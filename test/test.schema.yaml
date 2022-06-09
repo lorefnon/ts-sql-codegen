@@ -1,0 +1,219 @@
+name: libtest
+desc: ""
+tables:
+- name: public.authors
+  type: BASE TABLE
+  comment: ""
+  columns:
+  - name: id
+    type: integer
+    nullable: false
+    default: null
+    comment: ""
+  - name: name
+    type: varchar
+    nullable: true
+    default: null
+    comment: ""
+  - name: created_at
+    type: timestamp without time zone
+    nullable: true
+    default: null
+    comment: ""
+  - name: updated_at
+    type: timestamp without time zone
+    nullable: true
+    default: null
+    comment: ""
+  indexes:
+  - name: authors_pkey
+    def: CREATE UNIQUE INDEX authors_pkey ON public.authors USING btree (id)
+    table: public.authors
+    columns:
+    - id
+    comment: ""
+  constraints:
+  - name: authors_pkey
+    type: PRIMARY KEY
+    def: PRIMARY KEY (id)
+    table: public.authors
+    referencedTable: ""
+    columns:
+    - id
+    referencedColumns: []
+    comment: ""
+  triggers: []
+  def: ""
+- name: public.books
+  type: BASE TABLE
+  comment: ""
+  columns:
+  - name: id
+    type: uuid
+    nullable: false
+    default: uuid_generate_v4()
+    comment: ""
+  - name: name
+    type: varchar(255)
+    nullable: false
+    default: null
+    comment: ""
+  - name: author_id
+    type: integer
+    nullable: false
+    default: null
+    comment: ""
+  - name: released_at
+    type: date
+    nullable: true
+    default: null
+    comment: ""
+  - name: time_to_read
+    type: interval
+    nullable: true
+    default: null
+    comment: ""
+  indexes:
+  - name: books_pkey
+    def: CREATE UNIQUE INDEX books_pkey ON public.books USING btree (id)
+    table: public.books
+    columns:
+    - id
+    comment: ""
+  constraints:
+  - name: fk_books__author_id
+    type: FOREIGN KEY
+    def: FOREIGN KEY (author_id) REFERENCES authors(id)
+    table: public.books
+    referencedTable: authors
+    columns:
+    - author_id
+    referencedColumns:
+    - id
+    comment: ""
+  - name: books_pkey
+    type: PRIMARY KEY
+    def: PRIMARY KEY (id)
+    table: public.books
+    referencedTable: ""
+    columns:
+    - id
+    referencedColumns: []
+    comment: ""
+  triggers: []
+  def: ""
+- name: public.chapters
+  type: BASE TABLE
+  comment: ""
+  columns:
+  - name: id
+    type: integer
+    nullable: false
+    default: nextval('chapters_id_seq'::regclass)
+    comment: ""
+  - name: name
+    type: varchar
+    nullable: false
+    default: null
+    comment: ""
+  - name: book_id
+    type: uuid
+    nullable: false
+    default: null
+    comment: ""
+  indexes:
+  - name: chapters_pkey
+    def: CREATE UNIQUE INDEX chapters_pkey ON public.chapters USING btree (id)
+    table: public.chapters
+    columns:
+    - id
+    comment: ""
+  constraints:
+  - name: fk_books__book_id
+    type: FOREIGN KEY
+    def: FOREIGN KEY (book_id) REFERENCES books(id)
+    table: public.chapters
+    referencedTable: books
+    columns:
+    - book_id
+    referencedColumns:
+    - id
+    comment: ""
+  - name: chapters_pkey
+    type: PRIMARY KEY
+    def: PRIMARY KEY (id)
+    table: public.chapters
+    referencedTable: ""
+    columns:
+    - id
+    referencedColumns: []
+    comment: ""
+  triggers: []
+  def: ""
+relations:
+- table: public.books
+  columns:
+  - author_id
+  parentTable: public.authors
+  parentColumns:
+  - id
+  def: FOREIGN KEY (author_id) REFERENCES authors(id)
+  virtual: false
+- table: public.chapters
+  columns:
+  - book_id
+  parentTable: public.books
+  parentColumns:
+  - id
+  def: FOREIGN KEY (book_id) REFERENCES books(id)
+  virtual: false
+functions:
+- name: public.uuid_nil
+  returnType: uuid
+  arguments: ""
+  type: FUNCTION
+- name: public.uuid_ns_dns
+  returnType: uuid
+  arguments: ""
+  type: FUNCTION
+- name: public.uuid_ns_url
+  returnType: uuid
+  arguments: ""
+  type: FUNCTION
+- name: public.uuid_ns_oid
+  returnType: uuid
+  arguments: ""
+  type: FUNCTION
+- name: public.uuid_ns_x500
+  returnType: uuid
+  arguments: ""
+  type: FUNCTION
+- name: public.uuid_generate_v1
+  returnType: uuid
+  arguments: ""
+  type: FUNCTION
+- name: public.uuid_generate_v1mc
+  returnType: uuid
+  arguments: ""
+  type: FUNCTION
+- name: public.uuid_generate_v3
+  returnType: uuid
+  arguments: namespace uuid, name text
+  type: FUNCTION
+- name: public.uuid_generate_v4
+  returnType: uuid
+  arguments: ""
+  type: FUNCTION
+- name: public.uuid_generate_v5
+  returnType: uuid
+  arguments: namespace uuid, name text
+  type: FUNCTION
+driver:
+  name: postgres
+  databaseVersion: PostgreSQL 14.3 (Ubuntu 14.3-1.pgdg22.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, 64-bit
+  meta:
+    currentSchema: public
+    searchPaths:
+    - "\"$user\""
+    - public
+    dict: {}
