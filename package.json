@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "bin": "dist/cli.js",
   "scripts": {
-    "build": "tsc && pnpm run copy:templates",
+    "build": "pnpm run build:ts && pnpm run copy:templates && pnpm run build:docs",
     "build:ts": "tsc",
     "build:docs": "typedoc src/index.ts",
     "copy:templates": "recursive-copy -w src dist -f \"*.liquid\"",

@@ -13,6 +13,26 @@ interface FieldTmplInput {
     columnType: string;
 }
 
+/**
+ * Generator class for programmatic codegen.
+ *
+ * Most common usage involves creating an instance and calling generate function: 
+ *
+ * ```ts
+ * const options = {
+ *    schemaPath: './schema.yaml',
+ *    connectionSourcePath: './connection-source.ts'
+ * }
+ * const generator = new Generator(options);
+ * await generator.generate();
+ * ```
+ *
+ * See [GeneratorOpts](../interfaces/GeneratorOpts.md) for configuration options.
+ *
+ * For advanced use-cases, you can extend this class.
+ * This enables you to use custom templates, pre/post processing of generated code 
+ * and custom logic for table/column/field mapping.
+ */
 export class Generator {
     protected engine = new Liquid();
     protected fieldTypeMappings = fieldTypeMappings;

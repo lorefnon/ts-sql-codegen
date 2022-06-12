@@ -28,4 +28,7 @@ export const GeneratorOptsSchema = z.object({
         .nullish()
 });
 
-export type GeneratorOpts = z.TypeOf<typeof GeneratorOptsSchema>;
+/**
+ * Generator options
+ */
+export interface GeneratorOpts extends z.TypeOf<typeof GeneratorOptsSchema> {}
