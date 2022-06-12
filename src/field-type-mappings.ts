@@ -1,9 +1,16 @@
-export interface FieldTypeMapping {
-    columnName?: string | RegExp;
-    tableName?: string | RegExp;
-    columnType?: string | RegExp;
-    fieldType: string;
-}
+import * as z from "zod";
+
+const StrOrRegExpSchema = z.string().or(z.instanceof(RegExp));
+
+export const FieldTypeMappingSchema = z.object({
+    columnName: StrOrRegExpSchema.nullish(),
+    tableName: StrOrRegExpSchema.nullish(),
+    columnType: StrOrRegExpSchema.nullish(),
+    fieldType: z.string(),
+});
+
+export interface FieldTypeMapping
+    extends z.TypeOf<typeof FieldTypeMappingSchema> {}
 
 export const fieldTypeMappings: Readonly<FieldTypeMapping[]> = Object.freeze([
     {
