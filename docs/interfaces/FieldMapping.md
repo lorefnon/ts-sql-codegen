@@ -29,7 +29,7 @@ z.TypeOf.columnName
 
 #### Defined in
 
-field-mappings.ts:24
+[field-mappings.ts:25](https://github.com/lorefnon/ts-sql-codegen/blob/d465686/src/field-mappings.ts#L25)
 
 ___
 
@@ -43,7 +43,7 @@ z.TypeOf.columnType
 
 #### Defined in
 
-field-mappings.ts:26
+[field-mappings.ts:27](https://github.com/lorefnon/ts-sql-codegen/blob/d465686/src/field-mappings.ts#L27)
 
 ___
 
@@ -56,7 +56,7 @@ ___
 | Name | Type |
 | :------ | :------ |
 | `name` | `undefined` \| ``null`` \| `string` |
-| `type` | `undefined` \| ``null`` \| { adapter?: { name: string; importPath: string; } \| null \| undefined; name: string; } |
+| `type` | `undefined` \| ``null`` \| { dbTypeName?: string \| null \| undefined; tsTypeName?: string \| null \| undefined; adapter?: { importPath?: string \| null \| undefined; name: string; } \| null \| undefined; } |
 
 #### Inherited from
 
@@ -64,7 +64,7 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-field-mappings.ts:27
+[field-mappings.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/d465686/src/field-mappings.ts#L28)
 
 ___
 
@@ -78,4 +78,4 @@ z.TypeOf.tableName
 
 #### Defined in
 
-field-mappings.ts:25
+[field-mappings.ts:26](https://github.com/lorefnon/ts-sql-codegen/blob/d465686/src/field-mappings.ts#L26)

@@ -1,6 +1,6 @@
 {
   "name": "ts-sql-codegen",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Generates ts-sql-query table mappings from tbls schema output",
   "main": "dist/index.js",
   "bin": "dist/cli.js",
@@ -8,10 +8,13 @@
     "build": "pnpm run build:ts && pnpm run copy:templates && pnpm run build:docs",
     "build:ts": "tsc",
     "build:docs": "typedoc --readme none src/index.ts",
-    "copy:templates": "recursive-copy -w src dist -f \"*.liquid\"",
+    "copy:templates": "recursive-copy -w src dist -f \"*.hbs\"",
     "clean": "rimraf dist test/generated",
     "test": "mocha -r ts-node/register -r mocha-snap \"./test/**/*.ts\""
   },
+  "files": [
+    "dist/**/*"
+  ],
   "keywords": [
     "sql",
     "code-generator",

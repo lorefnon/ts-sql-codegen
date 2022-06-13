@@ -3,11 +3,12 @@ import * as z from "zod";
 export const StrOrRegExpSchema = z.string().or(z.instanceof(RegExp));
 
 export const GeneratedFieldTypeSchema = z.object({
-    name: z.string(),
+    dbTypeName: z.string().nullish(),
+    tsTypeName: z.string().nullish(),
     adapter: z
         .object({
             name: z.string(),
-            importPath: z.string(),
+            importPath: z.string().nullish(),
         })
         .nullish(),
 });
@@ -32,34 +33,34 @@ export interface FieldMapping extends z.TypeOf<typeof FieldMappingSchema> {}
 export const fieldMappings: FieldMapping[] = [
     {
         columnType: /(character|varchar|text)/,
-        generatedField: { type: { name: "string" } },
+        generatedField: { type: { dbTypeName: "string" } },
     },
     {
         columnType: /bool/,
-        generatedField: { type: { name: "boolean" } },
+        generatedField: { type: { dbTypeName: "boolean" } },
     },
     {
         columnType: /bigint|bigserial/,
-        generatedField: { type: { name: "bigint" } },
+        generatedField: { type: { dbTypeName: "bigint" } },
     },
     {
         columnType: /int/,
-        generatedField: { type: { name: "int" } },
+        generatedField: { type: { dbTypeName: "int" } },
     },
     {
         columnType: /^uuid$/,
-        generatedField: { type: { name: "uuid" } },
+        generatedField: { type: { dbTypeName: "uuid" } },
     },
     {
         columnType: /(timestamp|datetime)/,
-        generatedField: { type: { name: "localDateTime" } },
+        generatedField: { type: { dbTypeName: "localDateTime" } },
     },
     {
         columnType: /date/,
-        generatedField: { type: { name: "localDate" } },
+        generatedField: { type: { dbTypeName: "localDate" } },
     },
     {
         columnType: /time/,
-        generatedField: { type: { name: "localTime" } },
+        generatedField: { type: { dbTypeName: "localTime" } },
     },
 ];
