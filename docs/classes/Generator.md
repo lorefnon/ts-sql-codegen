@@ -1,4 +1,4 @@
-[ts-sql-codegen](../README.md) / [Exports](../modules.md) / Generator
+[ts-sql-codegen](../README.md) / Generator
 
 # Class: Generator
 
@@ -15,7 +15,7 @@ const generator = new Generator(options);
 await generator.generate();
 ```
 
-See [GeneratorOpts](./GeneratorOpts.md) for configuration options.
+See [GeneratorOpts](../interfaces/GeneratorOpts.md) for configuration options.
 
 For advanced use-cases, you can extend this class.
 This enables you to use custom templates, pre/post processing of generated code
@@ -29,11 +29,11 @@ and custom logic for table/column/field mapping.
 
 ### Properties
 
-- [engine](Generator.md#engine)
-- [fieldTypeMappings](Generator.md#fieldtypemappings)
-- [getFieldTypeMappings](Generator.md#getfieldtypemappings)
-- [getParsedTemplate](Generator.md#getparsedtemplate)
+- [fieldMappings](Generator.md#fieldmappings)
+- [getCompiledTemplate](Generator.md#getcompiledtemplate)
+- [getFieldMappings](Generator.md#getfieldmappings)
 - [getTemplatePath](Generator.md#gettemplatepath)
+- [logger](Generator.md#logger)
 - [opts](Generator.md#opts)
 
 ### Methods
@@ -41,6 +41,7 @@ and custom logic for table/column/field mapping.
 - [extractPrimaryKey](Generator.md#extractprimarykey)
 - [generate](Generator.md#generate)
 - [generateTableMapper](Generator.md#generatetablemapper)
+- [getAdapters](Generator.md#getadapters)
 - [getClassNameFromTableName](Generator.md#getclassnamefromtablename)
 - [getConnectionSourceImportPath](Generator.md#getconnectionsourceimportpath)
 - [getFieldNameForColumn](Generator.md#getfieldnameforcolumn)
@@ -49,6 +50,7 @@ and custom logic for table/column/field mapping.
 - [getOutputFilePath](Generator.md#getoutputfilepath)
 - [postProcessOutput](Generator.md#postprocessoutput)
 - [preProcessTemplateInput](Generator.md#preprocesstemplateinput)
+- [shouldProcess](Generator.md#shouldprocess)
 
 ## Constructors
 
@@ -64,47 +66,37 @@ and custom logic for table/column/field mapping.
 
 #### Defined in
 
-[generator.ts:41](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L41)
+[generator.ts:57](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L57)
 
 ## Properties
 
-### engine
+### fieldMappings
 
-• `Protected` **engine**: `Liquid`
+• `Protected` **fieldMappings**: [`FieldMapping`](../interfaces/FieldMapping.md)[] = `fieldMappings`
 
 #### Defined in
 
-[generator.ts:37](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L37)
+[generator.ts:53](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L53)
 
 ___
 
-### fieldTypeMappings
+### getCompiledTemplate
 
-• `Protected` **fieldTypeMappings**: readonly `FieldTypeMapping`[] = `fieldTypeMappings`
+• `Protected` **getCompiledTemplate**: () => `Promise`<`HandlebarsTemplateDelegate`<`any`\>\> & `MemoizedFunction`
 
 #### Defined in
 
-[generator.ts:38](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L38)
+[generator.ts:69](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L69)
 
 ___
 
-### getFieldTypeMappings
+### getFieldMappings
 
-• `Protected` **getFieldTypeMappings**: () => { `columnName`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `columnType`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `fieldType`: `string` ; `tableName`: `undefined` \| ``null`` \| `string` \| `RegExp`  }[] & `MemoizedFunction`
-
-#### Defined in
-
-[generator.ts:45](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L45)
-
-___
-
-### getParsedTemplate
-
-• `Protected` **getParsedTemplate**: () => `Promise`<`Template`[]\> & `MemoizedFunction`
+• `Protected` **getFieldMappings**: () => { `columnName`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `columnType`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `generatedField`: { type?: { adapter?: { name: string; importPath: string; } \| null \| undefined; name: string; } \| null \| undefined; name?: string \| null \| undefined; } = GeneratedFieldSchema; `tableName`: `undefined` \| ``null`` \| `string` \| `RegExp`  }[] & `MemoizedFunction`
 
 #### Defined in
 
-[generator.ts:53](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L53)
+[generator.ts:61](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L61)
 
 ___
 
@@ -114,7 +106,17 @@ ___
 
 #### Defined in
 
-[generator.ts:49](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L49)
+[generator.ts:65](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L65)
+
+___
+
+### logger
+
+• **logger**: `Logger` = `console`
+
+#### Defined in
+
+[generator.ts:55](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L55)
 
 ___
 
@@ -124,13 +126,13 @@ ___
 
 #### Defined in
 
-[generator.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L39)
+[generator.ts:54](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L54)
 
 ## Methods
 
 ### extractPrimaryKey
 
-▸ `Protected` **extractPrimaryKey**(`table`, `fields`): `undefined` \| { `columnName`: `string` ; `columnType`: `string` ; `isAutoGenerated`: `boolean` ; `name`: `string`  }
+▸ `Protected` **extractPrimaryKey**(`table`, `fields`): `undefined` \| { `columnName`: `string` ; `fieldType`: `GeneratedFieldType` ; `isAutoGenerated`: `boolean` ; `name`: `string`  }
 
 #### Parameters
 
@@ -145,11 +147,11 @@ ___
 
 #### Returns
 
-`undefined` \| { `columnName`: `string` ; `columnType`: `string` ; `isAutoGenerated`: `boolean` ; `name`: `string`  }
+`undefined` \| { `columnName`: `string` ; `fieldType`: `GeneratedFieldType` ; `isAutoGenerated`: `boolean` ; `name`: `string`  }
 
 #### Defined in
 
-[generator.ts:150](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L150)
+[generator.ts:219](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L219)
 
 ___
 
@@ -163,13 +165,13 @@ ___
 
 #### Defined in
 
-[generator.ts:58](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L58)
+[generator.ts:74](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L74)
 
 ___
 
 ### generateTableMapper
 
-▸ **generateTableMapper**(`table`): `Promise`<`void`\>
+▸ `Protected` **generateTableMapper**(`table`): `Promise`<`void`\>
 
 #### Parameters
 
@@ -187,7 +189,28 @@ ___
 
 #### Defined in
 
-[generator.ts:71](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L71)
+[generator.ts:110](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L110)
+
+___
+
+### getAdapters
+
+▸ `Protected` **getAdapters**(`outputFilePath`, `fields`): { `importPath`: `string` ; `name`: `string`  }[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `outputFilePath` | `string` |
+| `fields` | `FieldTmplInput`[] |
+
+#### Returns
+
+{ `importPath`: `string` ; `name`: `string`  }[]
+
+#### Defined in
+
+[generator.ts:155](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L155)
 
 ___
 
@@ -207,7 +230,7 @@ ___
 
 #### Defined in
 
-[generator.ts:123](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L123)
+[generator.ts:179](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L179)
 
 ___
 
@@ -227,38 +250,13 @@ ___
 
 #### Defined in
 
-[generator.ts:104](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L104)
+[generator.ts:144](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L144)
 
 ___
 
 ### getFieldNameForColumn
 
-▸ `Protected` **getFieldNameForColumn**(`col`): `string`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `col` | `Object` |
-| `col.comment` | `undefined` \| ``null`` \| `string` |
-| `col.default` | `any` |
-| `col.name` | `string` |
-| `col.nullable` | `undefined` \| `boolean` |
-| `col.type` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-[generator.ts:127](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L127)
-
-___
-
-### getFieldType
-
-▸ `Protected` **getFieldType**(`tableName`, `col`): `string`
+▸ `Protected` **getFieldNameForColumn**(`tableName`, `col`): `string`
 
 #### Parameters
 
@@ -278,7 +276,33 @@ ___
 
 #### Defined in
 
-[generator.ts:131](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L131)
+[generator.ts:183](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L183)
+
+___
+
+### getFieldType
+
+▸ `Protected` **getFieldType**(`tableName`, `col`): `GeneratedFieldType`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `tableName` | `string` |
+| `col` | `Object` |
+| `col.comment` | `undefined` \| ``null`` \| `string` |
+| `col.default` | `any` |
+| `col.name` | `string` |
+| `col.nullable` | `undefined` \| `boolean` |
+| `col.type` | `string` |
+
+#### Returns
+
+`GeneratedFieldType`
+
+#### Defined in
+
+[generator.ts:194](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L194)
 
 ___
 
@@ -302,7 +326,7 @@ ___
 
 #### Defined in
 
-[generator.ts:146](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L146)
+[generator.ts:215](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L215)
 
 ___
 
@@ -326,7 +350,7 @@ ___
 
 #### Defined in
 
-[generator.ts:141](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L141)
+[generator.ts:210](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L210)
 
 ___
 
@@ -351,7 +375,7 @@ ___
 
 #### Defined in
 
-[generator.ts:119](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L119)
+[generator.ts:175](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L175)
 
 ___
 
@@ -371,4 +395,28 @@ ___
 
 #### Defined in
 
-[generator.ts:115](https://github.com/lorefnon/ts-sql-codegen/blob/c86b980/src/generator.ts#L115)
+[generator.ts:171](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L171)
+
+___
+
+### shouldProcess
+
+▸ `Protected` **shouldProcess**(`table`): `boolean`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `table` | `Object` |
+| `table.columns` | { nullable?: boolean \| undefined; default?: any; comment?: string \| null \| undefined; type: string; name: string; }[] |
+| `table.constraints` | { comment?: string \| null \| undefined; referencedTable?: string \| null \| undefined; referencedColumns?: string[] \| null \| undefined; type: string; name: string; table: string; columns: string[]; }[] |
+| `table.name` | `string` |
+| `table.type` | `string` |
+
+#### Returns
+
+`boolean`
+
+#### Defined in
+
+[generator.ts:89](https://github.com/lorefnon/ts-sql-codegen/blob/8cf5e38/src/generator.ts#L89)

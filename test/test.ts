@@ -26,10 +26,18 @@ describe("Generator", () => {
             outputDirPath,
         });
         await generator.generate();
-        await snap(
-            (await readOutput("AuthorsTable")) +
-                (await readOutput("BooksTable")) +
-                (await readOutput("ChaptersTable"))
+        await snap(`
+// AuthorsTable.ts:
+
+${await readOutput("AuthorsTable")}
+
+// BooksTable.ts:
+
+${await readOutput("BooksTable")}
+
+// ChaptersTable.ts: 
+
+${await readOutput("ChaptersTable")}`
         );
     });
 });

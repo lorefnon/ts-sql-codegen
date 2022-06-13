@@ -1,13 +1,13 @@
 {
   "name": "ts-sql-codegen",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Generates ts-sql-query table mappings from tbls schema output",
   "main": "dist/index.js",
   "bin": "dist/cli.js",
   "scripts": {
     "build": "pnpm run build:ts && pnpm run copy:templates && pnpm run build:docs",
     "build:ts": "tsc",
-    "build:docs": "typedoc src/index.ts",
+    "build:docs": "typedoc --readme none src/index.ts",
     "copy:templates": "recursive-copy -w src dist -f \"*.liquid\"",
     "clean": "rimraf dist test/generated",
     "test": "mocha -r ts-node/register -r mocha-snap \"./test/**/*.ts\""
@@ -18,7 +18,11 @@
     "ts-sql-query",
     "query-builder"
   ],
-  "author": "Lorefnon <lorefnon@tutanota.com>",
+  "author": {
+    "name": "Lorefnon",
+    "email": "lorefnon@tutanota.com",
+    "url": "https://lorefnon.me"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
@@ -46,8 +50,9 @@
   },
   "dependencies": {
     "fs-extra": "^10.1.0",
+    "handlebars": "^4.7.7",
+    "hbs-dedent-helper": "^0.2.0",
     "js-yaml": "^4.1.0",
-    "liquidjs": "^9.37.0",
     "lodash": "^4.17.21",
     "minimist": "^1.2.6",
     "zod": "^3.17.3"
