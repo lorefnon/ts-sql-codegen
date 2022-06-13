@@ -50,7 +50,6 @@ interface FieldTmplInput {
  * and custom logic for table/column/field mapping.
  */
 export class Generator {
-    protected fieldMappings = fieldMappings;
     protected opts: GeneratorOpts;
     public logger: Logger = console;
 
@@ -181,7 +180,7 @@ export class Generator {
     }
 
     protected getFieldNameForColumn(tableName: string, col: Column) {
-        const mapping = this.fieldMappings.find(
+        const mapping = this.getFieldMappings().find(
             (it) =>
                 it.generatedField?.name &&
                 doesMatchNameOrPattern(it.columnName, col.name) &&
@@ -192,7 +191,7 @@ export class Generator {
     }
 
     protected getFieldType(tableName: string, col: Column): GeneratedFieldType {
-        const mapping = this.fieldMappings.find(
+        const mapping = this.getFieldMappings().find(
             (it) =>
                 it.generatedField?.type &&
                 doesMatchNameOrPattern(it.columnName, col.name) &&
