@@ -1,32 +1,46 @@
 #!/usr/bin/env node
 
-import minimist from 'minimist'
-import { ZodError } from 'zod'
-import { Generator } from "./generator"
+import minimist from "minimist";
+import { ZodError } from "zod";
+import { Generator } from "./generator";
+import fs from "fs/promises";
+import path from "path";
 
-main().catch(e => {
+main().catch((e) => {
     console.error(e);
     if (e instanceof ZodError) {
         printHelp();
     }
     process.exit(1);
-})
+});
 
 async function main() {
     const argv = minimist(process.argv.slice(2));
-    if (argv.help) {
-        printHelp();
+    if (argv.help || argv.h) {
+        await printHelp();
         return;
     }
-   const generator = new Generator({
-       dryRun: argv['dry-run'],
-       schemaPath: argv['schema'] ?? argv['s'],
-       connectionSourcePath: argv['connection-source'] ?? argv['c'],
-       outputDirPath: argv['output-dir'] ?? argv['o']
-   });
-   await generator.generate();
+    if (argv.version || argv.v) {
+        await printVersion();
+        return;
+    }
+    const generator = new Generator({
+        dryRun: argv["dry-run"],
+        schemaPath: argv["schema"] ?? argv["s"],
+        connectionSourcePath: argv["connection-source"] ?? argv["c"],
+        outputDirPath: argv["output-dir"] ?? argv["o"],
+    });
+    await generator.generate();
 }
 
+async function printVersion() {
+    const rawManifest = await fs.readFile(
+        path.join(__dirname, "../package.json"),
+        "utf8"
+    );
+    const manifest = JSON.parse(rawManifest);
+    console.log(`${manifest.name} version ${manifest.version}`);
+}
 
 async function printHelp() {
     console.log(`
@@ -56,6 +70,5 @@ async function printHelp() {
     Note: 
     - All paths are relative to cwd
 
-    `)
+    `);
 }
-
