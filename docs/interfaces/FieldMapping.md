@@ -23,13 +23,15 @@
 
 • **columnName**: `undefined` \| ``null`` \| `string` \| `RegExp`
 
+Optional criteria (string or regex) to match column name
+
 #### Inherited from
 
 z.TypeOf.columnName
 
 #### Defined in
 
-[field-mappings.ts:25](https://github.com/lorefnon/ts-sql-codegen/blob/f0ff5e7/src/field-mappings.ts#L25)
+[field-mappings.ts:30](https://github.com/lorefnon/ts-sql-codegen/blob/807e609/src/field-mappings.ts#L30)
 
 ___
 
@@ -37,26 +39,25 @@ ___
 
 • **columnType**: `undefined` \| ``null`` \| `string` \| `RegExp`
 
+Optional criteria (string or regex) to match column type (in database)
+
 #### Inherited from
 
 z.TypeOf.columnType
 
 #### Defined in
 
-[field-mappings.ts:27](https://github.com/lorefnon/ts-sql-codegen/blob/f0ff5e7/src/field-mappings.ts#L27)
+[field-mappings.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/807e609/src/field-mappings.ts#L36)
 
 ___
 
 ### generatedField
 
-• **generatedField**: `Object` = `GeneratedFieldSchema`
+• **generatedField**: ``false`` \| { `name`: `undefined` \| ``null`` \| `string` ; `type`: `undefined` \| ``null`` \| { dbTypeName?: string \| null \| undefined; tsTypeName?: string \| null \| undefined; adapter?: { importPath?: string \| null \| undefined; name: string; } \| null \| undefined; }  }
 
-#### Type declaration
+Can be used to customize the field name or type mapping
 
-| Name | Type |
-| :------ | :------ |
-| `name` | `undefined` \| ``null`` \| `string` |
-| `type` | `undefined` \| ``null`` \| { dbTypeName?: string \| null \| undefined; tsTypeName?: string \| null \| undefined; adapter?: { importPath?: string \| null \| undefined; name: string; } \| null \| undefined; } |
+Set to false to omit mapping of this field
 
 #### Inherited from
 
@@ -64,7 +65,7 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-[field-mappings.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/f0ff5e7/src/field-mappings.ts#L28)
+[field-mappings.ts:43](https://github.com/lorefnon/ts-sql-codegen/blob/807e609/src/field-mappings.ts#L43)
 
 ___
 
@@ -72,10 +73,12 @@ ___
 
 • **tableName**: `undefined` \| ``null`` \| `string` \| `RegExp`
 
+Optional criteria (string or regex) to match table name
+
 #### Inherited from
 
 z.TypeOf.tableName
 
 #### Defined in
 
-[field-mappings.ts:26](https://github.com/lorefnon/ts-sql-codegen/blob/f0ff5e7/src/field-mappings.ts#L26)
+[field-mappings.ts:33](https://github.com/lorefnon/ts-sql-codegen/blob/807e609/src/field-mappings.ts#L33)

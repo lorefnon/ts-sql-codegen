@@ -26,9 +26,20 @@ export const GeneratedFieldSchema = z.object({
 export interface GeneratedField extends z.TypeOf<typeof GeneratedFieldSchema> {}
 
 export const FieldMappingSchema = z.object({
+    /** Optional criteria (string or regex) to match column name */
     columnName: StrOrRegExpSchema.nullish(),
+
+    /** Optional criteria (string or regex) to match table name */
     tableName: StrOrRegExpSchema.nullish(),
+
+    /** Optional criteria (string or regex) to match column type (in database) */
     columnType: StrOrRegExpSchema.nullish(),
+
+    /**
+     * Can be used to customize the field name or type mapping
+     *
+     * Set to false to omit mapping of this field
+     */
     generatedField: GeneratedFieldSchema.or(z.literal(false)),
 });
 
