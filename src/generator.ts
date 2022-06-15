@@ -5,7 +5,7 @@ import yaml from "js-yaml";
 import path from "path";
 import { camelCase, memoize, upperFirst, last } from "lodash";
 import { GeneratorOpts, GeneratorOptsSchema } from "./generator-options";
-import { Adapter, fieldMappings, GeneratedFieldType } from "./field-mappings";
+import { Adapter, fieldMappings, GeneratedField, GeneratedFieldType } from "./field-mappings";
 import { Column, Table, TblsSchema } from "./tbls-types";
 
 type Logger = Record<
@@ -99,12 +99,16 @@ export class Generator {
     }
 
     protected async generateTableMapper(table: Table) {
-        const fields: FieldTmplInput[] = table.columns.map((col) => ({
-            name: this.getFieldNameForColumn(table.name, col),
-            columnName: col.name,
-            fieldType: this.getFieldType(table.name, col),
-        }));
         const tableName = last(table.name.split("."));
+        const fields: FieldTmplInput[] = table.columns
+            .filter((col) => {
+                return !this.isColumnOmitted(table.name, col);
+            })
+            .map((col) => ({
+                name: this.getFieldNameForColumn(table.name, col),
+                columnName: col.name,
+                fieldType: this.getFieldType(table.name, col),
+            }));
         const primaryKey = this.extractPrimaryKey(table, fields);
         const filePath = this.getOutputFilePath(table);
         const dbConnectionSource = this.getConnectionSourceImportPath(filePath);
@@ -116,6 +120,8 @@ export class Generator {
             fields,
             primaryKey,
             adapters,
+            exportTableClass: this.opts.export?.tableClasses ?? true,
+            exportTableInstances: this.opts.export?.tableInstances ?? false,
         });
         const template = await this.getCompiledTemplate();
         const output = await this.postProcessOutput(
@@ -128,7 +134,7 @@ export class Generator {
             this.logger.info(output);
             this.logger.info("---");
         } else {
-            this.logger.info(`Writing ${filePath}`)
+            this.logger.info(`Writing ${filePath}`);
             await fs.writeFile(filePath, output);
         }
     }
@@ -203,20 +209,33 @@ export class Generator {
         return upperFirst(camelCase(last(tableName.split(".")))) + "Table";
     }
 
+    protected isColumnOmitted(tableName: string, col: Column) {
+        const mapping = this.getFieldMappings().find(
+            (it) =>
+                it.generatedField === false &&
+                doesMatchNameOrPattern(it.columnName, col.name) &&
+                doesMatchNameOrPattern(it.tableName, tableName) &&
+                doesMatchNameOrPattern(it.columnType, col.type)
+        );
+        return !!mapping;
+    }
+
     protected getFieldNameForColumn(tableName: string, col: Column) {
         const mapping = this.getFieldMappings().find(
             (it) =>
+                it.generatedField && 
                 it.generatedField?.name &&
                 doesMatchNameOrPattern(it.columnName, col.name) &&
                 doesMatchNameOrPattern(it.tableName, tableName) &&
                 doesMatchNameOrPattern(it.columnType, col.type)
         );
-        return mapping?.generatedField?.name ?? camelCase(col.name);
+        return (mapping?.generatedField as GeneratedField)?.name ?? camelCase(col.name);
     }
 
     protected getFieldType(tableName: string, col: Column): GeneratedFieldType {
         const mapping = this.getFieldMappings().find(
             (it) =>
+                it.generatedField &&
                 it.generatedField?.type &&
                 doesMatchNameOrPattern(it.columnName, col.name) &&
                 doesMatchNameOrPattern(it.tableName, tableName) &&
@@ -227,13 +246,14 @@ export class Generator {
                 `Failed to infer field type for ${tableName}.${col.name}`
             );
         }
-        const dbTypeName = mapping.generatedField.type?.dbTypeName ?? col.type;
-        let tsTypeName = mapping.generatedField.type?.tsTypeName;
-        if (mapping.generatedField?.type?.adapter && !tsTypeName) {
+        const generatedField = mapping.generatedField as GeneratedField
+        const dbTypeName = generatedField.type?.dbTypeName ?? col.type;
+        let tsTypeName = generatedField.type?.tsTypeName;
+        if (generatedField?.type?.adapter && !tsTypeName) {
             tsTypeName = upperFirst(camelCase(dbTypeName));
         }
         return {
-            ...mapping.generatedField.type,
+            ...generatedField.type,
             dbTypeName,
             tsTypeName,
         };

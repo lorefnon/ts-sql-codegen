@@ -4,18 +4,15 @@ import { Generator } from "../src";
 import snap from "mocha-snap";
 
 const schemaPath = path.join(__dirname, "test.schema.yaml");
-const outputDirPath = path.join(__dirname, "generated");
 const connectionSourcePath = path.join(__dirname, "connection-source");
-
-const readOutput = (name: string) =>
-    fs.readFile(path.join(outputDirPath, `${name}.ts`), "utf8");
+const outputDirPath = path.join(__dirname, "generated");
 
 describe("Generator", () => {
-    before(async () => {
+    beforeEach(async () => {
         await fs.remove(outputDirPath);
     });
 
-    after(async () => {
+    afterEach(async () => {
         await fs.remove(outputDirPath);
     });
 
@@ -37,7 +34,54 @@ ${await readOutput("BooksTable")}
 
 // ChaptersTable.ts: 
 
-${await readOutput("ChaptersTable")}`
-        );
+${await readOutput("ChaptersTable")}`);
+    });
+
+    it("allows omitting specific tables and fields", async () => {
+        const generator = new Generator({
+            schemaPath,
+            connectionSourcePath,
+            outputDirPath,
+            tables: {
+                include: [/authors/, "books"],
+            },
+            fieldMappings: [
+                {
+                    tableName: "authors",
+                    columnName: "name",
+                    generatedField: false,
+                },
+                {
+                    tableName: "books",
+                    columnName: "time_to_read",
+                    generatedField: {
+                        type: {
+                            dbTypeName: "int",
+                        },
+                        name: "readTime",
+                    },
+                },
+            ],
+        });
+        await generator.generate();
+        await snap(await readAllGenerated());
     });
 });
+
+const readAllGenerated = async () => {
+    const fList = await fs.readdir(outputDirPath);
+    return (
+        await Promise.all(
+            fList.map(async (fName) => {
+                const content = await fs.readFile(
+                    path.join(outputDirPath, fName),
+                    "utf8"
+                );
+                return [`// ${fName} :\n${content}`];
+            })
+        )
+    ).join("\n\n");
+};
+
+const readOutput = (name: string) =>
+    fs.readFile(path.join(outputDirPath, `${name}.ts`), "utf8");
