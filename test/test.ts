@@ -86,5 +86,3 @@ const readAllGenerated = async () => {
     ).join("\n\n");
 };
 
-const readOutput = (name: string) =>
-    fs.readFile(path.join(outputDirPath, `${name}.ts`), "utf8");

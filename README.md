@@ -57,7 +57,38 @@ await generator.generate();
 
 Refer to [Generator](./docs/classes/Generator.md) and [GeneratorOpts](./docs/interfaces/GeneratorOpts.md) for available options.
 
-### Custom types
+For advanced use-cases (eg. custom templates, pre/post processing of generated code 
+ and custom logic for table/column/field mapping) it is recommended to extend the Generator class in project.
+We intend to keep the customization options that the constructor accepts focussed on primary common use-cases.
+
+## Recipies
+
+### Generating mappers for a subset of available tables or fields
+
+```ts
+const options = {
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+        // Include only whitelisted tables
+        include: [/authors/, "books"],
+        // Similar exclude can be used to blacklist
+    },
+    fieldMappings: [
+        {
+            tableName: "authors",
+            columnName: "name",
+            // Ignore this field when generating table mapper
+            generatedField: false,
+        }
+    ]
+}
+```
+
+:warning: We don't do anything to ensure that database operations will succeed with included columns. Eg. if any omitted columns are mandatory they will cause inserts to fail. 
+
+### Custom DB types
 
 ts-sql-query supports custom database types through [type-adapters](https://ts-sql-query.readthedocs.io/en/stable/column-types/#type-adapters).
 
@@ -131,8 +162,3 @@ const options = {
   ]
 }
 ```
-
-For advanced use-cases (eg. custom templates, pre/post processing of generated code 
- and custom logic for table/column/field mapping) it is recommended to extend the Generator class in project.
-We intend to keep the customization options that the constructor accepts focussed on primary common use-cases.
-
