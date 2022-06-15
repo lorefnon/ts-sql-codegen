@@ -21,6 +21,7 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 }
 
 
+
 // BooksTable.ts :
 /**
  * DO NOT EDIT:
@@ -44,3 +45,4 @@ export class BooksTable extends Table<DBConnection, 'BooksTable'> {
         super('books')
     }
 }
+

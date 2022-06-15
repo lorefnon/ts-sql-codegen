@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
 import path from "path";
-import { camelCase, memoize, upperFirst, last } from "lodash";
+import { camelCase, memoize, upperFirst, last, lowerFirst } from "lodash";
 import { GeneratorOpts, GeneratorOptsSchema } from "./generator-options";
 import { Adapter, fieldMappings, GeneratedField, GeneratedFieldType } from "./field-mappings";
 import { Column, Table, TblsSchema } from "./tbls-types";
@@ -113,15 +113,20 @@ export class Generator {
         const filePath = this.getOutputFilePath(table);
         const dbConnectionSource = this.getConnectionSourceImportPath(filePath);
         const adapters = this.getAdapterImports(filePath, fields);
+        const exportTableClass = this.opts.export?.tableClasses ?? true
+        const exportTableInstance = this.opts.export?.tableInstances ?? false
+        const className = this.getClassNameFromTableName(table.name)
+        const instName = lowerFirst(className)
         const templateInput = await this.preProcessTemplateInput({
             tableName,
             dbConnectionSource,
-            className: this.getClassNameFromTableName(table.name),
+            className,
+            instName,
             fields,
             primaryKey,
             adapters,
-            exportTableClass: this.opts.export?.tableClasses ?? true,
-            exportTableInstances: this.opts.export?.tableInstances ?? false,
+            exportTableClass,
+            exportTableInstance
         });
         const template = await this.getCompiledTemplate();
         const output = await this.postProcessOutput(

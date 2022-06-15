@@ -49,6 +49,13 @@ export const GeneratorOptsSchema = z.object({
         })
         .nullish(),
 
+    export: z
+        .object({
+            tableInstances: z.boolean().default(false),
+            tableClasses: z.boolean().default(true)
+        })
+        .nullish(),
+
     /**
      * Convenience utility for common cases where all tables
      * follow same conventions

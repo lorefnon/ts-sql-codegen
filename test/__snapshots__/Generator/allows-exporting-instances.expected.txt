@@ -8,7 +8,7 @@
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
 
-export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
+class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 
     id = this.primaryKey('id', 'int');
 
@@ -21,6 +21,7 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
     }
 }
 
+export const authorsTable = new AuthorsTable();
 
 
 // BooksTable.ts :
@@ -33,7 +34,7 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
 
-export class BooksTable extends Table<DBConnection, 'BooksTable'> {
+class BooksTable extends Table<DBConnection, 'BooksTable'> {
 
     id = this.primaryKey('id', 'uuid');
 
@@ -47,6 +48,7 @@ export class BooksTable extends Table<DBConnection, 'BooksTable'> {
     }
 }
 
+export const booksTable = new BooksTable();
 
 
 // ChaptersTable.ts :
@@ -59,7 +61,7 @@ export class BooksTable extends Table<DBConnection, 'BooksTable'> {
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
 
-export class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
+class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
 
     id = this.primaryKey('id', 'int');
 
@@ -71,3 +73,4 @@ export class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
     }
 }
 
+export const chaptersTable = new ChaptersTable();

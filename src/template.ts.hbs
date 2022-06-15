@@ -16,7 +16,7 @@ import {
 } from "{{importPath}}"
 {{/each}}
 
-export class {{className}} extends Table<DBConnection, '{{className}}'> {
+{{#if exportTableClass}}export {{/if}}class {{className}} extends Table<DBConnection, '{{className}}'> {
 
     {{#dedent-by 3 "level"}}
         {{#if primaryKey}}
@@ -50,3 +50,7 @@ export class {{className}} extends Table<DBConnection, '{{className}}'> {
         super('{{tableName}}')
     }
 }
+
+{{#if exportTableInstance}}
+export const {{instName}} = new {{className}}();
+{{/if}}

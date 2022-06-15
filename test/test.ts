@@ -23,18 +23,7 @@ describe("Generator", () => {
             outputDirPath,
         });
         await generator.generate();
-        await snap(`
-// AuthorsTable.ts:
-
-${await readOutput("AuthorsTable")}
-
-// BooksTable.ts:
-
-${await readOutput("BooksTable")}
-
-// ChaptersTable.ts: 
-
-${await readOutput("ChaptersTable")}`);
+        await snap(await readAllGenerated());
     });
 
     it("allows omitting specific tables and fields", async () => {
@@ -66,6 +55,20 @@ ${await readOutput("ChaptersTable")}`);
         await generator.generate();
         await snap(await readAllGenerated());
     });
+
+    it("allows exporting instances", async () => {
+        const generator = new Generator({
+            schemaPath,
+            connectionSourcePath,
+            outputDirPath,
+            export: {
+                tableInstances: true,
+                tableClasses: false
+            }
+        });
+        await generator.generate();
+        await snap(await readAllGenerated());
+    })
 });
 
 const readAllGenerated = async () => {
