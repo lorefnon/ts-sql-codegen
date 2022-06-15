@@ -1,6 +1,12 @@
 
 // AuthorsTable.ts:
 
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen. 
+ * Any changes will be overwritten.
+ */
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
 
@@ -20,6 +26,12 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 
 // BooksTable.ts:
 
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen. 
+ * Any changes will be overwritten.
+ */
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
 
@@ -40,6 +52,12 @@ export class BooksTable extends Table<DBConnection, 'BooksTable'> {
 
 // ChaptersTable.ts: 
 
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen. 
+ * Any changes will be overwritten.
+ */
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
 

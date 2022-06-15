@@ -5,7 +5,7 @@ import yaml from "js-yaml";
 import path from "path";
 import { camelCase, memoize, upperFirst, last } from "lodash";
 import { GeneratorOpts, GeneratorOptsSchema } from "./generator-options";
-import { fieldMappings, GeneratedFieldType } from "./field-mappings";
+import { Adapter, fieldMappings, GeneratedFieldType } from "./field-mappings";
 import { Column, Table, TblsSchema } from "./tbls-types";
 
 type Logger = Record<
@@ -128,6 +128,7 @@ export class Generator {
             this.logger.info(output);
             this.logger.info("---");
         } else {
+            this.logger.info(`Writing ${filePath}`)
             await fs.writeFile(filePath, output);
         }
     }
@@ -151,18 +152,9 @@ export class Generator {
         for (const field of fields) {
             const adapter = field.fieldType?.adapter;
             if (!adapter) continue;
-            const relImportPath =
-                adapter.importPath ?? this.opts.common?.typeAdapter?.importPath;
-            if (!relImportPath) {
-                throw new Error(
-                    `Unable to resolve import path for type adapter: ${JSON.stringify(
-                        adapter
-                    )}`
-                );
-            }
-            const importPath = path.relative(
-                path.dirname(outputFilePath),
-                path.resolve(relImportPath)
+            const importPath = this.getAdapterImportPath(
+                adapter,
+                outputFilePath
             );
             const adapterImports = imports.get(importPath) ?? new Set<string>();
             imports.set(importPath, adapterImports);
@@ -174,6 +166,29 @@ export class Generator {
             importPath,
             imported: [...importedSet],
         }));
+    }
+
+    protected getRelativeImportPath(
+        filePath: string,
+        cwdRelImportPath: string
+    ) {
+        return path.relative(
+            path.dirname(filePath),
+            path.resolve(cwdRelImportPath)
+        );
+    }
+
+    protected getAdapterImportPath(adapter: Adapter, outputFilePath: string) {
+        const relImportPath =
+            adapter.importPath ?? this.opts.common?.typeAdapter?.importPath;
+        if (!relImportPath) {
+            throw new Error(
+                `Unable to resolve import path for type adapter: ${JSON.stringify(
+                    adapter
+                )}`
+            );
+        }
+        return this.getRelativeImportPath(outputFilePath, relImportPath);
     }
 
     protected async preProcessTemplateInput(input: any) {

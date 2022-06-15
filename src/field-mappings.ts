@@ -2,15 +2,17 @@ import * as z from "zod";
 
 export const StrOrRegExpSchema = z.string().or(z.instanceof(RegExp));
 
+export const AdapterSchema = z.object({
+    name: z.string(),
+    importPath: z.string().nullish(),
+});
+
+export interface Adapter extends z.TypeOf<typeof AdapterSchema> {}
+
 export const GeneratedFieldTypeSchema = z.object({
     dbTypeName: z.string().nullish(),
     tsTypeName: z.string().nullish(),
-    adapter: z
-        .object({
-            name: z.string(),
-            importPath: z.string().nullish(),
-        })
-        .nullish(),
+    adapter: AdapterSchema.nullish(),
 });
 
 export interface GeneratedFieldType
