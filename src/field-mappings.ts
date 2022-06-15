@@ -23,11 +23,13 @@ export const GeneratedFieldSchema = z.object({
     name: z.string().nullish(),
 });
 
+export interface GeneratedField extends z.TypeOf<typeof GeneratedFieldSchema> {}
+
 export const FieldMappingSchema = z.object({
     columnName: StrOrRegExpSchema.nullish(),
     tableName: StrOrRegExpSchema.nullish(),
     columnType: StrOrRegExpSchema.nullish(),
-    generatedField: GeneratedFieldSchema,
+    generatedField: GeneratedFieldSchema.or(z.literal(false)),
 });
 
 export interface FieldMapping extends z.TypeOf<typeof FieldMappingSchema> {}
@@ -64,5 +66,9 @@ export const fieldMappings: FieldMapping[] = [
     {
         columnType: /time/,
         generatedField: { type: { dbTypeName: "localTime" } },
+    },
+    {
+        columnType: /double/,
+        generatedField: { type: { dbTypeName: "double" } },
     },
 ];
