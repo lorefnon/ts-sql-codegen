@@ -18,6 +18,7 @@ register();
 interface FieldTmplInput {
     name: string;
     columnName: string;
+    isOptional: boolean;
     fieldType: GeneratedFieldType;
 }
 
@@ -107,6 +108,7 @@ export class Generator {
             .map((col) => ({
                 name: this.getFieldNameForColumn(table.name, col),
                 columnName: col.name,
+                isOptional: col.nullable === true,
                 fieldType: this.getFieldType(table.name, col),
             }));
         const primaryKey = this.extractPrimaryKey(table, fields);
@@ -170,8 +172,12 @@ export class Generator {
             const adapterImports = imports.get(importPath) ?? new Set<string>();
             imports.set(importPath, adapterImports);
             adapterImports.add(adapter.name);
-            if (field.fieldType.tsTypeName)
-                adapterImports.add(field.fieldType.tsTypeName);
+            const { tsTypeName } = field.fieldType;
+            // Lets just assume that if first char is uppercase
+            // then its not a primitive/built-in
+            if (tsTypeName && upperFirst(tsTypeName) === tsTypeName) {
+                adapterImports.add(tsTypeName);
+            }
         }
         return [...imports.entries()].map(([importPath, importedSet]) => ({
             importPath,

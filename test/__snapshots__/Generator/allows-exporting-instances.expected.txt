@@ -12,9 +12,9 @@ class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 
     id = this.primaryKey('id', 'int');
 
-    name = this.column('name', 'string');
-    createdAt = this.column('created_at', 'localDateTime');
-    updatedAt = this.column('updated_at', 'localDateTime');
+    name = this.optionalColumn('name', 'string');
+    createdAt = this.optionalColumn('created_at', 'localDateTime');
+    updatedAt = this.optionalColumn('updated_at', 'localDateTime');
 
     constructor() {
         super('authors')
@@ -40,8 +40,8 @@ class BooksTable extends Table<DBConnection, 'BooksTable'> {
 
     name = this.column('name', 'string');
     authorId = this.column('author_id', 'int');
-    releasedAt = this.column('released_at', 'localDate');
-    timeToRead = this.column('time_to_read', 'int');
+    releasedAt = this.optionalColumn('released_at', 'localDate');
+    timeToRead = this.optionalColumn('time_to_read', 'int');
 
     constructor() {
         super('books')
