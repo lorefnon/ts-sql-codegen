@@ -10,6 +10,10 @@ export const AdapterSchema = z.object({
 export interface Adapter extends z.TypeOf<typeof AdapterSchema> {}
 
 export const GeneratedFieldTypeSchema = z.object({
+    kind: z.enum([
+        'custom',
+        'enum'
+    ]).nullish(),
     dbTypeName: z.string().nullish(),
     tsTypeName: z.string().nullish(),
     adapter: AdapterSchema.nullish(),
@@ -21,6 +25,7 @@ export interface GeneratedFieldType
 export const GeneratedFieldSchema = z.object({
     type: GeneratedFieldTypeSchema.nullish(),
     name: z.string().nullish(),
+    isComputed: z.boolean().nullish()
 });
 
 export interface GeneratedField extends z.TypeOf<typeof GeneratedFieldSchema> {}

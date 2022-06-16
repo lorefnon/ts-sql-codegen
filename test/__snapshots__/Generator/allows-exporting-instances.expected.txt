@@ -11,7 +11,6 @@ import { DBConnection } from "../connection-source";
 class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 
     id = this.primaryKey('id', 'int');
-
     name = this.optionalColumn('name', 'string');
     createdAt = this.optionalColumn('created_at', 'localDateTime');
     updatedAt = this.optionalColumn('updated_at', 'localDateTime');
@@ -37,7 +36,6 @@ import { DBConnection } from "../connection-source";
 class BooksTable extends Table<DBConnection, 'BooksTable'> {
 
     id = this.primaryKey('id', 'uuid');
-
     name = this.column('name', 'string');
     authorId = this.column('author_id', 'int');
     releasedAt = this.optionalColumn('released_at', 'localDate');
@@ -64,7 +62,6 @@ import { DBConnection } from "../connection-source";
 class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
 
     id = this.primaryKey('id', 'int');
-
     name = this.column('name', 'string');
     bookId = this.column('book_id', 'uuid');
 
