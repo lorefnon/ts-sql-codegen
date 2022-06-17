@@ -4,9 +4,9 @@
  * This file has been auto-generated from database schema using ts-sql-codegen. 
  * Any changes will be overwritten.
  */
-import { Table } from "ts-sql-query/Table";
+import { {{tableKind}} } from "ts-sql-query/{{tableKind}}";
 import { DBConnection } from "{{dbConnectionSource}}";
-{{#each adapters}}
+{{#each imports}}
 import {
     {{#dedent-by 2 "level"}}
         {{#each imported}}
@@ -16,14 +16,14 @@ import {
 } from "{{importPath}}"
 {{/each}}
 
-{{#if exportTableClass}}export {{/if}}class {{className}} extends Table<DBConnection, '{{className}}'> {
+{{#if exportTableClass}}export {{/if}}class {{className}} extends {{tableKind}}<DBConnection, '{{className}}'> {
 
     {{#dedent-by 3 "level"}}
         {{#each fields}}
             {{#if fieldType.kind}}
-                {{name}} = this.{{columnMethod}}<{{fieldType.tsTypeName}}>('{{columnName}}', '{{fieldType.kind}}', '{{fieldType.dbTypeName}}', {{fieldType.adapter.name}});
+                {{name}} = this.{{columnMethod}}<{{fieldType.tsType.name}}>('{{columnName}}', '{{fieldType.kind}}', '{{fieldType.dbType.name}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
             {{else}}
-                {{name}} = this.{{columnMethod}}('{{columnName}}', '{{fieldType.dbTypeName}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
+                {{name}} = this.{{columnMethod}}('{{columnName}}', '{{fieldType.dbType.name}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
             {{/if}}
         {{/each}}
     {{/dedent-by}}

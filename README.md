@@ -98,12 +98,6 @@ You can configure the code-generator to use type-adapters for specific columns o
 const options = {
   schemaPath: './schema.yaml',
   connectionSourcePath: './connection-source.ts',
-  common: {
-      typeAdapter: {
-          // Path from where adapters will be imported by default
-          importPath: "src/db/adapters",
-      },
-  },
   fieldMappings: [
     {
         // Field matching criteria: 
@@ -116,21 +110,25 @@ const options = {
         // use the ClassParticipationPolicyAdapter type adapter
         // which you will have to implement. 
         // 
-        // You will need to ensure
-        // that from above importPath (src/db/adapters) we are able to import: 
-        //   1. The adapter itself (ClassParticipationPolicyAdapter)
-        //   2. The typescript type which the mapped column will use (this will be used as generic type argument for column)
-        //
+        // The import paths are resolved relative to cwd, and converted
+        // to relative paths wrt the generated file
+        // 
         // Generated code will include an import like this:
         //     import { ClassParticipationPolicyAdapter, ClassParticipationPolicy } from '../adapters';
-        //
-        // The next example shows how to pick specific names instead of the default type names
-        // that are conventionally derived (by pascal-casing) from database column type
         generatedField: {
             type: {
+                kind: 'custom',
                 adapter: {
                     name: "ClassParticipationPolicyAdapter",
+                    importPath: "src/db/adapters",
                 },
+                tsType: {
+                    name: "ClassParticipationPolicy",
+                    importPath: "src/db/adapters",
+                },
+                dbType: {
+                    name: 'class_participation_policy'
+                }
             },
         },
     },
@@ -141,23 +139,7 @@ const options = {
         columnName: 'participation_policy',
         // Instead of exact strings above, we could also use regular expressions
 
-        generatedField: {
-            type: {
-                // We can specify the typescript type
-                // which will be used for the mapped field 
-                tsTypeName: 'ClassParticipationPolicy',
-
-                // And also the database type name passed to ts-sql-query
-                dbTypeName: 'class_participation_policy',
-
-                adapter: {
-                    name: "ClassParticipationPolicyAdapter",
-                    // We can specify an importPath for this which
-                    // will override the common import path
-                    importPath: 'src/db/adapters/ClassParticipationPolicyAdapter'
-                },
-            },
-        },
+        generatedField: { ... }
     }
   ]
 }

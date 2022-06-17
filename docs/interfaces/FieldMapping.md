@@ -31,7 +31,7 @@ z.TypeOf.columnName
 
 #### Defined in
 
-[field-mappings.ts:30](https://github.com/lorefnon/ts-sql-codegen/blob/311f9c8/src/field-mappings.ts#L30)
+[field-mappings.ts:63](https://github.com/lorefnon/ts-sql-codegen/blob/b1f0116/src/field-mappings.ts#L63)
 
 ___
 
@@ -41,21 +41,25 @@ ___
 
 Optional criteria (string or regex) to match column type (in database)
 
+This will be used to match against the type name as
+present in the tbls output schema yaml file.
+
 #### Inherited from
 
 z.TypeOf.columnType
 
 #### Defined in
 
-[field-mappings.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/311f9c8/src/field-mappings.ts#L36)
+[field-mappings.ts:74](https://github.com/lorefnon/ts-sql-codegen/blob/b1f0116/src/field-mappings.ts#L74)
 
 ___
 
 ### generatedField
 
-• **generatedField**: ``false`` \| { `name`: `undefined` \| ``null`` \| `string` ; `type`: `undefined` \| ``null`` \| { dbTypeName?: string \| null \| undefined; tsTypeName?: string \| null \| undefined; adapter?: { importPath?: string \| null \| undefined; name: string; } \| null \| undefined; }  }
+• **generatedField**: ``false`` \| { `isComputed`: `undefined` \| ``null`` \| `boolean` ; `name`: `undefined` \| ``null`` \| `string` ; `type`: `undefined` \| ``null`` \| { kind?: "custom" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ... 1 more ... \| undefined; }  }
 
 Can be used to customize the field name or type mapping
+in the generated field.
 
 Set to false to omit mapping of this field
 
@@ -65,7 +69,7 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-[field-mappings.ts:43](https://github.com/lorefnon/ts-sql-codegen/blob/311f9c8/src/field-mappings.ts#L43)
+[field-mappings.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/b1f0116/src/field-mappings.ts#L82)
 
 ___
 
@@ -81,4 +85,4 @@ z.TypeOf.tableName
 
 #### Defined in
 
-[field-mappings.ts:33](https://github.com/lorefnon/ts-sql-codegen/blob/311f9c8/src/field-mappings.ts#L33)
+[field-mappings.ts:66](https://github.com/lorefnon/ts-sql-codegen/blob/b1f0116/src/field-mappings.ts#L66)

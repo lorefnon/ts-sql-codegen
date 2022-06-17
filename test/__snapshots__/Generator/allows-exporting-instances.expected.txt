@@ -1,3 +1,36 @@
+// AuthorBooksTable.ts :
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen. 
+ * Any changes will be overwritten.
+ */
+import { View } from "ts-sql-query/View";
+import { DBConnection } from "../connection-source";
+import {
+    Genre,
+} from "../types"
+
+class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
+
+    id = this.optionalColumn('id', 'uuid');
+    name = this.optionalColumn('name', 'string');
+    price = this.optionalColumn('price', 'double');
+    authorId = this.optionalColumn('author_id', 'int');
+    releasedAt = this.optionalColumn('released_at', 'localDate');
+    timeToRead = this.optionalColumn('time_to_read', 'int');
+    genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    weightGrams = this.optionalColumn('weight_grams', 'double');
+    authorName = this.optionalColumn('author_name', 'string');
+
+    constructor() {
+        super('author_books')
+    }
+}
+
+export const authorBooksTable = new AuthorBooksTable();
+
+
 // AuthorsTable.ts :
 /**
  * DO NOT EDIT:
@@ -12,8 +45,9 @@ class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 
     id = this.primaryKey('id', 'int');
     name = this.optionalColumn('name', 'string');
-    createdAt = this.optionalColumn('created_at', 'localDateTime');
-    updatedAt = this.optionalColumn('updated_at', 'localDateTime');
+    dob = this.optionalColumn('dob', 'localDate');
+    createdAt = this.columnWithDefaultValue('created_at', 'localDateTime');
+    updatedAt = this.columnWithDefaultValue('updated_at', 'localDateTime');
 
     constructor() {
         super('authors')
@@ -32,14 +66,20 @@ export const authorsTable = new AuthorsTable();
  */
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
+import {
+    Genre,
+} from "../types"
 
 class BooksTable extends Table<DBConnection, 'BooksTable'> {
 
     id = this.primaryKey('id', 'uuid');
     name = this.column('name', 'string');
+    price = this.column('price', 'double');
     authorId = this.column('author_id', 'int');
     releasedAt = this.optionalColumn('released_at', 'localDate');
     timeToRead = this.optionalColumn('time_to_read', 'int');
+    genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    weightGrams = this.optionalColumn('weight_grams', 'double');
 
     constructor() {
         super('books')
@@ -58,12 +98,21 @@ export const booksTable = new BooksTable();
  */
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
+import {
+    ChapterMetadataAdapter,
+} from "../adapter"
+import {
+    ChapterMetadata,
+} from "../types"
 
 class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
 
     id = this.primaryKey('id', 'int');
     name = this.column('name', 'string');
     bookId = this.column('book_id', 'uuid');
+    metadata = this.optionalColumn<ChapterMetadata>('metadata', 'custom', 'jsonb', ChapterMetadataAdapter);
+    title = this.optionalColumn('title', 'string');
+    description = this.optionalColumn('description', 'string');
 
     constructor() {
         super('chapters')

@@ -11,8 +11,9 @@ import { DBConnection } from "../connection-source";
 export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 
     id = this.primaryKey('id', 'int');
-    createdAt = this.optionalColumn('created_at', 'localDateTime');
-    updatedAt = this.optionalColumn('updated_at', 'localDateTime');
+    dob = this.optionalColumn('dob', 'localDate');
+    createdAt = this.columnWithDefaultValue('created_at', 'localDateTime');
+    updatedAt = this.columnWithDefaultValue('updated_at', 'localDateTime');
 
     constructor() {
         super('authors')
@@ -30,14 +31,20 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
  */
 import { Table } from "ts-sql-query/Table";
 import { DBConnection } from "../connection-source";
+import {
+    Genre,
+} from "../types"
 
 export class BooksTable extends Table<DBConnection, 'BooksTable'> {
 
     id = this.primaryKey('id', 'uuid');
     name = this.column('name', 'string');
+    price = this.column('price', 'double');
     authorId = this.column('author_id', 'int');
     releasedAt = this.optionalColumn('released_at', 'localDate');
     readTime = this.optionalColumn('time_to_read', 'int');
+    genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    weightGrams = this.optionalColumn('weight_grams', 'double');
 
     constructor() {
         super('books')

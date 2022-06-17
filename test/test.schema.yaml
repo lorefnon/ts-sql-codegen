@@ -15,15 +15,20 @@ tables:
     nullable: true
     default: null
     comment: ""
-  - name: created_at
-    type: timestamp without time zone
+  - name: dob
+    type: date
     nullable: true
     default: null
     comment: ""
+  - name: created_at
+    type: timestamp without time zone
+    nullable: false
+    default: now()
+    comment: ""
   - name: updated_at
     type: timestamp without time zone
-    nullable: true
-    default: null
+    nullable: false
+    default: now()
     comment: ""
   indexes:
   - name: authors_pkey
@@ -58,6 +63,11 @@ tables:
     nullable: false
     default: null
     comment: ""
+  - name: price
+    type: money
+    nullable: false
+    default: null
+    comment: ""
   - name: author_id
     type: integer
     nullable: false
@@ -70,6 +80,16 @@ tables:
     comment: ""
   - name: time_to_read
     type: interval
+    nullable: true
+    default: null
+    comment: ""
+  - name: genre
+    type: genre
+    nullable: true
+    default: null
+    comment: ""
+  - name: weight_grams
+    type: double precision
     nullable: true
     default: null
     comment: ""
@@ -121,6 +141,21 @@ tables:
     nullable: false
     default: null
     comment: ""
+  - name: metadata
+    type: jsonb
+    nullable: true
+    default: null
+    comment: ""
+  - name: title
+    type: varchar
+    nullable: true
+    default: null
+    comment: ""
+  - name: description
+    type: text
+    nullable: true
+    default: null
+    comment: ""
   indexes:
   - name: chapters_pkey
     def: CREATE UNIQUE INDEX chapters_pkey ON public.chapters USING btree (id)
@@ -150,6 +185,75 @@ tables:
     comment: ""
   triggers: []
   def: ""
+- name: public.author_books
+  type: VIEW
+  comment: ""
+  columns:
+  - name: id
+    type: uuid
+    nullable: true
+    default: null
+    comment: ""
+  - name: name
+    type: varchar(255)
+    nullable: true
+    default: null
+    comment: ""
+  - name: price
+    type: money
+    nullable: true
+    default: null
+    comment: ""
+  - name: author_id
+    type: integer
+    nullable: true
+    default: null
+    comment: ""
+  - name: released_at
+    type: date
+    nullable: true
+    default: null
+    comment: ""
+  - name: time_to_read
+    type: interval
+    nullable: true
+    default: null
+    comment: ""
+  - name: genre
+    type: genre
+    nullable: true
+    default: null
+    comment: ""
+  - name: weight_grams
+    type: double precision
+    nullable: true
+    default: null
+    comment: ""
+  - name: author_name
+    type: varchar
+    nullable: true
+    default: null
+    comment: ""
+  indexes: []
+  constraints: []
+  triggers: []
+  def: |-
+    CREATE VIEW author_books AS (
+     SELECT books.id,
+        books.name,
+        books.price,
+        books.author_id,
+        books.released_at,
+        books.time_to_read,
+        books.genre,
+        books.weight_grams,
+        authors.name AS author_name
+       FROM (authors
+         JOIN books ON ((books.author_id = authors.id)))
+    )
+  referencedTables:
+  - public.authors
+  - public.books
 relations:
 - table: public.books
   columns:

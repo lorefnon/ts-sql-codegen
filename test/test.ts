@@ -1,11 +1,44 @@
 import path from "path";
 import fs from "fs-extra";
-import { Generator } from "../src";
+import { FieldMapping, Generator } from "../src";
 import snap from "mocha-snap";
 
 const schemaPath = path.join(__dirname, "test.schema.yaml");
 const connectionSourcePath = path.join(__dirname, "connection-source");
 const outputDirPath = path.join(__dirname, "generated");
+
+const fieldMappings: FieldMapping[] = [
+    {
+        columnType: "genre",
+        generatedField: {
+            type: {
+                kind: "enum",
+                tsType: {
+                    name: "Genre",
+                    importPath: path.join(__dirname, "types"),
+                },
+            },
+        },
+    },
+    {
+        tableName: "chapters",
+        columnName: "metadata",
+        generatedField: {
+            type: {
+                kind: "custom",
+                dbType: { name: "jsonb" },
+                tsType: {
+                    name: "ChapterMetadata",
+                    importPath: path.join(__dirname, "types"),
+                },
+                adapter: {
+                    name: 'ChapterMetadataAdapter',
+                    importPath: path.join(__dirname, 'adapter')
+                }
+            },
+        },
+    },
+];
 
 describe("Generator", () => {
     beforeEach(async () => {
@@ -21,6 +54,7 @@ describe("Generator", () => {
             schemaPath,
             connectionSourcePath,
             outputDirPath,
+            fieldMappings,
         });
         await generator.generate();
         await snap(await readAllGenerated());
@@ -35,6 +69,7 @@ describe("Generator", () => {
                 include: [/authors/, "books"],
             },
             fieldMappings: [
+                ...fieldMappings,
                 {
                     tableName: "authors",
                     columnName: "name",
@@ -45,7 +80,7 @@ describe("Generator", () => {
                     columnName: "time_to_read",
                     generatedField: {
                         type: {
-                            dbTypeName: "int",
+                            dbType: { name: "int" },
                         },
                         name: "readTime",
                     },
@@ -63,12 +98,13 @@ describe("Generator", () => {
             outputDirPath,
             export: {
                 tableInstances: true,
-                tableClasses: false
-            }
+                tableClasses: false,
+            },
+            fieldMappings,
         });
         await generator.generate();
         await snap(await readAllGenerated());
-    })
+    });
 });
 
 const readAllGenerated = async () => {
@@ -85,4 +121,3 @@ const readAllGenerated = async () => {
         )
     ).join("\n\n");
 };
-

@@ -62,13 +62,19 @@ export const GeneratorOptsSchema = z.object({
      */
     common: z
         .object({
-            typeAdapter: z.object({
+            customTypes: z.object({
+                importPath: z.string(),
+            })
+            .nullish(),
+            typeAdapter: z
+            .object({
                 /**
                  * Common import path to be used for type adapters
                  * when no specific import path is specified at field level
                  */
                 importPath: z.string(),
-            }),
+            })
+            .nullish(),
             /**
              * Useful when tbls is not able to detect primary key
              * but all the tables share primary key columns with

@@ -12,6 +12,7 @@ import {
     GeneratedFieldType,
 } from "./field-mappings";
 import { Column, Table, TblsSchema } from "./tbls-types";
+import { match } from "ts-pattern";
 
 type Logger = Record<
     "debug" | "info" | "warn" | "error",
@@ -37,6 +38,11 @@ interface FieldTmplInput {
     isOptional: boolean;
     hasDefault: boolean;
     fieldType: GeneratedFieldType;
+}
+
+interface ImportTmplInput {
+    importPath: string;
+    imported: string[];
 }
 
 /**
@@ -117,7 +123,19 @@ export class Generator {
     }
 
     protected async generateTableMapper(table: Table) {
+        // Qualified table name with schema prefix
+        const qTableName = table.name;
         const tableName = last(table.name.split("."));
+        const tableKind = match(table.type)
+            .with("BASE TABLE", () => "Table")
+            .with("VIEW", () => "View")
+            .otherwise(() => null);
+        if (!tableKind) {
+            this.logger.warn(
+                `Unknown table type ${table.type} for table ${table.name}: SKIPPING`
+            );
+            return;
+        }
         const pkCol = this.findPrimaryKey(table);
         const fields: FieldTmplInput[] = table.columns
             .filter((col) => {
@@ -161,18 +179,25 @@ export class Generator {
             });
         const filePath = this.getOutputFilePath(table);
         const dbConnectionSource = this.getConnectionSourceImportPath(filePath);
-        const adapters = this.getAdapterImports(filePath, fields);
+        const adapterImports = this.getAdapterImports(filePath, fields);
+        const typeImports = this.getTypeImports(filePath, fields);
+        const imports = [
+            ...adapterImports,
+            ...typeImports
+        ]
         const exportTableClass = this.opts.export?.tableClasses ?? true;
         const exportTableInstance = this.opts.export?.tableInstances ?? false;
         const className = this.getClassNameFromTableName(table.name);
         const instName = lowerFirst(className);
         const templateInput = await this.preProcessTemplateInput({
             tableName,
+            tableKind,
+            imports,
             dbConnectionSource,
             className,
             instName,
             fields,
-            adapters,
+            adapterImports,
             exportTableClass,
             exportTableInstance,
         });
@@ -218,18 +243,36 @@ export class Generator {
             const adapterImports = imports.get(importPath) ?? new Set<string>();
             imports.set(importPath, adapterImports);
             adapterImports.add(adapter.name);
-            const { tsTypeName } = field.fieldType;
-            // Lets just assume that if first char is uppercase
-            // then its not a primitive/built-in
-            if (tsTypeName && upperFirst(tsTypeName) === tsTypeName) {
-                adapterImports.add(tsTypeName);
-            }
         }
         return [...imports.entries()].map(([importPath, importedSet]) => ({
             importPath,
             imported: [...importedSet],
         }));
     }
+
+    protected getTypeImports(
+        outputFilePath: string,
+        fields: FieldTmplInput[]
+    ) {
+        const imports = new Map<string, Set<string>>();
+        for (const field of fields) {
+            const importPath = field.fieldType?.tsType?.importPath;
+            const name = field.fieldType?.tsType?.name 
+            if (!importPath || !name) {
+                continue;
+            }
+            const nImportPath = this.getRelativeImportPath(outputFilePath, importPath)
+            const typeImports = imports.get(nImportPath) ?? new Set<string>();
+            imports.set(nImportPath, typeImports);
+            typeImports.add(name);
+        }
+        return [...imports.entries()].map(([importPath, importedSet]) => ({
+            importPath,
+            imported: [...importedSet],
+        }));
+
+    }
+
 
     protected getRelativeImportPath(
         filePath: string,
@@ -322,15 +365,21 @@ export class Generator {
             );
         }
         const generatedField = mapping.generatedField as GeneratedField;
-        const dbTypeName = generatedField.type?.dbTypeName ?? col.type;
-        let tsTypeName = generatedField.type?.tsTypeName;
+        const dbTypeName = generatedField.type?.dbType?.name ?? col.type;
+        let tsTypeName = generatedField.type?.tsType?.name;
         if (generatedField?.type?.adapter && !tsTypeName) {
             tsTypeName = upperFirst(camelCase(dbTypeName));
         }
         return {
             ...generatedField.type,
-            dbTypeName,
-            tsTypeName,
+            dbType: {
+                ...generatedField.type?.dbType,
+                name: dbTypeName,
+            },
+            tsType: {
+                ...generatedField.type?.tsType,
+                name: tsTypeName ?? "unknown",
+            },
         };
     }
 
@@ -347,7 +396,8 @@ export class Generator {
         let col: Column | null = null;
         const commonPKColName = this.opts.common?.primaryKey?.name;
         if (commonPKColName) {
-            col = table.columns.find((it) => it.name === commonPKColName) ?? null;
+            col =
+                table.columns.find((it) => it.name === commonPKColName) ?? null;
         }
         if (!col) {
             const pkConstraint = table.constraints.find(
