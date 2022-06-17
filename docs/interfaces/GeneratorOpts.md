@@ -38,7 +38,7 @@ z.TypeOf.common
 
 #### Defined in
 
-[generator-options.ts:63](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/generator-options.ts#L63)
+[generator-options.ts:63](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/generator-options.ts#L63)
 
 ___
 
@@ -54,7 +54,7 @@ z.TypeOf.connectionSourcePath
 
 #### Defined in
 
-[generator-options.ts:15](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/generator-options.ts#L15)
+[generator-options.ts:15](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/generator-options.ts#L15)
 
 ___
 
@@ -70,7 +70,7 @@ z.TypeOf.dryRun
 
 #### Defined in
 
-[generator-options.ts:6](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/generator-options.ts#L6)
+[generator-options.ts:6](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/generator-options.ts#L6)
 
 ___
 
@@ -84,7 +84,7 @@ z.TypeOf.export
 
 #### Defined in
 
-[generator-options.ts:52](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/generator-options.ts#L52)
+[generator-options.ts:52](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/generator-options.ts#L52)
 
 ___
 
@@ -102,7 +102,7 @@ z.TypeOf.fieldMappings
 
 #### Defined in
 
-[generator-options.ts:31](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/generator-options.ts#L31)
+[generator-options.ts:31](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/generator-options.ts#L31)
 
 ___
 
@@ -118,7 +118,7 @@ z.TypeOf.outputDirPath
 
 #### Defined in
 
-[generator-options.ts:21](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/generator-options.ts#L21)
+[generator-options.ts:21](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/generator-options.ts#L21)
 
 ___
 
@@ -134,7 +134,7 @@ z.TypeOf.schemaPath
 
 #### Defined in
 
-[generator-options.ts:9](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/generator-options.ts#L9)
+[generator-options.ts:9](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/generator-options.ts#L9)
 
 ___
 
@@ -151,4 +151,4 @@ z.TypeOf.tables
 
 #### Defined in
 
-[generator-options.ts:37](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/generator-options.ts#L37)
+[generator-options.ts:37](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/generator-options.ts#L37)

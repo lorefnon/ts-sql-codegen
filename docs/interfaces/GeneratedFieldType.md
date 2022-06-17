@@ -33,7 +33,7 @@ z.TypeOf.adapter
 
 #### Defined in
 
-[field-mappings.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/field-mappings.ts#L47)
+[field-mappings.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/field-mappings.ts#L47)
 
 ___
 
@@ -51,7 +51,7 @@ z.TypeOf.dbType
 
 #### Defined in
 
-[field-mappings.ts:31](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/field-mappings.ts#L31)
+[field-mappings.ts:31](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/field-mappings.ts#L31)
 
 ___
 
@@ -67,7 +67,7 @@ z.TypeOf.kind
 
 #### Defined in
 
-[field-mappings.ts:25](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/field-mappings.ts#L25)
+[field-mappings.ts:25](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/field-mappings.ts#L25)
 
 ___
 
@@ -87,4 +87,4 @@ z.TypeOf.tsType
 
 #### Defined in
 
-[field-mappings.ts:40](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/field-mappings.ts#L40)
+[field-mappings.ts:40](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/field-mappings.ts#L40)

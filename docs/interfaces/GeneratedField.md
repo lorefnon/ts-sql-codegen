@@ -28,7 +28,7 @@ z.TypeOf.isComputed
 
 #### Defined in
 
-[field-mappings.ts:56](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/field-mappings.ts#L56)
+[field-mappings.ts:56](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/field-mappings.ts#L56)
 
 ___
 
@@ -42,7 +42,7 @@ z.TypeOf.name
 
 #### Defined in
 
-[field-mappings.ts:55](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/field-mappings.ts#L55)
+[field-mappings.ts:55](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/field-mappings.ts#L55)
 
 ___
 
@@ -56,4 +56,4 @@ z.TypeOf.type
 
 #### Defined in
 
-[field-mappings.ts:54](https://github.com/lorefnon/ts-sql-codegen/blob/17dd361/src/field-mappings.ts#L54)
+[field-mappings.ts:54](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/field-mappings.ts#L54)
