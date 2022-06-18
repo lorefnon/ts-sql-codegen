@@ -1,5 +1,9 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+drop view if exists author_books;
+drop table if exists chapters;
+drop table if exists books;
+drop type if exists genre;
 drop table if exists authors;
 
 create table authors (
@@ -10,16 +14,14 @@ create table authors (
     updated_at timestamp not null default now()
 );
 
-drop table if exists books;
-
-drop type if exists genre;
+insert into authors (id, name)
+values (1, 'Will Wight');
 
 create type genre as enum ('fantasy', 'scifi', 'horror');
 
 create table books (
     id uuid not null primary key default uuid_generate_v4(),
     name varchar(255) not null,
-    price money not null,
     author_id int not null,
     released_at date,
     time_to_read interval,
@@ -31,7 +33,9 @@ create table books (
             references authors (id)
 );
 
-drop table if exists chapters;
+insert into books (name, author_id)
+select 'Unsouled', id
+from authors;
 
 create table chapters (
     id serial primary key,
@@ -46,7 +50,9 @@ create table chapters (
             references books (id)
 );
 
-drop view if exists author_books;
+insert into chapters (name, book_id, metadata)
+select 'Chapter 01', id, '{ "a": "test" }'
+from books;
 
 create view author_books as
     select

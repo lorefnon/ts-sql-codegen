@@ -1,10 +1,14 @@
 import path from "path";
 import fs from "fs-extra";
 import { FieldMapping, Generator } from "../src";
+import { isEqual, omit } from "lodash";
 import snap from "mocha-snap";
+import assert from "assert";
+import { getConnection } from "./helpers/connection-source";
+import { extractColumnsFrom } from "ts-sql-query/extras/utils";
 
-const schemaPath = path.join(__dirname, "test.schema.yaml");
-const connectionSourcePath = path.join(__dirname, "connection-source");
+const schemaPath = path.join(__dirname, "data/test.schema.yaml");
+const connectionSourcePath = path.join(__dirname, "helpers/connection-source");
 const outputDirPath = path.join(__dirname, "generated");
 
 const fieldMappings: FieldMapping[] = [
@@ -15,7 +19,7 @@ const fieldMappings: FieldMapping[] = [
                 kind: "enum",
                 tsType: {
                     name: "Genre",
-                    importPath: path.join(__dirname, "types"),
+                    importPath: path.join(__dirname, "helpers/types"),
                 },
             },
         },
@@ -29,12 +33,12 @@ const fieldMappings: FieldMapping[] = [
                 dbType: { name: "jsonb" },
                 tsType: {
                     name: "ChapterMetadata",
-                    importPath: path.join(__dirname, "types"),
+                    importPath: path.join(__dirname, "helpers/types"),
                 },
                 adapter: {
-                    name: 'ChapterMetadataAdapter',
-                    importPath: path.join(__dirname, 'adapter')
-                }
+                    name: "ChapterMetadataAdapter",
+                    importPath: path.join(__dirname, "helpers/adapters"),
+                },
             },
         },
     },
@@ -58,6 +62,92 @@ describe("Generator", () => {
         });
         await generator.generate();
         await snap(await readAllGenerated());
+        if (process.env.DATABASE_URL) {
+            const conn = getConnection();
+            await conn
+                .transaction(async () => {
+                    // prettier-ignore
+                    // @ts-ignore
+                    const { AuthorsTable } = await import( "./generated/AuthorsTable");
+                    // prettier-ignore
+                    // @ts-ignore
+                    const { BooksTable } = await import( "./generated/BooksTable");
+                    const authorsTable = new AuthorsTable();
+                    const { id } = await conn
+                        .insertInto(authorsTable)
+                        .set({
+                            id: 2,
+                            name: "Brandon Sanderson",
+                        })
+                        .returning({
+                            id: authorsTable.id,
+                        })
+                        .executeInsertOne();
+                    assert(id === 2);
+                    await conn
+                        .insertInto(new BooksTable())
+                        .set({
+                            name: "Mistborn",
+                            authorId: id,
+                        })
+                        .executeInsert();
+                    // prettier-ignore
+                    // @ts-ignore
+                    const { AuthorBooksTable } = await import( "./generated/AuthorBooksTable");
+                    // prettier-ignore
+                    // @ts-ignore
+                    const { ChaptersTable } = await import( "./generated/ChaptersTable");
+                    const authorBooksTable = new AuthorBooksTable();
+                    const authorBooks = await conn
+                        .selectFrom(authorBooksTable)
+                        .select(extractColumnsFrom(authorBooksTable) as any)
+                        .executeSelectMany();
+                            console.log(authorBooks.map((it) => omit(it, ["id"])))
+                    assert(
+                        isEqual(
+                            authorBooks.map((it) => omit(it, ["id"])),
+                            [
+                                {
+                                    name: "Unsouled",
+                                    authorId: 1,
+                                    authorName: "Will Wight",
+                                },
+                                {
+                                    name: "Mistborn",
+                                    authorId: 2,
+                                    authorName: "Brandon Sanderson",
+                                },
+                            ]
+                        )
+                    );
+                    const chaptersTable = new ChaptersTable();
+                    const chapters = await conn
+                        .selectFrom(chaptersTable)
+                        .select(extractColumnsFrom(chaptersTable) as any)
+                        .executeSelectMany();
+                    assert(
+                        isEqual(chapters, [
+                            {
+                                id: 1,
+                                name: "Chapter 01",
+                                bookId: "1c1c2cf1-55af-4fd1-916f-ef444ce15c30",
+                                metadata: { a: "test" },
+                            },
+                        ])
+                    );
+                    const newChapter = { ...chapters[0] };
+                    delete newChapter.id;
+                    newChapter.name = 'Chapter 02';
+                    await conn.insertInto(chaptersTable)
+                        .set(newChapter as any)
+                        .executeInsert()
+                    throw new Error("CANCEL_TRX");
+                })
+                .catch((e) => {
+                    if (e.message !== "CANCEL_TRX") throw e;
+                    console.info("Ignoring transaction error: ", e);
+                });
+        }
     });
 
     it("allows omitting specific tables and fields", async () => {

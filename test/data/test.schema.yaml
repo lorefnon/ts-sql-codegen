@@ -63,11 +63,6 @@ tables:
     nullable: false
     default: null
     comment: ""
-  - name: price
-    type: money
-    nullable: false
-    default: null
-    comment: ""
   - name: author_id
     type: integer
     nullable: false
@@ -199,11 +194,6 @@ tables:
     nullable: true
     default: null
     comment: ""
-  - name: price
-    type: money
-    nullable: true
-    default: null
-    comment: ""
   - name: author_id
     type: integer
     nullable: true
@@ -241,7 +231,6 @@ tables:
     CREATE VIEW author_books AS (
      SELECT books.id,
         books.name,
-        books.price,
         books.author_id,
         books.released_at,
         books.time_to_read,
