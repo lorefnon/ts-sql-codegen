@@ -118,7 +118,7 @@ export const fieldMappings: FieldMapping[] = [
         generatedField: { type: { dbType: { name: "localTime" } } },
     },
     {
-        columnType: /(double|float|money)/,
+        columnType: /(double|float)/,
         generatedField: { type: { dbType: { name: "double" } } },
     },
 ];
