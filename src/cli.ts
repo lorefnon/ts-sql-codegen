@@ -5,6 +5,7 @@ import { ZodError } from "zod";
 import { Generator } from "./generator";
 import fs from "fs/promises";
 import path from "path";
+import Handlebars from "handlebars";
 
 main().catch((e) => {
     console.error(e);
@@ -34,41 +35,26 @@ async function main() {
 }
 
 async function printVersion() {
-    const rawManifest = await fs.readFile(
-        path.join(__dirname, "../package.json"),
-        "utf8"
-    );
-    const manifest = JSON.parse(rawManifest);
+    const manifest = await readManifest();
     console.log(`${manifest.name} version ${manifest.version}`);
 }
 
 async function printHelp() {
-    console.log(`
-    ts-sql-codegen is a simple utility for generating table mappers for relational databases
-    
-    Installation:
+    const helpTemplate = await compileHelpTemplate();
+    const templateInput = await readManifest();
+    console.log(helpTemplate(templateInput));
+}
 
-    Step 1: Install tbls and ensure it is available in path
-      Refer: https://github.com/k1LoW/tbls#install
-    Step 2: Install ts-sql-codegen'
-      npm i --dev ts-sql-codegen
+async function readManifest(): Promise<any> {
+    const rawManifest = await fs.readFile(
+        path.join(__dirname, "../package.json"),
+        "utf8"
+    );
+    return JSON.parse(rawManifest);
+}
 
-    Note:
-      - Global installation (npm i -g ts-sql-codegen) can be convenient, but is preferrable
-        to have ts-sql-codegen as a project dependency to avoid versioning issues.
-
-    Usage: 
-
-    After every database schema change:
-
-    Step 1: Generate yaml schema file from database using tbls 
-      Example: tbls out postgres://postgres:password@localhost:5432/testdb -t yaml -o schema.yaml
-    Step 2: Pass this schema file to ts-sql-codegen
-      Example: ts-sql-codegen --schema ./schema.yaml --output-dir ./src/generated --connection-source ./src/db/connection-source
-    Above options are default, so you can also just run ts-sql-codegen
-
-    Note: 
-    - All paths are relative to cwd
-
-    `);
+async function compileHelpTemplate () {
+    const templatePath = path.join(__dirname, "help.hbs");
+    const templateContent = await fs.readFile(templatePath, 'utf8');
+    return Handlebars.compile(templateContent);
 }

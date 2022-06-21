@@ -6,13 +6,13 @@ import path from "path";
 import { camelCase, memoize, upperFirst, last, lowerFirst } from "lodash";
 import { GeneratorOpts, GeneratorOptsSchema } from "./generator-options";
 import {
-    Adapter,
     fieldMappings,
     GeneratedField,
     GeneratedFieldType,
+    ImportedItem,
 } from "./field-mappings";
 import { Column, Table, TblsSchema } from "./tbls-types";
-import { match } from "ts-pattern";
+import { match } from "ts-pattern"
 
 type Logger = Record<
     "debug" | "info" | "warn" | "error",
@@ -230,7 +230,7 @@ export class Generator {
     protected getAdapterImports(
         outputFilePath: string,
         fields: FieldTmplInput[]
-    ) {
+    ): ImportTmplInput[] {
         const imports = new Map<string, Set<string>>();
         for (const field of fields) {
             const adapter = field.fieldType?.adapter;
@@ -252,7 +252,7 @@ export class Generator {
     protected getTypeImports(
         outputFilePath: string,
         fields: FieldTmplInput[]
-    ) {
+    ): ImportTmplInput[] {
         const imports = new Map<string, Set<string>>();
         for (const field of fields) {
             const importPath = field.fieldType?.tsType?.importPath;
@@ -283,7 +283,7 @@ export class Generator {
         );
     }
 
-    protected getAdapterImportPath(adapter: Adapter, outputFilePath: string) {
+    protected getAdapterImportPath(adapter: ImportedItem, outputFilePath: string) {
         const relImportPath =
             adapter.importPath ?? this.opts.common?.typeAdapter?.importPath;
         if (!relImportPath) {

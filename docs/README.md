@@ -10,7 +10,6 @@ ts-sql-codegen
 
 ### Interfaces
 
-- [Adapter](interfaces/Adapter.md)
 - [FieldMapping](interfaces/FieldMapping.md)
 - [GeneratedField](interfaces/GeneratedField.md)
 - [GeneratedFieldType](interfaces/GeneratedFieldType.md)
@@ -31,4 +30,4 @@ Matching criteria specified as string or regex
 
 #### Defined in
 
-[field-mappings.ts:8](https://github.com/lorefnon/ts-sql-codegen/blob/e632c03/src/field-mappings.ts#L8)
+[field-mappings.ts:8](https://github.com/lorefnon/ts-sql-codegen/blob/6760e47/src/field-mappings.ts#L8)

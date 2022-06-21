@@ -14,10 +14,6 @@ export const ImportedItemSchema = z.object({
 
 export interface ImportedItem extends z.TypeOf<typeof ImportedItemSchema> {}
 
-export const AdapterSchema = ImportedItemSchema;
-
-export interface Adapter extends z.TypeOf<typeof AdapterSchema> {}
-
 export const GeneratedFieldTypeSchema = z.object({
     /**
      * Specify that this field uses a custom database type or an enum type

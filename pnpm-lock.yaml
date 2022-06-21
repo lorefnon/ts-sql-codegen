@@ -22,6 +22,7 @@ specifiers:
   recursive-copy-cli: ^1.0.20
   rimraf: ^3.0.2
   ts-node: ^10.8.1
+  ts-pattern: ^4.0.3
   ts-sql-query: ^1.28.0
   typedoc: ^0.22.17
   typedoc-plugin-markdown: ^3.12.1
@@ -35,6 +36,7 @@ dependencies:
   js-yaml: 4.1.0
   lodash: 4.17.21
   minimist: 1.2.6
+  ts-pattern: 4.0.3
   zod: 3.17.3
 
 devDependencies:
@@ -1281,6 +1283,10 @@ packages:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
+
+  /ts-pattern/4.0.3:
+    resolution: {integrity: sha512-OxQStbr1MKcYYz3YaXsFSBkMo3zjFODVkV8kaLfOak+sWSfx4B+jkOm/VoaWLhnMP+icnIcJ7ENYEnmpAv3jLg==}
+    dev: false
 
   /ts-sql-query/1.28.0:
     resolution: {integrity: sha512-66e9aHXlgRjkTvdWyaxhJJRMAxbF2JXZ9x5FtZNX9rRivda5bAjIeB/U009Ggd/OrHnALuGXPESboHHtpgOgpg==}
