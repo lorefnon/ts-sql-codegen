@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
 import path from "path";
-import { camelCase, memoize, upperFirst, last, lowerFirst } from "lodash";
+import { camelCase, memoize, upperFirst, last } from "lodash";
 import { GeneratorOpts, GeneratorOptsSchema } from "./generator-options";
 import {
     fieldMappings,
@@ -187,7 +187,7 @@ export class Generator {
         const exportTableClass = this.opts.export?.tableClasses ?? true;
         const exportTableInstance = this.opts.export?.tableInstances ?? false;
         const className = this.getClassNameFromTableName(table.name);
-        const instName = lowerFirst(className);
+        const instName = this.getInstanceNameFromTableName(table.name);
         const templateInput = await this.preProcessTemplateInput({
             tableName,
             tableKind,
@@ -308,6 +308,10 @@ export class Generator {
         return upperFirst(camelCase(last(tableName.split(".")))) + "Table";
     }
 
+    protected getInstanceNameFromTableName(tableName: string) {
+        return 't' + upperFirst(camelCase(last(tableName.split("."))));
+    }
+    
     protected isColumnOmitted(tableName: string, col: Column) {
         const mapping = this.getFieldMappings().find(
             (it) =>

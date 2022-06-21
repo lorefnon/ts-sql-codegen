@@ -27,7 +27,7 @@ class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
     }
 }
 
-export const authorBooksTable = new AuthorBooksTable();
+export const tAuthorBooks = new AuthorBooksTable();
 
 
 // AuthorsTable.ts :
@@ -53,7 +53,7 @@ class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
     }
 }
 
-export const authorsTable = new AuthorsTable();
+export const tAuthors = new AuthorsTable();
 
 
 // BooksTable.ts :
@@ -84,7 +84,7 @@ class BooksTable extends Table<DBConnection, 'BooksTable'> {
     }
 }
 
-export const booksTable = new BooksTable();
+export const tBooks = new BooksTable();
 
 
 // ChaptersTable.ts :
@@ -117,4 +117,4 @@ class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
     }
 }
 
-export const chaptersTable = new ChaptersTable();
+export const tChapters = new ChaptersTable();
