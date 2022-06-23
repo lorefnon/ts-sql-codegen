@@ -27,7 +27,7 @@ z.TypeOf.importPath
 
 #### Defined in
 
-[field-mappings.ts:12](https://github.com/lorefnon/ts-sql-codegen/blob/c99c53b/src/field-mappings.ts#L12)
+[field-mappings.ts:12](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L12)
 
 ___
 
@@ -41,4 +41,4 @@ z.TypeOf.name
 
 #### Defined in
 
-[field-mappings.ts:11](https://github.com/lorefnon/ts-sql-codegen/blob/c99c53b/src/field-mappings.ts#L11)
+[field-mappings.ts:11](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L11)
