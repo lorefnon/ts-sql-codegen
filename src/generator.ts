@@ -125,9 +125,10 @@ export class Generator {
     protected async generateTableMapper(table: Table) {
         // Qualified table name with schema prefix
         const tableName = last(table.name.split("."));
-        const tableKind = match(table.type)
-            .with("BASE TABLE", () => "Table")
-            .with("VIEW", () => "View")
+        const tableKind = match(table.type.toLowerCase())
+            .with("base table", () => "Table")
+            .with("table", () => "Table")
+            .with("view", () => "View")
             .otherwise(() => null);
         if (!tableKind) {
             this.logger.warn(

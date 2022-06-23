@@ -47,6 +47,8 @@ Programmatic usage enables a wider set of customization options.
 **Example:**
 
 ```ts
+const { Generator } = require('ts-sql-codegen');
+
 const options = {
    schemaPath: './schema.yaml',
    connectionSourcePath: './connection-source.ts'
