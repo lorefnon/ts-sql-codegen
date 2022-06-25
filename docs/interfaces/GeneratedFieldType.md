@@ -21,7 +21,7 @@
 
 ### adapter
 
-• **adapter**: `undefined` \| ``null`` \| { `importPath`: `undefined` \| ``null`` \| `string` ; `name`: `string`  }
+• **adapter**: `undefined` \| ``null`` \| { `importPath`: `undefined` \| ``null`` \| `string` ; `isDefault`: `undefined` \| ``null`` \| `boolean` ; `isRelative`: `undefined` \| ``null`` \| `boolean` ; `name`: `string`  }
 
 Specify a type adapter for the generated field.
 
@@ -33,7 +33,7 @@ z.TypeOf.adapter
 
 #### Defined in
 
-[field-mappings.ts:43](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L43)
+[field-mappings.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L82)
 
 ___
 
@@ -51,7 +51,7 @@ z.TypeOf.dbType
 
 #### Defined in
 
-[field-mappings.ts:27](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L27)
+[field-mappings.ts:66](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L66)
 
 ___
 
@@ -67,13 +67,13 @@ z.TypeOf.kind
 
 #### Defined in
 
-[field-mappings.ts:21](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L21)
+[field-mappings.ts:60](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L60)
 
 ___
 
 ### tsType
 
-• **tsType**: `undefined` \| ``null`` \| { `importPath`: `undefined` \| ``null`` \| `string` ; `name`: `string`  }
+• **tsType**: `undefined` \| ``null`` \| { `importPath`: `undefined` \| ``null`` \| `string` ; `isDefault`: `undefined` \| ``null`` \| `boolean` ; `isRelative`: `undefined` \| ``null`` \| `boolean` ; `name`: `string`  }
 
 If present, used as a generic type argument to field factory. This is typically useful when
 dealing with custom database types or enum types.
@@ -87,4 +87,4 @@ z.TypeOf.tsType
 
 #### Defined in
 
-[field-mappings.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L36)
+[field-mappings.ts:75](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L75)

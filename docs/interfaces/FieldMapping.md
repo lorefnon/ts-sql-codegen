@@ -31,7 +31,7 @@ z.TypeOf.columnName
 
 #### Defined in
 
-[field-mappings.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L59)
+[field-mappings.ts:103](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L103)
 
 ___
 
@@ -50,13 +50,13 @@ z.TypeOf.columnType
 
 #### Defined in
 
-[field-mappings.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L70)
+[field-mappings.ts:114](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L114)
 
 ___
 
 ### generatedField
 
-• **generatedField**: ``false`` \| { `isComputed`: `undefined` \| ``null`` \| `boolean` ; `name`: `undefined` \| ``null`` \| `string` ; `type`: `undefined` \| ``null`` \| { kind?: "custom" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ... 1 more ... \| undefined; }  }
+• **generatedField**: ``false`` \| { `isComputed`: `undefined` \| ``null`` \| `boolean` ; `name`: `undefined` \| ``null`` \| `string` ; `type`: `undefined` \| ``null`` \| { kind?: "custom" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| ... 1 more ... \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ... 1 more ... \| undefin...  }
 
 Can be used to customize the field name or type mapping
 in the generated field.
@@ -69,7 +69,7 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-[field-mappings.ts:78](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L78)
+[field-mappings.ts:122](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L122)
 
 ___
 
@@ -85,4 +85,4 @@ z.TypeOf.tableName
 
 #### Defined in
 
-[field-mappings.ts:62](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L62)
+[field-mappings.ts:106](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L106)

@@ -37,6 +37,7 @@ and custom logic for table/column/field mapping.
 
 ### Methods
 
+- [accumulateImports](Generator.md#accumulateimports)
 - [findPrimaryKey](Generator.md#findprimarykey)
 - [generate](Generator.md#generate)
 - [generateTableMapper](Generator.md#generatetablemapper)
@@ -46,10 +47,10 @@ and custom logic for table/column/field mapping.
 - [getConnectionSourceImportPath](Generator.md#getconnectionsourceimportpath)
 - [getFieldNameForColumn](Generator.md#getfieldnameforcolumn)
 - [getFieldType](Generator.md#getfieldtype)
+- [getImportPathForOutputPath](Generator.md#getimportpathforoutputpath)
 - [getInstanceNameFromTableName](Generator.md#getinstancenamefromtablename)
 - [getOutputFileName](Generator.md#getoutputfilename)
 - [getOutputFilePath](Generator.md#getoutputfilepath)
-- [getRelativeImportPath](Generator.md#getrelativeimportpath)
 - [getTypeImports](Generator.md#gettypeimports)
 - [isColumnComputed](Generator.md#iscolumncomputed)
 - [isColumnOmitted](Generator.md#iscolumnomitted)
@@ -71,7 +72,7 @@ and custom logic for table/column/field mapping.
 
 #### Defined in
 
-[generator.ts:72](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L72)
+[generator.ts:73](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L73)
 
 ## Properties
 
@@ -81,17 +82,17 @@ and custom logic for table/column/field mapping.
 
 #### Defined in
 
-[generator.ts:84](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L84)
+[generator.ts:85](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L85)
 
 ___
 
 ### getFieldMappings
 
-• `Protected` **getFieldMappings**: () => { `columnName`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `columnType`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `generatedField`: ``false`` \| { type?: { kind?: "custom" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ... 1 more ... \| undefined; } \| null \| undefined; name?: string \| ... 1 more ... \| undefined; isComputed?:... ; `tableName`: `undefined` \| ``null`` \| `string` \| `RegExp`  }[] & `MemoizedFunction`
+• `Protected` **getFieldMappings**: () => { `columnName`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `columnType`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `generatedField`: ``false`` \| { type?: { kind?: "custom" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| ... 1 more ... \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ... 1 more ... ... ; `tableName`: `undefined` \| ``null`` \| `string` \| `RegExp`  }[] & `MemoizedFunction`
 
 #### Defined in
 
-[generator.ts:76](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L76)
+[generator.ts:77](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L77)
 
 ___
 
@@ -101,7 +102,7 @@ ___
 
 #### Defined in
 
-[generator.ts:80](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L80)
+[generator.ts:81](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L81)
 
 ___
 
@@ -111,7 +112,7 @@ ___
 
 #### Defined in
 
-[generator.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L70)
+[generator.ts:71](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L71)
 
 ___
 
@@ -121,9 +122,30 @@ ___
 
 #### Defined in
 
-[generator.ts:69](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L69)
+[generator.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L70)
 
 ## Methods
+
+### accumulateImports
+
+▸ `Private` **accumulateImports**(`imports`, `defaultImports`): `ImportTmplInput`[]
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `imports` | `Map`<`string`, `Set`<`string`\>\> |
+| `defaultImports` | `Map`<`string`, `Set`<`string`\>\> |
+
+#### Returns
+
+`ImportTmplInput`[]
+
+#### Defined in
+
+[generator.ts:252](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L252)
+
+___
 
 ### findPrimaryKey
 
@@ -145,7 +167,7 @@ ___
 
 #### Defined in
 
-[generator.ts:399](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L399)
+[generator.ts:427](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L427)
 
 ___
 
@@ -159,7 +181,7 @@ ___
 
 #### Defined in
 
-[generator.ts:89](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L89)
+[generator.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L90)
 
 ___
 
@@ -183,7 +205,7 @@ ___
 
 #### Defined in
 
-[generator.ts:125](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L125)
+[generator.ts:126](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L126)
 
 ___
 
@@ -204,7 +226,7 @@ ___
 
 #### Defined in
 
-[generator.ts:287](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L287)
+[generator.ts:308](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L308)
 
 ___
 
@@ -225,7 +247,7 @@ ___
 
 #### Defined in
 
-[generator.ts:231](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L231)
+[generator.ts:230](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L230)
 
 ___
 
@@ -245,7 +267,7 @@ ___
 
 #### Defined in
 
-[generator.ts:308](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L308)
+[generator.ts:336](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L336)
 
 ___
 
@@ -265,7 +287,7 @@ ___
 
 #### Defined in
 
-[generator.ts:220](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L220)
+[generator.ts:219](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L219)
 
 ___
 
@@ -291,7 +313,7 @@ ___
 
 #### Defined in
 
-[generator.ts:342](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L342)
+[generator.ts:370](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L370)
 
 ___
 
@@ -317,7 +339,29 @@ ___
 
 #### Defined in
 
-[generator.ts:357](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L357)
+[generator.ts:385](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L385)
+
+___
+
+### getImportPathForOutputPath
+
+▸ `Protected` **getImportPathForOutputPath**(`filePath`, `importPath`, `importedItem`): `string`
+
+#### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `filePath` | `string` |
+| `importPath` | `string` |
+| `importedItem` | [`ImportedItem`](../interfaces/ImportedItem.md) |
+
+#### Returns
+
+`string`
+
+#### Defined in
+
+[generator.ts:299](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L299)
 
 ___
 
@@ -337,7 +381,7 @@ ___
 
 #### Defined in
 
-[generator.ts:312](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L312)
+[generator.ts:340](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L340)
 
 ___
 
@@ -361,7 +405,7 @@ ___
 
 #### Defined in
 
-[generator.ts:395](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L395)
+[generator.ts:423](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L423)
 
 ___
 
@@ -385,28 +429,7 @@ ___
 
 #### Defined in
 
-[generator.ts:390](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L390)
-
-___
-
-### getRelativeImportPath
-
-▸ `Protected` **getRelativeImportPath**(`filePath`, `cwdRelImportPath`): `string`
-
-#### Parameters
-
-| Name | Type |
-| :------ | :------ |
-| `filePath` | `string` |
-| `cwdRelImportPath` | `string` |
-
-#### Returns
-
-`string`
-
-#### Defined in
-
-[generator.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L277)
+[generator.ts:418](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L418)
 
 ___
 
@@ -427,7 +450,7 @@ ___
 
 #### Defined in
 
-[generator.ts:253](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L253)
+[generator.ts:272](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L272)
 
 ___
 
@@ -453,7 +476,7 @@ ___
 
 #### Defined in
 
-[generator.ts:327](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L327)
+[generator.ts:355](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L355)
 
 ___
 
@@ -479,7 +502,7 @@ ___
 
 #### Defined in
 
-[generator.ts:316](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L316)
+[generator.ts:344](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L344)
 
 ___
 
@@ -504,7 +527,7 @@ ___
 
 #### Defined in
 
-[generator.ts:304](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L304)
+[generator.ts:332](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L332)
 
 ___
 
@@ -524,7 +547,7 @@ ___
 
 #### Defined in
 
-[generator.ts:300](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L300)
+[generator.ts:328](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L328)
 
 ___
 
@@ -548,4 +571,4 @@ ___
 
 #### Defined in
 
-[generator.ts:104](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/generator.ts#L104)
+[generator.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator.ts#L105)

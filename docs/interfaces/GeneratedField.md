@@ -2,6 +2,10 @@
 
 # Interface: GeneratedField
 
+Specifies options for the generated field mapping
+
+The options here are ts-sql-query specific
+
 ## Hierarchy
 
 - `TypeOf`<typeof `GeneratedFieldSchema`\>
@@ -28,7 +32,7 @@ z.TypeOf.isComputed
 
 #### Defined in
 
-[field-mappings.ts:52](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L52)
+[field-mappings.ts:91](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L91)
 
 ___
 
@@ -42,13 +46,13 @@ z.TypeOf.name
 
 #### Defined in
 
-[field-mappings.ts:51](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L51)
+[field-mappings.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L90)
 
 ___
 
 ### type
 
-• **type**: `undefined` \| ``null`` \| { `adapter`: `undefined` \| ``null`` \| { importPath?: string \| null \| undefined; name: string; } ; `dbType`: `undefined` \| ``null`` \| { name: string; } ; `kind`: `undefined` \| ``null`` \| ``"custom"`` \| ``"enum"`` ; `tsType`: `undefined` \| ``null`` \| { importPath?: string \| null \| undefined; name: string; }  }
+• **type**: `undefined` \| ``null`` \| { `adapter`: `undefined` \| ``null`` \| { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| null \| undefined; name: string; } ; `dbType`: `undefined` \| ``null`` \| { name: string; } ; `kind`: `undefined` \| ``null`` \| ``"custom"`` \| ``"enum"`` ; `tsType`: `undefined` \| ``null`` \| { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| null \| undefined; name: string; }  }
 
 #### Inherited from
 
@@ -56,4 +60,4 @@ z.TypeOf.type
 
 #### Defined in
 
-[field-mappings.ts:50](https://github.com/lorefnon/ts-sql-codegen/blob/d0fb66c/src/field-mappings.ts#L50)
+[field-mappings.ts:89](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/field-mappings.ts#L89)

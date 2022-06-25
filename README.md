@@ -59,6 +59,8 @@ await generator.generate();
 
 Refer to [Generator](./docs/classes/Generator.md) and [GeneratorOpts](./docs/interfaces/GeneratorOpts.md) for available options.
 
+The [test suite](./test/test.ts) also has examples of more complex customizations.
+
 For advanced use-cases (eg. custom templates, pre/post processing of generated code 
  and custom logic for table/column/field mapping) it is recommended to extend the Generator class in project.
 We intend to keep the customization options that the constructor accepts focussed on primary common use-cases.
