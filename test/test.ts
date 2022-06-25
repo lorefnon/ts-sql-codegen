@@ -102,7 +102,7 @@ describe("Generator", () => {
                         .selectFrom(authorBooksTable)
                         .select(extractColumnsFrom(authorBooksTable) as any)
                         .executeSelectMany();
-                            console.log(authorBooks.map((it) => omit(it, ["id"])))
+                    console.log(authorBooks.map((it) => omit(it, ["id"])));
                     assert(
                         isEqual(
                             authorBooks.map((it) => omit(it, ["id"])),
@@ -137,10 +137,11 @@ describe("Generator", () => {
                     );
                     const newChapter = { ...chapters[0] };
                     delete newChapter.id;
-                    newChapter.name = 'Chapter 02';
-                    await conn.insertInto(chaptersTable)
+                    newChapter.name = "Chapter 02";
+                    await conn
+                        .insertInto(chaptersTable)
                         .set(newChapter as any)
-                        .executeInsert()
+                        .executeInsert();
                     throw new Error("CANCEL_TRX");
                 })
                 .catch((e) => {
@@ -191,6 +192,59 @@ describe("Generator", () => {
                 tableClasses: false,
             },
             fieldMappings,
+        });
+        await generator.generate();
+        await snap(await readAllGenerated());
+    });
+
+    it("allows non-relative and default import paths", async () => {
+        const generator = new Generator({
+            schemaPath,
+            connectionSourcePath,
+            outputDirPath,
+            export: {
+                tableInstances: true,
+                tableClasses: false,
+            },
+            fieldMappings: [
+                {
+                    columnType: "genre",
+                    generatedField: {
+                        type: {
+                            kind: "enum",
+                            tsType: {
+                                name: "Genre",
+                                importPath: path.join(
+                                    __dirname,
+                                    "helpers/types"
+                                ),
+                                isDefault: true
+                            },
+                        },
+                    },
+                },
+                {
+                    tableName: "chapters",
+                    columnName: "metadata",
+                    generatedField: {
+                        type: {
+                            kind: "custom",
+                            dbType: { name: "jsonb" },
+                            tsType: {
+                                name: "ChapterMetadata",
+                                importPath: "some-lib/ChapterMetadata",
+                                isDefault: true,
+                                isRelative: false
+                            },
+                            adapter: {
+                                name: "ChapterMetadataAdapter",
+                                importPath: "some-other-lib",
+                                isRelative: false
+                            },
+                        },
+                    },
+                },
+            ],
         });
         await generator.generate();
         await snap(await readAllGenerated());

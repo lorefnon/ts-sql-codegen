@@ -7,13 +7,23 @@
 import { {{tableKind}} } from "ts-sql-query/{{tableKind}}";
 import { DBConnection } from "{{dbConnectionSource}}";
 {{#each imports}}
-import {
-    {{#dedent-by 2 "level"}}
+    {{#if isDefault}}
         {{#each imported}}
-            {{.}},
+            {{#dedent-by 4 "level"}}
+                import {{.}} from "{{../importPath}}"
+            {{/dedent-by}}
         {{/each}}
-    {{/dedent-by}}
-} from "{{importPath}}"
+    {{else}}
+        {{#dedent-by 3 "level"}}
+            import {
+                {{#dedent-by 2 "level"}}
+                    {{#each imported}}
+                        {{.}},
+                    {{/each}}
+                {{/dedent-by}}
+            } from "{{importPath}}"
+        {{/dedent-by}}
+    {{/if}}
 {{/each}}
 
 {{#if exportTableClass}}export {{/if}}class {{className}} extends {{tableKind}}<DBConnection, '{{className}}'> {
