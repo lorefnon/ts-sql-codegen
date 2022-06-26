@@ -194,7 +194,7 @@ export class AuthorsTable extends Table<DBConnection, 'PublicAuthorsTable'> {
         //        ^
     }
 }
-``
+```
 
 #### Specifying id prefix for multi-db scenarios
 
@@ -219,6 +219,6 @@ export class AuthorsTable extends Table<DBConnection, 'ReportingDBAuthorsTable'>
         super('authors')
     }
 }
-``
+```
 
 This option will override the id prefix derived from schema name if `tableMapping.useQualifiedTableName` is true.
