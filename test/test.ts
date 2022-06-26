@@ -162,6 +162,9 @@ describe("Generator", () => {
       tables: {
         include: [/authors/, "books"],
       },
+      tableMapping: {
+        idPrefix: 'Public'
+      },
       fieldMappings: [
         ...fieldMappings,
         {

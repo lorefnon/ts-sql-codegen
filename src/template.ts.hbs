@@ -28,7 +28,7 @@ import { DBConnection } from "{{dbConnectionSource}}";
 {{/each}}
 
 {{ table.comment }}
-{{#if exportTableClass}}export {{/if}}class {{className}} extends {{table.kind}}<DBConnection, '{{className}}'> {
+{{#if exportTableClass}}export {{/if}}class {{className}} extends {{table.kind}}<DBConnection, '{{table.idPrefix}}{{className}}'> {
 
     {{#dedent-by 3 "level"}}
         {{#each fields}}

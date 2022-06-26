@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { FieldMappingSchema, StrOrRegExpSchema } from "./field-mappings";
+import { FieldMappingSchema, FieldMapping, StrOrRegExpSchema } from "./field-mappings";
 
 export const TableInclusionSchema = z.object({
     /**
@@ -34,6 +34,13 @@ export const CommonTypeAdapterOptionsSchema = z.object({
 export interface CommonTypeAdapterOptions
     extends z.TypeOf<typeof CommonTypeAdapterOptionsSchema> {}
 
+export const TableMappingSchema = z.object({
+    idPrefix: z.string().nullish()
+});
+
+export interface TableMapping 
+    extends z.TypeOf<typeof TableMappingSchema> {}
+
 export const CommonPrimaryKeyOptionsSchema = z.object({
     /** Name of primary key column */
     name: z.string().nullish(),
@@ -52,13 +59,13 @@ export interface CommonCustomTypesOptions
     extends z.TypeOf<typeof CommonCustomTypesOptionsSchema> {}
 
 export const CommonOptionsSchema = z.object({
-    /** @see {@link CommonCustomTypesOptions} */
+    /** @see CommonCustomTypesOptions */
     customTypes: CommonCustomTypesOptionsSchema.nullish(),
 
-    /** @see {@link CommonPrimaryKeyOptions} */
+    /** @see CommonPrimaryKeyOptions */
     typeAdapter: CommonTypeAdapterOptionsSchema.nullish(),
 
-    /** @see {@link CommonCustomTypesOptions} */
+    /** @see CommonCustomTypesOptions */
     primaryKey: CommonPrimaryKeyOptionsSchema.nullish(),
 });
 
@@ -89,22 +96,29 @@ export const GeneratorOptsSchema = z.object({
     /**
      * Customize how table columns are mapped to typescript fields
      *
-     * Refer {@link FieldMapping}
+     * @see FieldMapping
      */
     fieldMappings: FieldMappingSchema.array().nullish(),
+
+    /**
+     * Customize how tables are mapped
+     * 
+     * @see TableMapping 
+     */
+    tableMapping: TableMappingSchema.nullish(),
 
     /**
      * Restrict the generator to process only a subset of tables
      * available
      *
-     * See {@link TableInclusion}
+     * @see TableInclusion
      */
     tables: TableInclusionSchema.nullish(),
 
     /**
      * Customize what all entities are exported from generated file
      *
-     * See {@link ExportOptions}
+     * @see ExportOptions
      */
     export: ExportOptionsSchema.nullish(),
 

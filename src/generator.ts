@@ -193,7 +193,8 @@ export class Generator {
             table: {
                 name: tableName,
                 kind: tableKind,
-                comment: this.formatComment(table.comment)
+                comment: this.formatComment(table.comment),
+                idPrefix: this.opts.tableMapping?.idPrefix
             },
             imports,
             dbConnectionSource,
