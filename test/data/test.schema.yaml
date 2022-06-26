@@ -87,7 +87,7 @@ tables:
     type: double precision
     nullable: true
     default: null
-    comment: ""
+    comment: Sample weight as provided by distributor
   indexes:
   - name: books_pkey
     def: CREATE UNIQUE INDEX books_pkey ON public.books USING btree (id)
@@ -119,7 +119,7 @@ tables:
   def: ""
 - name: public.chapters
   type: BASE TABLE
-  comment: ""
+  comment: Chapters information is only available for books with parseable metadata; Consumers should not assume completeness.
   columns:
   - name: id
     type: integer
@@ -303,7 +303,7 @@ functions:
   type: FUNCTION
 driver:
   name: postgres
-  databaseVersion: PostgreSQL 14.3 (Ubuntu 14.3-1.pgdg22.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, 64-bit
+  databaseVersion: PostgreSQL 14.4 (Ubuntu 14.4-1.pgdg22.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, 64-bit
   meta:
     currentSchema: public
     searchPaths:

@@ -1,10 +1,11 @@
+{{#trim-trailing-whitespace}}
 /**
  * DO NOT EDIT:
  *
  * This file has been auto-generated from database schema using ts-sql-codegen. 
  * Any changes will be overwritten.
  */
-import { {{tableKind}} } from "ts-sql-query/{{tableKind}}";
+import { {{table.kind}} } from "ts-sql-query/{{table.kind}}";
 import { DBConnection } from "{{dbConnectionSource}}";
 {{#each imports}}
     {{#if isDefault}}
@@ -26,10 +27,12 @@ import { DBConnection } from "{{dbConnectionSource}}";
     {{/if}}
 {{/each}}
 
-{{#if exportTableClass}}export {{/if}}class {{className}} extends {{tableKind}}<DBConnection, '{{className}}'> {
+{{ table.comment }}
+{{#if exportTableClass}}export {{/if}}class {{className}} extends {{table.kind}}<DBConnection, '{{className}}'> {
 
     {{#dedent-by 3 "level"}}
         {{#each fields}}
+            {{field.comment}}
             {{#if fieldType.kind}}
                 {{name}} = this.{{columnMethod}}<{{fieldType.tsType.name}}>('{{columnName}}', '{{fieldType.kind}}', '{{fieldType.dbType.name}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
             {{else}}
@@ -39,10 +42,11 @@ import { DBConnection } from "{{dbConnectionSource}}";
     {{/dedent-by}}
 
     constructor() {
-        super('{{tableName}}')
+        super('{{table.name}}')
     }
 }
 
 {{#if exportTableInstance}}
 export const {{instName}} = new {{className}}();
 {{/if}}
+{{/trim-trailing-whitespace}}

@@ -12,7 +12,7 @@ specifiers:
   better-sqlite3: ^7.5.3
   fs-extra: ^10.1.0
   handlebars: ^4.7.7
-  hbs-dedent-helper: ^0.2.0
+  hbs-dedent-helper: ^0.3.0
   js-yaml: ^4.1.0
   lodash: ^4.17.21
   minimist: ^1.2.6
@@ -32,7 +32,7 @@ specifiers:
 dependencies:
   fs-extra: 10.1.0
   handlebars: 4.7.7
-  hbs-dedent-helper: 0.2.0_handlebars@4.7.7
+  hbs-dedent-helper: 0.3.0_handlebars@4.7.7
   js-yaml: 4.1.0
   lodash: 4.17.21
   minimist: 1.2.6
@@ -582,12 +582,15 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /hbs-dedent-helper/0.2.0_handlebars@4.7.7:
-    resolution: {integrity: sha512-KF2GZk9YFcXfZmOCjE5BrnKtlXr6l5qTw3hu23PWIYm6zllqnE9KH80SJfnIAl9sXya5IPxpablEZ3woIRXg+g==}
+  /hbs-dedent-helper/0.3.0_handlebars@4.7.7:
+    resolution: {integrity: sha512-czth7UoeuRQlyoMsNmp56kVuqUZGr0K1oMTeZLEOBEEiAcq7pmNyMs3dr9Dgn287YOTIj7sv4K9GGjhOj+G+lQ==}
     peerDependencies:
       handlebars: ^4.7.7
     dependencies:
       handlebars: 4.7.7
+      lodash.isempty: 4.4.0
+      lodash.repeat: 4.1.0
+      ts-pattern: 4.0.3
     dev: false
 
   /he/1.2.0:
@@ -688,6 +691,14 @@ packages:
     dependencies:
       p-locate: 5.0.0
     dev: true
+
+  /lodash.isempty/4.4.0:
+    resolution: {integrity: sha512-oKMuF3xEeqDltrGMfDxAPGIVMSSRv8tbRSODbrs4KGsRRLEhrW8N8Rd4DRgB2+621hY8A8XwwrTVhXWpxFvMzg==}
+    dev: false
+
+  /lodash.repeat/4.1.0:
+    resolution: {integrity: sha512-eWsgQW89IewS95ZOcr15HHCX6FVDxq3f2PNUIng3fyzsPev9imFQxIYdFZ6crl8L56UR6ZlGDLcEb3RZsCSSqw==}
+    dev: false
 
   /lodash/4.17.21:
     resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}

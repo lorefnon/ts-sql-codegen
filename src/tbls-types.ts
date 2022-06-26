@@ -25,6 +25,7 @@ export const TableSchema = z.object({
     type: z.string(),
     columns: ColumnSchema.array(),
     constraints: ConstraintSchema.array(),
+    comment: z.string().nullish()
 });
 
 export type Table = z.TypeOf<typeof TableSchema>;

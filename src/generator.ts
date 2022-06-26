@@ -3,7 +3,7 @@ import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
 import path from "path";
-import { camelCase, memoize, upperFirst, last } from "lodash";
+import { camelCase, memoize, upperFirst, last, isEmpty } from "lodash";
 import { GeneratorOpts, GeneratorOptsSchema } from "./generator-options";
 import {
     fieldMappings,
@@ -173,6 +173,7 @@ export class Generator {
                 return {
                     name: this.getFieldNameForColumn(table.name, col),
                     columnName: col.name,
+                    comment: this.formatComment(col.comment),
                     isOptional,
                     hasDefault,
                     columnMethod,
@@ -189,8 +190,11 @@ export class Generator {
         const className = this.getClassNameFromTableName(table.name);
         const instName = this.getInstanceNameFromTableName(table.name);
         const templateInput = await this.preProcessTemplateInput({
-            tableName,
-            tableKind,
+            table: {
+                name: tableName,
+                kind: tableKind,
+                comment: this.formatComment(table.comment)
+            },
             imports,
             dbConnectionSource,
             className,
@@ -214,6 +218,11 @@ export class Generator {
             this.logger.info(`Writing ${filePath}`);
             await fs.writeFile(filePath, output);
         }
+    }
+
+    protected formatComment(comment: string | null | undefined) {
+        if (isEmpty(comment)) return null
+        return '/**\n' + comment!.split('\n').map(it => ` * ${it}`).join('\n') + '\n*/';
     }
 
     protected getConnectionSourceImportPath(outputFilePath: string) {

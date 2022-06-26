@@ -33,6 +33,8 @@ create table books (
             references authors (id)
 );
 
+comment on column books.weight_grams is 'Sample weight as provided by distributor';
+
 insert into books (name, author_id)
 select 'Unsouled', id
 from authors;
@@ -49,6 +51,9 @@ create table chapters (
         foreign key (book_id)
             references books (id)
 );
+
+comment on table chapters is 'Chapters information is only available for books with parseable metadata; Consumers should not assume completeness.';
+
 
 insert into chapters (name, book_id, metadata)
 select 'Chapter 01', id, '{ "a": "test" }'

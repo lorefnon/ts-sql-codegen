@@ -54,7 +54,7 @@
   "dependencies": {
     "fs-extra": "^10.1.0",
     "handlebars": "^4.7.7",
-    "hbs-dedent-helper": "^0.2.0",
+    "hbs-dedent-helper": "^0.3.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "minimist": "^1.2.6",
