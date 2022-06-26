@@ -148,3 +148,77 @@ const options = {
   ]
 }
 ```
+
+### Multiple databases/schema
+
+The codegenerator does not have any special support for multi-db or multi-schema scenarios.
+
+You can simply run ts-sql-codegen multiple times for different databases/different schema.
+
+#### Filtering tables by schema
+
+The tbls schema dump contains table names with schema prefix. We can target this prefix in table inclusion criteria: 
+
+```ts
+const options = {
+  tables: {
+    include: [/^public\..*/]
+  }
+}
+```
+
+This can be helpful, for instance, if we want tables from different schema to be generated with different configurations or different output directories.
+
+#### Disambiguating tables in multi-schema scenarios
+
+Use of `tableMapping.useQualifiedTableName=true` is recommended when the application can simultaneously use tables from multiple schema
+
+```ts
+const options = {
+  tableMapping: {
+    useQualifiedTableName: true
+  }
+}
+```
+
+With this option the output looks like: 
+
+```ts
+export class AuthorsTable extends Table<DBConnection, 'PublicAuthorsTable'> {
+    //                                                 ~~~~~~
+    //                                                   ^
+    // .. fields ...
+    constructor() {
+        super('public.authors')
+        //     ~~~~~~~
+        //        ^
+    }
+}
+``
+
+#### Specifying id prefix for multi-db scenarios
+
+Use of idPrefix is recommended to ensure that table ids passed to ts-sql-query is unique when application can connect to tables with same name from multiple databases.
+
+```ts
+const options = {
+  tableMapping: {
+    idPrefix: 'ReportingDB'
+  }
+}
+```
+
+With this option the output looks like: 
+
+```ts
+export class AuthorsTable extends Table<DBConnection, 'ReportingDBAuthorsTable'> {
+    //                                                 ~~~~~~~~~~~
+    //                                                     ^
+    // .. fields ...
+    constructor() {
+        super('authors')
+    }
+}
+``
+
+This option will override the id prefix derived from schema name if `tableMapping.useQualifiedTableName` is true.

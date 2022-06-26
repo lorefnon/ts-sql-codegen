@@ -35,7 +35,8 @@ export interface CommonTypeAdapterOptions
     extends z.TypeOf<typeof CommonTypeAdapterOptionsSchema> {}
 
 export const TableMappingSchema = z.object({
-    idPrefix: z.string().nullish()
+    idPrefix: z.string().nullish(),
+    useQualifiedTableName: z.boolean().nullish()
 });
 
 export interface TableMapping 

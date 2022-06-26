@@ -27,7 +27,7 @@ z.TypeOf.tableClasses
 
 #### Defined in
 
-[generator-options.ts:21](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L21)
+[generator-options.ts:21](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L21)
 
 ___
 
@@ -41,4 +41,4 @@ z.TypeOf.tableInstances
 
 #### Defined in
 
-[generator-options.ts:20](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L20)
+[generator-options.ts:20](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L20)

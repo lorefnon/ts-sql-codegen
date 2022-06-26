@@ -21,6 +21,7 @@ Generator options
 - [fieldMappings](GeneratorOpts.md#fieldmappings)
 - [outputDirPath](GeneratorOpts.md#outputdirpath)
 - [schemaPath](GeneratorOpts.md#schemapath)
+- [tableMapping](GeneratorOpts.md#tablemapping)
 - [tables](GeneratorOpts.md#tables)
 
 ## Properties
@@ -40,7 +41,7 @@ z.TypeOf.common
 
 #### Defined in
 
-[generator-options.ts:117](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L117)
+[generator-options.ts:132](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L132)
 
 ___
 
@@ -56,7 +57,7 @@ z.TypeOf.connectionSourcePath
 
 #### Defined in
 
-[generator-options.ts:78](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L78)
+[generator-options.ts:86](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L86)
 
 ___
 
@@ -72,7 +73,7 @@ z.TypeOf.dryRun
 
 #### Defined in
 
-[generator-options.ts:69](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L69)
+[generator-options.ts:77](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L77)
 
 ___
 
@@ -82,7 +83,7 @@ ___
 
 Customize what all entities are exported from generated file
 
-See [ExportOptions](ExportOptions.md)
+**`see`** ExportOptions
 
 #### Inherited from
 
@@ -90,7 +91,7 @@ z.TypeOf.export
 
 #### Defined in
 
-[generator-options.ts:109](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L109)
+[generator-options.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L124)
 
 ___
 
@@ -100,7 +101,7 @@ ___
 
 Customize how table columns are mapped to typescript fields
 
-Refer [FieldMapping](FieldMapping.md)
+**`see`** FieldMapping
 
 #### Inherited from
 
@@ -108,7 +109,7 @@ z.TypeOf.fieldMappings
 
 #### Defined in
 
-[generator-options.ts:94](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L94)
+[generator-options.ts:102](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L102)
 
 ___
 
@@ -124,7 +125,7 @@ z.TypeOf.outputDirPath
 
 #### Defined in
 
-[generator-options.ts:84](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L84)
+[generator-options.ts:92](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L92)
 
 ___
 
@@ -140,7 +141,25 @@ z.TypeOf.schemaPath
 
 #### Defined in
 
-[generator-options.ts:72](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L72)
+[generator-options.ts:80](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L80)
+
+___
+
+### tableMapping
+
+• **tableMapping**: `undefined` \| ``null`` \| { `idPrefix`: `undefined` \| ``null`` \| `string` ; `useQualifiedTableName`: `undefined` \| ``null`` \| `boolean`  }
+
+Customize how tables are mapped
+
+**`see`** TableMapping
+
+#### Inherited from
+
+z.TypeOf.tableMapping
+
+#### Defined in
+
+[generator-options.ts:109](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L109)
 
 ___
 
@@ -151,7 +170,7 @@ ___
 Restrict the generator to process only a subset of tables
 available
 
-See [TableInclusion](TableInclusion.md)
+**`see`** TableInclusion
 
 #### Inherited from
 
@@ -159,4 +178,4 @@ z.TypeOf.tables
 
 #### Defined in
 
-[generator-options.ts:102](https://github.com/lorefnon/ts-sql-codegen/blob/f52c780/src/generator-options.ts#L102)
+[generator-options.ts:117](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L117)

@@ -53,105 +53,110 @@ describe("Generator", () => {
     await fs.remove(outputDirPath);
   });
 
-  it("generates code from schema", async () => {
-    const generator = new Generator({
-      schemaPath,
-      connectionSourcePath,
-      outputDirPath,
-      fieldMappings,
+  [undefined, true, false].forEach((useQualifiedTableName) => {
+    it(`generates code from schema with useQualifiedTablePrefix: ${useQualifiedTableName}`, async () => {
+      const generator = new Generator({
+        schemaPath,
+        connectionSourcePath,
+        outputDirPath,
+        fieldMappings,
+        tableMapping: useQualifiedTableName ? {
+            useQualifiedTableName
+        } : undefined
+      });
+      await generator.generate();
+      await snap(await readAllGenerated());
+      if (process.env.DATABASE_URL) {
+        const conn = getConnection();
+        await conn
+          .transaction(async () => {
+            // prettier-ignore
+            // @ts-ignore
+            const { AuthorsTable } = await import( "./generated/AuthorsTable");
+            // prettier-ignore
+            // @ts-ignore
+            const { BooksTable } = await import( "./generated/BooksTable");
+            const authorsTable = new AuthorsTable();
+            const { id } = await conn
+              .insertInto(authorsTable)
+              .set({
+                id: 2,
+                name: "Brandon Sanderson",
+              })
+              .returning({
+                id: authorsTable.id,
+              })
+              .executeInsertOne();
+            assert(id === 2);
+            await conn
+              .insertInto(new BooksTable())
+              .set({
+                name: "Mistborn",
+                authorId: id,
+              })
+              .executeInsert();
+            // prettier-ignore
+            // @ts-ignore
+            const { AuthorBooksTable } = await import( "./generated/AuthorBooksTable");
+            // prettier-ignore
+            // @ts-ignore
+            const { ChaptersTable } = await import( "./generated/ChaptersTable");
+            const authorBooksTable = new AuthorBooksTable();
+            const authorBooks = await conn
+              .selectFrom(authorBooksTable)
+              .select(extractColumnsFrom(authorBooksTable) as any)
+              .executeSelectMany();
+            console.log(authorBooks.map((it) => omit(it, ["id"])));
+            assert(
+              isEqual(
+                authorBooks.map((it) => omit(it, ["id"])),
+                [
+                  {
+                    name: "Unsouled",
+                    authorId: 1,
+                    authorName: "Will Wight",
+                  },
+                  {
+                    name: "Mistborn",
+                    authorId: 2,
+                    authorName: "Brandon Sanderson",
+                  },
+                ]
+              )
+            );
+            const chaptersTable = new ChaptersTable();
+            const chapters = await conn
+              .selectFrom(chaptersTable)
+              .select(extractColumnsFrom(chaptersTable) as any)
+              .executeSelectMany();
+            console.log("chapters:", chapters);
+            assert(
+              isEqual(
+                chapters.map(({ bookId, ...it }) => it),
+                [
+                  {
+                    id: 1,
+                    name: "Chapter 01",
+                    metadata: { a: "test" },
+                  },
+                ]
+              )
+            );
+            const newChapter = { ...chapters[0] };
+            delete newChapter.id;
+            newChapter.name = "Chapter 02";
+            await conn
+              .insertInto(chaptersTable)
+              .set(newChapter as any)
+              .executeInsert();
+            throw new Error("CANCEL_TRX");
+          })
+          .catch((e) => {
+            if (e.message !== "CANCEL_TRX") throw e;
+            console.info("Ignoring transaction error: ", e);
+          });
+      }
     });
-    await generator.generate();
-    await snap(await readAllGenerated());
-    if (process.env.DATABASE_URL) {
-      const conn = getConnection();
-      await conn
-        .transaction(async () => {
-          // prettier-ignore
-          // @ts-ignore
-          const { AuthorsTable } = await import( "./generated/AuthorsTable");
-          // prettier-ignore
-          // @ts-ignore
-          const { BooksTable } = await import( "./generated/BooksTable");
-          const authorsTable = new AuthorsTable();
-          const { id } = await conn
-            .insertInto(authorsTable)
-            .set({
-              id: 2,
-              name: "Brandon Sanderson",
-            })
-            .returning({
-              id: authorsTable.id,
-            })
-            .executeInsertOne();
-          assert(id === 2);
-          await conn
-            .insertInto(new BooksTable())
-            .set({
-              name: "Mistborn",
-              authorId: id,
-            })
-            .executeInsert();
-          // prettier-ignore
-          // @ts-ignore
-          const { AuthorBooksTable } = await import( "./generated/AuthorBooksTable");
-          // prettier-ignore
-          // @ts-ignore
-          const { ChaptersTable } = await import( "./generated/ChaptersTable");
-          const authorBooksTable = new AuthorBooksTable();
-          const authorBooks = await conn
-            .selectFrom(authorBooksTable)
-            .select(extractColumnsFrom(authorBooksTable) as any)
-            .executeSelectMany();
-          console.log(authorBooks.map((it) => omit(it, ["id"])));
-          assert(
-            isEqual(
-              authorBooks.map((it) => omit(it, ["id"])),
-              [
-                {
-                  name: "Unsouled",
-                  authorId: 1,
-                  authorName: "Will Wight",
-                },
-                {
-                  name: "Mistborn",
-                  authorId: 2,
-                  authorName: "Brandon Sanderson",
-                },
-              ]
-            )
-          );
-          const chaptersTable = new ChaptersTable();
-          const chapters = await conn
-            .selectFrom(chaptersTable)
-            .select(extractColumnsFrom(chaptersTable) as any)
-            .executeSelectMany();
-          console.log("chapters:", chapters);
-          assert(
-            isEqual(
-              chapters.map(({ bookId, ...it }) => it),
-              [
-                {
-                  id: 1,
-                  name: "Chapter 01",
-                  metadata: { a: "test" },
-                },
-              ]
-            )
-          );
-          const newChapter = { ...chapters[0] };
-          delete newChapter.id;
-          newChapter.name = "Chapter 02";
-          await conn
-            .insertInto(chaptersTable)
-            .set(newChapter as any)
-            .executeInsert();
-          throw new Error("CANCEL_TRX");
-        })
-        .catch((e) => {
-          if (e.message !== "CANCEL_TRX") throw e;
-          console.info("Ignoring transaction error: ", e);
-        });
-    }
   });
 
   it("allows omitting specific tables and fields", async () => {
@@ -163,7 +168,7 @@ describe("Generator", () => {
         include: [/authors/, "books"],
       },
       tableMapping: {
-        idPrefix: 'Public'
+        idPrefix: "Public",
       },
       fieldMappings: [
         ...fieldMappings,
