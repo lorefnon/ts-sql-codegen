@@ -8,6 +8,15 @@ With this utility, this mapping can be derived from the database itself as part 
 
 The code-generation process is highly customizable and almost all the defaults (which are sensible for most databases) can be configured if needed.
 
+## Features
+
+1. Generate clean typescript table/view mappers from database schema
+1. Ability to include/exclude tables/fields
+1. Ability to customize field types and type adapters
+1. Idiomatic pascal-cased/camel-cased table/field name mapping by default and ability to customize names if desired.
+1. Auto-detection & mapping of computed fields, primary key columns.
+1. Automatic documentation propagation from SQL comments
+
 ## Installation:
 
 **Step 1:** Install tbls and ensure it is available in path
@@ -64,6 +73,19 @@ The [test suite](./test/test.ts) also has examples of more complex customization
 For advanced use-cases (eg. custom templates, pre/post processing of generated code 
  and custom logic for table/column/field mapping) it is recommended to extend the Generator class in project.
 We intend to keep the customization options that the constructor accepts focussed on primary common use-cases.
+
+## Suggested workflow
+
+This utility is expected to be used in a database-first workflow, where the developers first plan and implement the database level changes, and then adapt their code for the updated schema.
+
+1. Use a database migration system for versioned database schema evolution. You are free to choose a migration utility that you like (eg. dbmate, liquibase, flyway etc.) - if you are starting out we recommend dbmate, a simple and easy to use solution.
+2. Integrate the following steps into your build lifecycle
+    1. Use migration utility to update database schema
+        eg. `dbmate up`
+    1. Dump yaml representation of schema through tbls
+        eg. `tbls out postgres://localhost:5432/mydb -t yaml -o schema.yaml`
+    1. Generate code using ts-sql-codegen
+        eg. `ts-sql-codegen --schema ./schema.yaml # additional options`
 
 ## Recipies
 
@@ -222,3 +244,20 @@ export class AuthorsTable extends Table<DBConnection, 'ReportingDBAuthorsTable'>
 ```
 
 This option will override the id prefix derived from schema name if `tableMapping.useQualifiedTableName` is true.
+
+## Known Limitations
+
+1. While ts-sql-codegen works with many databases and adapters, this utility has been tested only with postgresql & sqlite. Please report bugs if you face issues.
+1. Only databases which are supported by both ts-sql-query and tbls can be supported.
+1. Enum/custom type inspection support is currently limited - it is required to manually specify typescript types and adapters for now.
+1. Typescript is assumed - plain js projects are not supported currently
+
+## Contributing
+
+Thanks for your interest in contributing to this project. Pull requests and feature enhancements are welcome.
+
+This utility is being used in a project with hundreds of tables, so any backward incompatible changes in generated code are highly undesirable. 
+
+Feature flags are recommended for aspects which are not beneficial to all/most users.
+
+Code-generation should be last resort - if some feature can be supported in ts-sql-query itself, we recommending creating a PR there.
