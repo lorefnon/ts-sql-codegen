@@ -6,7 +6,7 @@
  * Any changes will be overwritten.
  */
 import { {{table.kind}} } from "ts-sql-query/{{table.kind}}";
-import { DBConnection } from "{{dbConnectionSource}}";
+import type { DBConnection } from "{{dbConnectionSource}}";
 {{#each imports}}
     {{#if isDefault}}
         {{#each imported}}
