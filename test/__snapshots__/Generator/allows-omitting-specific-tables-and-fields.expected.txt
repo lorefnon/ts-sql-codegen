@@ -6,7 +6,7 @@
  * Any changes will be overwritten.
  */
 import { Table } from "ts-sql-query/Table";
-import { DBConnection } from "../helpers/connection-source";
+import type { DBConnection } from "../helpers/connection-source";
 
 
 export class AuthorsTable extends Table<DBConnection, 'PublicAuthorsTable'> {
@@ -35,7 +35,7 @@ export class AuthorsTable extends Table<DBConnection, 'PublicAuthorsTable'> {
  * Any changes will be overwritten.
  */
 import { Table } from "ts-sql-query/Table";
-import { DBConnection } from "../helpers/connection-source";
+import type { DBConnection } from "../helpers/connection-source";
 import {
     Genre,
 } from "../helpers/types"

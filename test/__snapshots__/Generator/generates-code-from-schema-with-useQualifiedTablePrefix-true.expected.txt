@@ -6,7 +6,7 @@
  * Any changes will be overwritten.
  */
 import { View } from "ts-sql-query/View";
-import { DBConnection } from "../helpers/connection-source";
+import type { DBConnection } from "../helpers/connection-source";
 import {
     Genre,
 } from "../helpers/types"
@@ -46,7 +46,7 @@ export class AuthorBooksTable extends View<DBConnection, 'PublicAuthorBooksTable
  * Any changes will be overwritten.
  */
 import { Table } from "ts-sql-query/Table";
-import { DBConnection } from "../helpers/connection-source";
+import type { DBConnection } from "../helpers/connection-source";
 
 
 export class AuthorsTable extends Table<DBConnection, 'PublicAuthorsTable'> {
@@ -77,7 +77,7 @@ export class AuthorsTable extends Table<DBConnection, 'PublicAuthorsTable'> {
  * Any changes will be overwritten.
  */
 import { Table } from "ts-sql-query/Table";
-import { DBConnection } from "../helpers/connection-source";
+import type { DBConnection } from "../helpers/connection-source";
 import {
     Genre,
 } from "../helpers/types"
@@ -115,7 +115,7 @@ export class BooksTable extends Table<DBConnection, 'PublicBooksTable'> {
  * Any changes will be overwritten.
  */
 import { Table } from "ts-sql-query/Table";
-import { DBConnection } from "../helpers/connection-source";
+import type { DBConnection } from "../helpers/connection-source";
 import {
     ChapterMetadataAdapter,
 } from "../helpers/adapters"
