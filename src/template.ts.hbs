@@ -30,12 +30,15 @@ import { InsertableRow, UpdatableRow, SelectedRow } from "ts-sql-query/extras/ty
     {{/if}}
 {{/each}}
 
+{{#if table.comment}}
 {{ table.comment }}
+{{/if}}
 {{#if exportTableClass}}export {{/if}}class {{className}} extends {{table.kind}}<DBConnection, '{{table.idPrefix}}{{className}}'> {
-
     {{#dedent-by 3 "level"}}
         {{#each fields}}
+            {{#if field.comment}}
             {{field.comment}}
+            {{/if}}
             {{#if fieldType.kind}}
                 {{name}} = this.{{columnMethod}}<{{fieldType.tsType.name}}>('{{columnName}}', '{{fieldType.kind}}', '{{fieldType.dbType.name}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
             {{else}}
