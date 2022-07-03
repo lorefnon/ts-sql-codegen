@@ -38,6 +38,7 @@ export class AuthorBooksTable extends View<DBConnection, 'PublicAuthorBooksTable
 
 
 
+
 // AuthorsTable.ts :
 /**
  * DO NOT EDIT:
@@ -66,6 +67,7 @@ export class AuthorsTable extends Table<DBConnection, 'PublicAuthorsTable'> {
         super('public.authors')
     }
 }
+
 
 
 
@@ -107,6 +109,7 @@ export class BooksTable extends Table<DBConnection, 'PublicBooksTable'> {
 
 
 
+
 // ChaptersTable.ts :
 /**
  * DO NOT EDIT:
@@ -145,4 +148,5 @@ export class ChaptersTable extends Table<DBConnection, 'PublicChaptersTable'> {
         super('public.chapters')
     }
 }
+
 

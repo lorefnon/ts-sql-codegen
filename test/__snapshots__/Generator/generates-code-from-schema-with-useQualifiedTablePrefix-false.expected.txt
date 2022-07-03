@@ -38,6 +38,7 @@ export class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
 
 
 
+
 // AuthorsTable.ts :
 /**
  * DO NOT EDIT:
@@ -66,6 +67,7 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
         super('authors')
     }
 }
+
 
 
 
@@ -107,6 +109,7 @@ export class BooksTable extends Table<DBConnection, 'BooksTable'> {
 
 
 
+
 // ChaptersTable.ts :
 /**
  * DO NOT EDIT:
@@ -145,4 +148,5 @@ export class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
         super('chapters')
     }
 }
+
 

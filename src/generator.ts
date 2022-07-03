@@ -123,7 +123,7 @@ export class Generator {
 
   protected async generateTableMapper(table: Table) {
     // Qualified table name with schema prefix
-    const tableName = last(table.name.split("."));
+    const tableName = last(table.name.split(".")) as string;
     const tableKind = match(table.type.toLowerCase())
       .with("base table", () => "Table")
       .with("table", () => "Table")
@@ -185,9 +185,11 @@ export class Generator {
     const imports = [...adapterImports, ...typeImports];
     const exportTableClass = this.opts.export?.tableClasses ?? true;
     const exportTableInstance = this.opts.export?.tableInstances ?? false;
+    const exportRowTypes = this.opts.export?.rowTypes ?? false;
     const className = this.getClassNameFromTableName(table.name);
     const instName = this.getInstanceNameFromTableName(table.name);
     const idPrefix = this.getIdPrefix(table);
+    const rowTypePrefix = this.getRowTypePrefix(tableName);
     const templateInput = await this.preProcessTemplateInput({
       table: {
         name: this.opts.tableMapping?.useQualifiedTableName
@@ -195,7 +197,7 @@ export class Generator {
           : tableName,
         kind: tableKind,
         comment: this.formatComment(table.comment),
-        idPrefix
+        idPrefix,
       },
       imports,
       dbConnectionSource,
@@ -205,6 +207,8 @@ export class Generator {
       adapterImports,
       exportTableClass,
       exportTableInstance,
+      exportRowTypes,
+      rowTypePrefix,
     });
     const template = await this.getCompiledTemplate();
     const output = await this.postProcessOutput(template(templateInput), table);
@@ -358,11 +362,19 @@ export class Generator {
   }
 
   protected getClassNameFromTableName(tableName: string) {
-    return upperFirst(camelCase(last(tableName.split(".")))) + "Table";
+    return this.getPascalCasedTableName(tableName) + "Table";
+  }
+
+  protected getRowTypePrefix(tableName: string) {
+    return this.getPascalCasedTableName(tableName);
   }
 
   protected getInstanceNameFromTableName(tableName: string) {
-    return "t" + upperFirst(camelCase(last(tableName.split("."))));
+    return "t" + this.getPascalCasedTableName(tableName);
+  }
+
+  private getPascalCasedTableName(tableName: string) {
+    return upperFirst(camelCase(last(tableName.split("."))));
   }
 
   protected isColumnOmitted(tableName: string, col: Column) {

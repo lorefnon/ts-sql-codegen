@@ -37,6 +37,7 @@ class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
 export const tAuthorBooks = new AuthorBooksTable();
 
 
+
 // AuthorsTable.ts :
 /**
  * DO NOT EDIT:
@@ -67,6 +68,7 @@ class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 }
 
 export const tAuthors = new AuthorsTable();
+
 
 
 // BooksTable.ts :
@@ -104,6 +106,7 @@ class BooksTable extends Table<DBConnection, 'BooksTable'> {
 }
 
 export const tBooks = new BooksTable();
+
 
 
 // ChaptersTable.ts :
@@ -144,3 +147,4 @@ class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
 }
 
 export const tChapters = new ChaptersTable();
+

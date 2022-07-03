@@ -7,6 +7,9 @@
  */
 import { {{table.kind}} } from "ts-sql-query/{{table.kind}}";
 import type { DBConnection } from "{{dbConnectionSource}}";
+{{#if exportRowTypes}}
+import { InsertableRow, UpdatableRow, SelectedRow } from "ts-sql-query/extras/types"
+{{/if}}
 {{#each imports}}
     {{#if isDefault}}
         {{#each imported}}
@@ -48,5 +51,11 @@ import type { DBConnection } from "{{dbConnectionSource}}";
 
 {{#if exportTableInstance}}
 export const {{instName}} = new {{className}}();
+{{/if}}
+
+{{#if exportRowTypes}}
+export const {{rowTypePrefix}}IRow = InsertableRow<{{className}}>;
+export const {{rowTypePrefix}}URow = UpdatableRow<{{className}}>;
+export const {{rowTypePrefix}}SRow = SelectedRow<{{className}}>;
 {{/if}}
 {{/trim-trailing-whitespace}}

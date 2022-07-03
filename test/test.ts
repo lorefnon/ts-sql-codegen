@@ -158,6 +158,21 @@ describe("Generator", () => {
       }
     });
   });
+  it("allows exporting row types", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      export: {
+        rowTypes: true
+      }
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
 
   it("allows omitting specific tables and fields", async () => {
     const generator = new Generator({
