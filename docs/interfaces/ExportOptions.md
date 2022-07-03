@@ -47,7 +47,7 @@ z.TypeOf.rowTypes
 
 #### Defined in
 
-[generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/7c76b75/src/generator-options.ts#L59)
+[generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/63faa48/src/generator-options.ts#L59)
 
 ___
 
@@ -66,7 +66,7 @@ z.TypeOf.tableClasses
 
 #### Defined in
 
-[generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/7c76b75/src/generator-options.ts#L36)
+[generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/63faa48/src/generator-options.ts#L36)
 
 ___
 
@@ -87,4 +87,4 @@ z.TypeOf.tableInstances
 
 #### Defined in
 
-[generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/7c76b75/src/generator-options.ts#L28)
+[generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/63faa48/src/generator-options.ts#L28)
