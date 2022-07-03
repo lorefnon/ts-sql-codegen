@@ -31,7 +31,7 @@ z.TypeOf.columnName
 
 #### Defined in
 
-[field-mappings.ts:103](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/field-mappings.ts#L103)
+[field-mappings.ts:103](https://github.com/lorefnon/ts-sql-codegen/blob/7c76b75/src/field-mappings.ts#L103)
 
 ___
 
@@ -50,7 +50,7 @@ z.TypeOf.columnType
 
 #### Defined in
 
-[field-mappings.ts:114](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/field-mappings.ts#L114)
+[field-mappings.ts:114](https://github.com/lorefnon/ts-sql-codegen/blob/7c76b75/src/field-mappings.ts#L114)
 
 ___
 
@@ -69,7 +69,7 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-[field-mappings.ts:122](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/field-mappings.ts#L122)
+[field-mappings.ts:122](https://github.com/lorefnon/ts-sql-codegen/blob/7c76b75/src/field-mappings.ts#L122)
 
 ___
 
@@ -85,4 +85,4 @@ z.TypeOf.tableName
 
 #### Defined in
 
-[field-mappings.ts:106](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/field-mappings.ts#L106)
+[field-mappings.ts:106](https://github.com/lorefnon/ts-sql-codegen/blob/7c76b75/src/field-mappings.ts#L106)

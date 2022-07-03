@@ -20,10 +20,14 @@
 
 • **importPath**: `string`
 
+Path from where custom types will be imported by default
+
+Relative to cwd
+
 #### Inherited from
 
 z.TypeOf.importPath
 
 #### Defined in
 
-[generator-options.ts:56](https://github.com/lorefnon/ts-sql-codegen/blob/57b704f/src/generator-options.ts#L56)
+[generator-options.ts:109](https://github.com/lorefnon/ts-sql-codegen/blob/7c76b75/src/generator-options.ts#L109)
