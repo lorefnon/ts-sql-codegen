@@ -22,6 +22,6 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 }
 
 
-export const AuthorsIRow = InsertableRow<AuthorsTable>;
-export const AuthorsURow = UpdatableRow<AuthorsTable>;
-export const AuthorsSRow = SelectedRow<AuthorsTable>;
+export type AuthorsIRow = InsertableRow<AuthorsTable>;
+export type AuthorsURow = UpdatableRow<AuthorsTable>;
+export type AuthorsSRow = SelectedRow<AuthorsTable>;

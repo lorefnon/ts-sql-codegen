@@ -57,8 +57,8 @@ export const {{instName}} = new {{className}}();
 {{/if}}
 
 {{#if exportRowTypes}}
-export const {{rowTypePrefix}}IRow = InsertableRow<{{className}}>;
-export const {{rowTypePrefix}}URow = UpdatableRow<{{className}}>;
-export const {{rowTypePrefix}}SRow = SelectedRow<{{className}}>;
+export type {{rowTypePrefix}}IRow = InsertableRow<{{className}}>;
+export type {{rowTypePrefix}}URow = UpdatableRow<{{className}}>;
+export type {{rowTypePrefix}}SRow = SelectedRow<{{className}}>;
 {{/if}}
 {{/trim-trailing-whitespace}}
