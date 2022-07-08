@@ -16,11 +16,27 @@ The options here are ts-sql-query specific
 
 ### Properties
 
+- [hasDefault](GeneratedField.md#hasdefault)
 - [isComputed](GeneratedField.md#iscomputed)
+- [isOptional](GeneratedField.md#isoptional)
 - [name](GeneratedField.md#name)
 - [type](GeneratedField.md#type)
 
 ## Properties
+
+### hasDefault
+
+• **hasDefault**: `undefined` \| ``null`` \| `boolean`
+
+#### Inherited from
+
+z.TypeOf.hasDefault
+
+#### Defined in
+
+[field-mappings.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/86aae36/src/field-mappings.ts#L93)
+
+___
 
 ### isComputed
 
@@ -32,7 +48,21 @@ z.TypeOf.isComputed
 
 #### Defined in
 
-[field-mappings.ts:91](https://github.com/lorefnon/ts-sql-codegen/blob/63faa48/src/field-mappings.ts#L91)
+[field-mappings.ts:91](https://github.com/lorefnon/ts-sql-codegen/blob/86aae36/src/field-mappings.ts#L91)
+
+___
+
+### isOptional
+
+• **isOptional**: `undefined` \| ``null`` \| `boolean`
+
+#### Inherited from
+
+z.TypeOf.isOptional
+
+#### Defined in
+
+[field-mappings.ts:92](https://github.com/lorefnon/ts-sql-codegen/blob/86aae36/src/field-mappings.ts#L92)
 
 ___
 
@@ -46,7 +76,7 @@ z.TypeOf.name
 
 #### Defined in
 
-[field-mappings.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/63faa48/src/field-mappings.ts#L90)
+[field-mappings.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/86aae36/src/field-mappings.ts#L90)
 
 ___
 
@@ -60,4 +90,4 @@ z.TypeOf.type
 
 #### Defined in
 
-[field-mappings.ts:89](https://github.com/lorefnon/ts-sql-codegen/blob/63faa48/src/field-mappings.ts#L89)
+[field-mappings.ts:89](https://github.com/lorefnon/ts-sql-codegen/blob/86aae36/src/field-mappings.ts#L89)
