@@ -1,0 +1,27 @@
+// AuthorsTable.ts :
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen.
+ * Any changes will be overwritten.
+ */
+import { Table } from "ts-sql-query/Table";
+import type { DBConnection } from "../helpers/connection-source";
+import { InsertableRow, UpdatableRow, SelectedRow } from "ts-sql-query/extras/types"
+
+export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
+    id = this.primaryKey('id', 'int');
+    name = this.column('name', 'string');
+    dob = this.column('dob', 'localDate');
+    createdAt = this.column('created_at', 'localDateTime');
+    updatedAt = this.column('updated_at', 'localDateTime');
+
+    constructor() {
+        super('authors')
+    }
+}
+
+
+export type AuthorsIRow = InsertableRow<AuthorsTable>;
+export type AuthorsURow = UpdatableRow<AuthorsTable>;
+export type AuthorsSRow = SelectedRow<AuthorsTable>;

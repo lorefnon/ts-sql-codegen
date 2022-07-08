@@ -89,6 +89,8 @@ export const GeneratedFieldSchema = z.object({
     type: GeneratedFieldTypeSchema.nullish(),
     name: z.string().nullish(),
     isComputed: z.boolean().nullish(),
+    isOptional: z.boolean().nullish(),
+    hasDefault: z.boolean().nullish()
 });
 
 /**

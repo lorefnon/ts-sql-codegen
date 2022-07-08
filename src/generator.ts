@@ -141,8 +141,8 @@ export class Generator {
         return !this.isColumnOmitted(table.name, col);
       })
       .map((col) => {
-        const isOptional = col.nullable === true;
-        const hasDefault = col.default !== null;
+        const isOptional = this.isColumnOptional(table.name, col);
+        const hasDefault = this.doesColumnHaveDefault(table.name, col);
         const isComputed = this.isColumnComputed(table.name, col);
         let columnMethod!: ColumnMethod;
         if (col === pkCol) {
@@ -388,18 +388,50 @@ export class Generator {
     return !!mapping;
   }
 
-  protected isColumnComputed(tableName: string, col: Column) {
+  protected isColumnOptional(tableName: string, col: Column): boolean {
     const mapping = this.getFieldMappings().find(
       (it) =>
         it.generatedField &&
-        it.generatedField.isComputed !== null &&
+        it.generatedField.isOptional != null &&
         doesMatchNameOrPattern(it.columnName, col.name) &&
         doesMatchNameOrPattern(it.tableName, tableName) &&
         doesMatchNameOrPattern(it.columnType, col.type)
     );
-    return (
-      mapping?.generatedField && mapping.generatedField.isComputed === true
+    if (mapping?.generatedField) {
+      return mapping.generatedField.isOptional === true 
+    } else {
+      return col.nullable === true
+    }
+  }
+
+  protected doesColumnHaveDefault(tableName: string, col: Column): boolean {
+    const mapping = this.getFieldMappings().find(
+      (it) =>
+        it.generatedField &&
+        it.generatedField.hasDefault != null &&
+        doesMatchNameOrPattern(it.columnName, col.name) &&
+        doesMatchNameOrPattern(it.tableName, tableName) &&
+        doesMatchNameOrPattern(it.columnType, col.type)
     );
+    if (mapping?.generatedField) {
+      return mapping.generatedField.hasDefault === true 
+    } else {
+      return col.default != null
+    }
+  }
+
+  protected isColumnComputed(tableName: string, col: Column): boolean {
+    const mapping = this.getFieldMappings().find(
+      (it) =>
+        it.generatedField &&
+        it.generatedField.isComputed != null &&
+        doesMatchNameOrPattern(it.columnName, col.name) &&
+        doesMatchNameOrPattern(it.tableName, tableName) &&
+        doesMatchNameOrPattern(it.columnType, col.type)
+    );
+    if (mapping?.generatedField) {
+      return mapping.generatedField.isComputed === true 
+    } return false
   }
 
   protected getFieldNameForColumn(tableName: string, col: Column) {
