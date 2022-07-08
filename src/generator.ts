@@ -185,7 +185,14 @@ export class Generator {
     const imports = [...adapterImports, ...typeImports];
     const exportTableClass = this.opts.export?.tableClasses ?? true;
     const exportTableInstance = this.opts.export?.tableInstances ?? false;
-    const exportRowTypes = this.opts.export?.rowTypes ?? false;
+    const exportRowTypes = this.opts.export?.rowTypes ? {} as any : false;
+    if (exportRowTypes !== false) {
+      exportRowTypes.selected = true
+      if (tableKind !== 'View') {
+        exportRowTypes.insertable = true;
+        exportRowTypes.updatable = true;
+      }
+    }
     const className = this.getClassNameFromTableName(table.name);
     const instName = this.getInstanceNameFromTableName(table.name);
     const idPrefix = this.getIdPrefix(table);

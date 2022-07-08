@@ -56,9 +56,13 @@ import { InsertableRow, UpdatableRow, SelectedRow } from "ts-sql-query/extras/ty
 export const {{instName}} = new {{className}}();
 {{/if}}
 
-{{#if exportRowTypes}}
+{{#if exportRowTypes.insertable}}
 export type {{rowTypePrefix}}IRow = InsertableRow<{{className}}>;
+{{/if}}
+{{#if exportRowTypes.updatable}}
 export type {{rowTypePrefix}}URow = UpdatableRow<{{className}}>;
+{{/if}}
+{{#if exportRowTypes.selected}}
 export type {{rowTypePrefix}}SRow = SelectedRow<{{className}}>;
 {{/if}}
 {{/trim-trailing-whitespace}}

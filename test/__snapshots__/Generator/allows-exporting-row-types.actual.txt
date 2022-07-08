@@ -11,10 +11,10 @@ import { InsertableRow, UpdatableRow, SelectedRow } from "ts-sql-query/extras/ty
 
 export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
     id = this.primaryKey('id', 'int');
-    name = this.column('name', 'string');
-    dob = this.column('dob', 'localDate');
-    createdAt = this.column('created_at', 'localDateTime');
-    updatedAt = this.column('updated_at', 'localDateTime');
+    name = this.optionalColumn('name', 'string');
+    dob = this.optionalColumn('dob', 'localDate');
+    createdAt = this.columnWithDefaultValue('created_at', 'localDateTime');
+    updatedAt = this.columnWithDefaultValue('updated_at', 'localDateTime');
 
     constructor() {
         super('authors')
@@ -22,6 +22,3 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 }
 
 
-export type AuthorsIRow = InsertableRow<AuthorsTable>;
-export type AuthorsURow = UpdatableRow<AuthorsTable>;
-export type AuthorsSRow = SelectedRow<AuthorsTable>;
