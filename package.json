@@ -19,13 +19,15 @@
     "sql",
     "code-generator",
     "ts-sql-query",
-    "query-builder"
+    "query-builder",
+    "typescript"
   ],
   "author": {
     "name": "Lorefnon",
     "email": "lorefnon@tutanota.com",
     "url": "https://lorefnon.me"
   },
+  "repository": "github:lorefnon/ts-sql-codegen",
   "license": "MIT",
   "devDependencies": {
     "@types/fs-extra": "^9.0.13",
@@ -43,13 +45,13 @@
     "recursive-copy-cli": "^1.0.20",
     "rimraf": "^3.0.2",
     "ts-node": "^10.8.1",
-    "ts-sql-query": "^1.28.0",
+    "ts-sql-query": "^1.29.0",
     "typedoc": "^0.22.17",
     "typedoc-plugin-markdown": "^3.12.1",
     "typescript": "^4.7.3"
   },
   "peerDependencies": {
-    "ts-sql-query": "^1.28.0"
+    "ts-sql-query": "^1.29.0"
   },
   "dependencies": {
     "fs-extra": "^10.1.0",

@@ -247,8 +247,8 @@ This option will override the id prefix derived from schema name if `tableMappin
 
 ## Known Limitations
 
-1. While ts-sql-codegen works with many databases and adapters, this utility has been tested only with postgresql & sqlite. Please report bugs if you face issues.
 1. Only databases which are supported by both ts-sql-query and tbls can be supported.
+1. While ts-sql-codegen works with many databases and adapters, this utility has been tested only with postgresql & sqlite. Please report bugs if you face issues with other databases.
 1. Enum/custom type inspection support is currently limited - it is required to manually specify typescript types and adapters for now.
 1. Typescript is assumed - plain js projects are not supported currently
 
@@ -256,8 +256,8 @@ This option will override the id prefix derived from schema name if `tableMappin
 
 Thanks for your interest in contributing to this project. Pull requests and feature enhancements are welcome.
 
-This utility is being used in a project with hundreds of tables, so any backward incompatible changes in generated code are highly undesirable. 
+This utility is being used in projects with many tables, so backward incompatible changes in generated code are highly undesirable. 
 
 Feature flags are recommended for aspects which are not beneficial to all/most users.
 
-Code-generation should be last resort - if some feature can be supported in ts-sql-query itself, we recommending creating a PR there.
+Code-generation should be last resort - if some feature can be supported in ts-sql-query itself, we recommending contributing there.

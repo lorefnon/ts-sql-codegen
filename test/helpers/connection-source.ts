@@ -13,7 +13,7 @@ export const getPool = memoize(() => {
     pool.on("error", (error: any) => {
         console.error("error from pg connection pool: ", error);
     });
-    return pool
+    return pool;
 });
 
 export const getConnection = () =>
