@@ -36,7 +36,7 @@ export const ExportOptionsSchema = z.object({
     tableClasses: z.boolean().default(true),
 
     /**
-     * In addition to table class also export the row types associated with table
+     * Additionally export the row types associated with table
      *
      * Example:
      *     import { InsertableRow, UpdatableRow, SelectedRow } from "ts-sql-query/extras/types"
@@ -57,6 +57,14 @@ export const ExportOptionsSchema = z.object({
      *
      */
     rowTypes: z.boolean().default(false),
+
+    /**
+     * Additionally export the extracted columns (Useful for select * queries etc.)
+     *
+     * Example: 
+     *     export const tUserCols = extractColumnsFrom(tUser)
+     */
+    extractedColumns: z.boolean().default(false)
 });
 
 export interface ExportOptions extends z.TypeOf<typeof ExportOptionsSchema> {}

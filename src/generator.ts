@@ -121,14 +121,18 @@ export class Generator {
     return true;
   }
 
+  protected getTableKind(table: Table): "Table" | "View" | null {
+    return match(table.type.toLowerCase())
+      .with("base table", () => "Table" as const)
+      .with("table", () => "Table" as const)
+      .with("view", () => "View" as const)
+      .otherwise(() => null);
+  }
+
   protected async generateTableMapper(table: Table) {
     // Qualified table name with schema prefix
     const tableName = last(table.name.split(".")) as string;
-    const tableKind = match(table.type.toLowerCase())
-      .with("base table", () => "Table")
-      .with("table", () => "Table")
-      .with("view", () => "View")
-      .otherwise(() => null);
+    const tableKind = this.getTableKind(table);
     if (!tableKind) {
       this.logger.warn(
         `Unknown table type ${table.type} for table ${table.name}: SKIPPING`
@@ -184,17 +188,21 @@ export class Generator {
     const typeImports = this.getTypeImports(filePath, fields);
     const imports = [...adapterImports, ...typeImports];
     const exportTableClass = this.opts.export?.tableClasses ?? true;
-    const exportTableInstance = this.opts.export?.tableInstances ?? false;
-    const exportRowTypes = this.opts.export?.rowTypes ? {} as any : false;
+    const exportRowTypes = this.opts.export?.rowTypes ? ({} as any) : false;
     if (exportRowTypes !== false) {
-      exportRowTypes.selected = true
-      if (tableKind !== 'View') {
+      exportRowTypes.selected = true;
+      if (tableKind !== "View") {
         exportRowTypes.insertable = true;
         exportRowTypes.updatable = true;
       }
     }
     const className = this.getClassNameFromTableName(table.name);
-    const instName = this.getInstanceNameFromTableName(table.name);
+    const colSetName = this.opts.export?.extractedColumns 
+      ? this.getColumnsObjectNameFromTableName(table.name)
+      : null;
+    const instName = (this.opts.export?.tableInstances || colSetName)
+      ? this.getInstanceNameFromTableName(table.name)
+      : null;
     const idPrefix = this.getIdPrefix(table);
     const rowTypePrefix = this.getRowTypePrefix(tableName);
     const templateInput = await this.preProcessTemplateInput({
@@ -213,9 +221,9 @@ export class Generator {
       fields,
       adapterImports,
       exportTableClass,
-      exportTableInstance,
       exportRowTypes,
       rowTypePrefix,
+      colSetName
     });
     const template = await this.getCompiledTemplate();
     const output = await this.postProcessOutput(template(templateInput), table);
@@ -380,6 +388,10 @@ export class Generator {
     return "t" + this.getPascalCasedTableName(tableName);
   }
 
+  protected getColumnsObjectNameFromTableName(tableName: string) {
+    return "t" + this.getPascalCasedTableName(tableName) + "Cols";
+  }
+
   private getPascalCasedTableName(tableName: string) {
     return upperFirst(camelCase(last(tableName.split("."))));
   }
@@ -405,9 +417,9 @@ export class Generator {
         doesMatchNameOrPattern(it.columnType, col.type)
     );
     if (mapping?.generatedField) {
-      return mapping.generatedField.isOptional === true 
+      return mapping.generatedField.isOptional === true;
     } else {
-      return col.nullable === true
+      return col.nullable === true;
     }
   }
 
@@ -421,9 +433,9 @@ export class Generator {
         doesMatchNameOrPattern(it.columnType, col.type)
     );
     if (mapping?.generatedField) {
-      return mapping.generatedField.hasDefault === true 
+      return mapping.generatedField.hasDefault === true;
     } else {
-      return col.default != null
+      return col.default != null;
     }
   }
 
@@ -437,8 +449,9 @@ export class Generator {
         doesMatchNameOrPattern(it.columnType, col.type)
     );
     if (mapping?.generatedField) {
-      return mapping.generatedField.isComputed === true 
-    } return false
+      return mapping.generatedField.isComputed === true;
+    }
+    return false;
   }
 
   protected getFieldNameForColumn(tableName: string, col: Column) {

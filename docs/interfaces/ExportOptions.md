@@ -12,17 +12,37 @@
 
 ### Properties
 
+- [extractedColumns](ExportOptions.md#extractedcolumns)
 - [rowTypes](ExportOptions.md#rowtypes)
 - [tableClasses](ExportOptions.md#tableclasses)
 - [tableInstances](ExportOptions.md#tableinstances)
 
 ## Properties
 
+### extractedColumns
+
+• **extractedColumns**: `boolean`
+
+Additionally export the extracted columns (Useful for select * queries etc.)
+
+Example:
+    export const tUserCols = extractColumnsFrom(tUser)
+
+#### Inherited from
+
+z.TypeOf.extractedColumns
+
+#### Defined in
+
+[generator-options.ts:67](https://github.com/lorefnon/ts-sql-codegen/blob/76587ea/src/generator-options.ts#L67)
+
+___
+
 ### rowTypes
 
 • **rowTypes**: `boolean`
 
-In addition to table class also export the row types associated with table
+Additionally export the row types associated with table
 
 Example:
     import { InsertableRow, UpdatableRow, SelectedRow } from "ts-sql-query/extras/types"
@@ -47,7 +67,7 @@ z.TypeOf.rowTypes
 
 #### Defined in
 
-[generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/86aae36/src/generator-options.ts#L59)
+[generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/76587ea/src/generator-options.ts#L59)
 
 ___
 
@@ -66,7 +86,7 @@ z.TypeOf.tableClasses
 
 #### Defined in
 
-[generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/86aae36/src/generator-options.ts#L36)
+[generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/76587ea/src/generator-options.ts#L36)
 
 ___
 
@@ -87,4 +107,4 @@ z.TypeOf.tableInstances
 
 #### Defined in
 
-[generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/86aae36/src/generator-options.ts#L28)
+[generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/76587ea/src/generator-options.ts#L28)

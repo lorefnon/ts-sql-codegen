@@ -7,7 +7,11 @@
  */
 import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
-import { InsertableRow, UpdatableRow, SelectedRow } from "ts-sql-query/extras/types"
+import {
+    InsertableRow,
+    UpdatableRow,
+    SelectedRow,
+} from "ts-sql-query/extras/types"
 
 export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
     id = this.primaryKey('id', 'int');
