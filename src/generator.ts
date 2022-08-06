@@ -106,15 +106,17 @@ export class Generator {
     const filter = this.opts.tables;
     if (
       filter?.include &&
-      filter.include.findIndex((it) => doesMatchNameOrPattern(it, table.name)) <
-        0
+      filter.include.findIndex((it) =>
+        doesMatchNameOrPattern(it, table.name)
+      ) >= 0
     ) {
-      return false;
+      return true;
     }
     if (
       filter?.exclude &&
-      filter.exclude.findIndex((it) => doesMatchNameOrPattern(it, table.name)) <
-        0
+      filter.exclude.findIndex((it) =>
+        doesMatchNameOrPattern(it, table.name)
+      ) >= 0
     ) {
       return false;
     }
@@ -197,12 +199,13 @@ export class Generator {
       }
     }
     const className = this.getClassNameFromTableName(table.name);
-    const colSetName = this.opts.export?.extractedColumns 
+    const colSetName = this.opts.export?.extractedColumns
       ? this.getColumnsObjectNameFromTableName(table.name)
       : null;
-    const instName = (this.opts.export?.tableInstances || colSetName)
-      ? this.getInstanceNameFromTableName(table.name)
-      : null;
+    const instName =
+      this.opts.export?.tableInstances || colSetName
+        ? this.getInstanceNameFromTableName(table.name)
+        : null;
     const idPrefix = this.getIdPrefix(table);
     const rowTypePrefix = this.getRowTypePrefix(tableName);
     const templateInput = await this.preProcessTemplateInput({
@@ -223,7 +226,7 @@ export class Generator {
       exportTableClass,
       exportRowTypes,
       rowTypePrefix,
-      colSetName
+      colSetName,
     });
     const template = await this.getCompiledTemplate();
     const output = await this.postProcessOutput(template(templateInput), table);
