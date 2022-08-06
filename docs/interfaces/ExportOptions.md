@@ -34,7 +34,7 @@ z.TypeOf.extractedColumns
 
 #### Defined in
 
-[generator-options.ts:67](https://github.com/lorefnon/ts-sql-codegen/blob/76587ea/src/generator-options.ts#L67)
+[generator-options.ts:67](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator-options.ts#L67)
 
 ___
 
@@ -67,7 +67,7 @@ z.TypeOf.rowTypes
 
 #### Defined in
 
-[generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/76587ea/src/generator-options.ts#L59)
+[generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator-options.ts#L59)
 
 ___
 
@@ -86,7 +86,7 @@ z.TypeOf.tableClasses
 
 #### Defined in
 
-[generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/76587ea/src/generator-options.ts#L36)
+[generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator-options.ts#L36)
 
 ___
 
@@ -107,4 +107,4 @@ z.TypeOf.tableInstances
 
 #### Defined in
 
-[generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/76587ea/src/generator-options.ts#L28)
+[generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator-options.ts#L28)
