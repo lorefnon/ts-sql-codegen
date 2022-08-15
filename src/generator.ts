@@ -348,7 +348,12 @@ export class Generator {
     importedItem: ImportedItem
   ) {
     if (importedItem.isRelative === false) return importPath;
-    return path.relative(path.dirname(filePath), path.resolve(importPath));
+    const result: string = path.relative(path.dirname(filePath), path.resolve(importPath));
+    if (result.startsWith(".")) {
+      return result;
+    } else {
+      return "./" + result;
+    }
   }
 
   protected getAdapterImportPath(
