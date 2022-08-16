@@ -30,7 +30,7 @@ z.TypeOf.exclude
 
 #### Defined in
 
-[generator-options.ts:14](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator-options.ts#L14)
+[generator-options.ts:14](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator-options.ts#L14)
 
 ___
 
@@ -47,4 +47,4 @@ z.TypeOf.include
 
 #### Defined in
 
-[generator-options.ts:9](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator-options.ts#L9)
+[generator-options.ts:9](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator-options.ts#L9)

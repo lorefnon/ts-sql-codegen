@@ -80,7 +80,7 @@ and custom logic for table/column/field mapping.
 
 #### Defined in
 
-[generator.ts:73](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L73)
+[generator.ts:73](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L73)
 
 ## Properties
 
@@ -90,7 +90,7 @@ and custom logic for table/column/field mapping.
 
 #### Defined in
 
-[generator.ts:85](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L85)
+[generator.ts:85](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L85)
 
 ___
 
@@ -100,7 +100,7 @@ ___
 
 #### Defined in
 
-[generator.ts:77](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L77)
+[generator.ts:77](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L77)
 
 ___
 
@@ -110,7 +110,7 @@ ___
 
 #### Defined in
 
-[generator.ts:81](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L81)
+[generator.ts:81](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L81)
 
 ___
 
@@ -120,7 +120,7 @@ ___
 
 #### Defined in
 
-[generator.ts:71](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L71)
+[generator.ts:71](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L71)
 
 ___
 
@@ -130,7 +130,7 @@ ___
 
 #### Defined in
 
-[generator.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L70)
+[generator.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L70)
 
 ## Methods
 
@@ -151,7 +151,7 @@ ___
 
 #### Defined in
 
-[generator.ts:298](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L298)
+[generator.ts:298](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L298)
 
 ___
 
@@ -177,7 +177,7 @@ ___
 
 #### Defined in
 
-[generator.ts:429](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L429)
+[generator.ts:434](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L434)
 
 ___
 
@@ -202,7 +202,7 @@ ___
 
 #### Defined in
 
-[generator.ts:516](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L516)
+[generator.ts:521](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L521)
 
 ___
 
@@ -222,7 +222,7 @@ ___
 
 #### Defined in
 
-[generator.ts:256](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L256)
+[generator.ts:256](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L256)
 
 ___
 
@@ -236,7 +236,7 @@ ___
 
 #### Defined in
 
-[generator.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L90)
+[generator.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L90)
 
 ___
 
@@ -261,7 +261,7 @@ ___
 
 #### Defined in
 
-[generator.ts:134](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L134)
+[generator.ts:134](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L134)
 
 ___
 
@@ -282,7 +282,7 @@ ___
 
 #### Defined in
 
-[generator.ts:354](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L354)
+[generator.ts:359](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L359)
 
 ___
 
@@ -303,7 +303,7 @@ ___
 
 #### Defined in
 
-[generator.ts:279](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L279)
+[generator.ts:279](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L279)
 
 ___
 
@@ -323,7 +323,7 @@ ___
 
 #### Defined in
 
-[generator.ts:382](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L382)
+[generator.ts:387](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L387)
 
 ___
 
@@ -343,7 +343,7 @@ ___
 
 #### Defined in
 
-[generator.ts:394](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L394)
+[generator.ts:399](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L399)
 
 ___
 
@@ -363,7 +363,7 @@ ___
 
 #### Defined in
 
-[generator.ts:268](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L268)
+[generator.ts:268](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L268)
 
 ___
 
@@ -389,7 +389,7 @@ ___
 
 #### Defined in
 
-[generator.ts:460](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L460)
+[generator.ts:465](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L465)
 
 ___
 
@@ -415,7 +415,7 @@ ___
 
 #### Defined in
 
-[generator.ts:474](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L474)
+[generator.ts:479](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L479)
 
 ___
 
@@ -440,7 +440,7 @@ ___
 
 #### Defined in
 
-[generator.ts:244](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L244)
+[generator.ts:244](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L244)
 
 ___
 
@@ -462,7 +462,7 @@ ___
 
 #### Defined in
 
-[generator.ts:345](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L345)
+[generator.ts:345](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L345)
 
 ___
 
@@ -482,7 +482,7 @@ ___
 
 #### Defined in
 
-[generator.ts:390](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L390)
+[generator.ts:395](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L395)
 
 ___
 
@@ -507,7 +507,7 @@ ___
 
 #### Defined in
 
-[generator.ts:512](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L512)
+[generator.ts:517](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L517)
 
 ___
 
@@ -532,7 +532,7 @@ ___
 
 #### Defined in
 
-[generator.ts:507](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L507)
+[generator.ts:512](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L512)
 
 ___
 
@@ -552,7 +552,7 @@ ___
 
 #### Defined in
 
-[generator.ts:398](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L398)
+[generator.ts:403](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L403)
 
 ___
 
@@ -572,7 +572,7 @@ ___
 
 #### Defined in
 
-[generator.ts:386](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L386)
+[generator.ts:391](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L391)
 
 ___
 
@@ -597,7 +597,7 @@ ___
 
 #### Defined in
 
-[generator.ts:126](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L126)
+[generator.ts:126](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L126)
 
 ___
 
@@ -618,7 +618,7 @@ ___
 
 #### Defined in
 
-[generator.ts:318](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L318)
+[generator.ts:318](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L318)
 
 ___
 
@@ -644,7 +644,7 @@ ___
 
 #### Defined in
 
-[generator.ts:445](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L445)
+[generator.ts:450](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L450)
 
 ___
 
@@ -670,7 +670,7 @@ ___
 
 #### Defined in
 
-[generator.ts:402](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L402)
+[generator.ts:407](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L407)
 
 ___
 
@@ -696,7 +696,7 @@ ___
 
 #### Defined in
 
-[generator.ts:413](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L413)
+[generator.ts:418](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L418)
 
 ___
 
@@ -722,7 +722,7 @@ ___
 
 #### Defined in
 
-[generator.ts:378](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L378)
+[generator.ts:383](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L383)
 
 ___
 
@@ -742,7 +742,7 @@ ___
 
 #### Defined in
 
-[generator.ts:374](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L374)
+[generator.ts:379](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L379)
 
 ___
 
@@ -767,4 +767,4 @@ ___
 
 #### Defined in
 
-[generator.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/bccacd5/src/generator.ts#L105)
+[generator.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator.ts#L105)
