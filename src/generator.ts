@@ -108,9 +108,9 @@ export class Generator {
       filter?.include &&
       filter.include.findIndex((it) =>
         doesMatchNameOrPattern(it, table.name)
-      ) >= 0
+      ) < 0
     ) {
-      return true;
+      return false;
     }
     if (
       filter?.exclude &&
