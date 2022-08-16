@@ -272,6 +272,38 @@ describe("Generator", () => {
     await generator.generate();
     await snap(await readAllGenerated());
   });
+
+  it("valid import on inner folder", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["author_books"],
+      },
+      export: {
+        tableInstances: true,
+        tableClasses: false,
+      },
+      fieldMappings: [
+        {
+          columnType: "genre",
+          generatedField: {
+            type: {
+              kind: "enum",
+              tsType: {
+                name: "Genre",
+                importPath: path.join(outputDirPath, "enums", "Genre"),
+                isDefault: true,
+              },
+            },
+          },
+        }
+      ],
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
 });
 
 const readAllGenerated = async () => {
