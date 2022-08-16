@@ -59,6 +59,29 @@ export const ExportOptionsSchema = z.object({
     rowTypes: z.boolean().default(false),
 
     /**
+     * Additionally export the value types associated with table
+     *
+     * Example:
+     *     import { InsertableValues, UpdatableValues, SelectedValues } from "ts-sql-query/extras/types"
+     *
+     *     export class UserTable extends Table<DBConnection, "User"> { ... }
+     *
+     *     // Type of user values that can be used for insert
+     *     // Here computed columns will not be present and columns with defaults will be optional
+     *     export type InsertableUser = InsertableValues<UserTable>
+     *
+     *     // Type of user values that can be used for update
+     *     // Here computed columns will not be present and all fields will be optional
+     *     export type UpdatableUser = UpdatableValues<UserTable>
+     *
+     *     // Type of user values that is returned from select
+     *     // Here computed columns will be present, only nullable fields will be optional
+     *     export type User = SelectedValues<UserTable>
+     *
+     */
+    valuesTypes: z.boolean().default(false),
+
+    /**
      * Additionally export the extracted columns (Useful for select * queries etc.)
      *
      * Example: 

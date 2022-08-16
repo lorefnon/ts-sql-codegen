@@ -7,7 +7,7 @@
  */
 import { {{table.kind}} } from "ts-sql-query/{{table.kind}}";
 import type { DBConnection } from "{{dbConnectionSource}}";
-{{#if exportRowTypes}}
+{{#if importExtraTypes}}
 import {
     {{#if exportRowTypes.insertable}}
     InsertableRow, 
@@ -17,6 +17,15 @@ import {
     {{/if}}
     {{#if exportRowTypes.selected}}
     SelectedRow,
+    {{/if}}
+    {{#if exportValuesTypes.insertable}}
+    InsertableValues, 
+    {{/if}}
+    {{#if exportValuesTypes.updatable}}
+    UpdatableValues, 
+    {{/if}}
+    {{#if exportValuesTypes.selected}}
+    SelectedValues,
     {{/if}}
 } from "ts-sql-query/extras/types"
 {{/if}}
@@ -77,6 +86,15 @@ export type {{rowTypePrefix}}URow = UpdatableRow<{{className}}>;
 {{/if}}
 {{#if exportRowTypes.selected}}
 export type {{rowTypePrefix}}SRow = SelectedRow<{{className}}>;
+{{/if}}
+{{#if exportValuesTypes.insertable}}
+export type Insertable{{rowTypePrefix}} = InsertableValues<{{className}}>;
+{{/if}}
+{{#if exportValuesTypes.updatable}}
+export type Updatable{{rowTypePrefix}} = UpdatableValues<{{className}}>;
+{{/if}}
+{{#if exportValuesTypes.selected}}
+export type {{rowTypePrefix}} = SelectedValues<{{className}}>;
 {{/if}}
 {{#if colSetName}}
 export const {{colSetName}} = extractColumnsFrom({{instName}});
