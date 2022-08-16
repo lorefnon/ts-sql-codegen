@@ -173,6 +173,21 @@ describe("Generator", () => {
     await generator.generate();
     await snap(await readAllGenerated());
   });
+  it("allows exporting value types", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      export: {
+        valuesTypes: true
+      }
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
 
   it("allows omitting specific tables and fields", async () => {
     const generator = new Generator({

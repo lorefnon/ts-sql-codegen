@@ -198,6 +198,14 @@ export class Generator {
         exportRowTypes.updatable = true;
       }
     }
+    const exportValuesTypes = this.opts.export?.valuesTypes ? ({} as any) : false;
+    if (exportValuesTypes !== false) {
+      exportValuesTypes.selected = true;
+      if (tableKind !== "View") {
+        exportValuesTypes.insertable = true;
+        exportValuesTypes.updatable = true;
+      }
+    }
     const className = this.getClassNameFromTableName(table.name);
     const colSetName = this.opts.export?.extractedColumns
       ? this.getColumnsObjectNameFromTableName(table.name)
@@ -225,6 +233,8 @@ export class Generator {
       adapterImports,
       exportTableClass,
       exportRowTypes,
+      exportValuesTypes,
+      importExtraTypes: exportRowTypes || exportValuesTypes,
       rowTypePrefix,
       colSetName,
     });
