@@ -319,6 +319,50 @@ describe("Generator", () => {
     await generator.generate();
     await snap(await readAllGenerated());
   });
+
+  it("customizing naming", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      export: {
+        rowTypes: true,
+        valuesTypes: true,
+        extractedColumns: true,
+        tableInstances: true,
+        tableClasses: false,
+      },
+      naming: {
+        insertableRowTypeNamePrefix: 'IRP',
+        insertableRowTypeNameSuffix: 'IRS',
+        insertableValuesTypeNamePrefix: 'IVP',
+        insertableValuesTypeNameSuffix: 'IVS',
+        selectedRowTypeNamePrefix: 'SRP',
+        selectedRowTypeNameSuffix: 'SRS',
+        selectedValuesTypeNamePrefix: 'SVP',
+        selectedValuesTypeNameSuffix: 'SVS',
+        tableClassNamePrefix: 'TCP',
+        tableClassNameSuffix: 'TCS',
+        tableColumnsNamePrefix: 'TCsP',
+        tableColumnsNameSuffix: 'TCsS',
+        tableInstanceNamePrefix: 'TIP',
+        tableInstanceNameSuffix: 'TIS',
+        updatableRowTypeNamePrefix: 'URP',
+        updatableRowTypeNameSuffix: 'URS',
+        updatableValuesTypeNamePrefix: 'UVP',
+        updatableValuesTypeNameSuffix: 'UVS',
+        viewClassNamePrefix: 'VCP',
+        viewClassNameSuffix: 'VCS',
+        viewColumnsNamePrefix: 'VCsP',
+        viewColumnsNameSuffix: 'VCsS',
+        viewInstanceNamePrefix: 'VIP',
+        viewInstanceNameSuffix: 'VIS',
+      },
+      fieldMappings,
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
 });
 
 const readAllGenerated = async () => {
