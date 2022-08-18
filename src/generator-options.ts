@@ -92,6 +92,107 @@ export const ExportOptionsSchema = z.object({
 
 export interface ExportOptions extends z.TypeOf<typeof ExportOptionsSchema> {}
 
+export const NamingOptionsSchema = z.object({
+    /**
+     * Prefix to be used in the name of the class that reprecents a table
+     */
+    tableClassNamePrefix: z.string().default(''),
+    /**
+     * Suffix to be used in the name of the class that reprecents a table
+     */
+    tableClassNameSuffix: z.string().default('Table'),
+    /**
+     * Prefix to be used in the name of the class that reprecents a view
+     */
+    viewClassNamePrefix: z.string().default(''),
+    /**
+     * Suffix to be used in the name of the class that reprecents a view
+     */
+    viewClassNameSuffix: z.string().default('Table'),
+    /**
+     * Prefix to be used in the name of the instance of the class that reprecents a table
+     */
+    tableInstanceNamePrefix: z.string().default('t'),
+    /**
+     * Suffix to be used in the name of the instance of the class that reprecents a table
+     */
+    tableInstanceNameSuffix: z.string().default(''),
+    /**
+     * Prefix to be used in the name of the instance of the class that reprecents a view
+     */
+    viewInstanceNamePrefix: z.string().default('t'),
+    /**
+     * Suffix to be used in the name of the the instance of class that reprecents a view
+     */
+    viewInstanceNameSuffix: z.string().default(''),
+    /**
+     * Prefix to be used in the name of the InsertableRow type
+     */
+    insertableRowTypeNamePrefix: z.string().default(''),
+    /**
+     * Suffix to be used in the name of the InsertableRow type
+     */
+    insertableRowTypeNameSuffix: z.string().default('IRow'),
+    /**
+     * Prefix to be used in the name of the UpdatableRow type
+     */
+    updatableRowTypeNamePrefix: z.string().default(''),
+    /**
+     * Suffix to be used in the name of the UpdatableRow type
+     */
+    updatableRowTypeNameSuffix: z.string().default('URow'),
+    /**
+     * Prefix to be used in the name of the SelectedRow type
+     */
+    selectedRowTypeNamePrefix: z.string().default(''),
+    /**
+     * Suffix to be used in the name of the SelectedRow type
+     */
+    selectedRowTypeNameSuffix: z.string().default('SRow'),
+    /**
+     * Prefix to be used in the name of the InsertableValues type
+     */
+    insertableValuesTypeNamePrefix: z.string().default('Insertable'),
+    /**
+     * Suffix to be used in the name of the InsertableValues type
+     */
+    insertableValuesTypeNameSuffix: z.string().default(''),
+    /**
+     * Prefix to be used in the name of the UpdatableValues type
+     */
+    updatableValuesTypeNamePrefix: z.string().default('Updatable'),
+    /**
+     * Suffix to be used in the name of the UpdatableValues type
+     */
+    updatableValuesTypeNameSuffix: z.string().default(''),
+    /**
+     * Prefix to be used in the name of the SelectedValues type
+     */
+    selectedValuesTypeNamePrefix: z.string().default(''),
+    /**
+     * Suffix to be used in the name of the SelectedValues type
+     */
+    selectedValuesTypeNameSuffix: z.string().default(''),
+    /**
+     * Prefix to be used in the name of the const with the column list of a table
+     */
+    tableColumnsNamePrefix: z.string().default('t'),
+    /**
+     * Suffix to be used in the name of the const with the column list of a table
+     */
+    tableColumnsNameSuffix: z.string().default('Cols'),
+    /**
+     * Prefix to be used in the name of the const with the column list of a view
+     */
+    viewColumnsNamePrefix: z.string().default('t'),
+    /**
+     * Suffix to be used in the name of the const with the column list of a view
+     */
+    viewColumnsNameSuffix: z.string().default('Cols'),
+});
+
+export interface NamingOptions extends z.TypeOf<typeof NamingOptionsSchema> {}
+
 export const CommonTypeAdapterOptionsSchema = z.object({
     /**
      * Common import path to be used for type adapters
@@ -214,6 +315,13 @@ export const GeneratorOptsSchema = z.object({
      * See {@link CommonOptions}
      */
     common: CommonOptionsSchema.nullish(),
+
+    /**
+     * Customize the naming rules of the generated items
+     * 
+     * See NamingOptions
+     */
+    naming: NamingOptionsSchema.partial().nullish(),
 });
 
 /**

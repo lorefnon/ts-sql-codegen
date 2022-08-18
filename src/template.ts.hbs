@@ -79,22 +79,22 @@ export const {{instName}} = new {{className}}();
 {{/if}}
 
 {{#if exportRowTypes.insertable}}
-export type {{rowTypePrefix}}IRow = InsertableRow<{{className}}>;
+export type {{exportRowTypes.insertable}} = InsertableRow<{{className}}>;
 {{/if}}
 {{#if exportRowTypes.updatable}}
-export type {{rowTypePrefix}}URow = UpdatableRow<{{className}}>;
+export type {{exportRowTypes.updatable}} = UpdatableRow<{{className}}>;
 {{/if}}
 {{#if exportRowTypes.selected}}
-export type {{rowTypePrefix}}SRow = SelectedRow<{{className}}>;
+export type {{exportRowTypes.selected}} = SelectedRow<{{className}}>;
 {{/if}}
 {{#if exportValuesTypes.insertable}}
-export type Insertable{{rowTypePrefix}} = InsertableValues<{{className}}>;
+export type {{exportValuesTypes.insertable}} = InsertableValues<{{className}}>;
 {{/if}}
 {{#if exportValuesTypes.updatable}}
-export type Updatable{{rowTypePrefix}} = UpdatableValues<{{className}}>;
+export type {{exportValuesTypes.updatable}} = UpdatableValues<{{className}}>;
 {{/if}}
 {{#if exportValuesTypes.selected}}
-export type {{rowTypePrefix}} = SelectedValues<{{className}}>;
+export type {{exportValuesTypes.selected}} = SelectedValues<{{className}}>;
 {{/if}}
 {{#if colSetName}}
 export const {{colSetName}} = extractColumnsFrom({{instName}});

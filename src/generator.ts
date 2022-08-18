@@ -4,7 +4,7 @@ import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
 import path from "path";
 import { camelCase, memoize, upperFirst, last, isEmpty } from "lodash";
-import { GeneratorOpts, GeneratorOptsSchema } from "./generator-options";
+import { GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
 import {
   fieldMappings,
   GeneratedField,
@@ -68,10 +68,12 @@ interface ImportTmplInput {
  */
 export class Generator {
   protected opts: GeneratorOpts;
+  protected naming: NamingOptions;
   public logger: Logger = console;
 
   constructor(opts: GeneratorOpts) {
     this.opts = GeneratorOptsSchema.parse(opts);
+    this.naming = NamingOptionsSchema.parse(this.opts.naming || {});
   }
 
   protected getFieldMappings = memoize(() => {
@@ -123,7 +125,7 @@ export class Generator {
     return true;
   }
 
-  protected getTableKind(table: Table): "Table" | "View" | null {
+  protected getTableKind(table: Table): TableKind | null {
     return match(table.type.toLowerCase())
       .with("base table", () => "Table" as const)
       .with("table", () => "Table" as const)
@@ -184,35 +186,36 @@ export class Generator {
           fieldType: this.getFieldType(table.name, col),
         };
       });
-    const filePath = this.getOutputFilePath(table);
+    const filePath = this.getOutputFilePath(table, tableKind);
     const dbConnectionSource = this.getConnectionSourceImportPath(filePath);
     const adapterImports = this.getAdapterImports(filePath, fields);
     const typeImports = this.getTypeImports(filePath, fields);
     const imports = [...adapterImports, ...typeImports];
     const exportTableClass = this.opts.export?.tableClasses ?? true;
     const exportRowTypes = this.opts.export?.rowTypes ? ({} as any) : false;
+    const pascalName = this.getPascalCasedTableName(tableName);
     if (exportRowTypes !== false) {
-      exportRowTypes.selected = true;
+      exportRowTypes.selected = this.naming.selectedRowTypeNamePrefix + pascalName + this.naming.selectedRowTypeNameSuffix;
       if (tableKind !== "View") {
-        exportRowTypes.insertable = true;
-        exportRowTypes.updatable = true;
+        exportRowTypes.insertable = this.naming.insertableRowTypeNamePrefix + pascalName + this.naming.insertableRowTypeNameSuffix;
+        exportRowTypes.updatable = this.naming.updatableRowTypeNamePrefix + pascalName + this.naming.updatableRowTypeNameSuffix;
       }
     }
     const exportValuesTypes = this.opts.export?.valuesTypes ? ({} as any) : false;
     if (exportValuesTypes !== false) {
-      exportValuesTypes.selected = true;
+      exportValuesTypes.selected = this.naming.selectedValuesTypeNamePrefix + pascalName + this.naming.selectedValuesTypeNameSuffix;
       if (tableKind !== "View") {
-        exportValuesTypes.insertable = true;
-        exportValuesTypes.updatable = true;
+        exportValuesTypes.insertable = this.naming.insertableValuesTypeNamePrefix + pascalName + this.naming.insertableValuesTypeNameSuffix;
+        exportValuesTypes.updatable = this.naming.updatableValuesTypeNamePrefix + pascalName + this.naming.updatableValuesTypeNameSuffix;
       }
     }
-    const className = this.getClassNameFromTableName(table.name);
+    const className = this.getClassNameFromTableName(table.name, tableKind);
     const colSetName = this.opts.export?.extractedColumns
-      ? this.getColumnsObjectNameFromTableName(table.name)
+      ? this.getColumnsObjectNameFromTableName(table.name, tableKind)
       : null;
     const instName =
       this.opts.export?.tableInstances || colSetName
-        ? this.getInstanceNameFromTableName(table.name)
+        ? this.getInstanceNameFromTableName(table.name, tableKind)
         : null;
     const idPrefix = this.getIdPrefix(table);
     const rowTypePrefix = this.getRowTypePrefix(tableName);
@@ -394,24 +397,48 @@ export class Generator {
     return output;
   }
 
-  protected getClassNameFromTableName(tableName: string) {
-    return this.getPascalCasedTableName(tableName) + "Table";
+  protected getClassNameFromTableName(tableName: string, tableKind: TableKind) {
+    if (tableKind === 'Table') {
+      return this.naming.tableClassNamePrefix + this.getPascalCasedTableName(tableName) + this.naming.tableClassNameSuffix;
+    } else {
+      return this.naming.viewClassNamePrefix + this.getPascalCasedTableName(tableName) + this.naming.viewClassNameSuffix;
+    }
   }
 
   protected getRowTypePrefix(tableName: string) {
     return this.getPascalCasedTableName(tableName);
   }
 
-  protected getInstanceNameFromTableName(tableName: string) {
-    return "t" + this.getPascalCasedTableName(tableName);
+  protected getInstanceNameFromTableName(tableName: string, tableKind: TableKind) {
+    if (tableKind === 'Table') {
+      return this.naming.tableInstanceNamePrefix + this.getPascalCasedTableName(tableName) + this.naming.tableInstanceNameSuffix;
+    } else {
+      return this.naming.viewInstanceNamePrefix + this.getPascalCasedTableName(tableName) + this.naming.viewInstanceNameSuffix;
+    }
   }
 
-  protected getColumnsObjectNameFromTableName(tableName: string) {
-    return "t" + this.getPascalCasedTableName(tableName) + "Cols";
+  protected getColumnsObjectNameFromTableName(tableName: string, tableKind: TableKind) {
+    if (tableKind === 'Table') {
+      if (this.naming.tableColumnsNamePrefix) {
+        return this.naming.tableColumnsNamePrefix + this.getPascalCasedTableName(tableName) + this.naming.tableColumnsNameSuffix;
+      } else {
+        return this.getCamelCasedTableName(tableName) + this.naming.tableColumnsNameSuffix;
+      }
+    } else {
+      if (this.naming.viewColumnsNamePrefix) {
+        return this.naming.viewColumnsNamePrefix + this.getPascalCasedTableName(tableName) + this.naming.viewColumnsNameSuffix;
+      } else {
+        return this.getCamelCasedTableName(tableName) + this.naming.viewColumnsNameSuffix;
+      }
+    }
   }
 
   private getPascalCasedTableName(tableName: string) {
     return upperFirst(camelCase(last(tableName.split("."))));
+  }
+
+  private getCamelCasedTableName(tableName: string) {
+    return camelCase(last(tableName.split(".")));
   }
 
   protected isColumnOmitted(tableName: string, col: Column) {
@@ -519,13 +546,13 @@ export class Generator {
     };
   }
 
-  protected getOutputFilePath(table: Table) {
-    const fileName = this.getOutputFileName(table);
+  protected getOutputFilePath(table: Table, tableKind: TableKind) {
+    const fileName = this.getOutputFileName(table, tableKind);
     return path.join(this.opts.outputDirPath, fileName);
   }
 
-  protected getOutputFileName(table: Table) {
-    return this.getClassNameFromTableName(table.name) + ".ts";
+  protected getOutputFileName(table: Table, tableKind: TableKind) {
+    return this.getClassNameFromTableName(table.name, tableKind) + ".ts";
   }
 
   protected findPrimaryKey(table: Table) {
@@ -566,3 +593,5 @@ const doesMatchNameOrPattern = (
   }
   return target.match(matcher);
 };
+
+type TableKind = "Table" | "View"
