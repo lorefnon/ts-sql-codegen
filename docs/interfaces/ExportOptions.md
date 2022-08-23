@@ -16,6 +16,7 @@
 - [rowTypes](ExportOptions.md#rowtypes)
 - [tableClasses](ExportOptions.md#tableclasses)
 - [tableInstances](ExportOptions.md#tableinstances)
+- [valuesTypes](ExportOptions.md#valuestypes)
 
 ## Properties
 
@@ -34,7 +35,7 @@ z.TypeOf.extractedColumns
 
 #### Defined in
 
-[generator-options.ts:67](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator-options.ts#L67)
+[generator-options.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L90)
 
 ___
 
@@ -67,7 +68,7 @@ z.TypeOf.rowTypes
 
 #### Defined in
 
-[generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator-options.ts#L59)
+[generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L59)
 
 ___
 
@@ -86,7 +87,7 @@ z.TypeOf.tableClasses
 
 #### Defined in
 
-[generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator-options.ts#L36)
+[generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L36)
 
 ___
 
@@ -107,4 +108,37 @@ z.TypeOf.tableInstances
 
 #### Defined in
 
-[generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/26005c2/src/generator-options.ts#L28)
+[generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L28)
+
+___
+
+### valuesTypes
+
+• **valuesTypes**: `boolean`
+
+Additionally export the value types associated with table
+
+Example:
+    import { InsertableValues, UpdatableValues, SelectedValues } from "ts-sql-query/extras/types"
+
+    export class UserTable extends Table<DBConnection, "User"> { ... }
+
+    // Type of user values that can be used for insert
+    // Here computed columns will not be present and columns with defaults will be optional
+    export type InsertableUser = InsertableValues<UserTable>
+
+    // Type of user values that can be used for update
+    // Here computed columns will not be present and all fields will be optional
+    export type UpdatableUser = UpdatableValues<UserTable>
+
+    // Type of user values that is returned from select
+    // Here computed columns will be present, only nullable fields will be optional
+    export type User = SelectedValues<UserTable>
+
+#### Inherited from
+
+z.TypeOf.valuesTypes
+
+#### Defined in
+
+[generator-options.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L82)
