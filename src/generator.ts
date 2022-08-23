@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
-import path from "path";
+import path from "path/posix";
 import { camelCase, memoize, upperFirst, last, isEmpty } from "lodash";
 import { GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
 import {
