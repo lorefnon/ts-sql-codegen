@@ -324,7 +324,7 @@ export const GeneratorOptsSchema = z.object({
     naming: NamingOptionsSchema.partial().nullish(),
 
     /** 
-     * The fields marked as "custom", "customComparable" or "enum" recive a second generic
+     * The fields marked as "custom", "customComparable" or "enum" receive a second generic
      * argument that need to be the same of the db type in the database or redefined for the field
      * If you set to true this property that second generic argument will be generated.
      */
