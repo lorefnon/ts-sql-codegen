@@ -288,6 +288,57 @@ describe("Generator", () => {
     await snap(await readAllGenerated());
   });
 
+  it("allows non-relative and default import paths with db type name", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      export: {
+        tableInstances: true,
+        tableClasses: false,
+      },
+      fieldMappings: [
+        {
+          columnType: "genre",
+          generatedField: {
+            type: {
+              kind: "enum",
+              tsType: {
+                name: "Genre",
+                importPath: path.join(__dirname, "helpers/types"),
+                isDefault: true,
+              },
+            },
+          },
+        },
+        {
+          tableName: "chapters",
+          columnName: "metadata",
+          generatedField: {
+            type: {
+              kind: "custom",
+              dbType: { name: "jsonb" },
+              tsType: {
+                name: "ChapterMetadata",
+                importPath: "some-lib/ChapterMetadata",
+                isDefault: true,
+                isRelative: false,
+              },
+              adapter: {
+                name: "ChapterMetadataAdapter",
+                importPath: "some-other-lib",
+                isRelative: false,
+              },
+            },
+          },
+        },
+      ],
+      includeDBTypeWhenIsOptional: true,
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
+
   it("valid import on inner folder", async () => {
     const generator = new Generator({
       schemaPath,
@@ -359,6 +410,71 @@ describe("Generator", () => {
         viewInstanceNameSuffix: 'VIS',
       },
       fieldMappings,
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
+
+  it("custom comparable field", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["author_books"],
+      },
+      export: {
+        tableInstances: true,
+        tableClasses: false,
+      },
+      fieldMappings: [
+        {
+          columnType: "genre",
+          generatedField: {
+            type: {
+              kind: "customComparable",
+              tsType: {
+                name: "Genre",
+                importPath: path.join(outputDirPath, "enums", "Genre"),
+                isDefault: true,
+              },
+            },
+          },
+        }
+      ],
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
+  
+  it("custom comparable field with db type name", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["author_books"],
+      },
+      export: {
+        tableInstances: true,
+        tableClasses: false,
+      },
+      fieldMappings: [
+        {
+          columnType: "genre",
+          generatedField: {
+            type: {
+              kind: "customComparable",
+              tsType: {
+                name: "Genre",
+                importPath: path.join(outputDirPath, "enums", "Genre"),
+                isDefault: true,
+              },
+            },
+          },
+        }
+      ],
+      includeDBTypeWhenIsOptional: true,
     });
     await generator.generate();
     await snap(await readAllGenerated());
