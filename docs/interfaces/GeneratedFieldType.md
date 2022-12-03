@@ -33,7 +33,7 @@ z.TypeOf.adapter
 
 #### Defined in
 
-[field-mappings.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L82)
+[field-mappings.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/7570018/src/field-mappings.ts#L82)
 
 ___
 
@@ -51,13 +51,13 @@ z.TypeOf.dbType
 
 #### Defined in
 
-[field-mappings.ts:66](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L66)
+[field-mappings.ts:66](https://github.com/lorefnon/ts-sql-codegen/blob/7570018/src/field-mappings.ts#L66)
 
 ___
 
 ### kind
 
-• **kind**: `undefined` \| ``null`` \| ``"custom"`` \| ``"enum"``
+• **kind**: `undefined` \| ``null`` \| ``"custom"`` \| ``"customComparable"`` \| ``"enum"``
 
 Specify that this field uses a custom database type or an enum type
 
@@ -67,7 +67,7 @@ z.TypeOf.kind
 
 #### Defined in
 
-[field-mappings.ts:60](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L60)
+[field-mappings.ts:60](https://github.com/lorefnon/ts-sql-codegen/blob/7570018/src/field-mappings.ts#L60)
 
 ___
 
@@ -87,4 +87,4 @@ z.TypeOf.tsType
 
 #### Defined in
 
-[field-mappings.ts:75](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L75)
+[field-mappings.ts:75](https://github.com/lorefnon/ts-sql-codegen/blob/7570018/src/field-mappings.ts#L75)

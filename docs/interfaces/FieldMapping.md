@@ -31,7 +31,7 @@ z.TypeOf.columnName
 
 #### Defined in
 
-[field-mappings.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L105)
+[field-mappings.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/7570018/src/field-mappings.ts#L105)
 
 ___
 
@@ -50,13 +50,13 @@ z.TypeOf.columnType
 
 #### Defined in
 
-[field-mappings.ts:116](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L116)
+[field-mappings.ts:116](https://github.com/lorefnon/ts-sql-codegen/blob/7570018/src/field-mappings.ts#L116)
 
 ___
 
 ### generatedField
 
-• **generatedField**: ``false`` \| { `hasDefault`: `undefined` \| ``null`` \| `boolean` ; `isComputed`: `undefined` \| ``null`` \| `boolean` ; `isOptional`: `undefined` \| ``null`` \| `boolean` ; `name`: `undefined` \| ``null`` \| `string` ; `type`: `undefined` \| ``null`` \| { kind?: "custom" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| ... 1 more ... \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ... 1 more ... \| undefin...  }
+• **generatedField**: ``false`` \| { `hasDefault`: `undefined` \| ``null`` \| `boolean` ; `isComputed`: `undefined` \| ``null`` \| `boolean` ; `isOptional`: `undefined` \| ``null`` \| `boolean` ; `name`: `undefined` \| ``null`` \| `string` ; `type`: `undefined` \| ``null`` \| { kind?: "custom" \| "customComparable" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| ... 1 more ... \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ......  }
 
 Can be used to customize the field name or type mapping
 in the generated field.
@@ -69,7 +69,7 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-[field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L124)
+[field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/7570018/src/field-mappings.ts#L124)
 
 ___
 
@@ -85,4 +85,4 @@ z.TypeOf.tableName
 
 #### Defined in
 
-[field-mappings.ts:108](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L108)
+[field-mappings.ts:108](https://github.com/lorefnon/ts-sql-codegen/blob/7570018/src/field-mappings.ts#L108)

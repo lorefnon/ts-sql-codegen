@@ -23,7 +23,7 @@ specifiers:
   rimraf: ^3.0.2
   ts-node: ^10.8.1
   ts-pattern: ^4.0.3
-  ts-sql-query: ^1.28.0
+  ts-sql-query: ^1.29.0
   typedoc: ^0.22.17
   typedoc-plugin-markdown: ^3.12.1
   typescript: ^4.7.3
@@ -55,7 +55,7 @@ devDependencies:
   recursive-copy-cli: 1.0.20
   rimraf: 3.0.2
   ts-node: 10.8.1_f5eqjuxkorpjvs4z7mviievvou
-  ts-sql-query: 1.28.0
+  ts-sql-query: 1.41.0
   typedoc: 0.22.17_typescript@4.7.3
   typedoc-plugin-markdown: 3.12.1_typedoc@0.22.17
   typescript: 4.7.3
@@ -1299,8 +1299,8 @@ packages:
     resolution: {integrity: sha512-OxQStbr1MKcYYz3YaXsFSBkMo3zjFODVkV8kaLfOak+sWSfx4B+jkOm/VoaWLhnMP+icnIcJ7ENYEnmpAv3jLg==}
     dev: false
 
-  /ts-sql-query/1.28.0:
-    resolution: {integrity: sha512-66e9aHXlgRjkTvdWyaxhJJRMAxbF2JXZ9x5FtZNX9rRivda5bAjIeB/U009Ggd/OrHnALuGXPESboHHtpgOgpg==}
+  /ts-sql-query/1.41.0:
+    resolution: {integrity: sha512-NOzZV5ikOQHq5euFS1mI6UmuOgbmNPdrF3Z/s93cEJ1TYecq3+Gan08TnWl43FU9s7ym575h+0PNmSRXO3kzXA==}
     dependencies:
       chained-error: 1.0.0
       ts-extended-types: 1.1.0
