@@ -62,7 +62,11 @@ import { extractColumnsFrom } from "ts-sql-query/extras/utils"
             {{field.comment}}
             {{/if}}
             {{#if fieldType.kind}}
+                {{#if includeDBTypeWhenIsOptional}}
+                {{name}} = this.{{columnMethod}}<{{fieldType.tsType.name}}, '{{fieldType.dbType.name}}'>('{{columnName}}', '{{fieldType.kind}}', '{{fieldType.dbType.name}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
+                {{else}}
                 {{name}} = this.{{columnMethod}}<{{fieldType.tsType.name}}>('{{columnName}}', '{{fieldType.kind}}', '{{fieldType.dbType.name}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
+                {{/if}}
             {{else}}
                 {{name}} = this.{{columnMethod}}('{{columnName}}', '{{fieldType.dbType.name}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
             {{/if}}

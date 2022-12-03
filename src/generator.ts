@@ -38,6 +38,7 @@ interface FieldTmplInput {
   isOptional: boolean;
   hasDefault: boolean;
   fieldType: GeneratedFieldType;
+  includeDBTypeWhenIsOptional: boolean;
 }
 
 interface ImportTmplInput {
@@ -184,6 +185,7 @@ export class Generator {
           hasDefault,
           columnMethod,
           fieldType: this.getFieldType(table.name, col),
+          includeDBTypeWhenIsOptional: this.opts.includeDBTypeWhenIsOptional || false,
         };
       });
     const filePath = this.getOutputFilePath(table, tableKind);
