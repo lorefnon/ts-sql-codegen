@@ -287,7 +287,7 @@ export class Generator {
     );
     return path.join(
       path.dirname(relPath),
-      path.basename(relPath, path.extname(relPath))
+      path.basename(relPath)
     );
   }
 
