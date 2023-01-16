@@ -128,7 +128,7 @@ export interface FieldMapping extends z.TypeOf<typeof FieldMappingSchema> {}
 
 export const fieldMappings: FieldMapping[] = [
     {
-        columnType: /(character|varchar|text)/,
+        columnType: /(char|text)/,
         generatedField: { type: { dbType: { name: "string" } } },
     },
     {
@@ -163,4 +163,8 @@ export const fieldMappings: FieldMapping[] = [
         columnType: /(double|float)/,
         generatedField: { type: { dbType: { name: "double" } } },
     },
+    {
+        columnType: /(decimal|numeric)/,
+        generatedField: { type: { dbType: { name: "stringDouble" } } },
+    }
 ];
