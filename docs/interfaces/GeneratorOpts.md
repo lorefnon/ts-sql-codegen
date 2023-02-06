@@ -19,6 +19,7 @@ Generator options
 - [dryRun](GeneratorOpts.md#dryrun)
 - [export](GeneratorOpts.md#export)
 - [fieldMappings](GeneratorOpts.md#fieldmappings)
+- [includeDBTypeWhenIsOptional](GeneratorOpts.md#includedbtypewhenisoptional)
 - [naming](GeneratorOpts.md#naming)
 - [outputDirPath](GeneratorOpts.md#outputdirpath)
 - [schemaPath](GeneratorOpts.md#schemapath)
@@ -42,7 +43,7 @@ z.TypeOf.common
 
 #### Defined in
 
-[src/generator-options.ts:317](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L317)
+[src/generator-options.ts:317](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L317)
 
 ___
 
@@ -58,7 +59,7 @@ z.TypeOf.connectionSourcePath
 
 #### Defined in
 
-[src/generator-options.ts:271](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L271)
+[src/generator-options.ts:271](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L271)
 
 ___
 
@@ -74,7 +75,7 @@ z.TypeOf.dryRun
 
 #### Defined in
 
-[src/generator-options.ts:262](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L262)
+[src/generator-options.ts:262](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L262)
 
 ___
 
@@ -94,13 +95,13 @@ z.TypeOf.export
 
 #### Defined in
 
-[src/generator-options.ts:309](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L309)
+[src/generator-options.ts:309](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L309)
 
 ___
 
 ### fieldMappings
 
-• **fieldMappings**: `undefined` \| ``null`` \| { `columnName`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `columnType`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `generatedField`: ``false`` \| { type?: { kind?: "custom" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| ... 1 more ... \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ... 1 more ... ... ; `tableName`: `undefined` \| ``null`` \| `string` \| `RegExp`  }[]
+• **fieldMappings**: `undefined` \| ``null`` \| { `columnName`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `columnType`: `undefined` \| ``null`` \| `string` \| `RegExp` ; `generatedField`: ``false`` \| { type?: { kind?: "custom" \| "customComparable" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; isDefault?: boolean \| ... 1 more ... \| undefined; isRelative?: boolean \| ... 1 more ... \| undefined; name: string; } \| null \| undefined; adapt... ; `tableName`: `undefined` \| ``null`` \| `string` \| `RegExp`  }[]
 
 Customize how table columns are mapped to typescript fields
 
@@ -114,7 +115,25 @@ z.TypeOf.fieldMappings
 
 #### Defined in
 
-[src/generator-options.ts:287](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L287)
+[src/generator-options.ts:287](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L287)
+
+___
+
+### includeDBTypeWhenIsOptional
+
+• **includeDBTypeWhenIsOptional**: `undefined` \| ``null`` \| `boolean`
+
+The fields marked as "custom", "customComparable" or "enum" receive a second generic
+argument that need to be the same of the db type in the database or redefined for the field
+If you set to true this property that second generic argument will be generated.
+
+#### Inherited from
+
+z.TypeOf.includeDBTypeWhenIsOptional
+
+#### Defined in
+
+[src/generator-options.ts:331](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L331)
 
 ___
 
@@ -132,7 +151,7 @@ z.TypeOf.naming
 
 #### Defined in
 
-[src/generator-options.ts:324](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L324)
+[src/generator-options.ts:324](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L324)
 
 ___
 
@@ -148,7 +167,7 @@ z.TypeOf.outputDirPath
 
 #### Defined in
 
-[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L277)
+[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L277)
 
 ___
 
@@ -164,7 +183,7 @@ z.TypeOf.schemaPath
 
 #### Defined in
 
-[src/generator-options.ts:265](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L265)
+[src/generator-options.ts:265](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L265)
 
 ___
 
@@ -184,7 +203,7 @@ z.TypeOf.tableMapping
 
 #### Defined in
 
-[src/generator-options.ts:294](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L294)
+[src/generator-options.ts:294](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L294)
 
 ___
 
@@ -205,4 +224,4 @@ z.TypeOf.tables
 
 #### Defined in
 
-[src/generator-options.ts:302](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L302)
+[src/generator-options.ts:302](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L302)
