@@ -8,7 +8,7 @@ Note that unless isRelative is specified as false, the import will be
 resolved relative to the cwd from where generator is invoked and
 then converted to a relative path relative to the generated file
 
-Examples:
+Examples: 
    When generated file is located at src/db/tables/some-table.ts and generator
    is run from project root
 
@@ -50,7 +50,7 @@ z.TypeOf.importPath
 
 #### Defined in
 
-[field-mappings.ts:16](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L16)
+[src/field-mappings.ts:16](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/field-mappings.ts#L16)
 
 ___
 
@@ -60,7 +60,9 @@ ___
 
 Whether this is a default import
 
-**`default`** false
+**`Default`**
+
+false
 
 #### Inherited from
 
@@ -68,7 +70,7 @@ z.TypeOf.isDefault
 
 #### Defined in
 
-[field-mappings.ts:23](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L23)
+[src/field-mappings.ts:23](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/field-mappings.ts#L23)
 
 ___
 
@@ -78,7 +80,9 @@ ___
 
 Whether this is a relative import
 
-**`default`** true
+**`Default`**
+
+true
 
 #### Inherited from
 
@@ -86,7 +90,7 @@ z.TypeOf.isRelative
 
 #### Defined in
 
-[field-mappings.ts:30](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L30)
+[src/field-mappings.ts:30](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/field-mappings.ts#L30)
 
 ___
 
@@ -102,4 +106,4 @@ z.TypeOf.name
 
 #### Defined in
 
-[field-mappings.ts:13](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/field-mappings.ts#L13)
+[src/field-mappings.ts:13](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/field-mappings.ts#L13)

@@ -42,7 +42,7 @@ z.TypeOf.common
 
 #### Defined in
 
-[generator-options.ts:317](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L317)
+[src/generator-options.ts:317](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L317)
 
 ___
 
@@ -58,7 +58,7 @@ z.TypeOf.connectionSourcePath
 
 #### Defined in
 
-[generator-options.ts:271](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L271)
+[src/generator-options.ts:271](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L271)
 
 ___
 
@@ -74,7 +74,7 @@ z.TypeOf.dryRun
 
 #### Defined in
 
-[generator-options.ts:262](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L262)
+[src/generator-options.ts:262](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L262)
 
 ___
 
@@ -84,7 +84,9 @@ ___
 
 Customize what all entities are exported from generated file
 
-**`see`** ExportOptions
+**`See`**
+
+ExportOptions
 
 #### Inherited from
 
@@ -92,7 +94,7 @@ z.TypeOf.export
 
 #### Defined in
 
-[generator-options.ts:309](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L309)
+[src/generator-options.ts:309](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L309)
 
 ___
 
@@ -102,7 +104,9 @@ ___
 
 Customize how table columns are mapped to typescript fields
 
-**`see`** FieldMapping
+**`See`**
+
+FieldMapping
 
 #### Inherited from
 
@@ -110,7 +114,7 @@ z.TypeOf.fieldMappings
 
 #### Defined in
 
-[generator-options.ts:287](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L287)
+[src/generator-options.ts:287](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L287)
 
 ___
 
@@ -128,7 +132,7 @@ z.TypeOf.naming
 
 #### Defined in
 
-[generator-options.ts:324](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L324)
+[src/generator-options.ts:324](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L324)
 
 ___
 
@@ -144,7 +148,7 @@ z.TypeOf.outputDirPath
 
 #### Defined in
 
-[generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L277)
+[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L277)
 
 ___
 
@@ -160,7 +164,7 @@ z.TypeOf.schemaPath
 
 #### Defined in
 
-[generator-options.ts:265](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L265)
+[src/generator-options.ts:265](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L265)
 
 ___
 
@@ -170,7 +174,9 @@ ___
 
 Customize how tables are mapped
 
-**`see`** TableMapping
+**`See`**
+
+TableMapping
 
 #### Inherited from
 
@@ -178,7 +184,7 @@ z.TypeOf.tableMapping
 
 #### Defined in
 
-[generator-options.ts:294](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L294)
+[src/generator-options.ts:294](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L294)
 
 ___
 
@@ -189,7 +195,9 @@ ___
 Restrict the generator to process only a subset of tables
 available
 
-**`see`** TableInclusion
+**`See`**
+
+TableInclusion
 
 #### Inherited from
 
@@ -197,4 +205,4 @@ z.TypeOf.tables
 
 #### Defined in
 
-[generator-options.ts:302](https://github.com/lorefnon/ts-sql-codegen/blob/f74fdb7/src/generator-options.ts#L302)
+[src/generator-options.ts:302](https://github.com/lorefnon/ts-sql-codegen/blob/f782de2/src/generator-options.ts#L302)
