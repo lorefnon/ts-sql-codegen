@@ -29,6 +29,6 @@ z.TypeOf.importPath
 
 #### Defined in
 
-[src/generator-options.ts:201](https://github.com/lorefnon/ts-sql-codegen/blob/d0ec6e0/src/generator-options.ts#L201)
+[src/generator-options.ts:201](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L201)
 
-[src/generator-options.ts:201](https://github.com/lorefnon/ts-sql-codegen/blob/d0ec6e0/src/generator-options.ts#L201)
+[src/generator-options.ts:201](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L201)
