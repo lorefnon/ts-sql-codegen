@@ -79,13 +79,14 @@ We intend to keep the customization options that the constructor accepts focusse
 This utility is expected to be used in a database-first workflow, where the developers first plan and implement the database level changes, and then adapt their code for the updated schema.
 
 1. Use a database migration system for versioned database schema evolution. You are free to choose a migration utility that you like (eg. dbmate, liquibase, flyway etc.) - if you are starting out we recommend dbmate, a simple and easy to use solution.
-2. Integrate the following steps into your build lifecycle
+1. Integrate the following steps into your build lifecycle
     1. Use migration utility to update database schema
         eg. `dbmate up`
     1. Dump yaml representation of schema through tbls
         eg. `tbls out postgres://localhost:5432/mydb -t yaml -o schema.yaml`
     1. Generate code using ts-sql-codegen
-        eg. `ts-sql-codegen --schema ./schema.yaml # additional options`
+        eg. `ts-sql-codegen --schema ./schema.yaml --remove-extraneous`
+1. Use generated table mappers in your application
 
 ## Recipies
 
@@ -244,6 +245,12 @@ export class AuthorsTable extends Table<DBConnection, 'ReportingDBAuthorsTable'>
 ```
 
 This option will override the id prefix derived from schema name if `tableMapping.useQualifiedTableName` is true.
+
+#### Remove extraneous files
+
+By default, we don't delete any files. So, if you generate mappers for some tables, and then delete those tables from database, the corresponding mapper files will be left behind.
+
+If you pass `removeExtraneous: true` generator option, we will remove any extraneous files. If you enable this, you will need to ensure that the output directory is used only by ts-sql-codegen and you never add any additional files there yourself.
 
 ## Known Limitations
 

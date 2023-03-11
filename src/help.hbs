@@ -11,16 +11,23 @@ Note:
   - Global installation (npm i -g ts-sql-codegen) can be convenient, but is preferrable
     to have ts-sql-codegen as a project dependency to avoid versioning issues.
 
-Usage: 
+Usage:
 
 After every database schema change:
 
-Step 1: Generate yaml schema file from database using tbls 
+Step 1: Generate yaml schema file from database using tbls
   Example: tbls out postgres://postgres:password@localhost:5432/testdb -t yaml -o schema.yaml
 Step 2: Pass this schema file to ts-sql-codegen
   Example: ts-sql-codegen --schema ./schema.yaml --output-dir ./src/generated --connection-source ./src/db/connection-source
 Above options are default, so you can also just run ts-sql-codegen
 
-Note: 
+Note:
 - All paths are relative to cwd
 
+Additional CLI Options:
+--remove-extraneous Remove extraneous files from output directory which were not generated in last run
+--export-table-instance Export singleton instance of generated table mapper class
+--export-row-types Export row types for mapped tables (See https://ts-sql-query.readthedocs.io/en/stable/advanced-usage/#utility-types)
+--export-values-types Export value types for mapped tables (See https://ts-sql-query.readthedocs.io/en/stable/advanced-usage/#utility-types)
+--export-extracted-columns Set to true to export result of extractColumnsFrom function from ts-sql-query.
+--export-table-classes Set to false to prevent mapper class from being exported
