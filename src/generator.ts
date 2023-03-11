@@ -14,12 +14,8 @@ import {
 import { FileRemover } from "./file-remover";
 import { GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
 import { doesMatchNameOrPattern } from "./matcher";
+import { Logger } from "./logger"
 import { Column, Table, TblsSchema } from "./tbls-types";
-
-type Logger = Record<
-  "debug" | "info" | "warn" | "error",
-  (...args: any[]) => void
->;
 
 register();
 
@@ -107,7 +103,11 @@ export class Generator {
         }
       })
     );
-    await new FileRemover(this.opts, this.writtenFiles).removeExtraneousFiles()
+    await new FileRemover(
+      this.opts,
+      this.writtenFiles,
+      this.logger
+    ).removeExtraneousFiles()
   }
 
   protected shouldProcess(table: Table) {
@@ -256,7 +256,7 @@ export class Generator {
       this.logger.info("---");
     } else {
       this.logger.info(`Writing ${filePath}`);
-      this.writtenFiles.add(filePath);
+      this.writtenFiles.add(path.relative(this.opts.outputDirPath, filePath));
       await fs.writeFile(filePath, output);
     }
   }

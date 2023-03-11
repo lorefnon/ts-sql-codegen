@@ -3,9 +3,14 @@ import { glob } from "glob";
 import path from "path/posix";
 import prompts from "prompts";
 import { GeneratorOpts } from "./generator-options";
+import { Logger } from "./logger"
 
 export class FileRemover {
-    constructor(private opts: GeneratorOpts, private writtenFiles: Set<string>) { }
+    constructor(
+        private opts: GeneratorOpts,
+        private writtenFiles: Set<string>,
+        private logger: Logger
+    ) { }
     public async removeExtraneousFiles() {
         if (!this.opts.removeExtraneous || this.opts.removeExtraneous === 'never') {
             return;
@@ -48,6 +53,9 @@ export class FileRemover {
                 }
             }
         }
-        await Promise.all(pathsToDelete.map(fs.remove))
+        this.logger.info(`Deleting ${pathsToDelete.length} files: `, pathsToDelete.join(', '))
+        await Promise.all(pathsToDelete.map((p) =>
+            fs.remove(path.join(this.opts.outputDirPath, p)))
+        )
     }
 }

@@ -5,7 +5,6 @@ specifiers:
   '@types/glob': ^8.1.0
   '@types/js-yaml': ^4.0.5
   '@types/lodash': ^4.14.191
-  '@types/minimist': ^1.2.2
   '@types/mocha': ^10.0.1
   '@types/node': ^18.15.0
   '@types/pg': ^8.6.6
@@ -18,7 +17,6 @@ specifiers:
   hbs-dedent-helper: ^0.3.0
   js-yaml: ^4.1.0
   lodash: ^4.17.21
-  minimist: ^1.2.8
   mocha: ^10.2.0
   mocha-snap: ^4.3.0
   pg: ^8.10.0
@@ -40,7 +38,6 @@ dependencies:
   hbs-dedent-helper: 0.3.0_handlebars@4.7.7
   js-yaml: 4.1.0
   lodash: 4.17.21
-  minimist: 1.2.8
   prompts: 2.4.2
   ts-pattern: 4.2.1
   zod: 3.21.4
@@ -50,7 +47,6 @@ devDependencies:
   '@types/glob': 8.1.0
   '@types/js-yaml': 4.0.5
   '@types/lodash': 4.14.191
-  '@types/minimist': 1.2.2
   '@types/mocha': 10.0.1
   '@types/node': 18.15.0
   '@types/pg': 8.6.6
@@ -160,10 +156,6 @@ packages:
 
   /@types/minimatch/5.1.2:
     resolution: {integrity: sha512-K0VQKziLUWkVKiRVrx4a40iPaxTUefQmjtkQofBkYRcoaaL/8rhwDWww9qWbrgicNOgnpIsMxyNIUM4+n6dUIA==}
-    dev: true
-
-  /@types/minimist/1.2.2:
-    resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: true
 
   /@types/mocha/10.0.1:

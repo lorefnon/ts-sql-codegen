@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-import minimist from "minimist";
+import { parseArgs } from "util";
 import { ZodError } from "zod";
 import { Generator } from "./generator";
 import fs from "fs/promises";
 import path from "path";
 import Handlebars from "handlebars";
+import { GeneratorOpts } from "./generator-options";
 
 main().catch((e) => {
     console.error(e);
@@ -16,22 +17,44 @@ main().catch((e) => {
 });
 
 async function main() {
-    const argv = minimist(process.argv.slice(2));
-    if (argv.help || argv.h) {
+    const { values: argv } = parseArgs({
+        options: {
+            'help': { type: 'boolean', short: 'h' },
+            'version': { type: 'boolean', short: 'v' },
+            'dry-run': { type: 'boolean' },
+            'schema': { type: 'string', short: 's' },
+            'connection-source': { type: 'string', short: 'c' },
+            'output-dir': { type: 'string', short: 'o' },
+            'remove-extraneous': { type: 'string' },
+            'export-table-instances': { type: 'boolean' },
+            'export-row-types': { type: 'boolean' },
+            'export-table-classes': { type: 'boolean' },
+            'export-values-types': { type: 'boolean' },
+            'export-extracted-columns': { type: 'boolean' }
+        }
+    });
+    if (argv.help) {
         await printHelp();
         return;
     }
-    if (argv.version || argv.v) {
+    if (argv.version) {
         await printVersion();
         return;
     }
     const generator = new Generator({
         dryRun: argv["dry-run"],
-        schemaPath: argv["schema"] ?? argv["s"],
-        connectionSourcePath: argv["connection-source"] ?? argv["c"],
-        outputDirPath: argv["output-dir"] ?? argv["o"],
-        removeExtraneous: argv["remove-extraneous"] ?? "never"
-    });
+        schemaPath: argv["schema"],
+        connectionSourcePath: argv["connection-source"],
+        outputDirPath: argv["output-dir"],
+        removeExtraneous: argv["remove-extraneous"] ?? "never",
+        export: {
+            tableInstances: argv['export-table-instances'],
+            tableClasses: argv['export-table-classes'],
+            rowTypes: argv['export-row-types'],
+            valuesTypes: argv['export-values-types'],
+            extractedColumns: argv['export-extracted-columns']
+        }
+    } as GeneratorOpts);
     await generator.generate();
 }
 

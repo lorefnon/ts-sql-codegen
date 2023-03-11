@@ -245,8 +245,8 @@ describe("Generator", function () {
     await snap(await readAllGenerated());
   });
 
-  it.only("supports removal of extraneous files", async () => {
-    const exPath = path.resolve(path.join(outputDirPath, 'test.md'))
+  it("supports removal of extraneous files", async () => {
+    const exPath = path.resolve(path.join(outputDirPath, 'extra/test.md'))
     await fs.ensureDir(path.dirname(exPath))
     await fs.writeFile(exPath, 'test')
     const generator = new Generator({
