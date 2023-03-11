@@ -84,7 +84,7 @@ export const ExportOptionsSchema = z.object({
     /**
      * Additionally export the extracted columns (Useful for select * queries etc.)
      *
-     * Example: 
+     * Example:
      *     export const tUserCols = extractColumnsFrom(tUser)
      */
     extractedColumns: z.boolean().default(false)
@@ -318,17 +318,31 @@ export const GeneratorOptsSchema = z.object({
 
     /**
      * Customize the naming rules of the generated items
-     * 
+     *
      * See NamingOptions
      */
     naming: NamingOptionsSchema.partial().nullish(),
 
-    /** 
+    /**
      * The fields marked as "custom", "customComparable" or "enum" receive a second generic
      * argument that need to be the same of the db type in the database or redefined for the field
      * If you set to true this property that second generic argument will be generated.
      */
     includeDBTypeWhenIsOptional: z.boolean().nullish(),
+
+    /**
+     * Remove extraneous files after code generation completes - this prevents you from
+     * having to manually clean up files after eg. any table has been deleted, but it is
+     * your responsibility to ensure that the outputDir used solely for files generated through
+     * this utility and all files are written as part of single run.
+     *
+     * Defauls to retaining all extraneous files.
+     */
+    removeExtraneous: z.enum([
+        'never',
+        'interactively',
+        'all'
+    ]).nullish()
 });
 
 /**

@@ -31,7 +31,7 @@ z.TypeOf.columnName
 
 #### Defined in
 
-[src/field-mappings.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L105)
+[src/field-mappings.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L105)
 
 ___
 
@@ -50,13 +50,13 @@ z.TypeOf.columnType
 
 #### Defined in
 
-[src/field-mappings.ts:116](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L116)
+[src/field-mappings.ts:116](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L116)
 
 ___
 
 ### generatedField
 
-• **generatedField**: ``false`` \| { `hasDefault`: `undefined` \| ``null`` \| `boolean` ; `isComputed`: `undefined` \| ``null`` \| `boolean` ; `isOptional`: `undefined` \| ``null`` \| `boolean` ; `name`: `undefined` \| ``null`` \| `string` ; `type`: `undefined` \| ``null`` \| { kind?: "custom" \| "customComparable" \| "enum" \| null \| undefined; dbType?: { name: string; } \| null \| undefined; tsType?: { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| ... 1 more ... \| undefined; name: string; } \| null \| undefined; adapter?: { ...; } \| ......  }
+• **generatedField**: `Object`
 
 Can be used to customize the field name or type mapping
 in the generated field.
@@ -69,7 +69,9 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-[src/field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L124)
+[src/field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L124)
+
+[src/field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L124)
 
 ___
 
@@ -85,4 +87,4 @@ z.TypeOf.tableName
 
 #### Defined in
 
-[src/field-mappings.ts:108](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L108)
+[src/field-mappings.ts:108](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L108)

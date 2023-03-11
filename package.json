@@ -11,7 +11,7 @@
     "build:docs": "typedoc --readme none src/index.ts",
     "copy:templates": "recursive-copy -w src dist -f \"*.hbs\"",
     "clean": "rimraf dist test/generated",
-    "test": "mocha -r ts-node/register -r mocha-snap \"./test/**/*.ts\""
+    "test": "mocha -r ts-node/register -r mocha-snap --extensions ts,js \"./test/**/*.ts\""
   },
   "files": [
     "dist/**/*"
@@ -32,22 +32,24 @@
   "license": "MIT",
   "devDependencies": {
     "@types/fs-extra": "^11.0.1",
+    "@types/glob": "^8.1.0",
     "@types/js-yaml": "^4.0.5",
     "@types/lodash": "^4.14.191",
     "@types/minimist": "^1.2.2",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^18.11.19",
+    "@types/node": "^18.15.0",
     "@types/pg": "^8.6.6",
+    "@types/prompts": "^2.4.2",
     "@types/rimraf": "^3.0.2",
-    "better-sqlite3": "^8.0.1",
+    "better-sqlite3": "^8.2.0",
     "mocha": "^10.2.0",
     "mocha-snap": "^4.3.0",
-    "pg": "^8.9.0",
+    "pg": "^8.10.0",
     "recursive-copy-cli": "^1.0.20",
-    "rimraf": "^4.1.2",
+    "rimraf": "^4.4.0",
     "ts-node": "^10.9.1",
-    "ts-sql-query": "^1.48.0",
-    "typedoc": "^0.23.24",
+    "ts-sql-query": "^1.50.0",
+    "typedoc": "^0.23.26",
     "typedoc-plugin-markdown": "^3.14.0",
     "typescript": "^4.9.5"
   },
@@ -56,12 +58,14 @@
   },
   "dependencies": {
     "fs-extra": "^11.1.0",
+    "glob": "^9.2.1",
     "handlebars": "^4.7.7",
     "hbs-dedent-helper": "^0.3.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
-    "minimist": "^1.2.7",
-    "ts-pattern": "^4.1.3",
-    "zod": "^3.20.2"
+    "minimist": "^1.2.8",
+    "prompts": "^2.4.2",
+    "ts-pattern": "^4.2.1",
+    "zod": "^3.21.4"
   }
 }

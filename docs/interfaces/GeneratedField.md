@@ -34,7 +34,7 @@ z.TypeOf.hasDefault
 
 #### Defined in
 
-[src/field-mappings.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L93)
+[src/field-mappings.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L93)
 
 ___
 
@@ -48,7 +48,7 @@ z.TypeOf.isComputed
 
 #### Defined in
 
-[src/field-mappings.ts:91](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L91)
+[src/field-mappings.ts:91](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L91)
 
 ___
 
@@ -62,7 +62,7 @@ z.TypeOf.isOptional
 
 #### Defined in
 
-[src/field-mappings.ts:92](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L92)
+[src/field-mappings.ts:92](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L92)
 
 ___
 
@@ -76,13 +76,13 @@ z.TypeOf.name
 
 #### Defined in
 
-[src/field-mappings.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L90)
+[src/field-mappings.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L90)
 
 ___
 
 ### type
 
-• **type**: `undefined` \| ``null`` \| { `adapter`: `undefined` \| ``null`` \| { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| null \| undefined; name: string; } ; `dbType`: `undefined` \| ``null`` \| { name: string; } ; `kind`: `undefined` \| ``null`` \| ``"custom"`` \| ``"customComparable"`` \| ``"enum"`` ; `tsType`: `undefined` \| ``null`` \| { importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| null \| undefined; name: string; }  }
+• **type**: `undefined` \| ``null`` \| { `adapter`: `undefined` \| ``null`` \| { name: string; importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| null \| undefined; } ; `dbType`: `undefined` \| ``null`` \| { name: string; } ; `kind`: `undefined` \| ``null`` \| ``"custom"`` \| ``"customComparable"`` \| ``"enum"`` ; `tsType`: `undefined` \| ``null`` \| { name: string; importPath?: string \| null \| undefined; isDefault?: boolean \| null \| undefined; isRelative?: boolean \| null \| undefined; }  }
 
 #### Inherited from
 
@@ -90,4 +90,4 @@ z.TypeOf.type
 
 #### Defined in
 
-[src/field-mappings.ts:89](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/field-mappings.ts#L89)
+[src/field-mappings.ts:89](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/field-mappings.ts#L89)

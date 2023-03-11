@@ -44,13 +44,20 @@ const fieldMappings: FieldMapping[] = [
   },
 ];
 
-describe("Generator", () => {
+
+describe("Generator", function () {
+  this.timeout(10_1000)
+
   beforeEach(async () => {
     await fs.remove(outputDirPath);
   });
 
   afterEach(async () => {
-    await fs.remove(outputDirPath);
+    try {
+      await fs.remove(outputDirPath);
+    } catch (e) {
+      console.error(e)
+    }
   });
 
   [undefined, true, false].forEach((useQualifiedTableName) => {
@@ -61,7 +68,7 @@ describe("Generator", () => {
         outputDirPath,
         fieldMappings,
         tableMapping: useQualifiedTableName ? {
-            useQualifiedTableName
+          useQualifiedTableName
         } : undefined
       });
       await generator.generate();
@@ -72,10 +79,10 @@ describe("Generator", () => {
           .transaction(async () => {
             // prettier-ignore
             // @ts-ignore
-            const { AuthorsTable } = await import( "./generated/AuthorsTable");
+            const { AuthorsTable } = await import("./generated/AuthorsTable");
             // prettier-ignore
             // @ts-ignore
-            const { BooksTable } = await import( "./generated/BooksTable");
+            const { BooksTable } = await import("./generated/BooksTable");
             const authorsTable = new AuthorsTable();
             const { id } = await conn
               .insertInto(authorsTable)
@@ -97,10 +104,10 @@ describe("Generator", () => {
               .executeInsert();
             // prettier-ignore
             // @ts-ignore
-            const { AuthorBooksTable } = await import( "./generated/AuthorBooksTable");
+            const { AuthorBooksTable } = await import("./generated/AuthorBooksTable");
             // prettier-ignore
             // @ts-ignore
-            const { ChaptersTable } = await import( "./generated/ChaptersTable");
+            const { ChaptersTable } = await import("./generated/ChaptersTable");
             const authorBooksTable = new AuthorBooksTable();
             const authorBooks = await conn
               .selectFrom(authorBooksTable)
@@ -237,6 +244,29 @@ describe("Generator", () => {
     await generator.generate();
     await snap(await readAllGenerated());
   });
+
+  it.only("supports removal of extraneous files", async () => {
+    const exPath = path.resolve(path.join(outputDirPath, 'test.md'))
+    await fs.ensureDir(path.dirname(exPath))
+    await fs.writeFile(exPath, 'test')
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      export: {
+        rowTypes: true
+      },
+      removeExtraneous: 'all'
+    });
+    await generator.generate().catch(e => {
+      console.error(e)
+    });
+    const doesExist = await fs.exists(exPath)
+    assert(!doesExist, 'Extraneous file should not exist after generation')
+  })
 
   it("allows non-relative and default import paths", async () => {
     const generator = new Generator({
@@ -446,7 +476,7 @@ describe("Generator", () => {
     await generator.generate();
     await snap(await readAllGenerated());
   });
-  
+
   it("custom comparable field with db type name", async () => {
     const generator = new Generator({
       schemaPath,

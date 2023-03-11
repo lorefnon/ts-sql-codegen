@@ -26,7 +26,7 @@
 
 Additionally export the extracted columns (Useful for select * queries etc.)
 
-Example: 
+Example:
     export const tUserCols = extractColumnsFrom(tUser)
 
 #### Inherited from
@@ -35,7 +35,9 @@ z.TypeOf.extractedColumns
 
 #### Defined in
 
-[src/generator-options.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L90)
+[src/generator-options.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L90)
+
+[src/generator-options.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L90)
 
 ___
 
@@ -68,7 +70,9 @@ z.TypeOf.rowTypes
 
 #### Defined in
 
-[src/generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L59)
+[src/generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L59)
+
+[src/generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L59)
 
 ___
 
@@ -87,7 +91,9 @@ z.TypeOf.tableClasses
 
 #### Defined in
 
-[src/generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L36)
+[src/generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L36)
+
+[src/generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L36)
 
 ___
 
@@ -108,7 +114,9 @@ z.TypeOf.tableInstances
 
 #### Defined in
 
-[src/generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L28)
+[src/generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L28)
+
+[src/generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L28)
 
 ___
 
@@ -141,4 +149,6 @@ z.TypeOf.valuesTypes
 
 #### Defined in
 
-[src/generator-options.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/d38c7e4/src/generator-options.ts#L82)
+[src/generator-options.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L82)
+
+[src/generator-options.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/fc68de2/src/generator-options.ts#L82)

@@ -32,11 +32,11 @@ The code-generation process is highly customizable and almost all the defaults (
   - Global installation (`npm i -g ts-sql-codegen`) can be convenient, but is preferrable
     to have ts-sql-codegen as a project dependency to avoid versioning issues.
 
-## Usage (CLI): 
+## Usage (CLI):
 
 After every database schema change:
 
-**Step 1:** Generate yaml schema file from database using tbls 
+**Step 1:** Generate yaml schema file from database using tbls
 
   **Example:** `tbls out postgres://postgres:password@localhost:5432/testdb -t yaml -o schema.yaml`
 
@@ -44,14 +44,14 @@ After every database schema change:
 
   **Example:** `ts-sql-codegen --schema ./schema.yaml --output-dir ./src/generated --connection-source ./src/db/connection-source`
 
-### Note: 
+### Note:
 
 - All paths are relative to cwd
 - Above options are default, so you can also just run ts-sql-codegen
 
 ## Usage (Programmatic):
 
-Programmatic usage enables a wider set of customization options. 
+Programmatic usage enables a wider set of customization options.
 
 **Example:**
 
@@ -70,7 +70,7 @@ Refer to [Generator](./docs/classes/Generator.md) and [GeneratorOpts](./docs/int
 
 The [test suite](./test/test.ts) also has examples of more complex customizations.
 
-For advanced use-cases (eg. custom templates, pre/post processing of generated code 
+For advanced use-cases (eg. custom templates, pre/post processing of generated code
  and custom logic for table/column/field mapping) it is recommended to extend the Generator class in project.
 We intend to keep the customization options that the constructor accepts focussed on primary common use-cases.
 
@@ -112,7 +112,7 @@ const options = {
 }
 ```
 
-:warning: We don't do anything to ensure that database operations will succeed with included columns. Eg. if any omitted columns are mandatory they will cause inserts to fail. 
+:warning: We don't do anything to ensure that database operations will succeed with included columns. Eg. if any omitted columns are mandatory they will cause inserts to fail.
 
 ### Custom DB types
 
@@ -126,7 +126,7 @@ const options = {
   connectionSourcePath: './connection-source.ts',
   fieldMappings: [
     {
-        // Field matching criteria: 
+        // Field matching criteria:
         //
         // Match any column of any table where column type in database
         // is the class_participation_policy custom type
@@ -134,11 +134,11 @@ const options = {
 
         // For fields matched by above criteria,
         // use the ClassParticipationPolicyAdapter type adapter
-        // which you will have to implement. 
-        // 
+        // which you will have to implement.
+        //
         // The import paths are resolved relative to cwd, and converted
         // to relative paths wrt the generated file
-        // 
+        //
         // Generated code will include an import like this:
         //     import { ClassParticipationPolicyAdapter, ClassParticipationPolicy } from '../adapters';
         generatedField: {
@@ -179,7 +179,7 @@ You can simply run ts-sql-codegen multiple times for different databases/differe
 
 #### Filtering tables by schema
 
-The tbls schema dump contains table names with schema prefix. We can target this prefix in table inclusion criteria: 
+The tbls schema dump contains table names with schema prefix. We can target this prefix in table inclusion criteria:
 
 ```ts
 const options = {
@@ -203,7 +203,7 @@ const options = {
 }
 ```
 
-With this option the output looks like: 
+With this option the output looks like:
 
 ```ts
 export class AuthorsTable extends Table<DBConnection, 'PublicAuthorsTable'> {
@@ -230,7 +230,7 @@ const options = {
 }
 ```
 
-With this option the output looks like: 
+With this option the output looks like:
 
 ```ts
 export class AuthorsTable extends Table<DBConnection, 'ReportingDBAuthorsTable'> {
@@ -256,7 +256,7 @@ This option will override the id prefix derived from schema name if `tableMappin
 
 Thanks for your interest in contributing to this project. Pull requests and feature enhancements are welcome.
 
-This utility is being used in projects with many tables, so backward incompatible changes in generated code are highly undesirable. 
+This utility is being used in projects with many tables, so backward incompatible changes in generated code are highly undesirable.
 
 Feature flags are recommended for aspects which are not beneficial to all/most users.
 

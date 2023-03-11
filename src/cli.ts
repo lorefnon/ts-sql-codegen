@@ -30,6 +30,7 @@ async function main() {
         schemaPath: argv["schema"] ?? argv["s"],
         connectionSourcePath: argv["connection-source"] ?? argv["c"],
         outputDirPath: argv["output-dir"] ?? argv["o"],
+        removeExtraneous: argv["remove-extraneous"] ?? "never"
     });
     await generator.generate();
 }

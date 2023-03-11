@@ -2,17 +2,19 @@ import fs from "fs-extra";
 import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
+import { camelCase, isEmpty, last, memoize, upperFirst } from "lodash";
 import path from "path/posix";
-import { camelCase, memoize, upperFirst, last, isEmpty } from "lodash";
-import { GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
+import { match } from "ts-pattern";
 import {
   fieldMappings,
   GeneratedField,
   GeneratedFieldType,
-  ImportedItem,
+  ImportedItem
 } from "./field-mappings";
+import { FileRemover } from "./file-remover";
+import { GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
+import { doesMatchNameOrPattern } from "./matcher";
 import { Column, Table, TblsSchema } from "./tbls-types";
-import { match } from "ts-pattern";
 
 type Logger = Record<
   "debug" | "info" | "warn" | "error",
@@ -70,6 +72,8 @@ interface ImportTmplInput {
 export class Generator {
   protected opts: GeneratorOpts;
   protected naming: NamingOptions;
+
+  private writtenFiles = new Set<string>()
   public logger: Logger = console;
 
   constructor(opts: GeneratorOpts) {
@@ -103,6 +107,7 @@ export class Generator {
         }
       })
     );
+    await new FileRemover(this.opts, this.writtenFiles).removeExtraneousFiles()
   }
 
   protected shouldProcess(table: Table) {
@@ -125,7 +130,6 @@ export class Generator {
     }
     return true;
   }
-
   protected getTableKind(table: Table): TableKind | null {
     return match(table.type.toLowerCase())
       .with("base table", () => "Table" as const)
@@ -252,6 +256,7 @@ export class Generator {
       this.logger.info("---");
     } else {
       this.logger.info(`Writing ${filePath}`);
+      this.writtenFiles.add(filePath);
       await fs.writeFile(filePath, output);
     }
   }
@@ -575,25 +580,5 @@ export class Generator {
   }
 }
 
-const doesMatchNameOrPattern = (
-  matcher: undefined | null | string | RegExp,
-  target: string
-) => {
-  if (matcher == null) return true;
-  if (typeof matcher === "string") {
-    const matcherParts = matcher.split(".");
-    const targetParts = target.split(".");
-    for (let i = 0; i < matcherParts.length; i++) {
-      if (
-        targetParts[targetParts.length - 1 - i] !==
-        matcherParts[matcherParts.length - 1 - i]
-      ) {
-        return false;
-      }
-    }
-    return true;
-  }
-  return target.match(matcher);
-};
 
 type TableKind = "Table" | "View"
