@@ -87,7 +87,19 @@ export const ExportOptionsSchema = z.object({
      * Example:
      *     export const tUserCols = extractColumnsFrom(tUser)
      */
-    extractedColumns: z.boolean().default(false)
+    extractedColumns: z.boolean().default(false),
+
+    /**
+     * Additionally export a column types mapping useful for constructing filter type
+     * for dynamic conditions.
+     *
+     * Example:
+     *     export type UserCols = {
+     *         id: 'int'
+     *         name: 'string'
+     *     }
+     */
+    columnTypeMappingInterface: z.boolean().default(false)
 });
 
 export interface ExportOptions extends z.TypeOf<typeof ExportOptionsSchema> {}
@@ -189,6 +201,8 @@ export const NamingOptionsSchema = z.object({
      * Suffix to be used in the name of the const with the column list of a view
      */
     viewColumnsNameSuffix: z.string().default('Cols'),
+
+    columnTypeMappingInterfaceNameSuffix: z.string().default('Cols')
 });
 
 export interface NamingOptions extends z.TypeOf<typeof NamingOptionsSchema> {}

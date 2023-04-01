@@ -369,7 +369,7 @@ describe("Generator", function () {
     await snap(await readAllGenerated());
   });
 
-  it("valid import on inner folder", async () => {
+  it("generates valid import on inner folder", async () => {
     const generator = new Generator({
       schemaPath,
       connectionSourcePath,
@@ -401,7 +401,7 @@ describe("Generator", function () {
     await snap(await readAllGenerated());
   });
 
-  it("customizing naming", async () => {
+  it("allows customizing naming", async () => {
     const generator = new Generator({
       schemaPath,
       connectionSourcePath,
@@ -445,7 +445,7 @@ describe("Generator", function () {
     await snap(await readAllGenerated());
   });
 
-  it("custom comparable field", async () => {
+  it("supports custom comparable field", async () => {
     const generator = new Generator({
       schemaPath,
       connectionSourcePath,
@@ -477,7 +477,7 @@ describe("Generator", function () {
     await snap(await readAllGenerated());
   });
 
-  it("custom comparable field with db type name", async () => {
+  it("supports custom comparable field with db type name", async () => {
     const generator = new Generator({
       schemaPath,
       connectionSourcePath,
@@ -509,6 +509,22 @@ describe("Generator", function () {
     await generator.generate();
     await snap(await readAllGenerated());
   });
+
+  it("supports generating column type mappings", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      export: {
+        columnTypeMappingInterface: true
+      }
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  })
 });
 
 const readAllGenerated = async () => {

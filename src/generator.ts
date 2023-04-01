@@ -199,6 +199,7 @@ export class Generator {
     const imports = [...adapterImports, ...typeImports];
     const exportTableClass = this.opts.export?.tableClasses ?? true;
     const exportRowTypes = this.opts.export?.rowTypes ? ({} as any) : false;
+    const exportColMapping = this.opts.export?.columnTypeMappingInterface ? ({} as any) : false
     const pascalName = this.getPascalCasedTableName(tableName);
     if (exportRowTypes !== false) {
       exportRowTypes.selected = this.naming.selectedRowTypeNamePrefix + pascalName + this.naming.selectedRowTypeNameSuffix;
@@ -214,6 +215,9 @@ export class Generator {
         exportValuesTypes.insertable = this.naming.insertableValuesTypeNamePrefix + pascalName + this.naming.insertableValuesTypeNameSuffix;
         exportValuesTypes.updatable = this.naming.updatableValuesTypeNamePrefix + pascalName + this.naming.updatableValuesTypeNameSuffix;
       }
+    }
+    if (exportColMapping !== false) {
+      exportColMapping.name = pascalName + this.naming.columnTypeMappingInterfaceNameSuffix
     }
     const className = this.getClassNameFromTableName(table.name, tableKind);
     const colSetName = this.opts.export?.extractedColumns
@@ -246,6 +250,7 @@ export class Generator {
       importExtraTypes: exportRowTypes || exportValuesTypes,
       rowTypePrefix,
       colSetName,
+      exportColMapping
     });
     const template = await this.getCompiledTemplate();
     const output = await this.postProcessOutput(template(templateInput), table);

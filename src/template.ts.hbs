@@ -2,7 +2,7 @@
 /**
  * DO NOT EDIT:
  *
- * This file has been auto-generated from database schema using ts-sql-codegen. 
+ * This file has been auto-generated from database schema using ts-sql-codegen.
  * Any changes will be overwritten.
  */
 import { {{table.kind}} } from "ts-sql-query/{{table.kind}}";
@@ -10,19 +10,19 @@ import type { DBConnection } from "{{dbConnectionSource}}";
 {{#if importExtraTypes}}
 import {
     {{#if exportRowTypes.insertable}}
-    InsertableRow, 
+    InsertableRow,
     {{/if}}
     {{#if exportRowTypes.updatable}}
-    UpdatableRow, 
+    UpdatableRow,
     {{/if}}
     {{#if exportRowTypes.selected}}
     SelectedRow,
     {{/if}}
     {{#if exportValuesTypes.insertable}}
-    InsertableValues, 
+    InsertableValues,
     {{/if}}
     {{#if exportValuesTypes.updatable}}
-    UpdatableValues, 
+    UpdatableValues,
     {{/if}}
     {{#if exportValuesTypes.selected}}
     SelectedValues,
@@ -53,7 +53,7 @@ import { extractColumnsFrom } from "ts-sql-query/extras/utils"
 {{/each}}
 
 {{#if table.comment}}
-{{ table.comment }}
+{{table.comment}}
 {{/if}}
 {{#if exportTableClass}}export {{/if}}class {{className}} extends {{table.kind}}<DBConnection, '{{table.idPrefix}}{{className}}'> {
     {{#dedent-by 3 "level"}}
@@ -77,6 +77,13 @@ import { extractColumnsFrom } from "ts-sql-query/extras/utils"
         super('{{table.name}}')
     }
 }
+{{#if exportColMapping}}
+export interface {{exportColMapping.name}} {
+    {{#each fields}}
+    {{name}}: '{{fieldType.dbType.name}}'
+    {{/each}}
+}
+{{/if}}
 
 {{#if instName}}
 export const {{instName}} = new {{className}}();
