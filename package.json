@@ -1,11 +1,12 @@
 {
   "name": "ts-sql-codegen",
-  "version": "3.10.0",
+  "version": "3.10.1",
   "description": "Generates ts-sql-query table mappings from tbls schema output",
   "main": "dist/index.js",
   "bin": "dist/cli.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "prepublishOnly": "pnpm run build",
     "build": "pnpm run build:ts && pnpm run copy:templates && pnpm run build:docs",
     "build:ts": "tsc",
     "build:docs": "typedoc --readme none src/index.ts",
