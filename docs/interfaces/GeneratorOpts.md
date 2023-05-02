@@ -22,6 +22,7 @@ Generator options
 - [includeDBTypeWhenIsOptional](GeneratorOpts.md#includedbtypewhenisoptional)
 - [naming](GeneratorOpts.md#naming)
 - [outputDirPath](GeneratorOpts.md#outputdirpath)
+- [rawContent](GeneratorOpts.md#rawcontent)
 - [removeExtraneous](GeneratorOpts.md#removeextraneous)
 - [schemaPath](GeneratorOpts.md#schemapath)
 - [tableMapping](GeneratorOpts.md#tablemapping)
@@ -44,7 +45,7 @@ z.TypeOf.common
 
 #### Defined in
 
-[src/generator-options.ts:317](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L317)
+[src/generator-options.ts:341](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L341)
 
 ___
 
@@ -60,9 +61,9 @@ z.TypeOf.connectionSourcePath
 
 #### Defined in
 
-[src/generator-options.ts:271](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L271)
+[src/generator-options.ts:295](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L295)
 
-[src/generator-options.ts:271](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L271)
+[src/generator-options.ts:295](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L295)
 
 ___
 
@@ -78,13 +79,13 @@ z.TypeOf.dryRun
 
 #### Defined in
 
-[src/generator-options.ts:262](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L262)
+[src/generator-options.ts:286](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L286)
 
 ___
 
 ### export
 
-• **export**: `undefined` \| ``null`` \| { `extractedColumns`: `undefined` \| `boolean` ; `rowTypes`: `undefined` \| `boolean` ; `tableClasses`: `undefined` \| `boolean` ; `tableInstances`: `undefined` \| `boolean` ; `valuesTypes`: `undefined` \| `boolean`  }
+• **export**: `undefined` \| ``null`` \| { `columnTypeMappingInterface`: `undefined` \| `boolean` ; `extractedColumns`: `undefined` \| `boolean` ; `rowTypes`: `undefined` \| `boolean` ; `tableClasses`: `undefined` \| `boolean` ; `tableInstances`: `undefined` \| `boolean` ; `valuesTypes`: `undefined` \| `boolean`  }
 
 Customize what all entities are exported from generated file
 
@@ -98,7 +99,7 @@ z.TypeOf.export
 
 #### Defined in
 
-[src/generator-options.ts:309](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L309)
+[src/generator-options.ts:333](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L333)
 
 ___
 
@@ -118,7 +119,7 @@ z.TypeOf.fieldMappings
 
 #### Defined in
 
-[src/generator-options.ts:287](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L287)
+[src/generator-options.ts:311](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L311)
 
 ___
 
@@ -136,13 +137,13 @@ z.TypeOf.includeDBTypeWhenIsOptional
 
 #### Defined in
 
-[src/generator-options.ts:331](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L331)
+[src/generator-options.ts:355](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L355)
 
 ___
 
 ### naming
 
-• **naming**: `undefined` \| ``null`` \| { `insertableRowTypeNamePrefix`: `undefined` \| `string` ; `insertableRowTypeNameSuffix`: `undefined` \| `string` ; `insertableValuesTypeNamePrefix`: `undefined` \| `string` ; `insertableValuesTypeNameSuffix`: `undefined` \| `string` ; `selectedRowTypeNamePrefix`: `undefined` \| `string` ; `selectedRowTypeNameSuffix`: `undefined` \| `string` ; `selectedValuesTypeNamePrefix`: `undefined` \| `string` ; `selectedValuesTypeNameSuffix`: `undefined` \| `string` ; `tableClassNamePrefix`: `undefined` \| `string` ; `tableClassNameSuffix`: `undefined` \| `string` ; `tableColumnsNamePrefix`: `undefined` \| `string` ; `tableColumnsNameSuffix`: `undefined` \| `string` ; `tableInstanceNamePrefix`: `undefined` \| `string` ; `tableInstanceNameSuffix`: `undefined` \| `string` ; `updatableRowTypeNamePrefix`: `undefined` \| `string` ; `updatableRowTypeNameSuffix`: `undefined` \| `string` ; `updatableValuesTypeNamePrefix`: `undefined` \| `string` ; `updatableValuesTypeNameSuffix`: `undefined` \| `string` ; `viewClassNamePrefix`: `undefined` \| `string` ; `viewClassNameSuffix`: `undefined` \| `string` ; `viewColumnsNamePrefix`: `undefined` \| `string` ; `viewColumnsNameSuffix`: `undefined` \| `string` ; `viewInstanceNamePrefix`: `undefined` \| `string` ; `viewInstanceNameSuffix`: `undefined` \| `string`  }
+• **naming**: `undefined` \| ``null`` \| { `columnTypeMappingInterfaceNameSuffix`: `undefined` \| `string` ; `insertableRowTypeNamePrefix`: `undefined` \| `string` ; `insertableRowTypeNameSuffix`: `undefined` \| `string` ; `insertableValuesTypeNamePrefix`: `undefined` \| `string` ; `insertableValuesTypeNameSuffix`: `undefined` \| `string` ; `selectedRowTypeNamePrefix`: `undefined` \| `string` ; `selectedRowTypeNameSuffix`: `undefined` \| `string` ; `selectedValuesTypeNamePrefix`: `undefined` \| `string` ; `selectedValuesTypeNameSuffix`: `undefined` \| `string` ; `tableClassNamePrefix`: `undefined` \| `string` ; `tableClassNameSuffix`: `undefined` \| `string` ; `tableColumnsNamePrefix`: `undefined` \| `string` ; `tableColumnsNameSuffix`: `undefined` \| `string` ; `tableInstanceNamePrefix`: `undefined` \| `string` ; `tableInstanceNameSuffix`: `undefined` \| `string` ; `updatableRowTypeNamePrefix`: `undefined` \| `string` ; `updatableRowTypeNameSuffix`: `undefined` \| `string` ; `updatableValuesTypeNamePrefix`: `undefined` \| `string` ; `updatableValuesTypeNameSuffix`: `undefined` \| `string` ; `viewClassNamePrefix`: `undefined` \| `string` ; `viewClassNameSuffix`: `undefined` \| `string` ; `viewColumnsNamePrefix`: `undefined` \| `string` ; `viewColumnsNameSuffix`: `undefined` \| `string` ; `viewInstanceNamePrefix`: `undefined` \| `string` ; `viewInstanceNameSuffix`: `undefined` \| `string`  }
 
 Customize the naming rules of the generated items
 
@@ -154,7 +155,7 @@ z.TypeOf.naming
 
 #### Defined in
 
-[src/generator-options.ts:324](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L324)
+[src/generator-options.ts:348](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L348)
 
 ___
 
@@ -170,9 +171,30 @@ z.TypeOf.outputDirPath
 
 #### Defined in
 
-[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L277)
+[src/generator-options.ts:301](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L301)
 
-[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L277)
+[src/generator-options.ts:301](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L301)
+
+___
+
+### rawContent
+
+• **rawContent**: `undefined` \| ``null`` \| { `after`: `undefined` \| ``null`` \| `string` ; `before`: `undefined` \| ``null`` \| `string`  }
+
+Support injection of raw content in the generated files.
+This is useful for adding things like eslint-ignore, additional exports etc.
+
+**`See`**
+
+RawContent
+
+#### Inherited from
+
+z.TypeOf.rawContent
+
+#### Defined in
+
+[src/generator-options.ts:377](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L377)
 
 ___
 
@@ -193,7 +215,7 @@ z.TypeOf.removeExtraneous
 
 #### Defined in
 
-[src/generator-options.ts:341](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L341)
+[src/generator-options.ts:365](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L365)
 
 ___
 
@@ -209,9 +231,9 @@ z.TypeOf.schemaPath
 
 #### Defined in
 
-[src/generator-options.ts:265](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L265)
+[src/generator-options.ts:289](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L289)
 
-[src/generator-options.ts:265](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L265)
+[src/generator-options.ts:289](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L289)
 
 ___
 
@@ -231,7 +253,7 @@ z.TypeOf.tableMapping
 
 #### Defined in
 
-[src/generator-options.ts:294](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L294)
+[src/generator-options.ts:318](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L318)
 
 ___
 
@@ -252,4 +274,4 @@ z.TypeOf.tables
 
 #### Defined in
 
-[src/generator-options.ts:302](https://github.com/lorefnon/ts-sql-codegen/blob/8ae7772/src/generator-options.ts#L302)
+[src/generator-options.ts:326](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L326)
