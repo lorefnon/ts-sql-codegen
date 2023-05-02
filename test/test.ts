@@ -525,6 +525,23 @@ describe("Generator", function () {
     await generator.generate();
     await snap(await readAllGenerated());
   })
+
+  it("supports injection of raw content in generated files", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      rawContent: {
+        before: `/* eslint-disable */`,
+        after: `/* Generated on: 2020-10-10 */`
+      }
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  })
 });
 
 const readAllGenerated = async () => {

@@ -271,6 +271,16 @@ export const CommonOptionsSchema = z.object({
 
 export interface CommonOptions extends z.TypeOf<typeof CommonOptionsSchema> {}
 
+export const RawContentSchema = z.object({
+    /** Raw content injected before generated code in each file */
+    before: z.string().nullish(),
+
+    /** Raw content injected after generated code in each file */
+    after: z.string().nullish()
+});
+
+export interface RawContent extends z.TypeOf<typeof RawContentSchema> {}
+
 export const GeneratorOptsSchema = z.object({
     /** Simulate the generation and print the outcome without actually modifying any files */
     dryRun: z.boolean().nullish(),
@@ -356,7 +366,15 @@ export const GeneratorOptsSchema = z.object({
         'never',
         'interactively',
         'all'
-    ]).nullish()
+    ]).nullish(),
+
+    /**
+     * Support injection of raw content in the generated files.
+     * This is useful for adding things like eslint-ignore, additional exports etc.
+     *
+     * @see RawContent
+     */
+    rawContent: RawContentSchema.nullish(),
 });
 
 /**

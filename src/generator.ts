@@ -406,7 +406,14 @@ export class Generator {
   }
 
   protected async postProcessOutput(output: string, _table: Table) {
-    return output;
+    const sections = [output];
+    if (this.opts.rawContent?.before) {
+      sections.unshift(this.opts.rawContent.before)
+    }
+    if (this.opts.rawContent?.after) {
+      sections.push(this.opts.rawContent.after)
+    }
+    return sections.join('\n');
   }
 
   protected getClassNameFromTableName(tableName: string, tableKind: TableKind) {
