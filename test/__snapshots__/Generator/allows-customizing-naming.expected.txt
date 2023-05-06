@@ -15,7 +15,9 @@ import {
     UpdatableValues,
     SelectedValues,
 } from "ts-sql-query/extras/types"
-import { extractColumnsFrom } from "ts-sql-query/extras/utils"
+import {
+    extractColumnsFrom,
+} from "ts-sql-query/extras/utils"
 
 class TCPAuthorsTCS extends Table<DBConnection, 'TCPAuthorsTCS'> {
     id = this.primaryKey('id', 'int');
@@ -57,7 +59,9 @@ import {
     UpdatableValues,
     SelectedValues,
 } from "ts-sql-query/extras/types"
-import { extractColumnsFrom } from "ts-sql-query/extras/utils"
+import {
+    extractColumnsFrom,
+} from "ts-sql-query/extras/utils"
 import {
     Genre,
 } from "../helpers/types"
@@ -104,7 +108,9 @@ import {
     UpdatableValues,
     SelectedValues,
 } from "ts-sql-query/extras/types"
-import { extractColumnsFrom } from "ts-sql-query/extras/utils"
+import {
+    extractColumnsFrom,
+} from "ts-sql-query/extras/utils"
 import {
     ChapterMetadataAdapter,
 } from "../helpers/adapters"
@@ -152,7 +158,9 @@ import {
     SelectedRow,
     SelectedValues,
 } from "ts-sql-query/extras/types"
-import { extractColumnsFrom } from "ts-sql-query/extras/utils"
+import {
+    extractColumnsFrom,
+} from "ts-sql-query/extras/utils"
 import {
     Genre,
 } from "../helpers/types"

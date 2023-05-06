@@ -13,6 +13,7 @@
 ### Properties
 
 - [columnTypeMappingInterface](ExportOptions.md#columntypemappinginterface)
+- [crudRepository](ExportOptions.md#crudrepository)
 - [extractedColumns](ExportOptions.md#extractedcolumns)
 - [rowTypes](ExportOptions.md#rowtypes)
 - [tableClasses](ExportOptions.md#tableclasses)
@@ -40,9 +41,29 @@ z.TypeOf.columnTypeMappingInterface
 
 #### Defined in
 
-[src/generator-options.ts:102](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L102)
+[src/generator-options.ts:102](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L102)
 
-[src/generator-options.ts:102](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L102)
+[src/generator-options.ts:102](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L102)
+
+___
+
+### crudRepository
+
+• **crudRepository**: `boolean`
+
+Generate a repository class to simplify common single-table CRUD operations
+
+This is currently only supported for tables having an id column as primary key
+
+#### Inherited from
+
+z.TypeOf.crudRepository
+
+#### Defined in
+
+[src/generator-options.ts:109](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L109)
+
+[src/generator-options.ts:109](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L109)
 
 ___
 
@@ -61,9 +82,9 @@ z.TypeOf.extractedColumns
 
 #### Defined in
 
-[src/generator-options.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L90)
+[src/generator-options.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L90)
 
-[src/generator-options.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L90)
+[src/generator-options.ts:90](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L90)
 
 ___
 
@@ -96,9 +117,9 @@ z.TypeOf.rowTypes
 
 #### Defined in
 
-[src/generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L59)
+[src/generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L59)
 
-[src/generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L59)
+[src/generator-options.ts:59](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L59)
 
 ___
 
@@ -117,9 +138,9 @@ z.TypeOf.tableClasses
 
 #### Defined in
 
-[src/generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L36)
+[src/generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L36)
 
-[src/generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L36)
+[src/generator-options.ts:36](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L36)
 
 ___
 
@@ -140,9 +161,9 @@ z.TypeOf.tableInstances
 
 #### Defined in
 
-[src/generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L28)
+[src/generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L28)
 
-[src/generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L28)
+[src/generator-options.ts:28](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L28)
 
 ___
 
@@ -175,6 +196,6 @@ z.TypeOf.valuesTypes
 
 #### Defined in
 
-[src/generator-options.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L82)
+[src/generator-options.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L82)
 
-[src/generator-options.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/generator-options.ts#L82)
+[src/generator-options.ts:82](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/generator-options.ts#L82)

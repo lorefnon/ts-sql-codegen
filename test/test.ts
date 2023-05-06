@@ -195,6 +195,19 @@ describe("Generator", function () {
     await generator.generate();
     await snap(await readAllGenerated());
   });
+  it("allows exporting crud repositories", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      fieldMappings,
+      export: {
+        crudRepository: true
+      }
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
 
   it("allows omitting specific tables and fields", async () => {
     const generator = new Generator({

@@ -36,4 +36,4 @@ Matching criteria specified as string or regex
 
 #### Defined in
 
-[src/field-mappings.ts:8](https://github.com/lorefnon/ts-sql-codegen/blob/8103e62/src/field-mappings.ts#L8)
+[src/field-mappings.ts:8](https://github.com/lorefnon/ts-sql-codegen/blob/a9c6e02/src/field-mappings.ts#L8)

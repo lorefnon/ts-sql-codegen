@@ -99,7 +99,14 @@ export const ExportOptionsSchema = z.object({
      *         name: 'string'
      *     }
      */
-    columnTypeMappingInterface: z.boolean().default(false)
+    columnTypeMappingInterface: z.boolean().default(false),
+
+    /**
+     * Generate a repository class to simplify common single-table CRUD operations
+     *
+     * This is currently only supported for tables having an id column as primary key
+     */
+    crudRepository: z.boolean().default(false),
 });
 
 export interface ExportOptions extends z.TypeOf<typeof ExportOptionsSchema> {}
@@ -202,7 +209,11 @@ export const NamingOptionsSchema = z.object({
      */
     viewColumnsNameSuffix: z.string().default('Cols'),
 
-    columnTypeMappingInterfaceNameSuffix: z.string().default('Cols')
+    columnTypeMappingInterfaceNameSuffix: z.string().default('Cols'),
+
+    crudRepositoryClassNamePrefix: z.string().default(''),
+
+    crudRepositoryClassNameSuffix: z.string().default('CrudRepo'),
 });
 
 export interface NamingOptions extends z.TypeOf<typeof NamingOptionsSchema> {}
@@ -370,7 +381,7 @@ export const GeneratorOptsSchema = z.object({
 
     /**
      * Support injection of raw content in the generated files.
-     * This is useful for adding things like eslint-ignore, additional exports etc.
+     * This is useful for adding things like eslint-disable, additional exports etc.
      *
      * @see RawContent
      */
