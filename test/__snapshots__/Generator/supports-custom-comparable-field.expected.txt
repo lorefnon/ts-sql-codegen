@@ -7,7 +7,7 @@
  */
 import { View } from "ts-sql-query/View";
 import type { DBConnection } from "../helpers/connection-source";
-import Genre from "./enums/Genre"
+import Genre from "./enums/Genre";
 
 class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
     id = this.optionalColumn('id', 'uuid');
@@ -20,7 +20,7 @@ class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
     authorName = this.optionalColumn('author_name', 'string');
 
     constructor() {
-        super('author_books')
+        super('author_books');
     }
 }
 

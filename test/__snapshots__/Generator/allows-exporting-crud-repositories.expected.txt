@@ -9,7 +9,7 @@ import { View } from "ts-sql-query/View";
 import type { DBConnection } from "../helpers/connection-source";
 import {
     Genre,
-} from "../helpers/types"
+} from "../helpers/types";
 
 export class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
     id = this.optionalColumn('id', 'uuid');
@@ -22,7 +22,7 @@ export class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
     authorName = this.optionalColumn('author_name', 'string');
 
     constructor() {
-        super('author_books')
+        super('author_books');
     }
 }
 
@@ -40,7 +40,10 @@ import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
 import {
     extractColumnsFrom,
-} from "ts-sql-query/extras/utils"
+} from "ts-sql-query/extras/utils";
+import {
+    DynamicCondition,
+} from "ts-sql-query/expressions/dynamicConditionUsingFilters";
 
 export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
     id = this.primaryKey('id', 'int');
@@ -50,12 +53,20 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
     updatedAt = this.columnWithDefaultValue('updated_at', 'localDateTime');
 
     constructor() {
-        super('authors')
+        super('authors');
     }
 }
 
+export type AuthorsCols = {
+    id: 'int'
+    name: 'string'
+    dob: 'localDate'
+    createdAt: 'localDateTime'
+    updatedAt: 'localDateTime'
+}
 
-export type AuthorsTablePk = SelectedValues<AuthorsTable>["id"]
+
+export type AuthorsTablePk = SelectedRow<AuthorsTable>["id"];
 
 export class AuthorsCrudRepo {
     constructor(
@@ -63,54 +74,90 @@ export class AuthorsCrudRepo {
         public table: AuthorsTable,
     ) {}
 
-    tableCols = extractColumnsFrom(this.table)
+    tableCols = extractColumnsFrom(this.table);
+
+    select(conn = this.getConnection()) {
+        return conn.selectFrom(this.table);
+    }
+
+    selectWhere(cond: DynamicCondition<AuthorsCols>, conn = this.getConnection()) {
+        return this.select(conn)
+            .where(conn.dynamicConditionFor(this.tableCols).withValues(cond))
+            .select(this.tableCols)
+            .executeSelectMany();
+    }
+
+    findAll(conn = this.getConnection()) {
+        return this.select(conn)
+            .select(this.tableCols)
+            .executeSelectMany();
+    }
 
     findOneById(id: AuthorsTablePk, conn = this.getConnection()) {
-        return conn.selectFrom(this.table)
+        return this.select(conn)
             .where(this.table.id.equals(id))
             .select(this.tableCols)
             .executeSelectNoneOrOne();
     }
+
     findManyById(idList: AuthorsTablePk[], conn = this.getConnection()) {
-        return conn.selectFrom(this.table)
+        return this.select(conn)
             .where(this.table.id.in(idList))
             .select(this.tableCols)
-            .executeSeletMany();
+            .executeSelectMany();
     }
+
+    insert(conn = this.getConnection()) {
+        return conn.insertInto(this.table);
+    }
+
     insertOne(row: InsertableRow<AuthorsTable>, conn = this.getConnection()) {
-        return conn.insertInto(this.table)
+        return this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
     }
+
     insertMany(rows: InsertableRow<AuthorsTable>[], conn = this.getConnection()) {
-        return conn.insertInto(this.table)
+        return this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
             .executeInsertMany();
     }
+
+    update(conn = this.getConnection()) {
+        return conn.update(this.table);
+    }
+
     updateOneById(id: AuthorsTablePk, update: UpdatableRow<AuthorsTable>, conn = this.getConnection()) {
-        return conn.update(this.table)
+        return this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeUpdateOne();
     }
+
     updateManyById(idList: AuthorsTablePk[], update: UpdatableRow<AuthorsTable>, conn = this.getConnection()) {
-        return conn.update(this.table)
+        return this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeUpdateMany();
     }
+
+    delete(conn = this.getConnection()) {
+        return conn.deleteFrom(this.table);
+    }
+
     deleteOneById(id: AuthorsTablePk, conn = this.getConnection()) {
-        return conn.deleteFrom(this.table)
+        return this.delete(conn)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeDeleteOne();
     }
+
     deleteManyById(idList: AuthorsTablePk[], conn = this.getConnection()) {
-        return conn.deleteFrom(this.table)
+        return this.delete(conn)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeDeleteMany();
@@ -129,10 +176,13 @@ import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
 import {
     extractColumnsFrom,
-} from "ts-sql-query/extras/utils"
+} from "ts-sql-query/extras/utils";
 import {
     Genre,
-} from "../helpers/types"
+} from "../helpers/types";
+import {
+    DynamicCondition,
+} from "ts-sql-query/expressions/dynamicConditionUsingFilters";
 
 export class BooksTable extends Table<DBConnection, 'BooksTable'> {
     id = this.autogeneratedPrimaryKey('id', 'uuid');
@@ -144,12 +194,22 @@ export class BooksTable extends Table<DBConnection, 'BooksTable'> {
     weightGrams = this.optionalColumn('weight_grams', 'double');
 
     constructor() {
-        super('books')
+        super('books');
     }
 }
 
+export type BooksCols = {
+    id: 'uuid'
+    name: 'string'
+    authorId: 'int'
+    releasedAt: 'localDate'
+    timeToRead: 'int'
+    genre: 'genre'
+    weightGrams: 'double'
+}
 
-export type BooksTablePk = SelectedValues<BooksTable>["id"]
+
+export type BooksTablePk = SelectedRow<BooksTable>["id"];
 
 export class BooksCrudRepo {
     constructor(
@@ -157,54 +217,90 @@ export class BooksCrudRepo {
         public table: BooksTable,
     ) {}
 
-    tableCols = extractColumnsFrom(this.table)
+    tableCols = extractColumnsFrom(this.table);
+
+    select(conn = this.getConnection()) {
+        return conn.selectFrom(this.table);
+    }
+
+    selectWhere(cond: DynamicCondition<BooksCols>, conn = this.getConnection()) {
+        return this.select(conn)
+            .where(conn.dynamicConditionFor(this.tableCols).withValues(cond))
+            .select(this.tableCols)
+            .executeSelectMany();
+    }
+
+    findAll(conn = this.getConnection()) {
+        return this.select(conn)
+            .select(this.tableCols)
+            .executeSelectMany();
+    }
 
     findOneById(id: BooksTablePk, conn = this.getConnection()) {
-        return conn.selectFrom(this.table)
+        return this.select(conn)
             .where(this.table.id.equals(id))
             .select(this.tableCols)
             .executeSelectNoneOrOne();
     }
+
     findManyById(idList: BooksTablePk[], conn = this.getConnection()) {
-        return conn.selectFrom(this.table)
+        return this.select(conn)
             .where(this.table.id.in(idList))
             .select(this.tableCols)
-            .executeSeletMany();
+            .executeSelectMany();
     }
+
+    insert(conn = this.getConnection()) {
+        return conn.insertInto(this.table);
+    }
+
     insertOne(row: InsertableRow<BooksTable>, conn = this.getConnection()) {
-        return conn.insertInto(this.table)
+        return this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
     }
+
     insertMany(rows: InsertableRow<BooksTable>[], conn = this.getConnection()) {
-        return conn.insertInto(this.table)
+        return this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
             .executeInsertMany();
     }
+
+    update(conn = this.getConnection()) {
+        return conn.update(this.table);
+    }
+
     updateOneById(id: BooksTablePk, update: UpdatableRow<BooksTable>, conn = this.getConnection()) {
-        return conn.update(this.table)
+        return this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeUpdateOne();
     }
+
     updateManyById(idList: BooksTablePk[], update: UpdatableRow<BooksTable>, conn = this.getConnection()) {
-        return conn.update(this.table)
+        return this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeUpdateMany();
     }
+
+    delete(conn = this.getConnection()) {
+        return conn.deleteFrom(this.table);
+    }
+
     deleteOneById(id: BooksTablePk, conn = this.getConnection()) {
-        return conn.deleteFrom(this.table)
+        return this.delete(conn)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeDeleteOne();
     }
+
     deleteManyById(idList: BooksTablePk[], conn = this.getConnection()) {
-        return conn.deleteFrom(this.table)
+        return this.delete(conn)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeDeleteMany();
@@ -223,13 +319,16 @@ import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
 import {
     extractColumnsFrom,
-} from "ts-sql-query/extras/utils"
+} from "ts-sql-query/extras/utils";
 import {
     ChapterMetadataAdapter,
-} from "../helpers/adapters"
+} from "../helpers/adapters";
 import {
     ChapterMetadata,
-} from "../helpers/types"
+} from "../helpers/types";
+import {
+    DynamicCondition,
+} from "ts-sql-query/expressions/dynamicConditionUsingFilters";
 
 /**
  * Chapters information is only available for books with parseable metadata; Consumers should not assume completeness.
@@ -243,12 +342,21 @@ export class ChaptersTable extends Table<DBConnection, 'ChaptersTable'> {
     description = this.optionalColumn('description', 'string');
 
     constructor() {
-        super('chapters')
+        super('chapters');
     }
 }
 
+export type ChaptersCols = {
+    id: 'int'
+    name: 'string'
+    bookId: 'uuid'
+    metadata: 'jsonb'
+    title: 'string'
+    description: 'string'
+}
 
-export type ChaptersTablePk = SelectedValues<ChaptersTable>["id"]
+
+export type ChaptersTablePk = SelectedRow<ChaptersTable>["id"];
 
 export class ChaptersCrudRepo {
     constructor(
@@ -256,54 +364,90 @@ export class ChaptersCrudRepo {
         public table: ChaptersTable,
     ) {}
 
-    tableCols = extractColumnsFrom(this.table)
+    tableCols = extractColumnsFrom(this.table);
+
+    select(conn = this.getConnection()) {
+        return conn.selectFrom(this.table);
+    }
+
+    selectWhere(cond: DynamicCondition<ChaptersCols>, conn = this.getConnection()) {
+        return this.select(conn)
+            .where(conn.dynamicConditionFor(this.tableCols).withValues(cond))
+            .select(this.tableCols)
+            .executeSelectMany();
+    }
+
+    findAll(conn = this.getConnection()) {
+        return this.select(conn)
+            .select(this.tableCols)
+            .executeSelectMany();
+    }
 
     findOneById(id: ChaptersTablePk, conn = this.getConnection()) {
-        return conn.selectFrom(this.table)
+        return this.select(conn)
             .where(this.table.id.equals(id))
             .select(this.tableCols)
             .executeSelectNoneOrOne();
     }
+
     findManyById(idList: ChaptersTablePk[], conn = this.getConnection()) {
-        return conn.selectFrom(this.table)
+        return this.select(conn)
             .where(this.table.id.in(idList))
             .select(this.tableCols)
-            .executeSeletMany();
+            .executeSelectMany();
     }
+
+    insert(conn = this.getConnection()) {
+        return conn.insertInto(this.table);
+    }
+
     insertOne(row: InsertableRow<ChaptersTable>, conn = this.getConnection()) {
-        return conn.insertInto(this.table)
+        return this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
     }
+
     insertMany(rows: InsertableRow<ChaptersTable>[], conn = this.getConnection()) {
-        return conn.insertInto(this.table)
+        return this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
             .executeInsertMany();
     }
+
+    update(conn = this.getConnection()) {
+        return conn.update(this.table);
+    }
+
     updateOneById(id: ChaptersTablePk, update: UpdatableRow<ChaptersTable>, conn = this.getConnection()) {
-        return conn.update(this.table)
+        return this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeUpdateOne();
     }
+
     updateManyById(idList: ChaptersTablePk[], update: UpdatableRow<ChaptersTable>, conn = this.getConnection()) {
-        return conn.update(this.table)
+        return this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeUpdateMany();
     }
+
+    delete(conn = this.getConnection()) {
+        return conn.deleteFrom(this.table);
+    }
+
     deleteOneById(id: ChaptersTablePk, conn = this.getConnection()) {
-        return conn.deleteFrom(this.table)
+        return this.delete(conn)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeDeleteOne();
     }
+
     deleteManyById(idList: ChaptersTablePk[], conn = this.getConnection()) {
-        return conn.deleteFrom(this.table)
+        return this.delete(conn)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeDeleteMany();

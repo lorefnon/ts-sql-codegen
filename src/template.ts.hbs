@@ -136,6 +136,14 @@ export class {{repo.className}} {
             .executeSelectMany();
     }
     {{/if}}
+    {{#if repo.methods.findAll}}
+
+    {{repo.methods.findAll}}(conn = this.getConnection()) {
+        return this.select(conn)
+            .select(this.tableCols)
+            .executeSelectMany();
+    }
+    {{/if}}
     {{#if repo.methods.findOne}}
 
     {{repo.methods.findOne}}({{pkField.name}}: {{className}}Pk, conn = this.getConnection()) {

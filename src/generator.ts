@@ -275,6 +275,7 @@ export class Generator {
     methods.select = `select`;
     methods.selectWhere = `selectWhere`;
 
+    methods.findAll = `findAll`;
     methods.findOne = `findOneBy${pkFSuffix}`;
     methods.findMany = `findManyBy${pkFSuffix}`;
 

@@ -16,10 +16,11 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
     updatedAt = this.columnWithDefaultValue('updated_at', 'localDateTime');
 
     constructor() {
-        super('authors')
+        super('authors');
     }
 }
-export interface AuthorsCols {
+
+export type AuthorsCols = {
     id: 'int'
     name: 'string'
     dob: 'localDate'
