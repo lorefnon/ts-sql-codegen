@@ -32,7 +32,7 @@ z.TypeOf.customTypes
 
 #### Defined in
 
-[src/generator-options.ts:274](https://github.com/lorefnon/ts-sql-codegen/blob/fa545e4/src/generator-options.ts#L274)
+[src/generator-options.ts:274](https://github.com/lorefnon/ts-sql-codegen/blob/21e0df5/src/generator-options.ts#L274)
 
 ___
 
@@ -50,7 +50,7 @@ z.TypeOf.primaryKey
 
 #### Defined in
 
-[src/generator-options.ts:280](https://github.com/lorefnon/ts-sql-codegen/blob/fa545e4/src/generator-options.ts#L280)
+[src/generator-options.ts:280](https://github.com/lorefnon/ts-sql-codegen/blob/21e0df5/src/generator-options.ts#L280)
 
 ___
 
@@ -68,4 +68,4 @@ z.TypeOf.typeAdapter
 
 #### Defined in
 
-[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/fa545e4/src/generator-options.ts#L277)
+[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/21e0df5/src/generator-options.ts#L277)
