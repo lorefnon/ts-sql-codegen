@@ -80,7 +80,11 @@ import {
 
 export type {{exportColMapping.name}} = {
     {{#each fields}}
+    {{#if fieldType.kind}}
+    {{name}}: ['{{fieldType.kind}}', {{fieldType.tsType.name}}]
+    {{else}}
     {{name}}: '{{fieldType.dbType.name}}'
+    {{/if}}
     {{/each}}
 }
 {{/if}}
