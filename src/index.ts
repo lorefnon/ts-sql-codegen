@@ -13,5 +13,6 @@ export {
     ImportedItem,
     GeneratedFieldType,
     GeneratedField,
+    fieldMappings
 } from "./field-mappings";
 export { Generator } from "./generator";
