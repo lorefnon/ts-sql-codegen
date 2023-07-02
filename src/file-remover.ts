@@ -25,8 +25,7 @@ export class FileRemover {
         let pathsToDelete: string[] = []
         if (this.opts.removeExtraneous === 'all') {
             pathsToDelete = extraneousPaths
-        }
-        else if (this.opts.removeExtraneous === 'interactively') {
+        } else if (this.opts.removeExtraneous === 'interactively') {
             const { selection } = await prompts({
                 type: 'select',
                 name: 'selection',
@@ -40,6 +39,7 @@ export class FileRemover {
             switch (selection) {
                 case '$all': {
                     pathsToDelete = extraneousPaths
+                    break;
                 }
                 case '$pick': {
                     const { candidates } = await prompts({
@@ -50,6 +50,7 @@ export class FileRemover {
                         hint: '- Space to select. Return to submit'
                     })
                     pathsToDelete.push(...candidates)
+                    break;
                 }
             }
         }
