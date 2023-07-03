@@ -33,12 +33,12 @@ class TCPAuthorsTCS extends Table<DBConnection, 'TCPAuthorsTCS'> {
 
 export const TIPAuthorsTIS = new TCPAuthorsTCS();
 
+export type SRPAuthorsSRS = SelectedRow<TCPAuthorsTCS>;
 export type IRPAuthorsIRS = InsertableRow<TCPAuthorsTCS>;
 export type URPAuthorsURS = UpdatableRow<TCPAuthorsTCS>;
-export type SRPAuthorsSRS = SelectedRow<TCPAuthorsTCS>;
+export type SVPAuthorsSVS = SelectedValues<TCPAuthorsTCS>;
 export type IVPAuthorsIVS = InsertableValues<TCPAuthorsTCS>;
 export type UVPAuthorsUVS = UpdatableValues<TCPAuthorsTCS>;
-export type SVPAuthorsSVS = SelectedValues<TCPAuthorsTCS>;
 export const TCsPAuthorsTCsS = extractColumnsFrom(TIPAuthorsTIS);
 
 
@@ -82,12 +82,12 @@ class TCPBooksTCS extends Table<DBConnection, 'TCPBooksTCS'> {
 
 export const TIPBooksTIS = new TCPBooksTCS();
 
+export type SRPBooksSRS = SelectedRow<TCPBooksTCS>;
 export type IRPBooksIRS = InsertableRow<TCPBooksTCS>;
 export type URPBooksURS = UpdatableRow<TCPBooksTCS>;
-export type SRPBooksSRS = SelectedRow<TCPBooksTCS>;
+export type SVPBooksSVS = SelectedValues<TCPBooksTCS>;
 export type IVPBooksIVS = InsertableValues<TCPBooksTCS>;
 export type UVPBooksUVS = UpdatableValues<TCPBooksTCS>;
-export type SVPBooksSVS = SelectedValues<TCPBooksTCS>;
 export const TCsPBooksTCsS = extractColumnsFrom(TIPBooksTIS);
 
 
@@ -136,12 +136,12 @@ class TCPChaptersTCS extends Table<DBConnection, 'TCPChaptersTCS'> {
 
 export const TIPChaptersTIS = new TCPChaptersTCS();
 
+export type SRPChaptersSRS = SelectedRow<TCPChaptersTCS>;
 export type IRPChaptersIRS = InsertableRow<TCPChaptersTCS>;
 export type URPChaptersURS = UpdatableRow<TCPChaptersTCS>;
-export type SRPChaptersSRS = SelectedRow<TCPChaptersTCS>;
+export type SVPChaptersSVS = SelectedValues<TCPChaptersTCS>;
 export type IVPChaptersIVS = InsertableValues<TCPChaptersTCS>;
 export type UVPChaptersUVS = UpdatableValues<TCPChaptersTCS>;
-export type SVPChaptersSVS = SelectedValues<TCPChaptersTCS>;
 export const TCsPChaptersTCsS = extractColumnsFrom(TIPChaptersTIS);
 
 

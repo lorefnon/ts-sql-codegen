@@ -204,7 +204,7 @@ export type BooksCols = {
     authorId: 'int'
     releasedAt: 'localDate'
     timeToRead: 'int'
-    genre: 'genre'
+    genre: ['enum', Genre]
     weightGrams: 'double'
 }
 
@@ -350,7 +350,7 @@ export type ChaptersCols = {
     id: 'int'
     name: 'string'
     bookId: 'uuid'
-    metadata: 'jsonb'
+    metadata: ['custom', ChapterMetadata]
     title: 'string'
     description: 'string'
 }

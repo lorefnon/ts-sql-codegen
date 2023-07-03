@@ -25,7 +25,7 @@ export const ImportedItemSchema = z.object({
     /**
      * Whether this is a relative import
      *
-     * @default true 
+     * @default true
      */
     isRelative: z.boolean().nullish()
 });
@@ -37,7 +37,7 @@ export const ImportedItemSchema = z.object({
  * resolved relative to the cwd from where generator is invoked and
  * then converted to a relative path relative to the generated file
  *
- * Examples: 
+ * Examples:
  *    When generated file is located at src/db/tables/some-table.ts and generator
  *    is run from project root
  *

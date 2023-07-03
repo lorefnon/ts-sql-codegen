@@ -9,24 +9,24 @@ import { {{table.kind}} } from "ts-sql-query/{{table.kind}}";
 import type { DBConnection } from "{{dbConnectionSource}}";
 {{#if importExtraTypes}}
 import {
-    {{#if exportRowTypes.insertable}}
+    {{#if rowTypes.insertable}}
     InsertableRow,
     {{/if}}
-    {{#if exportRowTypes.updatable}}
+    {{#if rowTypes.updatable}}
     UpdatableRow,
     {{/if}}
-    {{#if exportRowTypes.selected}}
+    {{#if rowTypes.selected}}
     SelectedRow,
     {{else if repo}}
     SelectedRow,
     {{/if}}
-    {{#if exportValuesTypes.insertable}}
+    {{#if valuesTypes.insertable}}
     InsertableValues,
     {{/if}}
-    {{#if exportValuesTypes.updatable}}
+    {{#if valuesTypes.updatable}}
     UpdatableValues,
     {{/if}}
-    {{#if exportValuesTypes.selected}}
+    {{#if valuesTypes.selected}}
     SelectedValues,
     {{/if}}
 } from "ts-sql-query/extras/types";
@@ -76,9 +76,9 @@ import {
         super('{{table.name}}');
     }
 }
-{{#if exportColMapping}}
+{{#if colMapping}}
 
-export type {{exportColMapping.name}} = {
+export type {{colMapping.name}} = {
     {{#each fields}}
     {{#if fieldType.kind}}
     {{name}}: ['{{fieldType.kind}}', {{fieldType.tsType.name}}]
@@ -93,24 +93,12 @@ export type {{exportColMapping.name}} = {
 export const {{instName}} = new {{className}}();
 {{/if}}
 
-{{#if exportRowTypes.insertable}}
-export type {{exportRowTypes.insertable}} = InsertableRow<{{className}}>;
-{{/if}}
-{{#if exportRowTypes.updatable}}
-export type {{exportRowTypes.updatable}} = UpdatableRow<{{className}}>;
-{{/if}}
-{{#if exportRowTypes.selected}}
-export type {{exportRowTypes.selected}} = SelectedRow<{{className}}>;
-{{/if}}
-{{#if exportValuesTypes.insertable}}
-export type {{exportValuesTypes.insertable}} = InsertableValues<{{className}}>;
-{{/if}}
-{{#if exportValuesTypes.updatable}}
-export type {{exportValuesTypes.updatable}} = UpdatableValues<{{className}}>;
-{{/if}}
-{{#if exportValuesTypes.selected}}
-export type {{exportValuesTypes.selected}} = SelectedValues<{{className}}>;
-{{/if}}
+{{#each rowTypes}}
+export type {{name}} = {{{expr}}};
+{{/each}}
+{{#each valuesTypes}}
+export type {{name}} = {{{expr}}};
+{{/each}}
 {{#if colSetName}}
 export const {{colSetName}} = extractColumnsFrom({{instName}});
 {{/if}}
@@ -133,7 +121,7 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.selectWhere}}
 
-    selectWhere(cond: DynamicCondition<{{exportColMapping.name}}>, conn = this.getConnection()) {
+    selectWhere(cond: DynamicCondition<{{colMapping.name}}>, conn = this.getConnection()) {
         return this.select(conn)
             .where(conn.dynamicConditionFor(this.tableCols).withValues(cond))
             .select(this.tableCols)

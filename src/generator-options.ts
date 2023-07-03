@@ -1,5 +1,5 @@
 import * as z from "zod";
-import { FieldMappingSchema, StrOrRegExpSchema } from "./field-mappings";
+import { FieldMappingSchema, ImportedItemSchema, StrOrRegExpSchema } from "./field-mappings";
 
 export const TableInclusionSchema = z.object({
     /**
@@ -292,6 +292,11 @@ export const RawContentSchema = z.object({
 
 export interface RawContent extends z.TypeOf<typeof RawContentSchema> {}
 
+export const TypeWrapperSchema = z.object({
+    typeName: StrOrRegExpSchema,
+    wrapper: ImportedItemSchema
+});
+
 export const GeneratorOptsSchema = z.object({
     /** Simulate the generation and print the outcome without actually modifying any files */
     dryRun: z.boolean().nullish(),
@@ -386,6 +391,16 @@ export const GeneratorOptsSchema = z.object({
      * @see RawContent
      */
     rawContent: RawContentSchema.nullish(),
+
+    /**
+     * Wrap inferred types before exporting - this is useful to restrict
+     * the types used for insert/update etc. beyond what the database permits.
+     *
+     * Eg. We can hint that updatedAt must be set whenever record is updated
+     *
+     * @see TypeWapper
+     */
+    typeWrappers: TypeWrapperSchema.array().nullish(),
 });
 
 /**

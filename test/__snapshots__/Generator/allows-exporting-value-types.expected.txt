@@ -26,6 +26,6 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 }
 
 
+export type Authors = SelectedValues<AuthorsTable>;
 export type InsertableAuthors = InsertableValues<AuthorsTable>;
 export type UpdatableAuthors = UpdatableValues<AuthorsTable>;
-export type Authors = SelectedValues<AuthorsTable>;

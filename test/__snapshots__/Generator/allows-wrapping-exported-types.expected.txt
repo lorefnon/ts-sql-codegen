@@ -11,7 +11,16 @@ import {
     InsertableRow,
     UpdatableRow,
     SelectedRow,
+    InsertableValues,
+    UpdatableValues,
+    SelectedValues,
 } from "ts-sql-query/extras/types";
+import {
+    EnforceAuthorInsertProps,
+} from "../type-helpers";
+import {
+    EnforceUpdateProps,
+} from "../type-helpers";
 
 export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
     id = this.primaryKey('id', 'int');
@@ -27,5 +36,8 @@ export class AuthorsTable extends Table<DBConnection, 'AuthorsTable'> {
 
 
 export type AuthorsSRow = SelectedRow<AuthorsTable>;
-export type AuthorsIRow = InsertableRow<AuthorsTable>;
-export type AuthorsURow = UpdatableRow<AuthorsTable>;
+export type AuthorsIRow = EnforceAuthorInsertProps<InsertableRow<AuthorsTable>>;
+export type AuthorsURow = EnforceUpdateProps<UpdatableRow<AuthorsTable>>;
+export type Authors = SelectedValues<AuthorsTable>;
+export type InsertableAuthors = InsertableValues<AuthorsTable>;
+export type UpdatableAuthors = UpdatableValues<AuthorsTable>;

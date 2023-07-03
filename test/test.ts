@@ -555,6 +555,37 @@ describe("Generator", function () {
     await generator.generate();
     await snap(await readAllGenerated());
   })
+
+  it("allows wrapping exported types", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      export: {
+        rowTypes: true,
+        valuesTypes: true,
+      },
+      typeWrappers: [{
+        typeName: /URow$/,
+        wrapper: {
+          name: 'EnforceUpdateProps',
+          importPath: '../type-helpers'
+        }
+      }, {
+        typeName: 'AuthorsIRow',
+        wrapper: {
+          name: 'EnforceAuthorInsertProps',
+          importPath: '../type-helpers'
+        }
+      }]
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  })
+
 });
 
 const readAllGenerated = async () => {

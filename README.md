@@ -100,7 +100,7 @@ const options = {
     tables: {
         // Include only whitelisted tables
         include: [/authors/, "books"],
-        // Similar exclude can be used to blacklist
+        // Similarly exclude can be used to blacklist
     },
     fieldMappings: [
         {

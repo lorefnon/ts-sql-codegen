@@ -4,6 +4,17 @@ export const doesMatchNameOrPattern = (
 ) => {
   if (matcher == null) return true;
   if (typeof matcher === "string") {
+    return matcher === target;
+  }
+  return target.match(matcher);
+};
+
+export const doesMatchNameOrPatternNamespaced = (
+  matcher: undefined | null | string | RegExp,
+  target: string
+) => {
+  if (matcher == null) return true;
+  if (typeof matcher === "string") {
     const matcherParts = matcher.split(".");
     const targetParts = target.split(".");
     for (let i = 0; i < matcherParts.length; i++) {
