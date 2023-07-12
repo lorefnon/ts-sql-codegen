@@ -20,12 +20,18 @@ export const ConstraintSchema = z.object({
     comment: z.string().nullish(),
 });
 
+export const IndexSchema = z.object({
+    name: z.string(),
+    columns: z.string().array()
+});
+
 export const TableSchema = z.object({
     name: z.string(),
     type: z.string(),
     columns: ColumnSchema.array(),
     constraints: ConstraintSchema.array(),
-    comment: z.string().nullish()
+    comment: z.string().nullish(),
+    indexes: IndexSchema.array().nullish(),
 });
 
 export type Table = z.TypeOf<typeof TableSchema>;
