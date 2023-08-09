@@ -2,7 +2,7 @@ import fs from "fs-extra";
 import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
-import { camelCase, isEmpty, last, memoize, upperFirst } from "lodash";
+import { camelCase, compact, defaults, groupBy, isEmpty, last, memoize, omit, upperFirst } from "lodash";
 import path from "path/posix";
 import { match } from "ts-pattern";
 import {
@@ -11,7 +11,7 @@ import {
   GeneratedFieldType,
 } from "./field-mappings";
 import { FileRemover } from "./file-remover";
-import { DecoratorTargetConfig, GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
+import { DecoratorTargetOpts, GeneratorOpts, GeneratorOptsSchema, MutationOutputOpts, NamingOptions, NamingOptionsSchema, RepoIncomingIdOpts, RepoTransformerOpts } from "./generator-options";
 import { doesMatchNameOrPattern, doesMatchNameOrPatternNamespaced } from "./matcher";
 import { Logger } from "./logger"
 import { Column, Table, TblsSchema } from "./tbls-types";
@@ -48,12 +48,15 @@ interface ImportTmplInput {
 
 interface DecoratedItem {
   name?: string
-  decorators?: DecoratorTargetConfig[]
+  decorators?: DecoratorTargetOpts[]
 }
 
 interface RepoInput {
   class: DecoratedItem
+  mutationOutput?: Omit<MutationOutputOpts, "className">
+  transformers?: Omit<RepoTransformerOpts, "className">
   methods: Record<string, DecoratedItem>
+  incomingId: Omit<RepoIncomingIdOpts, "className">
 }
 
 /**
@@ -172,6 +175,7 @@ export class Generator {
     const adapterImports = this.getAdapterImports(filePath, fields);
     const typeImports = this.getTypeImports(filePath, fields, !!repo);
     const utilImports = this.getUtilImports(colSetName, !!repo)
+    const repoImports = this.getRepoImports(repo)
 
     return this.preProcessTemplateInput({
       table: {
@@ -187,6 +191,7 @@ export class Generator {
         ...adapterImports,
         ...typeImports,
         ...wrapperTypeImports,
+        ...repoImports,
       ],
       dbConnectionSource,
       className,
@@ -267,6 +272,26 @@ export class Generator {
     const methodDecorators = this.opts.repos?.decorators?.method
     const methods: Record<string, DecoratedItem> = {};
 
+    const mutationOutput = defaults(omit(this.opts.repos?.mutationOutput?.find(opts =>
+      doesMatchNameOrPattern(opts.className, className)
+    ), "className"), {
+      returnInserted: true,
+      returnUpdated: true,
+      returnDeleted: false
+    })
+
+    const incomingId = this.opts.repos?.incomingId?.find(opts =>
+      doesMatchNameOrPattern(opts.className, className)
+    ) ?? {
+      type: {
+        name: `${this.getTableMapperClassName(tableName, tableKind)}Pk`
+      }
+    }
+
+    const transformers = omit(this.opts.repos?.transformers?.find(opts =>
+      doesMatchNameOrPattern(opts.className, className)
+    ), "className")
+
     methods.select = this.getDecorated({ className, methodName: `select` }, methodDecorators);
     methods.selectWhere = this.getDecorated({ className, methodName: `selectWhere` }, methodDecorators);
 
@@ -293,12 +318,43 @@ export class Generator {
         className,
       }, this.opts.repos?.decorators?.class ?? undefined),
       methods,
+      mutationOutput,
+      transformers,
+      incomingId
     }
+  }
+
+  protected aggregateImported(items: ImportedItem[]): ImportTmplInput[] {
+    return Object.entries(groupBy(items, item => item.importPath))
+      .flatMap(([importPath, imports]) => {
+        return Object
+          .entries(groupBy(imports, it => !!it.isDefault))
+          .map(([isDef, imports]) => {
+            return { importPath, imported: imports.map(it => it.name), isDefault: isDef === 'true' }
+          })
+      })
+  }
+
+  protected getRepoImports(
+    repo?: RepoInput | null
+  ): ImportTmplInput[] {
+    if (!repo) return []
+    const decoratorImports: ImportedItem[] =
+      repo.class.decorators?.map(it => it.decorator) ?? []
+    const methodImports: ImportedItem[] =
+      Object.values(repo.methods).flatMap(it => it.decorators?.map(it => it.decorator) ?? [])
+    const transformerImports: ImportedItem[] =
+      compact(Object.values(repo.transformers ?? {}))
+    return this.aggregateImported(
+      decoratorImports
+        .concat(methodImports)
+        .concat(transformerImports)
+    )
   }
 
   protected getDecorated(
     target: { className?: string, methodName?: string },
-    decorators?: null | DecoratorTargetConfig[]
+    decorators?: null | DecoratorTargetOpts[]
   ): DecoratedItem {
     const relDecorators = decorators?.filter(d => {
       if (target.className && d.className && !doesMatchNameOrPattern(d.className, target.className))

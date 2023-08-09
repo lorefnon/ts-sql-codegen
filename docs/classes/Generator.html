@@ -31,7 +31,7 @@ and custom logic for table/column/field mapping.</p>
 <ul class="tsd-hierarchy">
 <li><span class="target">Generator</span></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L79">src/generator.ts:79</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L82">src/generator.ts:82</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-index-accordion" open><summary class="tsd-accordion-summary tsd-index-summary">
@@ -54,6 +54,7 @@ and custom logic for table/column/field mapping.</p>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading">Methods</h3>
 <div class="tsd-index-list"><a href="Generator.html#accumulateImports" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><g id="icon-2048"><rect fill="var(--color-icon-background)" stroke="#FF4DB8" stroke-width="1.5" x="1" y="1" width="22" height="22" rx="12"></rect><path d="M9.162 16V7.24H10.578L11.514 10.072C11.602 10.328 11.674 10.584 11.73 10.84C11.794 11.088 11.842 11.28 11.874 11.416C11.906 11.28 11.954 11.088 12.018 10.84C12.082 10.584 12.154 10.324 12.234 10.06L13.122 7.24H14.538V16H13.482V12.82C13.482 12.468 13.49 12.068 13.506 11.62C13.53 11.172 13.558 10.716 13.59 10.252C13.622 9.78 13.654 9.332 13.686 8.908C13.726 8.476 13.762 8.1 13.794 7.78L12.366 12.16H11.334L9.894 7.78C9.934 8.092 9.97 8.456 10.002 8.872C10.042 9.28 10.078 9.716 10.11 10.18C10.142 10.636 10.166 11.092 10.182 11.548C10.206 12.004 10.218 12.428 10.218 12.82V16H9.162Z" fill="var(--color-text)"></path></g></svg><span>accumulate<wbr/>Imports</span></a>
+<a href="Generator.html#aggregateImported" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>aggregate<wbr/>Imported</span></a>
 <a href="Generator.html#doesColumnHaveDefault" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>does<wbr/>Column<wbr/>Have<wbr/>Default</span></a>
 <a href="Generator.html#extractTableName" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>extract<wbr/>Table<wbr/>Name</span></a>
 <a href="Generator.html#findPrimaryKey" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>find<wbr/>Primary<wbr/>Key</span></a>
@@ -81,6 +82,7 @@ and custom logic for table/column/field mapping.</p>
 <a href="Generator.html#getOutputFileName" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Output<wbr/>File<wbr/>Name</span></a>
 <a href="Generator.html#getOutputFilePath" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Output<wbr/>File<wbr/>Path</span></a>
 <a href="Generator.html#getPascalCasedTableName" class="tsd-index-link tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Pascal<wbr/>Cased<wbr/>Table<wbr/>Name</span></a>
+<a href="Generator.html#getRepoImports" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Repo<wbr/>Imports</span></a>
 <a href="Generator.html#getRepoInput" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Repo<wbr/>Input</span></a>
 <a href="Generator.html#getRowTypeInputs" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Row<wbr/>Type<wbr/>Inputs</span></a>
 <a href="Generator.html#getRowTypePrefix" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Row<wbr/>Type<wbr/>Prefix</span></a>
@@ -120,7 +122,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">opts</span>: <a href="../interfaces/GeneratorOpts.html" class="tsd-signature-type tsd-kind-interface">GeneratorOpts</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="Generator.html" class="tsd-signature-type tsd-kind-class">Generator</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L86">src/generator.ts:86</a></li></ul></aside></li></ul></section></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L89">src/generator.ts:89</a></li></ul></aside></li></ul></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Properties</h2>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getCompiledTemplate" class="tsd-anchor"></a>
@@ -135,7 +137,7 @@ and custom logic for table/column/field mapping.</p>
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type ">HandlebarsTemplateDelegate</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L99">src/generator.ts:99</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L102">src/generator.ts:102</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getFieldMappings" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Field<wbr/>Mappings</span><a href="#getFieldMappings" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">get<wbr/>Field<wbr/>Mappings</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">columnName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">RegExp</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">columnType</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">RegExp</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">generatedField</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">tableName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">RegExp</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type ">MemoizedFunction</span><span class="tsd-signature-symbol"> = ...</span></div>
@@ -148,7 +150,7 @@ and custom logic for table/column/field mapping.</p>
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">columnName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">RegExp</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">columnType</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">RegExp</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">generatedField</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Object</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">tableName</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">RegExp</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">[]</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L91">src/generator.ts:91</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L94">src/generator.ts:94</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getTemplatePath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Template<wbr/>Path</span><a href="#getTemplatePath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">get<wbr/>Template<wbr/>Path</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type ">MemoizedFunction</span><span class="tsd-signature-symbol"> = ...</span></div>
@@ -161,27 +163,27 @@ and custom logic for table/column/field mapping.</p>
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4></li></ul></li></ul></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L95">src/generator.ts:95</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L98">src/generator.ts:98</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member"><a id="logger" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>logger</span><a href="#logger" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">logger</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Logger</span><span class="tsd-signature-symbol"> = console</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L84">src/generator.ts:84</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L87">src/generator.ts:87</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="naming" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>naming</span><a href="#naming" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">naming</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">NamingOptions</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L81">src/generator.ts:81</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L84">src/generator.ts:84</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="opts" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>opts</span><a href="#opts" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">opts</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/GeneratorOpts.html" class="tsd-signature-type tsd-kind-interface">GeneratorOpts</a></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L80">src/generator.ts:80</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L83">src/generator.ts:83</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="writtenFiles" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>written<wbr/>Files</span><a href="#writtenFiles" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">written<wbr/>Files</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type ">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L83">src/generator.ts:83</a></li></ul></aside></section></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L86">src/generator.ts:86</a></li></ul></aside></section></section>
 <section class="tsd-panel-group tsd-member-group">
 <h2>Methods</h2>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="accumulateImports" class="tsd-anchor"></a>
@@ -198,7 +200,20 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">defaultImports</span>: <span class="tsd-signature-type ">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type ">Set</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L396">src/generator.ts:396</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L452">src/generator.ts:452</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected"><a id="aggregateImported" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>aggregate<wbr/>Imported</span><a href="#aggregateImported" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="tsd-signature tsd-anchor-link" id="aggregateImported.aggregateImported-1"><span class="tsd-kind-call-signature">aggregate<wbr/>Imported</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">items</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span><a href="#aggregateImported.aggregateImported-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><span class="tsd-kind-parameter">items</span>: <a href="../interfaces/ImportedItem.html" class="tsd-signature-type tsd-kind-interface">ImportedItem</a><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L327">src/generator.ts:327</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="doesColumnHaveDefault" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>does<wbr/>Column<wbr/>Have<wbr/>Default</span><a href="#doesColumnHaveDefault" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -226,7 +241,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L607">src/generator.ts:607</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L663">src/generator.ts:663</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="extractTableName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>extract<wbr/>Table<wbr/>Name</span><a href="#extractTableName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -239,7 +254,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">configTableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L724">src/generator.ts:724</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L780">src/generator.ts:780</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="findPrimaryKey" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>find<wbr/>Primary<wbr/>Key</span><a href="#findPrimaryKey" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -265,7 +280,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">comment</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">default</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">extraDef</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">nullable</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L694">src/generator.ts:694</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L750">src/generator.ts:750</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="formatComment" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>format<wbr/>Comment</span><a href="#formatComment" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -278,7 +293,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">comment</span>: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L354">src/generator.ts:354</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L410">src/generator.ts:410</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member"><a id="generate" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><span>generate</span><a href="#generate" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -286,7 +301,7 @@ and custom logic for table/column/field mapping.</p>
 <li class="tsd-description">
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L104">src/generator.ts:104</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L107">src/generator.ts:107</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="generateTableMapper" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>generate<wbr/>Table<wbr/>Mapper</span><a href="#generateTableMapper" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -312,7 +327,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L318">src/generator.ts:318</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L374">src/generator.ts:374</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getAdapterImportPath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Adapter<wbr/>Import<wbr/>Path</span><a href="#getAdapterImportPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -327,7 +342,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">outputFilePath</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L481">src/generator.ts:481</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L537">src/generator.ts:537</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getAdapterImports" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Adapter<wbr/>Imports</span><a href="#getAdapterImports" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -342,7 +357,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">fields</span>: <span class="tsd-signature-type ">FieldTmplInput</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L377">src/generator.ts:377</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L433">src/generator.ts:433</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="getCamelCasedTableName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>get<wbr/>Camel<wbr/>Cased<wbr/>Table<wbr/>Name</span><a href="#getCamelCasedTableName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-private">
@@ -355,7 +370,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L576">src/generator.ts:576</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L632">src/generator.ts:632</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getColMappingInput" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Col<wbr/>Mapping<wbr/>Input</span><a href="#getColMappingInput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -370,7 +385,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">didGenerateRepo</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L857">src/generator.ts:857</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L913">src/generator.ts:913</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getColMappingObjName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Col<wbr/>Mapping<wbr/>Obj<wbr/>Name</span><a href="#getColMappingObjName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -383,7 +398,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L764">src/generator.ts:764</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L820">src/generator.ts:820</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getColSetName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Col<wbr/>Set<wbr/>Name</span><a href="#getColSetName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -398,7 +413,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableKind</span>: <span class="tsd-signature-type ">TableKind</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L845">src/generator.ts:845</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L901">src/generator.ts:901</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getColumnsObjectName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Columns<wbr/>Object<wbr/>Name</span><a href="#getColumnsObjectName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -413,7 +428,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableKind</span>: <span class="tsd-signature-type ">TableKind</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L550">src/generator.ts:550</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L606">src/generator.ts:606</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getConnectionSourceImportPath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Connection<wbr/>Source<wbr/>Import<wbr/>Path</span><a href="#getConnectionSourceImportPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -426,7 +441,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">outputFilePath</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L366">src/generator.ts:366</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L422">src/generator.ts:422</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getCrudRepoName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Crud<wbr/>Repo<wbr/>Name</span><a href="#getCrudRepoName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -439,7 +454,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L516">src/generator.ts:516</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L572">src/generator.ts:572</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getDecorated" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Decorated</span><a href="#getDecorated" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -456,10 +471,10 @@ and custom logic for table/column/field mapping.</p>
 <li class="tsd-parameter">
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-property">method<wbr/>Name</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span></h5></li></ul></li>
 <li>
-<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">decorators</span>: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">DecoratorTargetConfig</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">decorators</span>: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">DecoratorTargetOpts</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">DecoratedItem</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L299">src/generator.ts:299</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L355">src/generator.ts:355</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getFieldInput" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Field<wbr/>Input</span><a href="#getFieldInput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -521,7 +536,7 @@ and custom logic for table/column/field mapping.</p>
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L216">src/generator.ts:216</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L221">src/generator.ts:221</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getFieldNameForColumn" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Field<wbr/>Name<wbr/>For<wbr/>Column</span><a href="#getFieldNameForColumn" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -549,7 +564,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L638">src/generator.ts:638</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L694">src/generator.ts:694</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getFieldType" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Field<wbr/>Type</span><a href="#getFieldType" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -577,7 +592,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../interfaces/GeneratedFieldType.html" class="tsd-signature-type tsd-kind-interface">GeneratedFieldType</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L652">src/generator.ts:652</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L708">src/generator.ts:708</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getFieldsInput" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Fields<wbr/>Input</span><a href="#getFieldsInput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -605,7 +620,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">pkCol</span>: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">comment</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">default</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">extraDef</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">nullable</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">FieldTmplInput</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L208">src/generator.ts:208</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L213">src/generator.ts:213</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getIdPrefix" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Id<wbr/>Prefix</span><a href="#getIdPrefix" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -631,7 +646,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L342">src/generator.ts:342</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L398">src/generator.ts:398</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getImportPathForOutputPath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Import<wbr/>Path<wbr/>For<wbr/>Output<wbr/>Path</span><a href="#getImportPathForOutputPath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -648,7 +663,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">importedItem</span>: <a href="../interfaces/ImportedItem.html" class="tsd-signature-type tsd-kind-interface">ImportedItem</a></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L464">src/generator.ts:464</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L520">src/generator.ts:520</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getInsertableRowTypeName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Insertable<wbr/>Row<wbr/>Type<wbr/>Name</span><a href="#getInsertableRowTypeName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -661,7 +676,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L734">src/generator.ts:734</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L790">src/generator.ts:790</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getInsertableValuesTypeName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Insertable<wbr/>Values<wbr/>Type<wbr/>Name</span><a href="#getInsertableValuesTypeName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -674,7 +689,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L752">src/generator.ts:752</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L808">src/generator.ts:808</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getOutputFileName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Output<wbr/>File<wbr/>Name</span><a href="#getOutputFileName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -702,7 +717,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableKind</span>: <span class="tsd-signature-type ">TableKind</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L690">src/generator.ts:690</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L746">src/generator.ts:746</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getOutputFilePath" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Output<wbr/>File<wbr/>Path</span><a href="#getOutputFilePath" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -730,7 +745,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableKind</span>: <span class="tsd-signature-type ">TableKind</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L685">src/generator.ts:685</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L741">src/generator.ts:741</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-private"><a id="getPascalCasedTableName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagPrivate">Private</code> <span>get<wbr/>Pascal<wbr/>Cased<wbr/>Table<wbr/>Name</span><a href="#getPascalCasedTableName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-private">
@@ -743,7 +758,20 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L572">src/generator.ts:572</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L628">src/generator.ts:628</a></li></ul></aside></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected"><a id="getRepoImports" class="tsd-anchor"></a>
+<h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Repo<wbr/>Imports</span><a href="#getRepoImports" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="tsd-signature tsd-anchor-link" id="getRepoImports.getRepoImports-1"><span class="tsd-kind-call-signature">get<wbr/>Repo<wbr/>Imports</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">repo</span><span class="tsd-signature-symbol">?</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span><a href="#getRepoImports.getRepoImports-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></li>
+<li class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li>
+<h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">repo</span>: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">RepoInput</span></h5></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L338">src/generator.ts:338</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getRepoInput" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Repo<wbr/>Input</span><a href="#getRepoInput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -760,7 +788,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">pkField</span>: <span class="tsd-signature-type ">FieldTmplInput</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">RepoInput</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L259">src/generator.ts:259</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L264">src/generator.ts:264</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getRowTypeInputs" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Row<wbr/>Type<wbr/>Inputs</span><a href="#getRowTypeInputs" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -779,7 +807,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">imports</span>: <span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L785">src/generator.ts:785</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L841">src/generator.ts:841</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getRowTypePrefix" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Row<wbr/>Type<wbr/>Prefix</span><a href="#getRowTypePrefix" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -792,7 +820,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L534">src/generator.ts:534</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L590">src/generator.ts:590</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getSelectedRowTypeName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Selected<wbr/>Row<wbr/>Type<wbr/>Name</span><a href="#getSelectedRowTypeName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -805,7 +833,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L728">src/generator.ts:728</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L784">src/generator.ts:784</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getSelectedValuesTypeName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Selected<wbr/>Values<wbr/>Type<wbr/>Name</span><a href="#getSelectedValuesTypeName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -818,7 +846,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L746">src/generator.ts:746</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L802">src/generator.ts:802</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getTableKind" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Table<wbr/>Kind</span><a href="#getTableKind" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -844,7 +872,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type ">TableKind</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L145">src/generator.ts:145</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L148">src/generator.ts:148</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getTableMapperClassName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Table<wbr/>Mapper<wbr/>Class<wbr/>Name</span><a href="#getTableMapperClassName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -859,7 +887,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableKind</span>: <span class="tsd-signature-type ">TableKind</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L522">src/generator.ts:522</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L578">src/generator.ts:578</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getTableMapperInstName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Table<wbr/>Mapper<wbr/>Inst<wbr/>Name</span><a href="#getTableMapperInstName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -874,7 +902,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableKind</span>: <span class="tsd-signature-type ">TableKind</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L851">src/generator.ts:851</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L907">src/generator.ts:907</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getTableMapperInstanceName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Table<wbr/>Mapper<wbr/>Instance<wbr/>Name</span><a href="#getTableMapperInstanceName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -889,7 +917,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableKind</span>: <span class="tsd-signature-type ">TableKind</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L538">src/generator.ts:538</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L594">src/generator.ts:594</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getTableTemplateInput" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Table<wbr/>Template<wbr/>Input</span><a href="#getTableTemplateInput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -919,7 +947,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">filePath</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L153">src/generator.ts:153</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L156">src/generator.ts:156</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getTypeImports" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Type<wbr/>Imports</span><a href="#getTypeImports" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -936,7 +964,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">generateRepo</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L416">src/generator.ts:416</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L472">src/generator.ts:472</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getTypeWrapper" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Type<wbr/>Wrapper</span><a href="#getTypeWrapper" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -949,7 +977,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">typeName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span><br/><span>    </span><span class="tsd-kind-property">importPath</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">isDefault</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">isRelative</span><span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">; </span><br/><span>    </span><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span><br/><span class="tsd-signature-symbol">}</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L716">src/generator.ts:716</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L772">src/generator.ts:772</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getUpdatableRowTypeName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Updatable<wbr/>Row<wbr/>Type<wbr/>Name</span><a href="#getUpdatableRowTypeName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -962,7 +990,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L740">src/generator.ts:740</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L796">src/generator.ts:796</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getUpdatableValuesTypeName" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Updatable<wbr/>Values<wbr/>Type<wbr/>Name</span><a href="#getUpdatableValuesTypeName" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -975,7 +1003,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">tableName</span>: <span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L758">src/generator.ts:758</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L814">src/generator.ts:814</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getUtilImports" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Util<wbr/>Imports</span><a href="#getUtilImports" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -990,7 +1018,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">generateRepo</span>: <span class="tsd-signature-type">boolean</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L452">src/generator.ts:452</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L508">src/generator.ts:508</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getValuesTypeInputs" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Values<wbr/>Type<wbr/>Inputs</span><a href="#getValuesTypeInputs" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1009,7 +1037,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">imports</span>: <span class="tsd-signature-type ">ImportTmplInput</span><span class="tsd-signature-symbol">[]</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L816">src/generator.ts:816</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L872">src/generator.ts:872</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="getWrappedTypeInput" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>get<wbr/>Wrapped<wbr/>Type<wbr/>Input</span><a href="#getWrappedTypeInput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1031,7 +1059,7 @@ and custom logic for table/column/field mapping.</p>
 <li class="tsd-parameter">
 <h5><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L768">src/generator.ts:768</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L824">src/generator.ts:824</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="isColumnComputed" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>is<wbr/>Column<wbr/>Computed</span><a href="#isColumnComputed" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1059,7 +1087,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L623">src/generator.ts:623</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L679">src/generator.ts:679</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="isColumnOmitted" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>is<wbr/>Column<wbr/>Omitted</span><a href="#isColumnOmitted" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1087,7 +1115,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L580">src/generator.ts:580</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L636">src/generator.ts:636</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="isColumnOptional" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>is<wbr/>Column<wbr/>Optional</span><a href="#isColumnOptional" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1115,7 +1143,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L591">src/generator.ts:591</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L647">src/generator.ts:647</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="postProcessOutput" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>post<wbr/>Process<wbr/>Output</span><a href="#postProcessOutput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1143,7 +1171,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L505">src/generator.ts:505</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L561">src/generator.ts:561</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="preProcessTemplateInput" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>pre<wbr/>Process<wbr/>Template<wbr/>Input</span><a href="#preProcessTemplateInput" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1156,7 +1184,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-parameter">input</span>: <span class="tsd-signature-type">any</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type ">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L501">src/generator.ts:501</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L557">src/generator.ts:557</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="shouldProcess" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>should<wbr/>Process</span><a href="#shouldProcess" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1182,7 +1210,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><span class="tsd-kind-property">type</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></h5></li></ul></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L124">src/generator.ts:124</a></li></ul></aside></li></ul></section>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L127">src/generator.ts:127</a></li></ul></aside></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected"><a id="wrapType" class="tsd-anchor"></a>
 <h3 class="tsd-anchor-link"><code class="tsd-tag ts-flagProtected">Protected</code> <span>wrap<wbr/>Type</span><a href="#wrapType" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24"><use href="#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -1197,7 +1225,7 @@ and custom logic for table/column/field mapping.</p>
 <h5><code class="tsd-tag ts-flagOptional">Optional</code> <span class="tsd-kind-parameter">wrapper</span>: <span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/b7da636/src/generator.ts#L711">src/generator.ts:711</a></li></ul></aside></li></ul></section></section></div>
+<li>Defined in <a href="https://github.com/lorefnon/ts-sql-codegen/blob/32f7480/src/generator.ts#L767">src/generator.ts:767</a></li></ul></aside></li></ul></section></section></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -1226,6 +1254,7 @@ and custom logic for table/column/field mapping.</p>
 <li><a href="#opts" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>opts</span></a></li>
 <li><a href="#writtenFiles" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-1024"></use></svg><span>written<wbr/>Files</span></a></li>
 <li><a href="#accumulateImports" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>accumulate<wbr/>Imports</span></a></li>
+<li><a href="#aggregateImported" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>aggregate<wbr/>Imported</span></a></li>
 <li><a href="#doesColumnHaveDefault" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>does<wbr/>Column<wbr/>Have<wbr/>Default</span></a></li>
 <li><a href="#extractTableName" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>extract<wbr/>Table<wbr/>Name</span></a></li>
 <li><a href="#findPrimaryKey" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>find<wbr/>Primary<wbr/>Key</span></a></li>
@@ -1253,6 +1282,7 @@ and custom logic for table/column/field mapping.</p>
 <li><a href="#getOutputFileName" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Output<wbr/>File<wbr/>Name</span></a></li>
 <li><a href="#getOutputFilePath" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Output<wbr/>File<wbr/>Path</span></a></li>
 <li><a href="#getPascalCasedTableName" class="tsd-is-private"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Pascal<wbr/>Cased<wbr/>Table<wbr/>Name</span></a></li>
+<li><a href="#getRepoImports" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Repo<wbr/>Imports</span></a></li>
 <li><a href="#getRepoInput" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Repo<wbr/>Input</span></a></li>
 <li><a href="#getRowTypeInputs" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Row<wbr/>Type<wbr/>Inputs</span></a></li>
 <li><a href="#getRowTypePrefix" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24"><use href="#icon-2048"></use></svg><span>get<wbr/>Row<wbr/>Type<wbr/>Prefix</span></a></li>

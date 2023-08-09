@@ -87,80 +87,91 @@ export class AuthorsCrudRepo {
             .executeSelectMany();
     }
 
-    findAll(conn = this.getConnection()) {
-        return this.select(conn)
+    async findAll(conn = this.getConnection()) {
+        const rows = await this.select(conn)
             .select(this.tableCols)
             .executeSelectMany();
+        return rows;
     }
 
-    findOneById(id: AuthorsTablePk, conn = this.getConnection()) {
-        return this.select(conn)
-            .where(this.table.id.equals(id))
+    async findOneById(id: AuthorsTablePk, conn = this.getConnection()) {
+        const row = await this.select(conn)
+            .where(this.table.id.equals(
+                id
+            ))
             .select(this.tableCols)
             .executeSelectNoneOrOne();
+        return row
     }
 
-    findManyById(idList: AuthorsTablePk[], conn = this.getConnection()) {
-        return this.select(conn)
-            .where(this.table.id.in(idList))
+    async findManyById(idList: AuthorsTablePk[], conn = this.getConnection()) {
+        const rows = await this.select(conn)
+            .where(this.table.id.in(
+                idList
+            ))
             .select(this.tableCols)
             .executeSelectMany();
+        return rows;
     }
 
     insert(conn = this.getConnection()) {
         return conn.insertInto(this.table);
     }
 
-    insertOne(row: InsertableRow<AuthorsTable>, conn = this.getConnection()) {
-        return this.insert(conn)
+    async insertOne(row: InsertableRow<AuthorsTable>, conn = this.getConnection()) {
+        const result = await this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
+        return result;
     }
 
-    insertMany(rows: InsertableRow<AuthorsTable>[], conn = this.getConnection()) {
-        return this.insert(conn)
+    async insertMany(rows: InsertableRow<AuthorsTable>[], conn = this.getConnection()) {
+        const result = await this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
             .executeInsertMany();
+        return result;
     }
 
     update(conn = this.getConnection()) {
         return conn.update(this.table);
     }
 
-    updateOneById(id: AuthorsTablePk, update: UpdatableRow<AuthorsTable>, conn = this.getConnection()) {
-        return this.update(conn)
+    async updateOneById(id: AuthorsTablePk, update: UpdatableRow<AuthorsTable>, conn = this.getConnection()) {
+        const result = await this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeUpdateOne();
+        return result;
     }
 
-    updateManyById(idList: AuthorsTablePk[], update: UpdatableRow<AuthorsTable>, conn = this.getConnection()) {
-        return this.update(conn)
+    async updateManyById(idList: AuthorsTablePk[], update: UpdatableRow<AuthorsTable>, conn = this.getConnection()) {
+        const result = await this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeUpdateMany();
+        return result;
     }
 
     delete(conn = this.getConnection()) {
         return conn.deleteFrom(this.table);
     }
 
-    deleteOneById(id: AuthorsTablePk, conn = this.getConnection()) {
-        return this.delete(conn)
+    async deleteOneById(id: AuthorsTablePk, conn = this.getConnection()) {
+        const result = await this.delete(conn)
             .where(this.table.id.equals(id))
-            .returning(this.tableCols)
-            .executeDeleteOne();
+            .executeDelete();
+        return result
     }
 
-    deleteManyById(idList: AuthorsTablePk[], conn = this.getConnection()) {
-        return this.delete(conn)
+    async deleteManyById(idList: AuthorsTablePk[], conn = this.getConnection()) {
+        const result = await this.delete(conn)
             .where(this.table.id.in(idList))
-            .returning(this.tableCols)
-            .executeDeleteMany();
+            .executeDelete();
+        return result;
     }
 }
 
@@ -230,80 +241,91 @@ export class BooksCrudRepo {
             .executeSelectMany();
     }
 
-    findAll(conn = this.getConnection()) {
-        return this.select(conn)
+    async findAll(conn = this.getConnection()) {
+        const rows = await this.select(conn)
             .select(this.tableCols)
             .executeSelectMany();
+        return rows;
     }
 
-    findOneById(id: BooksTablePk, conn = this.getConnection()) {
-        return this.select(conn)
-            .where(this.table.id.equals(id))
+    async findOneById(id: BooksTablePk, conn = this.getConnection()) {
+        const row = await this.select(conn)
+            .where(this.table.id.equals(
+                id
+            ))
             .select(this.tableCols)
             .executeSelectNoneOrOne();
+        return row
     }
 
-    findManyById(idList: BooksTablePk[], conn = this.getConnection()) {
-        return this.select(conn)
-            .where(this.table.id.in(idList))
+    async findManyById(idList: BooksTablePk[], conn = this.getConnection()) {
+        const rows = await this.select(conn)
+            .where(this.table.id.in(
+                idList
+            ))
             .select(this.tableCols)
             .executeSelectMany();
+        return rows;
     }
 
     insert(conn = this.getConnection()) {
         return conn.insertInto(this.table);
     }
 
-    insertOne(row: InsertableRow<BooksTable>, conn = this.getConnection()) {
-        return this.insert(conn)
+    async insertOne(row: InsertableRow<BooksTable>, conn = this.getConnection()) {
+        const result = await this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
+        return result;
     }
 
-    insertMany(rows: InsertableRow<BooksTable>[], conn = this.getConnection()) {
-        return this.insert(conn)
+    async insertMany(rows: InsertableRow<BooksTable>[], conn = this.getConnection()) {
+        const result = await this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
             .executeInsertMany();
+        return result;
     }
 
     update(conn = this.getConnection()) {
         return conn.update(this.table);
     }
 
-    updateOneById(id: BooksTablePk, update: UpdatableRow<BooksTable>, conn = this.getConnection()) {
-        return this.update(conn)
+    async updateOneById(id: BooksTablePk, update: UpdatableRow<BooksTable>, conn = this.getConnection()) {
+        const result = await this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeUpdateOne();
+        return result;
     }
 
-    updateManyById(idList: BooksTablePk[], update: UpdatableRow<BooksTable>, conn = this.getConnection()) {
-        return this.update(conn)
+    async updateManyById(idList: BooksTablePk[], update: UpdatableRow<BooksTable>, conn = this.getConnection()) {
+        const result = await this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeUpdateMany();
+        return result;
     }
 
     delete(conn = this.getConnection()) {
         return conn.deleteFrom(this.table);
     }
 
-    deleteOneById(id: BooksTablePk, conn = this.getConnection()) {
-        return this.delete(conn)
+    async deleteOneById(id: BooksTablePk, conn = this.getConnection()) {
+        const result = await this.delete(conn)
             .where(this.table.id.equals(id))
-            .returning(this.tableCols)
-            .executeDeleteOne();
+            .executeDelete();
+        return result
     }
 
-    deleteManyById(idList: BooksTablePk[], conn = this.getConnection()) {
-        return this.delete(conn)
+    async deleteManyById(idList: BooksTablePk[], conn = this.getConnection()) {
+        const result = await this.delete(conn)
             .where(this.table.id.in(idList))
-            .returning(this.tableCols)
-            .executeDeleteMany();
+            .executeDelete();
+        return result;
     }
 }
 
@@ -377,79 +399,90 @@ export class ChaptersCrudRepo {
             .executeSelectMany();
     }
 
-    findAll(conn = this.getConnection()) {
-        return this.select(conn)
+    async findAll(conn = this.getConnection()) {
+        const rows = await this.select(conn)
             .select(this.tableCols)
             .executeSelectMany();
+        return rows;
     }
 
-    findOneById(id: ChaptersTablePk, conn = this.getConnection()) {
-        return this.select(conn)
-            .where(this.table.id.equals(id))
+    async findOneById(id: ChaptersTablePk, conn = this.getConnection()) {
+        const row = await this.select(conn)
+            .where(this.table.id.equals(
+                id
+            ))
             .select(this.tableCols)
             .executeSelectNoneOrOne();
+        return row
     }
 
-    findManyById(idList: ChaptersTablePk[], conn = this.getConnection()) {
-        return this.select(conn)
-            .where(this.table.id.in(idList))
+    async findManyById(idList: ChaptersTablePk[], conn = this.getConnection()) {
+        const rows = await this.select(conn)
+            .where(this.table.id.in(
+                idList
+            ))
             .select(this.tableCols)
             .executeSelectMany();
+        return rows;
     }
 
     insert(conn = this.getConnection()) {
         return conn.insertInto(this.table);
     }
 
-    insertOne(row: InsertableRow<ChaptersTable>, conn = this.getConnection()) {
-        return this.insert(conn)
+    async insertOne(row: InsertableRow<ChaptersTable>, conn = this.getConnection()) {
+        const result = await this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
+        return result;
     }
 
-    insertMany(rows: InsertableRow<ChaptersTable>[], conn = this.getConnection()) {
-        return this.insert(conn)
+    async insertMany(rows: InsertableRow<ChaptersTable>[], conn = this.getConnection()) {
+        const result = await this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
             .executeInsertMany();
+        return result;
     }
 
     update(conn = this.getConnection()) {
         return conn.update(this.table);
     }
 
-    updateOneById(id: ChaptersTablePk, update: UpdatableRow<ChaptersTable>, conn = this.getConnection()) {
-        return this.update(conn)
+    async updateOneById(id: ChaptersTablePk, update: UpdatableRow<ChaptersTable>, conn = this.getConnection()) {
+        const result = await this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
             .returning(this.tableCols)
             .executeUpdateOne();
+        return result;
     }
 
-    updateManyById(idList: ChaptersTablePk[], update: UpdatableRow<ChaptersTable>, conn = this.getConnection()) {
-        return this.update(conn)
+    async updateManyById(idList: ChaptersTablePk[], update: UpdatableRow<ChaptersTable>, conn = this.getConnection()) {
+        const result = await this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))
             .returning(this.tableCols)
             .executeUpdateMany();
+        return result;
     }
 
     delete(conn = this.getConnection()) {
         return conn.deleteFrom(this.table);
     }
 
-    deleteOneById(id: ChaptersTablePk, conn = this.getConnection()) {
-        return this.delete(conn)
+    async deleteOneById(id: ChaptersTablePk, conn = this.getConnection()) {
+        const result = await this.delete(conn)
             .where(this.table.id.equals(id))
-            .returning(this.tableCols)
-            .executeDeleteOne();
+            .executeDelete();
+        return result
     }
 
-    deleteManyById(idList: ChaptersTablePk[], conn = this.getConnection()) {
-        return this.delete(conn)
+    async deleteManyById(idList: ChaptersTablePk[], conn = this.getConnection()) {
+        const result = await this.delete(conn)
             .where(this.table.id.in(idList))
-            .returning(this.tableCols)
-            .executeDeleteMany();
+            .executeDelete();
+        return result;
     }
 }

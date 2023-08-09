@@ -300,30 +300,59 @@ export const TypeWrapperSchema = z.object({
 
 export interface TypeWrapper extends z.TypeOf<typeof TypeWrapperSchema> { }
 
-export const DecoratorTargetConfigSchema = z.object({
+export const DecoratorTargetOptsSchema = z.object({
     className: StrOrRegExpSchema.nullish(),
     methodName: StrOrRegExpSchema.nullish(),
     decorator: ImportedItemSchema,
     expr: z.string().nullish()
 })
 
-export interface DecoratorTargetConfig extends z.TypeOf<typeof DecoratorTargetConfigSchema> { }
+export interface DecoratorTargetOpts extends z.TypeOf<typeof DecoratorTargetOptsSchema> { }
 
-export const RepoDecoratorsConfigSchema = z.object({
-    /** @see DecoratorTargetConfig */
-    class: DecoratorTargetConfigSchema
+export const RepoDecoratorOptsSchema = z.object({
+    /** @see DecoratorTargetOpts */
+    class: DecoratorTargetOptsSchema
         .omit({ methodName: true })
         .array()
         .nullish(),
-    /** @see DecoratorTargetConfig */
-    method: DecoratorTargetConfigSchema.array().nullish(),
+    /** @see DecoratorTargetOpts */
+    method: DecoratorTargetOptsSchema.array().nullish(),
 })
 
-export interface RepoDecoratorsConfig extends z.TypeOf<typeof RepoDecoratorsConfigSchema> { }
+export interface RepoDecoratorsOpts extends z.TypeOf<typeof RepoDecoratorOptsSchema> { }
+
+export const RepoTransformerOptsSchema = z.object({
+    className: StrOrRegExpSchema.nullish(),
+    incomingId: ImportedItemSchema.nullish(),
+    incomingInsertableRow: ImportedItemSchema.nullish(),
+    incomingRowUpdate: ImportedItemSchema.nullish(),
+    outgoingSelectedRow: ImportedItemSchema.nullish()
+})
+
+export interface RepoTransformerOpts extends z.TypeOf<typeof RepoTransformerOptsSchema> { }
+
+export const MutationOutputOptsSchema = z.object({
+    className: StrOrRegExpSchema.nullish(),
+    returnInserted: z.boolean().nullish(),
+    returnUpdated: z.boolean().nullish(),
+    returnDeleted: z.boolean().nullish(),
+})
+
+export interface MutationOutputOpts extends z.TypeOf<typeof MutationOutputOptsSchema> {}
+
+export const RepoIncomingIdOptsSchema = z.object({
+    className: StrOrRegExpSchema.nullish(),
+    type: ImportedItemSchema
+})
+
+export interface RepoIncomingIdOpts extends z.TypeOf<typeof RepoIncomingIdOptsSchema> {}
 
 export const RepoConfigSchema = z.object({
-    /** @see RepoDecoratorsConfig */
-    decorators: RepoDecoratorsConfigSchema
+    /** @see RepoDecoratorsOpts */
+    incomingId: RepoIncomingIdOptsSchema.array().nullish(),
+    decorators: RepoDecoratorOptsSchema.nullish(),
+    transformers: RepoTransformerOptsSchema.array().nullish(),
+    mutationOutput: MutationOutputOptsSchema.array().nullish()
 })
 
 export interface RepoConfig extends z.TypeOf<typeof RepoConfigSchema> { }

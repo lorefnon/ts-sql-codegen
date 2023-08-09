@@ -142,10 +142,15 @@ export class {{repo.class.name}} {
     {{#each repo.methods.findAll.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.findAll.name}}(conn = this.getConnection()) {
-        return this.{{repo.methods.select.name}}(conn)
+    async {{repo.methods.findAll.name}}(conn = this.getConnection()) {
+        const rows = await this.{{repo.methods.select.name}}(conn)
             .select(this.tableCols)
             .executeSelectMany();
+        {{#if repo.transformers.outgoingSelectedRow}}
+        return rows.map({{repo.transformers.outgoingSelectRow.name}});
+        {{else}}
+        return rows;
+        {{/if}}
     }
     {{/if}}
     {{#if repo.methods.findOne}}
@@ -153,11 +158,19 @@ export class {{repo.class.name}} {
     {{#each repo.methods.findOne.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.findOne.name}}({{pkField.name}}: {{className}}Pk, conn = this.getConnection()) {
-        return this.{{repo.methods.select.name}}(conn)
-            .where(this.table.{{pkField.name}}.equals({{pkField.name}}))
+    async {{repo.methods.findOne.name}}({{pkField.name}}: {{repo.incomingId.type.name}}, conn = this.getConnection()) {
+        const row = await this.{{repo.methods.select.name}}(conn)
+            .where(this.table.{{pkField.name}}.equals(
+                {{#if repo.transformers.incomingId}}{{repo.transformers.incomingId.name}}({{pkField.name}})
+                {{else}}{{pkField.name}}
+                {{/if}}
+            ))
             .select(this.tableCols)
             .executeSelectNoneOrOne();
+        {{#if repo.transformers.outgoingSelectedRow}}
+        if (row) return {{repo.transformers.outgoingSelectedRow.name}}(row)
+        {{/if}}
+        return row
     }
     {{/if}}
     {{#if repo.methods.findMany}}
@@ -165,11 +178,20 @@ export class {{repo.class.name}} {
     {{#each repo.methods.findMany.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.findMany.name}}({{pkField.name}}List: {{className}}Pk[], conn = this.getConnection()) {
-        return this.{{repo.methods.select.name}}(conn)
-            .where(this.table.{{pkField.name}}.in({{pkField.name}}List))
+    async {{repo.methods.findMany.name}}({{pkField.name}}List: {{repo.incomingId.type.name}}[], conn = this.getConnection()) {
+        const rows = await this.{{repo.methods.select.name}}(conn)
+            .where(this.table.{{pkField.name}}.in(
+                {{#if repo.transformers.incomingId}}{{pkField.name}}List.map({{repo.transformers.incomingId.name}})
+                {{else}}{{pkField.name}}List
+                {{/if}}
+            ))
             .select(this.tableCols)
             .executeSelectMany();
+        {{#if repo.transformers.outgoingSelectedRow}}
+        return rows.map({{repo.transformers.outgoingSelectRow.name}});
+        {{else}}
+        return rows;
+        {{/if}}
     }
     {{/if}}
     {{#if repo.methods.insert}}
@@ -186,11 +208,21 @@ export class {{repo.class.name}} {
     {{#each repo.methods.insertOne.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.insertOne.name}}(row: InsertableRow<{{className}}>, conn = this.getConnection()) {
-        return this.{{repo.methods.insert.name}}(conn)
+    async {{repo.methods.insertOne.name}}(row: InsertableRow<{{className}}>, conn = this.getConnection()) {
+        const result = await this.{{repo.methods.insert.name}}(conn)
             .set(row)
+            {{#if repo.mutationOutput.returnInserted}}
             .returning(this.tableCols)
             .executeInsertOne();
+            {{else}}
+            .executeInesrt();
+            {{/if}}
+        {{#if repo.mutationOutput.returnInserted}}
+        {{#if repo.transformers.outgoingSelectedRow}}
+        if (result) return {{repo.transformers.outgoingSelectedRow.name}}(result);
+        {{/if}}
+        {{/if}}
+        return result;
     }
     {{/if}}
     {{#if repo.methods.insertMany}}
@@ -198,11 +230,24 @@ export class {{repo.class.name}} {
     {{#each repo.methods.insertMany.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.insertMany.name}}(rows: InsertableRow<{{className}}>[], conn = this.getConnection()) {
-        return this.{{repo.methods.insert.name}}(conn)
+    async {{repo.methods.insertMany.name}}(rows: InsertableRow<{{className}}>[], conn = this.getConnection()) {
+        const result = await this.{{repo.methods.insert.name}}(conn)
             .values(rows)
+            {{#if repo.mutationOutput.returnInserted}}
             .returning(this.tableCols)
             .executeInsertMany();
+            {{else}}
+            .executeInsert();
+            {{/if}}
+        {{#if repo.mutationOutput.returnInserted}}
+        {{#if repo.transformers.outgoingSelectedRow}}
+        return result.map({{repo.transformers.outgoingSelectRow.name}});
+        {{else}}
+        return result;
+        {{/if}}
+        {{else}}
+        return result;
+        {{/if}}
     }
     {{/if}}
     {{#if repo.methods.update}}
@@ -219,12 +264,22 @@ export class {{repo.class.name}} {
     {{#each repo.methods.updateOne.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.updateOne.name}}({{pkField.name}}: {{className}}Pk, update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
-        return this.{{repo.methods.update.name}}(conn)
+    async {{repo.methods.updateOne.name}}({{pkField.name}}: {{className}}Pk, update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
+        const result = await this.{{repo.methods.update.name}}(conn)
             .set(update)
             .where(this.table.{{pkField.name}}.equals({{pkField.name}}))
+            {{#if repo.mutationOutput.returnUpdated}}
             .returning(this.tableCols)
             .executeUpdateOne();
+            {{else}}
+            .executeUpdate();
+            {{/if}}
+        {{#if repo.mutationOutput.returnUpdated}}
+        {{#if repo.transformers.outgoingSelectedRow}}
+        if (result) return {{repo.transformers.outgoingSelectedRow.name}}(result)
+        {{/if}}
+        {{/if}}
+        return result;
     }
     {{/if}}
     {{#if repo.methods.updateMany}}
@@ -232,12 +287,25 @@ export class {{repo.class.name}} {
     {{#each repo.methods.updateMany.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.updateMany.name}}({{pkField.name}}List: {{className}}Pk[], update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
-        return this.{{repo.methods.update.name}}(conn)
+    async {{repo.methods.updateMany.name}}({{pkField.name}}List: {{className}}Pk[], update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
+        const result = await this.{{repo.methods.update.name}}(conn)
             .set(update)
             .where(this.table.{{pkField.name}}.in({{pkField.name}}List))
+            {{#if repo.mutationOutput.returnUpdated}}
             .returning(this.tableCols)
             .executeUpdateMany();
+            {{else}}
+            .executeUpdate();
+            {{/if}}
+        {{#if repo.mutationOutput.returnUpdated}}
+        {{#if repo.transformers.outgoingSelectedRow}}
+        return result.map({{repo.transformers.outgoingSelectRow.name}});
+        {{else}}
+        return result;
+        {{/if}}
+        {{else}}
+        return result;
+        {{/if}}
     }
     {{/if}}
     {{#if repo.methods.delete}}
@@ -254,11 +322,21 @@ export class {{repo.class.name}} {
     {{#each repo.methods.deleteOne.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.deleteOne.name}}({{pkField.name}}: {{className}}Pk, conn = this.getConnection()) {
-        return this.{{repo.methods.delete.name}}(conn)
+    async {{repo.methods.deleteOne.name}}({{pkField.name}}: {{className}}Pk, conn = this.getConnection()) {
+        const result = await this.{{repo.methods.delete.name}}(conn)
             .where(this.table.{{pkField.name}}.equals({{pkField.name}}))
+            {{#if repo.mutationOutput.returnDeleted}}
             .returning(this.tableCols)
             .executeDeleteOne();
+            {{else}}
+            .executeDelete();
+            {{/if}}
+        {{#if repo.mutationOutput.returnDeleted}}
+        {{#if repo.transformers.outgoingSelectedRow}}
+        if (result) return {{repo.transformers.outgoingSelectedRow.name}}(result)
+        {{/if}}
+        {{/if}}
+        return result
     }
     {{/if}}
     {{#if repo.methods.deleteMany}}
@@ -266,11 +344,24 @@ export class {{repo.class.name}} {
     {{#each repo.methods.deleteMany.decorators}}
     {{expr}}
     {{/each}}
-    {{repo.methods.deleteMany.name}}({{pkField.name}}List: {{className}}Pk[], conn = this.getConnection()) {
-        return this.{{repo.methods.delete.name}}(conn)
+    async {{repo.methods.deleteMany.name}}({{pkField.name}}List: {{className}}Pk[], conn = this.getConnection()) {
+        const result = await this.{{repo.methods.delete.name}}(conn)
             .where(this.table.{{pkField.name}}.in({{pkField.name}}List))
+            {{#if repo.mutationOutput.returnDeleted}}
             .returning(this.tableCols)
             .executeDeleteMany();
+            {{else}}
+            .executeDelete();
+            {{/if}}
+        {{#if repo.mutationOutput.returnDeleted}}
+        {{#if repo.transformers.outgoingSelectedRow}}
+        return result.map({{repo.transformers.outgoingSelectRow.name}});
+        {{else}}
+        return result;
+        {{/if}}
+        {{else}}
+        return result;
+        {{/if}}
     }
     {{/if}}
 }
