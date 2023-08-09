@@ -601,7 +601,7 @@ export class Generator {
     if (mapping?.generatedField) {
       return mapping.generatedField.isComputed === true;
     }
-    return false;
+    return !!col.extraDef;
   }
 
   protected getFieldNameForColumn(tableName: string, col: Column) {

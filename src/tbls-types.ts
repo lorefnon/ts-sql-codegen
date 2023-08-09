@@ -6,6 +6,7 @@ export const ColumnSchema = z.object({
     nullable: z.boolean().optional(),
     default: z.any().nullish(),
     comment: z.string().nullish(),
+    extraDef: z.string().nullish(),
 });
 
 export type Column = z.TypeOf<typeof ColumnSchema>;
