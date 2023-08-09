@@ -1,5 +1,6 @@
 import * as z from "zod";
-import { FieldMappingSchema, ImportedItemSchema, StrOrRegExpSchema } from "./field-mappings";
+import { FieldMappingSchema, StrOrRegExpSchema } from "./field-mappings";
+import { ImportedItemSchema } from "./imported-item";
 
 export const TableInclusionSchema = z.object({
     /**
@@ -14,7 +15,7 @@ export const TableInclusionSchema = z.object({
     exclude: StrOrRegExpSchema.array().nullish(),
 });
 
-export interface TableInclusion extends z.TypeOf<typeof TableInclusionSchema> {}
+export interface TableInclusion extends z.TypeOf<typeof TableInclusionSchema> { }
 
 export const ExportOptionsSchema = z.object({
     /**
@@ -109,7 +110,7 @@ export const ExportOptionsSchema = z.object({
     crudRepository: z.boolean().default(false),
 });
 
-export interface ExportOptions extends z.TypeOf<typeof ExportOptionsSchema> {}
+export interface ExportOptions extends z.TypeOf<typeof ExportOptionsSchema> { }
 
 export const NamingOptionsSchema = z.object({
     /**
@@ -216,7 +217,7 @@ export const NamingOptionsSchema = z.object({
     crudRepositoryClassNameSuffix: z.string().default('CrudRepo'),
 });
 
-export interface NamingOptions extends z.TypeOf<typeof NamingOptionsSchema> {}
+export interface NamingOptions extends z.TypeOf<typeof NamingOptionsSchema> { }
 
 export const CommonTypeAdapterOptionsSchema = z.object({
     /**
@@ -227,7 +228,7 @@ export const CommonTypeAdapterOptionsSchema = z.object({
 });
 
 export interface CommonTypeAdapterOptions
-    extends z.TypeOf<typeof CommonTypeAdapterOptionsSchema> {}
+    extends z.TypeOf<typeof CommonTypeAdapterOptionsSchema> { }
 
 export const TableMappingSchema = z.object({
     /**
@@ -241,7 +242,7 @@ export const TableMappingSchema = z.object({
     useQualifiedTableName: z.boolean().nullish(),
 });
 
-export interface TableMapping extends z.TypeOf<typeof TableMappingSchema> {}
+export interface TableMapping extends z.TypeOf<typeof TableMappingSchema> { }
 
 export const CommonPrimaryKeyOptionsSchema = z.object({
     /**
@@ -255,7 +256,7 @@ export const CommonPrimaryKeyOptionsSchema = z.object({
 });
 
 export interface CommonPrimaryKeyOptions
-    extends z.TypeOf<typeof CommonPrimaryKeyOptionsSchema> {}
+    extends z.TypeOf<typeof CommonPrimaryKeyOptionsSchema> { }
 
 export const CommonCustomTypesOptionsSchema = z.object({
     /**
@@ -267,7 +268,7 @@ export const CommonCustomTypesOptionsSchema = z.object({
 });
 
 export interface CommonCustomTypesOptions
-    extends z.TypeOf<typeof CommonCustomTypesOptionsSchema> {}
+    extends z.TypeOf<typeof CommonCustomTypesOptionsSchema> { }
 
 export const CommonOptionsSchema = z.object({
     /** @see CommonCustomTypesOptions */
@@ -280,7 +281,7 @@ export const CommonOptionsSchema = z.object({
     primaryKey: CommonPrimaryKeyOptionsSchema.nullish(),
 });
 
-export interface CommonOptions extends z.TypeOf<typeof CommonOptionsSchema> {}
+export interface CommonOptions extends z.TypeOf<typeof CommonOptionsSchema> { }
 
 export const RawContentSchema = z.object({
     /** Raw content injected before generated code in each file */
@@ -290,12 +291,42 @@ export const RawContentSchema = z.object({
     after: z.string().nullish()
 });
 
-export interface RawContent extends z.TypeOf<typeof RawContentSchema> {}
+export interface RawContent extends z.TypeOf<typeof RawContentSchema> { }
 
 export const TypeWrapperSchema = z.object({
     typeName: StrOrRegExpSchema,
     wrapper: ImportedItemSchema
 });
+
+export interface TypeWrapper extends z.TypeOf<typeof TypeWrapperSchema> { }
+
+export const DecoratorTargetConfigSchema = z.object({
+    className: StrOrRegExpSchema.nullish(),
+    methodName: StrOrRegExpSchema.nullish(),
+    decorator: ImportedItemSchema,
+    expr: z.string().nullish()
+})
+
+export interface DecoratorTargetConfig extends z.TypeOf<typeof DecoratorTargetConfigSchema> { }
+
+export const RepoDecoratorsConfigSchema = z.object({
+    /** @see DecoratorTargetConfig */
+    class: DecoratorTargetConfigSchema
+        .omit({ methodName: true })
+        .array()
+        .nullish(),
+    /** @see DecoratorTargetConfig */
+    method: DecoratorTargetConfigSchema.array().nullish(),
+})
+
+export interface RepoDecoratorsConfig extends z.TypeOf<typeof RepoDecoratorsConfigSchema> { }
+
+export const RepoConfigSchema = z.object({
+    /** @see RepoDecoratorsConfig */
+    decorators: RepoDecoratorsConfigSchema
+})
+
+export interface RepoConfig extends z.TypeOf<typeof RepoConfigSchema> { }
 
 export const GeneratorOptsSchema = z.object({
     /** Simulate the generation and print the outcome without actually modifying any files */
@@ -401,9 +432,11 @@ export const GeneratorOptsSchema = z.object({
      * @see TypeWapper
      */
     typeWrappers: TypeWrapperSchema.array().nullish(),
+
+    repos: RepoConfigSchema.nullish()
 });
 
 /**
  * Generator options
  */
-export interface GeneratorOpts extends z.TypeOf<typeof GeneratorOptsSchema> {}
+export interface GeneratorOpts extends z.TypeOf<typeof GeneratorOptsSchema> { }

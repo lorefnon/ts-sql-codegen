@@ -9,13 +9,13 @@ import {
   fieldMappings,
   GeneratedField,
   GeneratedFieldType,
-  ImportedItem
 } from "./field-mappings";
 import { FileRemover } from "./file-remover";
-import { GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
+import { DecoratorTargetConfig, GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
 import { doesMatchNameOrPattern, doesMatchNameOrPatternNamespaced } from "./matcher";
 import { Logger } from "./logger"
 import { Column, Table, TblsSchema } from "./tbls-types";
+import { ImportedItem } from "./imported-item";
 
 register();
 
@@ -46,9 +46,14 @@ interface ImportTmplInput {
   isDefault: boolean;
 }
 
+interface DecoratedItem {
+  name?: string
+  decorators?: DecoratorTargetConfig[]
+}
+
 interface RepoInput {
-  className: string
-  methods: Record<string, string>
+  class: DecoratedItem
+  methods: Record<string, DecoratedItem>
 }
 
 /**
@@ -254,33 +259,59 @@ export class Generator {
   protected getRepoInput(tableName: string, tableKind: TableKind, pkField?: FieldTmplInput): RepoInput | null {
     if (!pkField) return null;
     if (!this.opts.export?.crudRepository) return null;
+
+    const className = this.getCrudRepoName(tableName)
+
     const pkFSuffix = upperFirst(pkField.name);
 
-    const methods: Record<string, string> = {};
+    const methodDecorators = this.opts.repos?.decorators?.method
+    const methods: Record<string, DecoratedItem> = {};
 
-    methods.select = `select`;
-    methods.selectWhere = `selectWhere`;
+    methods.select = this.getDecorated({ className, methodName: `select` }, methodDecorators);
+    methods.selectWhere = this.getDecorated({ className, methodName: `selectWhere` }, methodDecorators);
 
-    methods.findAll = `findAll`;
-    methods.findOne = `findOneBy${pkFSuffix}`;
-    methods.findMany = `findManyBy${pkFSuffix}`;
+    methods.findAll = this.getDecorated({ className, methodName: `findAll` }, methodDecorators);;
+    methods.findOne = this.getDecorated({ className, methodName: `findOneBy${pkFSuffix}` }, methodDecorators);
+    methods.findMany = this.getDecorated({ className, methodName: `findManyBy${pkFSuffix}` }, methodDecorators);
 
     if (tableKind === 'Table') {
-      methods.insert = `select`;
-      methods.insertOne = `insertOne`;
-      methods.insertMany = `insertMany`;
+      methods.insert = this.getDecorated({ className, methodName: `insert` }, methodDecorators);
+      methods.insertOne = this.getDecorated({ className, methodName: `insertOne` }, methodDecorators);
+      methods.insertMany = this.getDecorated({ className, methodName: `insertMany` }, methodDecorators);
 
-      methods.update = `update`;
-      methods.updateOne = `updateOneBy${pkFSuffix}`;
-      methods.updateMany = `updateManyBy${pkFSuffix}`;
+      methods.update = this.getDecorated({ className, methodName: `update` }, methodDecorators);
+      methods.updateOne = this.getDecorated({ className, methodName: `updateOneBy${pkFSuffix}` }, methodDecorators);
+      methods.updateMany = this.getDecorated({ className, methodName: `updateManyBy${pkFSuffix}` }, methodDecorators);
 
-      methods.delete = 'delete';
-      methods.deleteOne = `deleteOneBy${pkFSuffix}`;
-      methods.deleteMany = `deleteManyBy${pkFSuffix}`;
+      methods.delete = this.getDecorated({ className, methodName: 'delete' }, methodDecorators);
+      methods.deleteOne = this.getDecorated({ className, methodName: `deleteOneBy${pkFSuffix}` }, methodDecorators);
+      methods.deleteMany = this.getDecorated({ className, methodName: `deleteManyBy${pkFSuffix}` }, methodDecorators);
     }
+
     return {
-      className: this.getCrudRepoName(tableName),
+      class: this.getDecorated({
+        className,
+      }, this.opts.repos?.decorators?.class ?? undefined),
       methods,
+    }
+  }
+
+  protected getDecorated(
+    target: { className?: string, methodName?: string },
+    decorators?: null | DecoratorTargetConfig[]
+  ): DecoratedItem {
+    const relDecorators = decorators?.filter(d => {
+      if (target.className && d.className && !doesMatchNameOrPattern(d.className, target.className))
+        return false
+      if (target.methodName && d.methodName && !doesMatchNameOrPattern(d.methodName, target.methodName))
+        return false
+    })
+    return {
+      name: target.methodName ?? target.className,
+      decorators: relDecorators?.map(decorator => ({
+        ...decorator,
+        expr: decorator.expr ?? `@${decorator.decorator.name}`
+      }))
     }
   }
 

@@ -8,9 +8,11 @@ export {
     CommonTypeAdapterOptions,
 } from "./generator-options";
 export {
+    ImportedItem
+} from "./imported-item";
+export {
     FieldMapping,
     StrOrRegExp,
-    ImportedItem,
     GeneratedFieldType,
     GeneratedField,
     fieldMappings

@@ -106,7 +106,10 @@ export const {{colSetName}} = extractColumnsFrom({{instName}});
 {{#if repo}}
 export type {{className}}Pk = SelectedRow<{{className}}>["{{pkField.name}}"];
 
-export class {{repo.className}} {
+{{#each repo.class.decorators}}
+{{expr}}
+{{/each}}
+export class {{repo.class.name}} {
     constructor(
         public getConnection: () => DBConnection,
         public table: {{className}}{{#if instName}} = {{instName}}{{/if}},
@@ -115,14 +118,20 @@ export class {{repo.className}} {
     tableCols = {{#if colSetName}}{{colSetName}}{{else}}extractColumnsFrom(this.table){{/if}};
     {{#if repo.methods.select}}
 
-    select(conn = this.getConnection()) {
+    {{#each repo.methods.select.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.select.name}}(conn = this.getConnection()) {
         return conn.selectFrom(this.table);
     }
     {{/if}}
     {{#if repo.methods.selectWhere}}
 
-    selectWhere(cond: DynamicCondition<{{colMapping.name}}>, conn = this.getConnection()) {
-        return this.select(conn)
+    {{#each repo.methods.selectWhere.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.selectWhere.name}}(cond: DynamicCondition<{{colMapping.name}}>, conn = this.getConnection()) {
+        return this.{{repo.methods.select.name}}(conn)
             .where(conn.dynamicConditionFor(this.tableCols).withValues(cond))
             .select(this.tableCols)
             .executeSelectMany();
@@ -130,16 +139,22 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.findAll}}
 
-    {{repo.methods.findAll}}(conn = this.getConnection()) {
-        return this.select(conn)
+    {{#each repo.methods.findAll.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.findAll.name}}(conn = this.getConnection()) {
+        return this.{{repo.methods.select.name}}(conn)
             .select(this.tableCols)
             .executeSelectMany();
     }
     {{/if}}
     {{#if repo.methods.findOne}}
 
-    {{repo.methods.findOne}}({{pkField.name}}: {{className}}Pk, conn = this.getConnection()) {
-        return this.select(conn)
+    {{#each repo.methods.findOne.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.findOne.name}}({{pkField.name}}: {{className}}Pk, conn = this.getConnection()) {
+        return this.{{repo.methods.select.name}}(conn)
             .where(this.table.{{pkField.name}}.equals({{pkField.name}}))
             .select(this.tableCols)
             .executeSelectNoneOrOne();
@@ -147,8 +162,11 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.findMany}}
 
-    {{repo.methods.findMany}}({{pkField.name}}List: {{className}}Pk[], conn = this.getConnection()) {
-        return this.select(conn)
+    {{#each repo.methods.findMany.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.findMany.name}}({{pkField.name}}List: {{className}}Pk[], conn = this.getConnection()) {
+        return this.{{repo.methods.select.name}}(conn)
             .where(this.table.{{pkField.name}}.in({{pkField.name}}List))
             .select(this.tableCols)
             .executeSelectMany();
@@ -156,14 +174,20 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.insert}}
 
-    insert(conn = this.getConnection()) {
+    {{#each repo.methods.insert.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.insert.name}}(conn = this.getConnection()) {
         return conn.insertInto(this.table);
     }
     {{/if}}
     {{#if repo.methods.insertOne}}
 
-    {{repo.methods.insertOne}}(row: InsertableRow<{{className}}>, conn = this.getConnection()) {
-        return this.insert(conn)
+    {{#each repo.methods.insertOne.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.insertOne.name}}(row: InsertableRow<{{className}}>, conn = this.getConnection()) {
+        return this.{{repo.methods.insert.name}}(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
@@ -171,8 +195,11 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.insertMany}}
 
-    {{repo.methods.insertMany}}(rows: InsertableRow<{{className}}>[], conn = this.getConnection()) {
-        return this.insert(conn)
+    {{#each repo.methods.insertMany.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.insertMany.name}}(rows: InsertableRow<{{className}}>[], conn = this.getConnection()) {
+        return this.{{repo.methods.insert.name}}(conn)
             .values(rows)
             .returning(this.tableCols)
             .executeInsertMany();
@@ -180,14 +207,20 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.update}}
 
-    update(conn = this.getConnection()) {
+    {{#each repo.methods.update.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.update.name}}(conn = this.getConnection()) {
         return conn.update(this.table);
     }
     {{/if}}
     {{#if repo.methods.updateOne}}
 
-    {{repo.methods.updateOne}}({{pkField.name}}: {{className}}Pk, update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
-        return this.update(conn)
+    {{#each repo.methods.updateOne.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.updateOne.name}}({{pkField.name}}: {{className}}Pk, update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
+        return this.{{repo.methods.update.name}}(conn)
             .set(update)
             .where(this.table.{{pkField.name}}.equals({{pkField.name}}))
             .returning(this.tableCols)
@@ -196,8 +229,11 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.updateMany}}
 
-    {{repo.methods.updateMany}}({{pkField.name}}List: {{className}}Pk[], update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
-        return this.update(conn)
+    {{#each repo.methods.updateMany.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.updateMany.name}}({{pkField.name}}List: {{className}}Pk[], update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
+        return this.{{repo.methods.update.name}}(conn)
             .set(update)
             .where(this.table.{{pkField.name}}.in({{pkField.name}}List))
             .returning(this.tableCols)
@@ -206,14 +242,20 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.delete}}
 
-    delete(conn = this.getConnection()) {
+    {{#each repo.methods.delete.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.delete.name}}(conn = this.getConnection()) {
         return conn.deleteFrom(this.table);
     }
     {{/if}}
     {{#if repo.methods.deleteOne}}
 
-    {{repo.methods.deleteOne}}({{pkField.name}}: {{className}}Pk, conn = this.getConnection()) {
-        return this.delete(conn)
+    {{#each repo.methods.deleteOne.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.deleteOne.name}}({{pkField.name}}: {{className}}Pk, conn = this.getConnection()) {
+        return this.{{repo.methods.delete.name}}(conn)
             .where(this.table.{{pkField.name}}.equals({{pkField.name}}))
             .returning(this.tableCols)
             .executeDeleteOne();
@@ -221,8 +263,11 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.deleteMany}}
 
-    {{repo.methods.deleteMany}}({{pkField.name}}List: {{className}}Pk[], conn = this.getConnection()) {
-        return this.delete(conn)
+    {{#each repo.methods.deleteMany.decorators}}
+    {{expr}}
+    {{/each}}
+    {{repo.methods.deleteMany.name}}({{pkField.name}}List: {{className}}Pk[], conn = this.getConnection()) {
+        return this.{{repo.methods.delete.name}}(conn)
             .where(this.table.{{pkField.name}}.in({{pkField.name}}List))
             .returning(this.tableCols)
             .executeDeleteMany();
