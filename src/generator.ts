@@ -142,6 +142,7 @@ export class Generator {
       .with("base table", () => "Table" as const)
       .with("table", () => "Table" as const)
       .with("view", () => "View" as const)
+      .with("materialized view", () => "View" as const)
       .otherwise(() => null);
   }
 
