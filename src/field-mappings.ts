@@ -122,6 +122,8 @@ export const FieldMappingSchema = z.object({
      * Set to false to omit mapping of this field
      */
     generatedField: GeneratedFieldSchema.or(z.literal(false)),
+
+    comment: z.string().nullish(),
 });
 
 export interface FieldMapping extends z.TypeOf<typeof FieldMappingSchema> {}

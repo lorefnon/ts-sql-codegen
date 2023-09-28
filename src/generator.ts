@@ -174,7 +174,7 @@ export class Generator {
           ? table.name
           : tableName,
         kind: tableKind,
-        comment: this.formatComment(table.comment),
+        comment: this.formatComment([table.comment]),
         idPrefix,
       },
       imports: [
@@ -212,6 +212,7 @@ export class Generator {
     const isOptional = this.isColumnOptional(table.name, col);
     const hasDefault = this.doesColumnHaveDefault(table.name, col);
     const isComputed = this.isColumnComputed(table.name, col);
+    const comment = this.getColComment(table.name, col);
     let isPK = false;
     let columnMethod!: ColumnMethod;
     if (col === pkCol) {
@@ -241,7 +242,7 @@ export class Generator {
     return {
       name: this.getFieldNameForColumn(table.name, col),
       columnName: col.name,
-      comment: this.formatComment(col.comment),
+      comment: this.formatComment([col.comment, comment]),
       isOptional,
       hasDefault,
       columnMethod,
@@ -320,16 +321,13 @@ export class Generator {
     return idPrefix;
   }
 
-  protected formatComment(comment: string | null | undefined) {
-    if (isEmpty(comment)) return null;
-    return (
-      "/**\n" +
-      comment!
-        .split("\n")
-        .map((it) => ` * ${it}`)
-        .join("\n") +
-      "\n*/"
-    );
+  protected formatComment(comments: (string | null | undefined)[]) {
+    const neComments = comments.filter(Boolean) as string[]
+    if (isEmpty(neComments)) return null;
+    const commentLines = neComments
+      .flatMap(c => c.split("\n"))
+      .map(c => ` * ${c}`)
+    return `/**\n${commentLines.join("\n")}\n*/`
   }
 
   protected getConnectionSourceImportPath(outputFilePath: string) {
@@ -602,6 +600,17 @@ export class Generator {
       return mapping.generatedField.isComputed === true;
     }
     return false;
+  }
+
+  protected getColComment(tableName: string, col: Column): string | undefined {
+    const mapping = this.getFieldMappings().find(
+      (it) =>
+        it.comment &&
+        doesMatchNameOrPatternNamespaced(it.columnName, col.name) &&
+        doesMatchNameOrPatternNamespaced(it.tableName, tableName) &&
+        doesMatchNameOrPatternNamespaced(it.columnType, col.type)
+    );
+    return mapping?.comment ?? undefined;
   }
 
   protected getFieldNameForColumn(tableName: string, col: Column) {
