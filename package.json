@@ -32,39 +32,39 @@
   "repository": "github:lorefnon/ts-sql-codegen",
   "license": "MIT",
   "devDependencies": {
-    "@types/fs-extra": "^11.0.1",
+    "@types/fs-extra": "^11.0.2",
     "@types/glob": "^8.1.0",
-    "@types/js-yaml": "^4.0.5",
-    "@types/lodash": "^4.14.195",
-    "@types/mocha": "^10.0.1",
-    "@types/node": "^20.3.3",
-    "@types/pg": "^8.10.2",
-    "@types/prompts": "^2.4.4",
+    "@types/js-yaml": "^4.0.6",
+    "@types/lodash": "^4.14.199",
+    "@types/mocha": "^10.0.2",
+    "@types/node": "^20.7.1",
+    "@types/pg": "^8.10.3",
+    "@types/prompts": "^2.4.5",
     "@types/rimraf": "^3.0.2",
-    "better-sqlite3": "^8.4.0",
+    "better-sqlite3": "^8.6.0",
     "mocha": "^10.2.0",
     "mocha-snap": "^5.0.0",
-    "pg": "^8.11.1",
+    "pg": "^8.11.3",
     "recursive-copy-cli": "^1.0.20",
-    "rimraf": "^5.0.1",
+    "rimraf": "^5.0.5",
     "ts-node": "^10.9.1",
-    "ts-sql-query": "^1.54.0",
-    "typedoc": "^0.24.8",
-    "typedoc-plugin-markdown": "^3.15.3",
-    "typescript": "^5.1.6"
+    "ts-sql-query": "^1.56.0",
+    "typedoc": "^0.25.1",
+    "typedoc-plugin-markdown": "^3.16.0",
+    "typescript": "^5.2.2"
   },
   "peerDependencies": {
     "ts-sql-query": "^1.29.0"
   },
   "dependencies": {
     "fs-extra": "^11.1.1",
-    "glob": "^10.3.1",
-    "handlebars": "^4.7.7",
+    "glob": "^10.3.10",
+    "handlebars": "^4.7.8",
     "hbs-dedent-helper": "^0.3.0",
     "js-yaml": "^4.1.0",
     "lodash": "^4.17.21",
     "prompts": "^2.4.2",
-    "ts-pattern": "^5.0.1",
-    "zod": "^3.21.4"
+    "ts-pattern": "^5.0.5",
+    "zod": "^3.22.2"
   }
 }
