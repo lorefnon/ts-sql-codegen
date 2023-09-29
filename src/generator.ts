@@ -328,7 +328,9 @@ export class Generator {
     const commentLines = neComments
       .flatMap(c => c.split("\n"))
       .map(c => ` * ${c}`)
-    return `/**\n${commentLines.join("\n")}\n*/`
+    commentLines.unshift('/**')
+    commentLines.push(' */')
+    return commentLines;
   }
 
   protected getConnectionSourceImportPath(outputFilePath: string) {

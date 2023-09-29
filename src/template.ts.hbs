@@ -51,15 +51,15 @@ import {
     {{/if}}
 {{/each}}
 
-{{#if table.comment}}
-{{table.comment}}
-{{/if}}
+{{#each table.comment}}
+{{this}}
+{{/each}}
 {{#if exportTableClass}}export {{/if}}class {{className}} extends {{table.kind}}<DBConnection, '{{table.idPrefix}}{{className}}'> {
     {{#dedent-by 3 "level"}}
         {{#each fields}}
-            {{#if field.comment}}
-            {{field.comment}}
-            {{/if}}
+            {{#each this.comment}}
+                {{this}}
+            {{/each}}
             {{#if fieldType.kind}}
                 {{#if includeDBTypeWhenIsOptional}}
                 {{name}} = this.{{columnMethod}}<{{fieldType.tsType.name}}, '{{fieldType.dbType.name}}'>('{{columnName}}', '{{fieldType.kind}}', '{{fieldType.dbType.name}}'{{#if fieldType.adapter}}, {{fieldType.adapter.name}}{{/if}});
