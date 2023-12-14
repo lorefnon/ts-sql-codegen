@@ -93,7 +93,9 @@ export class Generator {
 
   protected getCompiledTemplate = memoize(async () => {
     const rawTemplate = await fs.readFile(this.getTemplatePath(), "utf8");
-    return Handlebars.compile(rawTemplate);
+    return Handlebars.compile(rawTemplate, {
+      noEscape: true
+    });
   });
 
   async generate() {
