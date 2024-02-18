@@ -602,3 +602,393 @@ const readAllGenerated = async () => {
     )
   ).join("\n\n");
 };
+
+it("supports custom int field", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customInt",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom int field with db type name", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customInt",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+    includeDBTypeWhenIsOptional: true,
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom double field", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customDouble",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom double field with db type name", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customDouble",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+    includeDBTypeWhenIsOptional: true,
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom UUID field", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customUuid",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom UUID field with db type name", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customUuid",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+    includeDBTypeWhenIsOptional: true,
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom local date field", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customLocalDate",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom local date field with db type name", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customLocalDate",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+    includeDBTypeWhenIsOptional: true,
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom local time field", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customLocalTime",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom local time field with db type name", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customLocalTime",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+    includeDBTypeWhenIsOptional: true,
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom local date time field", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customLocalDateTime",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});
+
+it("supports custom local date time field with db type name", async () => {
+  const generator = new Generator({
+    schemaPath,
+    connectionSourcePath,
+    outputDirPath,
+    tables: {
+      include: ["author_books"],
+    },
+    export: {
+      tableInstances: true,
+      tableClasses: false,
+    },
+    fieldMappings: [
+      {
+        columnType: "genre",
+        generatedField: {
+          type: {
+            kind: "customLocalDateTime",
+            tsType: {
+              name: "Genre",
+              importPath: path.join(outputDirPath, "enums", "Genre"),
+              isDefault: true,
+            },
+          },
+        },
+      }
+    ],
+    includeDBTypeWhenIsOptional: true,
+  });
+  await generator.generate();
+  await snap(await readAllGenerated());
+});

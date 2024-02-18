@@ -57,7 +57,7 @@ export const GeneratedFieldTypeSchema = z.object({
     /**
      * Specify that this field uses a custom database type or an enum type
      */
-    kind: z.enum(["custom", "customComparable", "enum"]).nullish(),
+    kind: z.enum(["custom", "customComparable", "enum", "customInt", "customDouble", "customUuid", "customLocalDate", "customLocalTime", "customLocalDateTime"]).nullish(),
     /**
      * This name is a database type identifier as expected by ts-sql-query
      *
