@@ -42,6 +42,9 @@ export class BooksTable extends Table<DBConnection, 'PublicBooksTable'> {
     releasedAt = this.optionalColumn('released_at', 'localDate');
     readTime = this.optionalColumn('time_to_read', 'int');
     genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    /**
+     * Sample weight as provided by distributor
+     */
     weightGrams = this.optionalColumn('weight_grams', 'double');
 
     constructor() {
