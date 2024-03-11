@@ -130,43 +130,43 @@ export interface FieldMapping extends z.TypeOf<typeof FieldMappingSchema> {}
 
 export const fieldMappings: FieldMapping[] = [
     {
-        columnType: /(char|text)/,
+        columnType: /(char|text)/i,
         generatedField: { type: { dbType: { name: "string" } } },
     },
     {
-        columnType: /bool/,
+        columnType: /bool/i,
         generatedField: { type: { dbType: { name: "boolean" } } },
     },
     {
-        columnType: /bigint|bigserial/,
+        columnType: /bigint|bigserial/i,
         generatedField: { type: { dbType: { name: "bigint" } } },
     },
     {
-        columnType: /int/,
+        columnType: /int/i,
         generatedField: { type: { dbType: { name: "int" } } },
     },
     {
-        columnType: /^uuid$/,
+        columnType: /^uuid$/i,
         generatedField: { type: { dbType: { name: "uuid" } } },
     },
     {
-        columnType: /(timestamp|datetime)/,
+        columnType: /(timestamp|datetime)/i,
         generatedField: { type: { dbType: { name: "localDateTime" } } },
     },
     {
-        columnType: /date/,
+        columnType: /date/i,
         generatedField: { type: { dbType: { name: "localDate" } } },
     },
     {
-        columnType: /time/,
+        columnType: /time/i,
         generatedField: { type: { dbType: { name: "localTime" } } },
     },
     {
-        columnType: /(double|float)/,
+        columnType: /(double|float)/i,
         generatedField: { type: { dbType: { name: "double" } } },
     },
     {
-        columnType: /(decimal|numeric)/,
+        columnType: /(decimal|numeric)/i,
         generatedField: { type: { dbType: { name: "stringDouble" } } },
     }
 ];
