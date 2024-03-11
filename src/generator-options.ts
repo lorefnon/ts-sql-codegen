@@ -297,6 +297,14 @@ export const TypeWrapperSchema = z.object({
     wrapper: ImportedItemSchema
 });
 
+export const OutputImportOptionsSchema = z.object({
+    extension: z.string().nullish(),
+});
+
+export const OutputOptionsSchema = z.object({
+    import: OutputImportOptionsSchema.nullish(),
+});
+
 export const GeneratorOptsSchema = z.object({
     /** Simulate the generation and print the outcome without actually modifying any files */
     dryRun: z.boolean().nullish(),
@@ -340,6 +348,11 @@ export const GeneratorOptsSchema = z.object({
      * @see TableInclusion
      */
     tables: TableInclusionSchema.nullish(),
+
+    /**
+     * Shared options that affect all generated output
+     */
+    output: OutputOptionsSchema.nullish(),
 
     /**
      * Customize what all entities are exported from generated file

@@ -180,6 +180,7 @@ export class Generator {
         comment: this.formatComment([table.comment]),
         idPrefix,
       },
+      output: this.opts.output,
       imports: [
         ...utilImports,
         ...adapterImports,

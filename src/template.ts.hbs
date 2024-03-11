@@ -5,8 +5,8 @@
  * This file has been auto-generated from database schema using ts-sql-codegen.
  * Any changes will be overwritten.
  */
-import { {{table.kind}} } from "ts-sql-query/{{table.kind}}";
-import type { DBConnection } from "{{dbConnectionSource}}";
+import { {{table.kind}} } from "ts-sql-query/{{table.kind}}{{output.import.extension}}";
+import type { DBConnection } from "{{dbConnectionSource}}{{output.import.extension}}";
 {{#if importExtraTypes}}
 import {
     {{#if rowTypes.insertable}}
@@ -29,13 +29,13 @@ import {
     {{#if valuesTypes.selected}}
     SelectedValues,
     {{/if}}
-} from "ts-sql-query/extras/types";
+} from "ts-sql-query/extras/types{{output.import.extension}}";
 {{/if}}
 {{#each imports}}
     {{#if isDefault}}
         {{#each imported}}
             {{#dedent-by 4 "level"}}
-                import {{.}} from "{{../importPath}}";
+                import {{.}} from "{{../importPath}}{{output.import.extension}}";
             {{/dedent-by}}
         {{/each}}
     {{else}}
@@ -46,7 +46,7 @@ import {
                         {{.}},
                     {{/each}}
                 {{/dedent-by}}
-            } from "{{importPath}}";
+            } from "{{importPath}}{{output.import.extension}}";
         {{/dedent-by}}
     {{/if}}
 {{/each}}

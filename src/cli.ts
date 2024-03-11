@@ -25,6 +25,7 @@ async function main() {
             'schema': { type: 'string', short: 's' },
             'connection-source': { type: 'string', short: 'c' },
             'output-dir': { type: 'string', short: 'o' },
+            'output-import-ext': { type: 'string' },
             'remove-extraneous': { type: 'string' },
             'export-table-instances': { type: 'boolean' },
             'export-row-types': { type: 'boolean' },
@@ -47,6 +48,11 @@ async function main() {
         connectionSourcePath: argv["connection-source"],
         outputDirPath: argv["output-dir"],
         removeExtraneous: argv["remove-extraneous"] ?? "never",
+        output: {
+            import: {
+                extension: argv["output-import-ext"],
+            }
+        },
         export: {
             tableInstances: argv['export-table-instances'],
             tableClasses: argv['export-table-classes'],
