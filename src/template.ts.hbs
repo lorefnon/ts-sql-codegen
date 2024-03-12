@@ -35,7 +35,7 @@ import {
     {{#if isDefault}}
         {{#each imported}}
             {{#dedent-by 4 "level"}}
-                import {{.}} from "{{../importPath}}{{output.import.extension}}";
+                import {{.}} from "{{../importPath}}{{../../output.import.extension}}";
             {{/dedent-by}}
         {{/each}}
     {{else}}
@@ -46,7 +46,7 @@ import {
                         {{.}},
                     {{/each}}
                 {{/dedent-by}}
-            } from "{{importPath}}{{output.import.extension}}";
+            } from "{{importPath}}{{../output.import.extension}}";
         {{/dedent-by}}
     {{/if}}
 {{/each}}
