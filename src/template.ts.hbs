@@ -162,7 +162,7 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.insertOne}}
 
-    {{repo.methods.insertOne}}(row: InsertableRow<{{className}}>, conn = this.getConnection()) {
+    {{repo.methods.insertOne}}(row: {{rowTypes.insertable.name}}, conn = this.getConnection()) {
         return this.insert(conn)
             .set(row)
             .returning(this.tableCols)
@@ -171,7 +171,7 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.insertMany}}
 
-    {{repo.methods.insertMany}}(rows: InsertableRow<{{className}}>[], conn = this.getConnection()) {
+    {{repo.methods.insertMany}}(rows: {{rowTypes.insertable.name}}[], conn = this.getConnection()) {
         return this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
@@ -186,7 +186,7 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.updateOne}}
 
-    {{repo.methods.updateOne}}({{pkField.name}}: {{className}}Pk, update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
+    {{repo.methods.updateOne}}({{pkField.name}}: {{className}}Pk, update: {{rowTypes.updatable.name}}, conn = this.getConnection()) {
         return this.update(conn)
             .set(update)
             .where(this.table.{{pkField.name}}.equals({{pkField.name}}))
@@ -196,7 +196,7 @@ export class {{repo.className}} {
     {{/if}}
     {{#if repo.methods.updateMany}}
 
-    {{repo.methods.updateMany}}({{pkField.name}}List: {{className}}Pk[], update: UpdatableRow<{{className}}>, conn = this.getConnection()) {
+    {{repo.methods.updateMany}}({{pkField.name}}List: {{className}}Pk[], update: {{rowTypes.updatable.name}}, conn = this.getConnection()) {
         return this.update(conn)
             .set(update)
             .where(this.table.{{pkField.name}}.in({{pkField.name}}List))

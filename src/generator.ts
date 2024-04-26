@@ -770,9 +770,12 @@ export class Generator {
     tableName: string,
     tableKind: TableKind,
     mapperClassName: string,
-    imports: ImportTmplInput[]
+    imports: ImportTmplInput[],
+
   ) {
-    const rowTypes = this.opts.export?.rowTypes
+    const isExported = this.opts.export?.rowTypes;
+    const hasRepo = this.opts.export?.crudRepository;
+    const rowTypes = (isExported || hasRepo)
       ? ({} as any)
       : false;
     if (rowTypes !== false) {
@@ -781,17 +784,20 @@ export class Generator {
         `SelectedRow<${mapperClassName}>`,
         imports
       );
+      rowTypes.selected.isExported = isExported;
       if (tableKind !== "View") {
         rowTypes.insertable = this.getWrappedTypeInput(
           this.getInsertableRowTypeName(tableName),
           `InsertableRow<${mapperClassName}>`,
           imports
         );
+        rowTypes.insertable.isExported = isExported;
         rowTypes.updatable = this.getWrappedTypeInput(
           this.getUpdatableRowTypeName(tableName),
           `UpdatableRow<${mapperClassName}>`,
           imports
         );
+        rowTypes.updatable.isExported = isExported;
       }
     }
     return rowTypes
