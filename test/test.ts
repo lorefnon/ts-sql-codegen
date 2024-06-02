@@ -195,6 +195,40 @@ describe("Generator", function () {
     await generator.generate();
     await snap(await readAllGenerated());
   });
+  it("allows exporting row types as interface", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      export: {
+        rowTypes: {
+          asInterface: true
+        }
+      }
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
+  it("allows exporting value types as interface", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      export: {
+        valuesTypes: {
+          asInterface: true
+        }
+      }
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
   it("allows exporting crud repositories", async () => {
     const generator = new Generator({
       schemaPath,

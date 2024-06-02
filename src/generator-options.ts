@@ -16,6 +16,17 @@ export const TableInclusionSchema = z.object({
 
 export interface TableInclusion extends z.TypeOf<typeof TableInclusionSchema> {}
 
+export const ExportTypesOptionsSchema = z.object({
+    /**
+     * If enabled, instead of type alias we will generate interfaces
+     *
+     * This can make type errors more succinct.
+     */
+    asInterface: z.boolean(),
+});
+
+export interface ExportTypesOptions extends z.TypeOf<typeof ExportTypesOptionsSchema> {}
+
 export const ExportOptionsSchema = z.object({
     /**
      * In addition to the table class, also expose instantiated instance of table class
@@ -56,7 +67,7 @@ export const ExportOptionsSchema = z.object({
      *     export type UserSRow = SelectedRow<UserTable>
      *
      */
-    rowTypes: z.boolean().default(false),
+    rowTypes: z.boolean().or(ExportTypesOptionsSchema).default(false),
 
     /**
      * Additionally export the value types associated with table
@@ -79,7 +90,7 @@ export const ExportOptionsSchema = z.object({
      *     export type User = SelectedValues<UserTable>
      *
      */
-    valuesTypes: z.boolean().default(false),
+    valuesTypes: z.boolean().or(ExportTypesOptionsSchema).default(false),
 
     /**
      * Additionally export the extracted columns (Useful for select * queries etc.)

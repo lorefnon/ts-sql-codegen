@@ -1,3 +1,4 @@
+import isObject from 'lodash/isObject';
 import fs from "fs-extra";
 import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
@@ -749,7 +750,7 @@ export class Generator {
     return this.getPascalCasedTableName(tableName) + this.naming.columnTypeMappingInterfaceNameSuffix;
   }
 
-  protected getWrappedTypeInput(name: string, baseExpr: string, imports: ImportTmplInput[]) {
+  protected getWrappedTypeInput(name: string, baseExpr: string, imports: ImportTmplInput[], isInterface = false) {
     const selectedWrapper = this.getTypeWrapper(name)
     if (selectedWrapper?.importPath)
       imports.push({
@@ -759,6 +760,7 @@ export class Generator {
       });
     return {
       name,
+      isInterface,
       expr: this.wrapType(
         baseExpr,
         selectedWrapper?.name
@@ -771,10 +773,10 @@ export class Generator {
     tableKind: TableKind,
     mapperClassName: string,
     imports: ImportTmplInput[],
-
   ) {
     const isExported = this.opts.export?.rowTypes;
     const hasRepo = this.opts.export?.crudRepository;
+    const isInterface = isObject(isExported) && isExported.asInterface;
     const rowTypes = (isExported || hasRepo)
       ? ({} as any)
       : false;
@@ -782,20 +784,23 @@ export class Generator {
       rowTypes.selected = this.getWrappedTypeInput(
         this.getSelectedRowTypeName(tableName),
         `SelectedRow<${mapperClassName}>`,
-        imports
+        imports,
+        isInterface
       );
       rowTypes.selected.isExported = isExported;
       if (tableKind !== "View") {
         rowTypes.insertable = this.getWrappedTypeInput(
           this.getInsertableRowTypeName(tableName),
           `InsertableRow<${mapperClassName}>`,
-          imports
+          imports,
+          isInterface
         );
         rowTypes.insertable.isExported = isExported;
         rowTypes.updatable = this.getWrappedTypeInput(
           this.getUpdatableRowTypeName(tableName),
           `UpdatableRow<${mapperClassName}>`,
-          imports
+          imports,
+          isInterface
         );
         rowTypes.updatable.isExported = isExported;
       }
@@ -809,23 +814,28 @@ export class Generator {
     mapperClassName: string,
     imports: ImportTmplInput[]
   ) {
-    const valuesTypes = this.opts.export?.valuesTypes ? ({} as any) : false;
+    const isExported = this.opts.export?.valuesTypes;
+    const isInterface = isObject(isExported) && isExported.asInterface;
+    const valuesTypes = isExported ? ({} as any) : false;
     if (valuesTypes !== false) {
       valuesTypes.selected = this.getWrappedTypeInput(
         this.getSelectedValuesTypeName(tableName),
         `SelectedValues<${mapperClassName}>`,
-        imports
+        imports,
+        isInterface
       );
       if (tableKind !== "View") {
         valuesTypes.insertable = this.getWrappedTypeInput(
           this.getInsertableValuesTypeName(tableName),
           `InsertableValues<${mapperClassName}>`,
-          imports
+          imports,
+          isInterface
         )
         valuesTypes.updatable = this.getWrappedTypeInput(
           this.getUpdatableValuesTypeName(tableName),
           `UpdatableValues<${mapperClassName}>`,
-          imports
+          imports,
+          isInterface
         );
       }
     }

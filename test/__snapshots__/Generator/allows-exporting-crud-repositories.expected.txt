@@ -8,6 +8,9 @@
 import { View } from "ts-sql-query/View";
 import type { DBConnection } from "../helpers/connection-source";
 import {
+    SelectedRow,
+} from "ts-sql-query/extras/types";
+import {
     Genre,
 } from "../helpers/types";
 
@@ -27,6 +30,7 @@ export class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
 }
 
 
+export type AuthorBooksSRow = SelectedRow<AuthorBooksTable>;
 
 
 // AuthorsTable.ts :
@@ -38,6 +42,11 @@ export class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
  */
 import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
+import {
+    InsertableRow,
+    UpdatableRow,
+    SelectedRow,
+} from "ts-sql-query/extras/types";
 import {
     extractColumnsFrom,
 } from "ts-sql-query/extras/utils";
@@ -66,6 +75,9 @@ export type AuthorsCols = {
 }
 
 
+export type AuthorsSRow = SelectedRow<AuthorsTable>;
+export type AuthorsIRow = InsertableRow<AuthorsTable>;
+export type AuthorsURow = UpdatableRow<AuthorsTable>;
 export type AuthorsTablePk = SelectedRow<AuthorsTable>["id"];
 
 export class AuthorsCrudRepo {
@@ -111,14 +123,14 @@ export class AuthorsCrudRepo {
         return conn.insertInto(this.table);
     }
 
-    insertOne(row: InsertableRow<AuthorsTable>, conn = this.getConnection()) {
+    insertOne(row: AuthorsIRow, conn = this.getConnection()) {
         return this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
     }
 
-    insertMany(rows: InsertableRow<AuthorsTable>[], conn = this.getConnection()) {
+    insertMany(rows: AuthorsIRow[], conn = this.getConnection()) {
         return this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
@@ -129,7 +141,7 @@ export class AuthorsCrudRepo {
         return conn.update(this.table);
     }
 
-    updateOneById(id: AuthorsTablePk, update: UpdatableRow<AuthorsTable>, conn = this.getConnection()) {
+    updateOneById(id: AuthorsTablePk, update: AuthorsURow, conn = this.getConnection()) {
         return this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
@@ -137,7 +149,7 @@ export class AuthorsCrudRepo {
             .executeUpdateOne();
     }
 
-    updateManyById(idList: AuthorsTablePk[], update: UpdatableRow<AuthorsTable>, conn = this.getConnection()) {
+    updateManyById(idList: AuthorsTablePk[], update: AuthorsURow, conn = this.getConnection()) {
         return this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))
@@ -174,6 +186,11 @@ export class AuthorsCrudRepo {
  */
 import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
+import {
+    InsertableRow,
+    UpdatableRow,
+    SelectedRow,
+} from "ts-sql-query/extras/types";
 import {
     extractColumnsFrom,
 } from "ts-sql-query/extras/utils";
@@ -212,6 +229,9 @@ export type BooksCols = {
 }
 
 
+export type BooksSRow = SelectedRow<BooksTable>;
+export type BooksIRow = InsertableRow<BooksTable>;
+export type BooksURow = UpdatableRow<BooksTable>;
 export type BooksTablePk = SelectedRow<BooksTable>["id"];
 
 export class BooksCrudRepo {
@@ -257,14 +277,14 @@ export class BooksCrudRepo {
         return conn.insertInto(this.table);
     }
 
-    insertOne(row: InsertableRow<BooksTable>, conn = this.getConnection()) {
+    insertOne(row: BooksIRow, conn = this.getConnection()) {
         return this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
     }
 
-    insertMany(rows: InsertableRow<BooksTable>[], conn = this.getConnection()) {
+    insertMany(rows: BooksIRow[], conn = this.getConnection()) {
         return this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
@@ -275,7 +295,7 @@ export class BooksCrudRepo {
         return conn.update(this.table);
     }
 
-    updateOneById(id: BooksTablePk, update: UpdatableRow<BooksTable>, conn = this.getConnection()) {
+    updateOneById(id: BooksTablePk, update: BooksURow, conn = this.getConnection()) {
         return this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
@@ -283,7 +303,7 @@ export class BooksCrudRepo {
             .executeUpdateOne();
     }
 
-    updateManyById(idList: BooksTablePk[], update: UpdatableRow<BooksTable>, conn = this.getConnection()) {
+    updateManyById(idList: BooksTablePk[], update: BooksURow, conn = this.getConnection()) {
         return this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))
@@ -320,6 +340,11 @@ export class BooksCrudRepo {
  */
 import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
+import {
+    InsertableRow,
+    UpdatableRow,
+    SelectedRow,
+} from "ts-sql-query/extras/types";
 import {
     extractColumnsFrom,
 } from "ts-sql-query/extras/utils";
@@ -359,6 +384,9 @@ export type ChaptersCols = {
 }
 
 
+export type ChaptersSRow = SelectedRow<ChaptersTable>;
+export type ChaptersIRow = InsertableRow<ChaptersTable>;
+export type ChaptersURow = UpdatableRow<ChaptersTable>;
 export type ChaptersTablePk = SelectedRow<ChaptersTable>["id"];
 
 export class ChaptersCrudRepo {
@@ -404,14 +432,14 @@ export class ChaptersCrudRepo {
         return conn.insertInto(this.table);
     }
 
-    insertOne(row: InsertableRow<ChaptersTable>, conn = this.getConnection()) {
+    insertOne(row: ChaptersIRow, conn = this.getConnection()) {
         return this.insert(conn)
             .set(row)
             .returning(this.tableCols)
             .executeInsertOne();
     }
 
-    insertMany(rows: InsertableRow<ChaptersTable>[], conn = this.getConnection()) {
+    insertMany(rows: ChaptersIRow[], conn = this.getConnection()) {
         return this.insert(conn)
             .values(rows)
             .returning(this.tableCols)
@@ -422,7 +450,7 @@ export class ChaptersCrudRepo {
         return conn.update(this.table);
     }
 
-    updateOneById(id: ChaptersTablePk, update: UpdatableRow<ChaptersTable>, conn = this.getConnection()) {
+    updateOneById(id: ChaptersTablePk, update: ChaptersURow, conn = this.getConnection()) {
         return this.update(conn)
             .set(update)
             .where(this.table.id.equals(id))
@@ -430,7 +458,7 @@ export class ChaptersCrudRepo {
             .executeUpdateOne();
     }
 
-    updateManyById(idList: ChaptersTablePk[], update: UpdatableRow<ChaptersTable>, conn = this.getConnection()) {
+    updateManyById(idList: ChaptersTablePk[], update: ChaptersURow, conn = this.getConnection()) {
         return this.update(conn)
             .set(update)
             .where(this.table.id.in(idList))

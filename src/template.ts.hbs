@@ -94,10 +94,18 @@ export const {{instName}} = new {{className}}();
 {{/if}}
 
 {{#each rowTypes}}
+{{#if isInterface}}
+export interface {{name}} extends {{{expr}}} {}
+{{else}}
 export type {{name}} = {{{expr}}};
+{{/if}}
 {{/each}}
 {{#each valuesTypes}}
+{{#if isInterface}}
+export interface {{name}} extends {{{expr}}} {}
+{{else}}
 export type {{name}} = {{{expr}}};
+{{/if}}
 {{/each}}
 {{#if colSetName}}
 export const {{colSetName}} = extractColumnsFrom({{instName}});
