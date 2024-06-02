@@ -1,6 +1,6 @@
 {
   "name": "ts-sql-codegen",
-  "version": "3.20.2",
+  "version": "3.21.0",
   "description": "Generates ts-sql-query table mappings from tbls schema output",
   "main": "dist/index.js",
   "bin": "dist/cli.js",
