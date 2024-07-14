@@ -9,7 +9,7 @@
     "prepublishOnly": "pnpm run build",
     "build": "pnpm run build:ts && pnpm run copy:templates && pnpm run build:docs",
     "build:ts": "tsc",
-    "build:docs": "typedoc --readme none src/index.ts",
+    "build:docs": "typedoc --plugin typedoc-plugin-markdown --readme none src/index.ts",
     "copy:templates": "recursive-copy -w src dist -f \"*.hbs\"",
     "clean": "rimraf dist test/generated",
     "test": "mocha -r ts-node/register -r mocha-snap --extensions ts,js \"./test/**/*.ts\""
