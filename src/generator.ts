@@ -338,14 +338,17 @@ export class Generator {
   }
 
   protected getConnectionSourceImportPath(outputFilePath: string) {
-    const relPath = path.relative(
-      path.dirname(outputFilePath),
-      path.resolve(this.opts.connectionSourcePath)
-    );
-    return path.join(
-      path.dirname(relPath),
-      path.basename(relPath)
-    );
+    if (this.opts.connectionSourcePath.match(/^\.\.?\//)) {
+      const relPath = path.relative(
+        path.dirname(outputFilePath),
+        path.resolve(this.opts.connectionSourcePath)
+      );
+      return path.join(
+        path.dirname(relPath),
+        path.basename(relPath)
+      );
+    }
+    return this.opts.connectionSourcePath;
   }
 
   protected getAdapterImports(
