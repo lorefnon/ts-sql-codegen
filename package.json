@@ -32,7 +32,6 @@
   "repository": "github:lorefnon/ts-sql-codegen",
   "license": "MIT",
   "devDependencies": {
-    "@types/fs-extra": "^11.0.4",
     "@types/glob": "^8.1.0",
     "@types/js-yaml": "^4.0.9",
     "@types/lodash": "^4.14.202",
@@ -57,7 +56,6 @@
     "ts-sql-query": "^1.29.0"
   },
   "dependencies": {
-    "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
     "handlebars": "^4.7.8",
     "hbs-dedent-helper": "^0.3.0",

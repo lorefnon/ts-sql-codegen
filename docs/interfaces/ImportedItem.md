@@ -50,7 +50,7 @@ z.TypeOf.importPath
 
 #### Defined in
 
-[src/field-mappings.ts:16](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/field-mappings.ts#L16)
+[src/field-mappings.ts:16](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L16)
 
 ___
 
@@ -72,7 +72,7 @@ z.TypeOf.isDefault
 
 #### Defined in
 
-[src/field-mappings.ts:23](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/field-mappings.ts#L23)
+[src/field-mappings.ts:23](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L23)
 
 ___
 
@@ -94,7 +94,7 @@ z.TypeOf.isRelative
 
 #### Defined in
 
-[src/field-mappings.ts:30](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/field-mappings.ts#L30)
+[src/field-mappings.ts:30](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L30)
 
 ___
 
@@ -110,6 +110,6 @@ z.TypeOf.name
 
 #### Defined in
 
-[src/field-mappings.ts:13](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/field-mappings.ts#L13)
+[src/field-mappings.ts:13](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L13)
 
-[src/field-mappings.ts:13](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/field-mappings.ts#L13)
+[src/field-mappings.ts:13](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L13)

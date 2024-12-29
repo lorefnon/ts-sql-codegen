@@ -1,4 +1,4 @@
-import fs from "fs-extra";
+import fs from "fs/promises";
 import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
@@ -308,7 +308,9 @@ export class Generator {
     const templateInput = await this.getTableTemplateInput(table, tableKind, filePath)
     const template = await this.getCompiledTemplate();
     const output = await this.postProcessOutput(template(templateInput), table);
-    await fs.ensureDir(path.dirname(filePath));
+    await fs.mkdir(path.dirname(filePath), {
+      recursive: true
+    });
     if (this.opts.dryRun) {
       this.logger.info(`Will populate ${filePath} with:`);
       this.logger.info(output);

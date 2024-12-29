@@ -41,9 +41,9 @@ z.TypeOf.columnTypeMappingInterface
 
 #### Defined in
 
-[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L113)
+[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L113)
 
-[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L113)
+[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L113)
 
 ___
 
@@ -61,9 +61,9 @@ z.TypeOf.crudRepository
 
 #### Defined in
 
-[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L120)
+[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L120)
 
-[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L120)
+[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L120)
 
 ___
 
@@ -82,9 +82,9 @@ z.TypeOf.extractedColumns
 
 #### Defined in
 
-[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L101)
+[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L101)
 
-[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L101)
+[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L101)
 
 ___
 
@@ -117,9 +117,9 @@ z.TypeOf.rowTypes
 
 #### Defined in
 
-[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L70)
+[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L70)
 
-[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L70)
+[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L70)
 
 ___
 
@@ -138,9 +138,9 @@ z.TypeOf.tableClasses
 
 #### Defined in
 
-[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L47)
+[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L47)
 
-[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L47)
+[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L47)
 
 ___
 
@@ -161,9 +161,9 @@ z.TypeOf.tableInstances
 
 #### Defined in
 
-[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L39)
+[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L39)
 
-[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L39)
+[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L39)
 
 ___
 
@@ -196,6 +196,6 @@ z.TypeOf.valuesTypes
 
 #### Defined in
 
-[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L93)
+[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L93)
 
-[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/194c41c/src/generator-options.ts#L93)
+[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L93)
