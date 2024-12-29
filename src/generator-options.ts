@@ -317,6 +317,9 @@ export const OutputOptionsSchema = z.object({
 });
 
 export const GeneratorOptsSchema = z.object({
+    /** Root path of module - used for resolving relative paths. If unspecified, assumed to be cwd */
+    moduleRoot: z.string().nullish(),
+
     /** Simulate the generation and print the outcome without actually modifying any files */
     dryRun: z.boolean().nullish(),
 

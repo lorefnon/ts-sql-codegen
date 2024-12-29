@@ -1,9 +1,8 @@
-import isObject from 'lodash/isObject';
 import fs from "fs-extra";
 import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
-import { camelCase, isEmpty, last, memoize, upperFirst } from "lodash";
+import { isObject, camelCase, isEmpty, last, memoize, upperFirst } from "lodash";
 import path from "path/posix";
 import { match } from "ts-pattern";
 import {
@@ -99,9 +98,16 @@ export class Generator {
     });
   });
 
+  private resolvePath(relPath: string) {
+      if (this.opts.moduleRoot) {
+        return path.resolve(this.opts.moduleRoot, relPath)
+      }
+      return path.resolve(relPath);
+  }
+
   async generate() {
     const rawSchema = await fs.readFile(
-      path.resolve(this.opts.schemaPath),
+      this.resolvePath(this.opts.schemaPath),
       "utf8"
     );
     const schema = TblsSchema.parse(yaml.load(rawSchema));
@@ -341,7 +347,7 @@ export class Generator {
     if (this.opts.connectionSourcePath.match(/^\.\.?\//)) {
       const relPath = path.relative(
         path.dirname(outputFilePath),
-        path.resolve(this.opts.connectionSourcePath)
+        this.resolvePath(this.opts.connectionSourcePath)
       );
       return path.join(
         path.dirname(relPath),
@@ -446,7 +452,7 @@ export class Generator {
     if (importedItem.isRelative === false) return importPath;
     const result: string = path.relative(
       path.dirname(filePath),
-      path.resolve(importPath)
+      this.resolvePath(importPath)
     );
     if (result.startsWith(".")) {
       return result;
