@@ -1,13 +1,14 @@
-import fs from "fs-extra";
+import fs from "node:fs/promises";
+import * as z from "zod";
 import { glob } from "glob";
 import path from "path/posix";
 import prompts from "prompts";
-import { GeneratorOpts } from "./generator-options";
+import { GeneratorOptsSchema } from "./generator-options";
 import { Logger } from "./logger"
 
 export class FileRemover {
     constructor(
-        private opts: GeneratorOpts,
+        private opts: z.output<typeof GeneratorOptsSchema>,
         private writtenFiles: Set<string>,
         private logger: Logger
     ) { }
@@ -56,7 +57,9 @@ export class FileRemover {
         }
         this.logger.info(`Deleting ${pathsToDelete.length} files: `, pathsToDelete.join(', '))
         await Promise.all(pathsToDelete.map((p) =>
-            fs.remove(path.join(this.opts.outputDirPath, p)))
+            fs.rm(path.join(this.opts.outputDirPath, p), {
+                recursive: true
+            }))
         )
     }
 }

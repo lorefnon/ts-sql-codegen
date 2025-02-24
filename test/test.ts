@@ -1,5 +1,5 @@
 import path from "path";
-import fs from "fs-extra";
+import fs from "node:fs/promises";
 import { FieldMapping, Generator } from "../src";
 import { isEqual, omit } from "lodash";
 import snap from "mocha-snap";
@@ -49,12 +49,20 @@ describe("Generator", function () {
   this.timeout(10_1000)
 
   beforeEach(async () => {
-    await fs.remove(outputDirPath);
+    try {
+      await fs.rm(outputDirPath, {
+        recursive: true
+      });
+    } catch (e) {
+      console.error(e)
+    }
   });
 
   afterEach(async () => {
     try {
-      await fs.remove(outputDirPath);
+      await fs.rm(outputDirPath, {
+        recursive: true
+      });
     } catch (e) {
       console.error(e)
     }
@@ -64,7 +72,10 @@ describe("Generator", function () {
     it(`generates code from schema with useQualifiedTablePrefix: ${useQualifiedTableName}`, async () => {
       const generator = new Generator({
         schemaPath,
-        connectionSourcePath,
+        connectionSource: {
+          path: "../helpers/connection-source",
+          resolveRelative: false,
+        },
         outputDirPath,
         fieldMappings,
         tableMapping: useQualifiedTableName ? {
@@ -168,7 +179,10 @@ describe("Generator", function () {
   it("allows exporting row types", async () => {
     const generator = new Generator({
       schemaPath,
-      connectionSourcePath,
+      connectionSource: {
+        path: connectionSourcePath,
+        resolveRelative: true,
+      },
       outputDirPath,
       tables: {
         include: ["authors"],
@@ -294,7 +308,9 @@ describe("Generator", function () {
 
   it("supports removal of extraneous files", async () => {
     const exPath = path.resolve(path.join(outputDirPath, 'extra/test.md'))
-    await fs.ensureDir(path.dirname(exPath))
+    await fs.mkdir(path.dirname(exPath), {
+      recursive: true
+    })
     await fs.writeFile(exPath, 'test')
     const generator = new Generator({
       schemaPath,
@@ -311,8 +327,9 @@ describe("Generator", function () {
     await generator.generate().catch(e => {
       console.error(e)
     });
-    const doesExist = await fs.exists(exPath)
-    assert(!doesExist, 'Extraneous file should not exist after generation')
+    assert.rejects(async () => fs.stat(exPath), {
+      code: "ENOENT"
+    })
   })
 
   it("allows non-relative and default import paths", async () => {

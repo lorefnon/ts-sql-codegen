@@ -1,4 +1,5 @@
 import fs from "fs/promises";
+import * as z from "zod";
 import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
@@ -72,7 +73,7 @@ interface RepoInput {
  * and custom logic for table/column/field mapping.
  */
 export class Generator {
-  protected opts: GeneratorOpts;
+  protected opts: z.output<typeof GeneratorOptsSchema>;
   protected naming: NamingOptions;
 
   private writtenFiles = new Set<string>()
@@ -346,17 +347,18 @@ export class Generator {
   }
 
   protected getConnectionSourceImportPath(outputFilePath: string) {
-    if (this.opts.connectionSourcePath.match(/^\.\.?\//)) {
-      const relPath = path.relative(
-        path.dirname(outputFilePath),
-        this.resolvePath(this.opts.connectionSourcePath)
-      );
-      return path.join(
-        path.dirname(relPath),
-        path.basename(relPath)
-      );
+    const csPath = this.opts.connectionSource?.path ?? this.opts.connectionSourcePath;
+    if (this.opts.connectionSource?.resolveRelative === false) {
+      return csPath;
     }
-    return this.opts.connectionSourcePath;
+    const relPath = path.relative(
+      path.dirname(outputFilePath),
+      this.resolvePath(csPath)
+    );
+    return path.join(
+      path.dirname(relPath),
+      path.basename(relPath)
+    );
   }
 
   protected getAdapterImports(

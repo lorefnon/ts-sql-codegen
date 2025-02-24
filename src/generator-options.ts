@@ -14,7 +14,7 @@ export const TableInclusionSchema = z.object({
     exclude: StrOrRegExpSchema.array().nullish(),
 });
 
-export interface TableInclusion extends z.TypeOf<typeof TableInclusionSchema> {}
+export interface TableInclusion extends z.input<typeof TableInclusionSchema> {}
 
 export const ExportTypesOptionsSchema = z.object({
     /**
@@ -25,7 +25,7 @@ export const ExportTypesOptionsSchema = z.object({
     asInterface: z.boolean(),
 });
 
-export interface ExportTypesOptions extends z.TypeOf<typeof ExportTypesOptionsSchema> {}
+export interface ExportTypesOptions extends z.input<typeof ExportTypesOptionsSchema> {}
 
 export const ExportOptionsSchema = z.object({
     /**
@@ -120,7 +120,7 @@ export const ExportOptionsSchema = z.object({
     crudRepository: z.boolean().default(false),
 });
 
-export interface ExportOptions extends z.TypeOf<typeof ExportOptionsSchema> {}
+export interface ExportOptions extends z.input<typeof ExportOptionsSchema> {}
 
 export const NamingOptionsSchema = z.object({
     /**
@@ -227,7 +227,7 @@ export const NamingOptionsSchema = z.object({
     crudRepositoryClassNameSuffix: z.string().default('CrudRepo'),
 });
 
-export interface NamingOptions extends z.TypeOf<typeof NamingOptionsSchema> {}
+export interface NamingOptions extends z.input<typeof NamingOptionsSchema> {}
 
 export const CommonTypeAdapterOptionsSchema = z.object({
     /**
@@ -238,7 +238,7 @@ export const CommonTypeAdapterOptionsSchema = z.object({
 });
 
 export interface CommonTypeAdapterOptions
-    extends z.TypeOf<typeof CommonTypeAdapterOptionsSchema> {}
+    extends z.input<typeof CommonTypeAdapterOptionsSchema> {}
 
 export const TableMappingSchema = z.object({
     /**
@@ -252,7 +252,7 @@ export const TableMappingSchema = z.object({
     useQualifiedTableName: z.boolean().nullish(),
 });
 
-export interface TableMapping extends z.TypeOf<typeof TableMappingSchema> {}
+export interface TableMapping extends z.input<typeof TableMappingSchema> {}
 
 export const CommonPrimaryKeyOptionsSchema = z.object({
     /**
@@ -266,7 +266,7 @@ export const CommonPrimaryKeyOptionsSchema = z.object({
 });
 
 export interface CommonPrimaryKeyOptions
-    extends z.TypeOf<typeof CommonPrimaryKeyOptionsSchema> {}
+    extends z.input<typeof CommonPrimaryKeyOptionsSchema> {}
 
 export const CommonCustomTypesOptionsSchema = z.object({
     /**
@@ -278,7 +278,7 @@ export const CommonCustomTypesOptionsSchema = z.object({
 });
 
 export interface CommonCustomTypesOptions
-    extends z.TypeOf<typeof CommonCustomTypesOptionsSchema> {}
+    extends z.input<typeof CommonCustomTypesOptionsSchema> {}
 
 export const CommonOptionsSchema = z.object({
     /** @see CommonCustomTypesOptions */
@@ -291,7 +291,7 @@ export const CommonOptionsSchema = z.object({
     primaryKey: CommonPrimaryKeyOptionsSchema.nullish(),
 });
 
-export interface CommonOptions extends z.TypeOf<typeof CommonOptionsSchema> {}
+export interface CommonOptions extends z.input<typeof CommonOptionsSchema> {}
 
 export const RawContentSchema = z.object({
     /** Raw content injected before generated code in each file */
@@ -301,7 +301,7 @@ export const RawContentSchema = z.object({
     after: z.string().nullish()
 });
 
-export interface RawContent extends z.TypeOf<typeof RawContentSchema> {}
+export interface RawContent extends z.input<typeof RawContentSchema> {}
 
 export const TypeWrapperSchema = z.object({
     typeName: StrOrRegExpSchema,
@@ -316,6 +316,13 @@ export const OutputOptionsSchema = z.object({
     import: OutputImportOptionsSchema.nullish(),
 });
 
+export const ConnectionSourceOptionsSchema = z.object({ 
+    path: z.string().nullish(),
+    resolveRelative: z.boolean().nullish(),
+});
+
+export interface ConnectionSourceOptions extends z.input<typeof ConnectionSourceOptionsSchema> {}
+
 export const GeneratorOptsSchema = z.object({
     /** Root path of module - used for resolving relative paths. If unspecified, assumed to be cwd */
     moduleRoot: z.string().nullish(),
@@ -329,11 +336,21 @@ export const GeneratorOptsSchema = z.object({
         .nullish()
         .transform((it) => it ?? "schema.yaml"),
 
-    /** Path to module that exports DBConnection object used in table mappers */
+    /** 
+     * Path to module that exports DBConnection object used in table mappers 
+     * @deprecated
+     * @see connectionSource
+     */
     connectionSourcePath: z
         .string()
         .nullish()
         .transform((it) => it ?? "src/db/connection-source.ts"),
+
+    /**
+     * Connection source configuration
+     * @see ConnectionSourceOptions
+     */
+    connectionSource: ConnectionSourceOptionsSchema.nullish(),
 
     /** Path to output directory where a typescript class file will be generated for each table */
     outputDirPath: z
@@ -433,4 +450,4 @@ export const GeneratorOptsSchema = z.object({
 /**
  * Generator options
  */
-export interface GeneratorOpts extends z.TypeOf<typeof GeneratorOptsSchema> {}
+export interface GeneratorOpts extends z.input<typeof GeneratorOptsSchema> {}
