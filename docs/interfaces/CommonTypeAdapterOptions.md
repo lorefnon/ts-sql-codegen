@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- `TypeOf`\<typeof `CommonTypeAdapterOptionsSchema`\>
+- `input`\<typeof `CommonTypeAdapterOptionsSchema`\>
 
   ↳ **`CommonTypeAdapterOptions`**
 
@@ -25,10 +25,8 @@ when no specific import path is specified at field level
 
 #### Inherited from
 
-z.TypeOf.importPath
+z.input.importPath
 
 #### Defined in
 
-[src/generator-options.ts:237](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L237)
-
-[src/generator-options.ts:237](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L237)
+[src/generator-options.ts:237](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L237)

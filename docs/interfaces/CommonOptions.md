@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- `TypeOf`\<typeof `CommonOptionsSchema`\>
+- `input`\<typeof `CommonOptionsSchema`\>
 
   ↳ **`CommonOptions`**
 
@@ -28,11 +28,11 @@ CommonCustomTypesOptions
 
 #### Inherited from
 
-z.TypeOf.customTypes
+z.input.customTypes
 
 #### Defined in
 
-[src/generator-options.ts:285](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L285)
+[src/generator-options.ts:285](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L285)
 
 ___
 
@@ -46,11 +46,11 @@ CommonCustomTypesOptions
 
 #### Inherited from
 
-z.TypeOf.primaryKey
+z.input.primaryKey
 
 #### Defined in
 
-[src/generator-options.ts:291](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L291)
+[src/generator-options.ts:291](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L291)
 
 ___
 
@@ -64,8 +64,8 @@ CommonPrimaryKeyOptions
 
 #### Inherited from
 
-z.TypeOf.typeAdapter
+z.input.typeAdapter
 
 #### Defined in
 
-[src/generator-options.ts:288](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L288)
+[src/generator-options.ts:288](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L288)

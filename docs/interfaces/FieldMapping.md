@@ -32,7 +32,7 @@ z.TypeOf.columnName
 
 #### Defined in
 
-[src/field-mappings.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L105)
+[src/field-mappings.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L105)
 
 ___
 
@@ -51,7 +51,7 @@ z.TypeOf.columnType
 
 #### Defined in
 
-[src/field-mappings.ts:116](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L116)
+[src/field-mappings.ts:116](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L116)
 
 ___
 
@@ -65,13 +65,13 @@ z.TypeOf.comment
 
 #### Defined in
 
-[src/field-mappings.ts:126](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L126)
+[src/field-mappings.ts:126](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L126)
 
 ___
 
 ### generatedField
 
-• **generatedField**: ``false`` \| \{ `hasDefault?`: ``null`` \| `boolean` ; `isComputed?`: ``null`` \| `boolean` ; `isOptional?`: ``null`` \| `boolean` ; `name?`: ``null`` \| `string` ; `type?`: ``null`` \| \{ `adapter?`: ``null`` \| \{ `importPath?`: ``null`` \| `string` ; `isDefault?`: ``null`` \| `boolean` ; `isRelative?`: ``null`` \| `boolean` ; `name`: `string`  } ; `dbType?`: ``null`` \| \{ `name`: `string`  } ; `kind?`: ``null`` \| ``"custom"`` \| ``"customComparable"`` \| ``"enum"`` \| ``"customInt"`` \| ``"customDouble"`` \| ``"customUuid"`` \| ``"customLocalDate"`` \| ``"customLocalTime"`` \| ``"customLocalDateTime"`` ; `tsType?`: ``null`` \| \{ `importPath?`: ``null`` \| `string` ; `isDefault?`: ``null`` \| `boolean` ; `isRelative?`: ``null`` \| `boolean` ; `name`: `string`  }  }  } & `undefined` \| ``false`` \| \{ `hasDefault?`: ``null`` \| `boolean` ; `isComputed?`: ``null`` \| `boolean` ; `isOptional?`: ``null`` \| `boolean` ; `name?`: ``null`` \| `string` ; `type?`: ``null`` \| \{ `adapter?`: ``null`` \| \{ `importPath?`: ``null`` \| `string` ; `isDefault?`: ``null`` \| `boolean` ; `isRelative?`: ``null`` \| `boolean` ; `name`: `string`  } ; `dbType?`: ``null`` \| \{ `name`: `string`  } ; `kind?`: ``null`` \| ``"custom"`` \| ``"customComparable"`` \| ``"enum"`` \| ``"customInt"`` \| ``"customDouble"`` \| ``"customUuid"`` \| ``"customLocalDate"`` \| ``"customLocalTime"`` \| ``"customLocalDateTime"`` ; `tsType?`: ``null`` \| \{ `importPath?`: ``null`` \| `string` ; `isDefault?`: ``null`` \| `boolean` ; `isRelative?`: ``null`` \| `boolean` ; `name`: `string`  }  }  }
+• **generatedField**: ``false`` \| \{ `hasDefault?`: ``null`` \| `boolean` ; `isComputed?`: ``null`` \| `boolean` ; `isOptional?`: ``null`` \| `boolean` ; `name?`: ``null`` \| `string` ; `type?`: ``null`` \| \{ `adapter?`: ``null`` \| \{ `importPath?`: ``null`` \| `string` ; `isDefault?`: ``null`` \| `boolean` ; `isRelative?`: ``null`` \| `boolean` ; `name`: `string`  } ; `dbType?`: ``null`` \| \{ `name`: `string`  } ; `kind?`: ``null`` \| ``"custom"`` \| ``"customComparable"`` \| ``"enum"`` \| ``"customInt"`` \| ``"customDouble"`` \| ``"customUuid"`` \| ``"customLocalDate"`` \| ``"customLocalTime"`` \| ``"customLocalDateTime"`` ; `tsType?`: ``null`` \| \{ `importPath?`: ``null`` \| `string` ; `isDefault?`: ``null`` \| `boolean` ; `isRelative?`: ``null`` \| `boolean` ; `name`: `string`  }  }  }
 
 Can be used to customize the field name or type mapping
 in the generated field.
@@ -84,9 +84,7 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-[src/field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L124)
-
-[src/field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L124)
+[src/field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L124)
 
 ___
 
@@ -102,4 +100,4 @@ z.TypeOf.tableName
 
 #### Defined in
 
-[src/field-mappings.ts:108](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/field-mappings.ts#L108)
+[src/field-mappings.ts:108](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L108)

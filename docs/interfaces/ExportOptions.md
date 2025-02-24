@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- `TypeOf`\<typeof `ExportOptionsSchema`\>
+- `input`\<typeof `ExportOptionsSchema`\>
 
   ↳ **`ExportOptions`**
 
@@ -24,7 +24,7 @@
 
 ### columnTypeMappingInterface
 
-• **columnTypeMappingInterface**: `boolean`
+• `Optional` **columnTypeMappingInterface**: `boolean`
 
 Additionally export a column types mapping useful for constructing filter type
 for dynamic conditions.
@@ -37,19 +37,17 @@ Example:
 
 #### Inherited from
 
-z.TypeOf.columnTypeMappingInterface
+z.input.columnTypeMappingInterface
 
 #### Defined in
 
-[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L113)
-
-[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L113)
+[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L113)
 
 ___
 
 ### crudRepository
 
-• **crudRepository**: `boolean`
+• `Optional` **crudRepository**: `boolean`
 
 Generate a repository class to simplify common single-table CRUD operations
 
@@ -57,19 +55,17 @@ This is currently only supported for tables having an id column as primary key
 
 #### Inherited from
 
-z.TypeOf.crudRepository
+z.input.crudRepository
 
 #### Defined in
 
-[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L120)
-
-[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L120)
+[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L120)
 
 ___
 
 ### extractedColumns
 
-• **extractedColumns**: `boolean`
+• `Optional` **extractedColumns**: `boolean`
 
 Additionally export the extracted columns (Useful for select * queries etc.)
 
@@ -78,19 +74,17 @@ Example:
 
 #### Inherited from
 
-z.TypeOf.extractedColumns
+z.input.extractedColumns
 
 #### Defined in
 
-[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L101)
-
-[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L101)
+[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L101)
 
 ___
 
 ### rowTypes
 
-• **rowTypes**: `boolean` \| \{ `asInterface`: `boolean`  } & `undefined` \| `boolean` \| \{ `asInterface`: `boolean`  }
+• `Optional` **rowTypes**: `boolean` \| \{ `asInterface`: `boolean`  }
 
 Additionally export the row types associated with table
 
@@ -113,19 +107,17 @@ Example:
 
 #### Inherited from
 
-z.TypeOf.rowTypes
+z.input.rowTypes
 
 #### Defined in
 
-[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L70)
-
-[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L70)
+[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L70)
 
 ___
 
 ### tableClasses
 
-• **tableClasses**: `boolean`
+• `Optional` **tableClasses**: `boolean`
 
 If set to false, prevents the table class from getting exported
 
@@ -134,19 +126,17 @@ export the table instance
 
 #### Inherited from
 
-z.TypeOf.tableClasses
+z.input.tableClasses
 
 #### Defined in
 
-[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L47)
-
-[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L47)
+[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L47)
 
 ___
 
 ### tableInstances
 
-• **tableInstances**: `boolean`
+• `Optional` **tableInstances**: `boolean`
 
 In addition to the table class, also expose instantiated instance of table class
 
@@ -157,19 +147,17 @@ Example:
 
 #### Inherited from
 
-z.TypeOf.tableInstances
+z.input.tableInstances
 
 #### Defined in
 
-[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L39)
-
-[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L39)
+[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L39)
 
 ___
 
 ### valuesTypes
 
-• **valuesTypes**: `boolean` \| \{ `asInterface`: `boolean`  } & `undefined` \| `boolean` \| \{ `asInterface`: `boolean`  }
+• `Optional` **valuesTypes**: `boolean` \| \{ `asInterface`: `boolean`  }
 
 Additionally export the value types associated with table
 
@@ -192,10 +180,8 @@ Example:
 
 #### Inherited from
 
-z.TypeOf.valuesTypes
+z.input.valuesTypes
 
 #### Defined in
 
-[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L93)
-
-[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L93)
+[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L93)

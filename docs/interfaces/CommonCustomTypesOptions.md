@@ -4,7 +4,7 @@
 
 ## Hierarchy
 
-- `TypeOf`\<typeof `CommonCustomTypesOptionsSchema`\>
+- `input`\<typeof `CommonCustomTypesOptionsSchema`\>
 
   ↳ **`CommonCustomTypesOptions`**
 
@@ -26,10 +26,8 @@ Relative to cwd
 
 #### Inherited from
 
-z.TypeOf.importPath
+z.input.importPath
 
 #### Defined in
 
-[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L277)
-
-[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/b77777f/src/generator-options.ts#L277)
+[src/generator-options.ts:277](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L277)
