@@ -41,7 +41,7 @@ z.input.columnTypeMappingInterface
 
 #### Defined in
 
-[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L113)
+[src/generator-options.ts:113](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L113)
 
 ___
 
@@ -59,7 +59,7 @@ z.input.crudRepository
 
 #### Defined in
 
-[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L120)
+[src/generator-options.ts:120](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L120)
 
 ___
 
@@ -78,7 +78,7 @@ z.input.extractedColumns
 
 #### Defined in
 
-[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L101)
+[src/generator-options.ts:101](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L101)
 
 ___
 
@@ -111,7 +111,7 @@ z.input.rowTypes
 
 #### Defined in
 
-[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L70)
+[src/generator-options.ts:70](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L70)
 
 ___
 
@@ -130,7 +130,7 @@ z.input.tableClasses
 
 #### Defined in
 
-[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L47)
+[src/generator-options.ts:47](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L47)
 
 ___
 
@@ -151,7 +151,7 @@ z.input.tableInstances
 
 #### Defined in
 
-[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L39)
+[src/generator-options.ts:39](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L39)
 
 ___
 
@@ -184,4 +184,4 @@ z.input.valuesTypes
 
 #### Defined in
 
-[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L93)
+[src/generator-options.ts:93](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L93)

@@ -40,7 +40,7 @@ Matching criteria specified as string or regex
 
 #### Defined in
 
-[src/field-mappings.ts:8](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L8)
+[src/field-mappings.ts:8](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/field-mappings.ts#L8)
 
 ## Variables
 
@@ -50,4 +50,4 @@ Matching criteria specified as string or regex
 
 #### Defined in
 
-[src/field-mappings.ts:131](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L131)
+[src/field-mappings.ts:131](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/field-mappings.ts#L131)

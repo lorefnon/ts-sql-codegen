@@ -100,10 +100,10 @@ export class Generator {
   });
 
   private resolvePath(relPath: string) {
-      if (this.opts.moduleRoot) {
-        return path.resolve(this.opts.moduleRoot, relPath)
-      }
-      return path.resolve(relPath);
+    if (this.opts.moduleRoot) {
+      return path.resolve(this.opts.moduleRoot, relPath)
+    }
+    return path.resolve(relPath);
   }
 
   async generate() {
@@ -696,7 +696,7 @@ export class Generator {
       col = table.columns.find((it) => it.name === commonPKColName) ?? null;
     }
     if (!col) {
-      const pkConstraint = table.constraints.find(
+      const pkConstraint = table.constraints?.find(
         (it) => it.type === "PRIMARY KEY"
       );
       if (pkConstraint && pkConstraint.columns.length === 1) {

@@ -32,7 +32,7 @@ z.input.customTypes
 
 #### Defined in
 
-[src/generator-options.ts:285](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L285)
+[src/generator-options.ts:285](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L285)
 
 ___
 
@@ -50,7 +50,7 @@ z.input.primaryKey
 
 #### Defined in
 
-[src/generator-options.ts:291](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L291)
+[src/generator-options.ts:291](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L291)
 
 ___
 
@@ -68,4 +68,4 @@ z.input.typeAdapter
 
 #### Defined in
 
-[src/generator-options.ts:288](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/generator-options.ts#L288)
+[src/generator-options.ts:288](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/generator-options.ts#L288)

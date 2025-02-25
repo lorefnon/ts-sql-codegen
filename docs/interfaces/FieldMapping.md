@@ -32,7 +32,7 @@ z.TypeOf.columnName
 
 #### Defined in
 
-[src/field-mappings.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L105)
+[src/field-mappings.ts:105](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/field-mappings.ts#L105)
 
 ___
 
@@ -51,7 +51,7 @@ z.TypeOf.columnType
 
 #### Defined in
 
-[src/field-mappings.ts:116](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L116)
+[src/field-mappings.ts:116](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/field-mappings.ts#L116)
 
 ___
 
@@ -65,7 +65,7 @@ z.TypeOf.comment
 
 #### Defined in
 
-[src/field-mappings.ts:126](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L126)
+[src/field-mappings.ts:126](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/field-mappings.ts#L126)
 
 ___
 
@@ -84,7 +84,7 @@ z.TypeOf.generatedField
 
 #### Defined in
 
-[src/field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L124)
+[src/field-mappings.ts:124](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/field-mappings.ts#L124)
 
 ___
 
@@ -100,4 +100,4 @@ z.TypeOf.tableName
 
 #### Defined in
 
-[src/field-mappings.ts:108](https://github.com/lorefnon/ts-sql-codegen/blob/e58eed00df9c6d2d18a73ca44cce2dac9ee007b5/src/field-mappings.ts#L108)
+[src/field-mappings.ts:108](https://github.com/lorefnon/ts-sql-codegen/blob/7fbf2a8eefc564235a09365113d5ea88b70cfc39/src/field-mappings.ts#L108)

@@ -24,7 +24,7 @@ export const TableSchema = z.object({
     name: z.string(),
     type: z.string(),
     columns: ColumnSchema.array(),
-    constraints: ConstraintSchema.array(),
+    constraints: ConstraintSchema.array().nullish(),
     comment: z.string().nullish()
 });
 
