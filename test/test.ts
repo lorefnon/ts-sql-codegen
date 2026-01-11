@@ -7,8 +7,8 @@ import assert from "assert";
 import { getConnection } from "./helpers/connection-source";
 import { extractColumnsFrom } from "ts-sql-query/extras/utils";
 
-const schemaPath = path.join(__dirname, "data/test.schema.yaml");
-const connectionSourcePath = path.join(__dirname, "helpers/connection-source");
+const schemaPath = path.join(__dirname, "data", "test.schema.yaml");
+const connectionSourcePath = path.join(__dirname, "helpers", "connection-source");
 const outputDirPath = path.join(__dirname, "generated");
 
 const fieldMappings: FieldMapping[] = [
@@ -19,7 +19,7 @@ const fieldMappings: FieldMapping[] = [
         kind: "enum",
         tsType: {
           name: "Genre",
-          importPath: path.join(__dirname, "helpers/types"),
+          importPath: path.join(__dirname, "helpers", "types"),
         },
       },
     },
@@ -33,11 +33,11 @@ const fieldMappings: FieldMapping[] = [
         dbType: { name: "jsonb" },
         tsType: {
           name: "ChapterMetadata",
-          importPath: path.join(__dirname, "helpers/types"),
+          importPath: path.join(__dirname, "helpers", "types"),
         },
         adapter: {
           name: "ChapterMetadataAdapter",
-          importPath: path.join(__dirname, "helpers/adapters"),
+          importPath: path.join(__dirname, "helpers", "adapters"),
         },
       },
     },
@@ -51,6 +51,7 @@ describe("Generator", function () {
   beforeEach(async () => {
     try {
       await fs.rm(outputDirPath, {
+        force: true,
         recursive: true
       });
     } catch (e) {
@@ -61,6 +62,7 @@ describe("Generator", function () {
   afterEach(async () => {
     try {
       await fs.rm(outputDirPath, {
+        force: true,
         recursive: true
       });
     } catch (e) {
@@ -470,6 +472,9 @@ describe("Generator", function () {
       schemaPath,
       connectionSourcePath,
       outputDirPath,
+      enums: {
+        include: ["genre"],
+      },
       export: {
         rowTypes: true,
         valuesTypes: true,
@@ -478,6 +483,10 @@ describe("Generator", function () {
         tableClasses: false,
       },
       naming: {
+        enumConstantNamePrefix: 'ECNP',
+        enumConstantNameSuffix: 'ECNS',
+        enumTypeNamePrefix: 'ETNP',
+        enumTypeNameSuffix: 'ETNS',
         insertableRowTypeNamePrefix: 'IRP',
         insertableRowTypeNameSuffix: 'IRS',
         insertableValuesTypeNamePrefix: 'IVP',
@@ -503,7 +512,26 @@ describe("Generator", function () {
         viewInstanceNamePrefix: 'VIP',
         viewInstanceNameSuffix: 'VIS',
       },
-      fieldMappings,
+      fieldMappings: [
+        {
+          tableName: "chapters",
+          columnName: "metadata",
+          generatedField: {
+            type: {
+              kind: "custom",
+              dbType: { name: "jsonb" },
+              tsType: {
+                name: "ChapterMetadata",
+                importPath: path.join(__dirname, "helpers", "types"),
+              },
+              adapter: {
+                name: "ChapterMetadataAdapter",
+                importPath: path.join(__dirname, "helpers", "adapters"),
+              },
+            },
+          },
+        },
+      ]
     });
     await generator.generate();
     await snap(await readAllGenerated());
@@ -632,6 +660,61 @@ describe("Generator", function () {
           importPath: '../type-helpers'
         }
       }]
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  })
+
+  it('supports inclusions for enumeration generation', async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      enums: {
+        include: ["public.genre"],
+      },
+      export: {
+        tableInstances: true,
+        tableClasses: false,
+      },
+      tables: {
+        include: ["author_books"],
+      },
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  })
+
+  it('supports exclusions for enumeration generation', async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      enums: {
+        exclude: ["genre"],
+      },
+      export: {
+        tableInstances: true,
+        tableClasses: false,
+      },
+      fieldMappings: [
+        {
+          columnType: "genre",
+          generatedField: {
+            type: {
+              kind: "customLocalDateTime",
+              tsType: {
+                name: "Genre",
+                importPath: path.join(outputDirPath, "enums", "Genre"),
+                isDefault: true,
+              },
+            },
+          },
+        }
+      ],
+      tables: {
+        include: ["author_books"],
+      },
     });
     await generator.generate();
     await snap(await readAllGenerated());

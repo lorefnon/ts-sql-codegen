@@ -4,10 +4,11 @@ import Handlebars from "handlebars";
 import { register } from "hbs-dedent-helper";
 import yaml from "js-yaml";
 import { isObject, camelCase, isEmpty, last, memoize, upperFirst } from "lodash";
-import path from "path/posix";
+import path from "path";
 import { match } from "ts-pattern";
 import {
   fieldMappings,
+  FieldMapping,
   GeneratedField,
   GeneratedFieldType,
   ImportedItem
@@ -16,7 +17,7 @@ import { FileRemover } from "./file-remover";
 import { GeneratorOpts, GeneratorOptsSchema, NamingOptions, NamingOptionsSchema } from "./generator-options";
 import { doesMatchNameOrPattern, doesMatchNameOrPatternNamespaced } from "./matcher";
 import { Logger } from "./logger"
-import { Column, Table, TblsSchema } from "./tbls-types";
+import { Column, Enum, Table, TblsSchema } from "./tbls-types";
 
 register();
 
@@ -75,6 +76,7 @@ interface RepoInput {
 export class Generator {
   protected opts: z.output<typeof GeneratorOptsSchema>;
   protected naming: NamingOptions;
+  protected generatedFieldMappings: FieldMapping[];
 
   private writtenFiles = new Set<string>()
   public logger: Logger = console;
@@ -82,18 +84,29 @@ export class Generator {
   constructor(opts: GeneratorOpts) {
     this.opts = GeneratorOptsSchema.parse(opts);
     this.naming = NamingOptionsSchema.parse(this.opts.naming || {});
+    this.generatedFieldMappings = [];
   }
 
-  protected getFieldMappings = memoize(() => {
-    return (this.opts.fieldMappings ?? []).concat(fieldMappings);
+  protected getFieldMappings = () => {
+    return [
+      ...(this.opts.fieldMappings ?? []),
+      ...fieldMappings,
+      ...this.generatedFieldMappings,
+    ];
+  };
+
+  protected getTemplatePath = memoize((entityKind: TableKind) => {
+    switch (entityKind) {
+      case "Enum":
+        return path.join(__dirname, "template-enum.ts.hbs");
+      case "Table":
+      case "View":
+        return path.join(__dirname, "template.ts.hbs");
+    }
   });
 
-  protected getTemplatePath = memoize(() => {
-    return path.join(__dirname, "template.ts.hbs");
-  });
-
-  protected getCompiledTemplate = memoize(async () => {
-    const rawTemplate = await fs.readFile(this.getTemplatePath(), "utf8");
+  protected getCompiledTemplate = memoize(async (entityKind: TableKind) => {
+    const rawTemplate = await fs.readFile(this.getTemplatePath(entityKind), "utf8");
     return Handlebars.compile(rawTemplate, {
       noEscape: true
     });
@@ -112,10 +125,19 @@ export class Generator {
       "utf8"
     );
     const schema = TblsSchema.parse(yaml.load(rawSchema));
+    if (Array.isArray(schema.enums)) {
+      await Promise.all(
+        schema.enums.map(async (enumeration) => {
+          if (this.shouldProcess(enumeration.name, 'enums')) {
+            await this.generateMapper(enumeration, 'Enum');
+          }
+        })
+      );
+    }
     await Promise.all(
       schema.tables.map(async (table) => {
-        if (this.shouldProcess(table)) {
-          await this.generateTableMapper(table);
+        if (this.shouldProcess(table.name, 'tables')) {
+          await this.generateMapper(table);
         }
       })
     );
@@ -126,20 +148,21 @@ export class Generator {
     ).removeExtraneousFiles()
   }
 
-  protected shouldProcess(table: Table) {
-    const filter = this.opts.tables;
+  protected shouldProcess(name: string, list: 'tables' | 'enums') {
+    const filter = this.opts[list];
     if (
       filter?.include &&
       filter.include.findIndex((it) =>
-        doesMatchNameOrPatternNamespaced(it, table.name)
+        doesMatchNameOrPatternNamespaced(it, name)
       ) < 0
     ) {
       return false;
     }
+
     if (
       filter?.exclude &&
       filter.exclude.findIndex((it) =>
-        doesMatchNameOrPatternNamespaced(it, table.name)
+        doesMatchNameOrPatternNamespaced(it, name)
       ) >= 0
     ) {
       return false;
@@ -156,15 +179,25 @@ export class Generator {
       .otherwise(() => null);
   }
 
+  protected async getEnumTemplateInput(enumeration: Enum) {
+    const enumerationName = this.getPascalCasedTableName(enumeration.name);
+    return {
+      constantName:
+        this.naming.enumConstantNamePrefix + enumerationName + this.naming.enumConstantNameSuffix,
+      typeName: this.getTableMapperTypeName(enumeration.name, "Enum"),
+      values: enumeration.values,
+    };
+  }
+
   protected async getTableTemplateInput(table: Table, tableKind: TableKind, filePath: string) {
     // Qualified table name with schema prefix
-    const tableName = this.extractTableName(table.name);
+    const tableName = this.extractTypeName(table.name);
     const pkCol = this.findPrimaryKey(table);
     const fields = this.getFieldsInput(table, pkCol);
     const dbConnectionSource = this.getConnectionSourceImportPath(filePath);
     const exportTableClass = this.opts.export?.tableClasses ?? true;
     const wrapperTypeImports: ImportTmplInput[] = [];
-    const className = this.getTableMapperClassName(table.name, tableKind);
+    const className = this.getTableMapperTypeName(table.name, tableKind);
     const rowTypes = this.getRowTypeInputs(tableName, tableKind, className, wrapperTypeImports);
     const valuesTypes = this.getValuesTypeInputs(tableName, tableKind, className, wrapperTypeImports);
     const pkField = fields.find(it => it.isPK)
@@ -210,6 +243,13 @@ export class Generator {
       pkField,
       repo
     });
+  }
+
+  protected maybeCorrectPathSeparators(inputPath: string): string {
+    if (path.sep === path.posix.sep)
+      return inputPath;
+
+    return inputPath.replaceAll(path.sep, path.posix.sep);
   }
 
   protected getFieldsInput(table: Table, pkCol: Column | null): FieldTmplInput[] {
@@ -297,18 +337,36 @@ export class Generator {
     }
   }
 
-  protected async generateTableMapper(table: Table) {
-    const tableKind = this.getTableKind(table);
-    if (!tableKind) {
+  protected async generateMapper(enumeration: Enum, entityKind: TableKind): Promise<void>;
+  protected async generateMapper(table: Table): Promise<void>;
+  protected async generateMapper(entity: Enum | Table, entityKind?: TableKind | null) {
+    entityKind ??= this.getTableKind(entity as Table);
+    if (!entityKind) {
       this.logger.warn(
-        `Unknown table type ${table.type} for table ${table.name}: SKIPPING`
+        `Unknown table type ${(entity as Table).type} for table ${entity.name}: SKIPPING`
       );
       return;
     }
-    const filePath = this.getOutputFilePath(table, tableKind);
-    const templateInput = await this.getTableTemplateInput(table, tableKind, filePath)
-    const template = await this.getCompiledTemplate();
-    const output = await this.postProcessOutput(template(templateInput), table);
+    const filePath = this.getOutputFilePath(entity.name, entityKind);
+
+    let templateInput: any;
+    switch (entityKind) {
+      case "Enum": {
+        if (!this.opts.enums)
+          return;  // should enumerations be generated by default?
+        templateInput = await this.getEnumTemplateInput(entity as Enum);
+        this.appendEnumerationToGeneratedFieldMappings(entity as Enum, filePath);
+        break;
+      }
+      case "Table":
+      case "View": {
+        templateInput = await this.getTableTemplateInput(entity as Table, entityKind, filePath)
+        break;
+      }
+    }
+
+    const template = await this.getCompiledTemplate(entityKind);
+    const output = await this.postProcessOutput(template(templateInput));
     await fs.mkdir(path.dirname(filePath), {
       recursive: true
     });
@@ -321,6 +379,21 @@ export class Generator {
       this.writtenFiles.add(path.relative(this.opts.outputDirPath, filePath));
       await fs.writeFile(filePath, output);
     }
+  }
+
+  protected appendEnumerationToGeneratedFieldMappings(enumeration: Enum, filePath: string) {
+    this.generatedFieldMappings.push({
+      columnName: this.extractTypeName(enumeration.name),
+      generatedField: {
+        type: {
+          kind: "enum",
+          tsType: {
+            name: this.getTableMapperTypeName(enumeration.name, "Enum"),
+            importPath: filePath,
+          },
+        },
+      },
+    });
   }
 
   protected getIdPrefix(table: Table) {
@@ -355,10 +428,10 @@ export class Generator {
       path.dirname(outputFilePath),
       this.resolvePath(csPath)
     );
-    return path.join(
+    return this.maybeCorrectPathSeparators(path.join(
       path.dirname(relPath),
       path.basename(relPath)
-    );
+    ));
   }
 
   protected getAdapterImports(
@@ -454,10 +527,10 @@ export class Generator {
     importedItem: ImportedItem
   ) {
     if (importedItem.isRelative === false) return importPath;
-    const result: string = path.relative(
+    const result: string = this.maybeCorrectPathSeparators(path.relative(
       path.dirname(filePath),
       this.resolvePath(importPath)
-    );
+    ));
     if (result.startsWith(".")) {
       return result;
     } else {
@@ -489,7 +562,7 @@ export class Generator {
     return input;
   }
 
-  protected async postProcessOutput(output: string, _table: Table) {
+  protected async postProcessOutput(output: string) {
     const sections = [output];
     if (this.opts.rawContent?.before) {
       sections.unshift(this.opts.rawContent.before)
@@ -506,8 +579,12 @@ export class Generator {
       this.naming.crudRepositoryClassNameSuffix;
   }
 
-  protected getTableMapperClassName(tableName: string, tableKind: TableKind) {
-    if (tableKind === 'Table') {
+  protected getTableMapperTypeName(tableName: string, tableKind: TableKind) {
+    if (tableKind === 'Enum') {
+      return this.naming.enumTypeNamePrefix +
+        this.getPascalCasedTableName(tableName) +
+        this.naming.enumTypeNameSuffix;
+    } else if (tableKind === 'Table') {
       return this.naming.tableClassNamePrefix +
         this.getPascalCasedTableName(tableName) +
         this.naming.tableClassNameSuffix;
@@ -680,13 +757,13 @@ export class Generator {
     };
   }
 
-  protected getOutputFilePath(table: Table, tableKind: TableKind) {
-    const fileName = this.getOutputFileName(table, tableKind);
+  protected getOutputFilePath(name: string, tableKind: TableKind) {
+    const fileName = this.getOutputFileName(name, tableKind);
     return path.join(this.opts.outputDirPath, fileName);
   }
 
-  protected getOutputFileName(table: Table, tableKind: TableKind) {
-    return this.getTableMapperClassName(table.name, tableKind) + ".ts";
+  protected getOutputFileName(name: string, tableKind: TableKind) {
+    return this.getTableMapperTypeName(name, tableKind) + ".ts";
   }
 
   protected findPrimaryKey(table: Table) {
@@ -719,7 +796,7 @@ export class Generator {
       ?.wrapper
   }
 
-  protected extractTableName(configTableName: string) {
+  protected extractTypeName(configTableName: string) {
     return last(configTableName.split(".")) as string;
   }
 
@@ -879,4 +956,4 @@ export class Generator {
 }
 
 
-type TableKind = "Table" | "View"
+type TableKind = "Enum" | "Table" | "View"

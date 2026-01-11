@@ -20,6 +20,13 @@ export const ConstraintSchema = z.object({
     comment: z.string().nullish(),
 });
 
+export const EnumsSchema = z.object({
+    name: z.string(),
+    values: z.string().array(),
+});
+
+export type Enum = z.TypeOf<typeof EnumsSchema>;
+
 export const TableSchema = z.object({
     name: z.string(),
     type: z.string(),
@@ -33,5 +40,6 @@ export type Table = z.TypeOf<typeof TableSchema>;
 export const TblsSchema = z.object({
     name: z.string(),
     tables: TableSchema.array(),
+    enums: EnumsSchema.array().nullish(),
 });
 

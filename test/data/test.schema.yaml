@@ -301,6 +301,12 @@ functions:
   returnType: uuid
   arguments: namespace uuid, name text
   type: FUNCTION
+enums:
+- name: public.genre
+  values:
+  - fantasy
+  - scifi
+  - horror
 driver:
   name: postgres
   databaseVersion: PostgreSQL 14.4 (Ubuntu 14.4-1.pgdg22.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, 64-bit

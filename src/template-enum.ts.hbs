@@ -1,0 +1,15 @@
+{{#trim-trailing-whitespace}}
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen.
+ * Any changes will be overwritten.
+ */
+export const {{constantName}} = {
+{{#each values}}
+  {{this}}: "{{this}}",
+{{/each}}
+} as const;
+
+export type {{typeName}} = keyof typeof {{constantName}};
+{{/trim-trailing-whitespace}}

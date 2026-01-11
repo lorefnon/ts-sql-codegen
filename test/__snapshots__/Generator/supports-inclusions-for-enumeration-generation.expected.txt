@@ -1,0 +1,46 @@
+// AuthorBooksTable.ts :
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen.
+ * Any changes will be overwritten.
+ */
+import { View } from "ts-sql-query/View";
+import type { DBConnection } from "../helpers/connection-source";
+import {
+    Genre,
+} from "./Genre.ts";
+
+class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
+    id = this.optionalColumn('id', 'uuid');
+    name = this.optionalColumn('name', 'string');
+    authorId = this.optionalColumn('author_id', 'int');
+    releasedAt = this.optionalColumn('released_at', 'localDate');
+    timeToRead = this.optionalColumn('time_to_read', 'int');
+    genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    weightGrams = this.optionalColumn('weight_grams', 'double');
+    authorName = this.optionalColumn('author_name', 'string');
+
+    constructor() {
+        super('author_books');
+    }
+}
+
+export const tAuthorBooks = new AuthorBooksTable();
+
+
+
+// Genre.ts :
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen.
+ * Any changes will be overwritten.
+ */
+export const kGenre = {
+  fantasy: "fantasy",
+  scifi: "scifi",
+  horror: "horror",
+} as const;
+
+export type Genre = keyof typeof kGenre;

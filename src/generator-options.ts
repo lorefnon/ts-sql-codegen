@@ -1,20 +1,20 @@
 import * as z from "zod";
 import { FieldMappingSchema, ImportedItemSchema, StrOrRegExpSchema } from "./field-mappings";
 
-export const TableInclusionSchema = z.object({
+export const InclusionSchema = z.object({
     /**
-     * Tables to be included - identified by qualified table name
+     * Entry to be included - identified by qualified table or type name
      * or regular expression
      */
     include: StrOrRegExpSchema.array().nullish(),
     /**
-     * Tables to be excluded - identified by qualified table name
+     * Entry to be excluded - identified by qualified table or type name
      * or regular expression
      */
     exclude: StrOrRegExpSchema.array().nullish(),
 });
 
-export interface TableInclusion extends z.input<typeof TableInclusionSchema> {}
+export interface Inclusion extends z.input<typeof InclusionSchema> {}
 
 export const ExportTypesOptionsSchema = z.object({
     /**
@@ -123,6 +123,22 @@ export const ExportOptionsSchema = z.object({
 export interface ExportOptions extends z.input<typeof ExportOptionsSchema> {}
 
 export const NamingOptionsSchema = z.object({
+    /**
+     * Prefix to be used in the name of the constant that represents an enumeration
+     */
+    enumConstantNamePrefix: z.string().default('k'),
+    /**
+     * Suffix to be used in the name of the constant that represents an enumeration
+     */
+    enumConstantNameSuffix: z.string().default(''),
+    /**
+     * Prefix to be used in the name of the type that represents an enumeration
+     */
+    enumTypeNamePrefix: z.string().default(''),
+    /**
+     * Suffix to be used in the name of the type that represents an enumeration
+     */
+    enumTypeNameSuffix: z.string().default(''),
     /**
      * Prefix to be used in the name of the class that reprecents a table
      */
@@ -376,9 +392,17 @@ export const GeneratorOptsSchema = z.object({
      * Restrict the generator to process only a subset of tables
      * available
      *
-     * @see TableInclusion
+     * @see Inclusion
      */
-    tables: TableInclusionSchema.nullish(),
+    tables: InclusionSchema.nullish(),
+
+    /**
+     * Restrict the generator to process only a subset of enums
+     * available
+     *
+     * @see Inclusion
+     */
+    enums: InclusionSchema.nullish(),
 
     /**
      * Shared options that affect all generated output
