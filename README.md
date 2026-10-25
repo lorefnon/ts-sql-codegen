@@ -14,7 +14,7 @@ The code-generation process is highly customizable and almost all the defaults (
 1. Ability to include/exclude tables/fields
 1. Ability to customize field types and type adapters
 1. Idiomatic pascal-cased/camel-cased table/field name mapping by default and ability to customize names if desired.
-1. Auto-detection & mapping of computed fields, primary key columns.
+1. Auto-detection & mapping of enums, computed fields, primary key columns.
 1. Automatic documentation propagation from SQL comments
 
 ## Installation:
@@ -256,7 +256,7 @@ If you pass `removeExtraneous: true` generator option, we will remove any extran
 
 1. Only databases which are supported by both ts-sql-query and tbls can be supported.
 1. While ts-sql-codegen works with many databases and adapters, this utility has been tested only with postgresql & sqlite. Please report bugs if you face issues with other databases.
-1. Enum/custom type inspection support is currently limited - it is required to manually specify typescript types and adapters for now.
+1. Custom type inspection support is currently limited - it is required to manually specify typescript types and adapters for now.
 1. Typescript is assumed - plain js projects are not supported currently
 
 ## Contributing

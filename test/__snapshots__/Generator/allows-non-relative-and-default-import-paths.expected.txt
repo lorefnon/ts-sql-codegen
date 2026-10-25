@@ -7,6 +7,9 @@
  */
 import { View } from "ts-sql-query/View";
 import type { DBConnection } from "../helpers/connection-source";
+import {
+    Format,
+} from "../helpers/types";
 import Genre from "../helpers/types";
 
 class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
@@ -16,6 +19,7 @@ class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
     releasedAt = this.optionalColumn('released_at', 'localDate');
     timeToRead = this.optionalColumn('time_to_read', 'int');
     genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    format = this.optionalColumn<Format>('format', 'enum', 'format');
     weightGrams = this.optionalColumn('weight_grams', 'double');
     authorName = this.optionalColumn('author_name', 'string');
 
@@ -63,6 +67,9 @@ export const tAuthors = new AuthorsTable();
  */
 import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
+import {
+    Format,
+} from "../helpers/types";
 import Genre from "../helpers/types";
 
 class BooksTable extends Table<DBConnection, 'BooksTable'> {
@@ -72,6 +79,7 @@ class BooksTable extends Table<DBConnection, 'BooksTable'> {
     releasedAt = this.optionalColumn('released_at', 'localDate');
     timeToRead = this.optionalColumn('time_to_read', 'int');
     genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    format = this.optionalColumn<Format>('format', 'enum', 'format');
     /**
      * Sample weight as provided by distributor
      */

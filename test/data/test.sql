@@ -17,7 +17,7 @@ create table authors (
 insert into authors (id, name)
 values (1, 'Will Wight');
 
-create type genre as enum ('fantasy', 'scifi', 'horror');
+create type genre as enum ('fantasy', 'sci-fi', 'horror');
 
 create table books (
     id uuid not null primary key default uuid_generate_v4(),
@@ -26,6 +26,7 @@ create table books (
     released_at date,
     time_to_read interval,
     genre genre,
+    format enum('Audio-Book', 'Digital', 'Physical'),
     weight_grams double precision,
 
     constraint fk_books__author_id

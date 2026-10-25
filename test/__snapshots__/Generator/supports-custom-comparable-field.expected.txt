@@ -7,6 +7,9 @@
  */
 import { View } from "ts-sql-query/View";
 import type { DBConnection } from "../helpers/connection-source";
+import {
+    Format,
+} from "../helpers/types";
 import Genre from "./enums/Genre";
 
 class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
@@ -16,6 +19,7 @@ class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
     releasedAt = this.optionalColumn('released_at', 'localDate');
     timeToRead = this.optionalColumn('time_to_read', 'int');
     genre = this.optionalColumn<Genre>('genre', 'customComparable', 'genre');
+    format = this.optionalColumn<Format>('format', 'enum', 'format');
     weightGrams = this.optionalColumn('weight_grams', 'double');
     authorName = this.optionalColumn('author_name', 'string');
 

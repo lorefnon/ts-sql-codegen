@@ -1,7 +1,8 @@
 export {
     GeneratorOpts,
     ExportOptions,
-    TableInclusion,
+    Inclusion,
+    Inclusion as TableInclusion,
     CommonOptions,
     CommonPrimaryKeyOptions,
     CommonCustomTypesOptions,

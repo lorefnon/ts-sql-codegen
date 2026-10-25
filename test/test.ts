@@ -25,6 +25,19 @@ const fieldMappings: FieldMapping[] = [
     },
   },
   {
+    columnName: "format",
+    generatedField: {
+      type: {
+        kind: "enum",
+        dbType: { name: "format" },
+        tsType: {
+          name: "Format",
+          importPath: path.join(__dirname, "helpers/types"),
+        },
+      },
+    },
+  },
+  {
     tableName: "chapters",
     columnName: "metadata",
     generatedField: {
@@ -175,6 +188,42 @@ describe("Generator", function () {
           });
       }
     });
+  });
+  it("allows exporting enums", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: [],
+      },
+      enums: {
+        include: ["genre"],
+      },
+      export: {
+        enums: true,
+      },
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
+  it("allows excluding enums", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["authors"],
+      },
+      enums: {
+        exclude: ["genre"],
+      },
+      export: {
+        enums: true,
+      },
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
   });
   it("allows exporting row types", async () => {
     const generator = new Generator({
@@ -376,6 +425,7 @@ describe("Generator", function () {
             },
           },
         },
+        ...fieldMappings,
       ],
     });
     await generator.generate();
@@ -426,6 +476,7 @@ describe("Generator", function () {
             },
           },
         },
+        ...fieldMappings,
       ],
       includeDBTypeWhenIsOptional: true,
     });
@@ -458,7 +509,8 @@ describe("Generator", function () {
               },
             },
           },
-        }
+        },
+        ...fieldMappings,
       ],
     });
     await generator.generate();
@@ -471,6 +523,7 @@ describe("Generator", function () {
       connectionSourcePath,
       outputDirPath,
       export: {
+        enums: true,
         rowTypes: true,
         valuesTypes: true,
         extractedColumns: true,
@@ -478,6 +531,10 @@ describe("Generator", function () {
         tableClasses: false,
       },
       naming: {
+        enumConstantNamePrefix: 'ECP',
+        enumConstantNameSuffix: 'ECS',
+        enumTypeNamePrefix: 'ETP',
+        enumTypeNameSuffix: 'ETS',
         insertableRowTypeNamePrefix: 'IRP',
         insertableRowTypeNameSuffix: 'IRS',
         insertableValuesTypeNamePrefix: 'IVP',
@@ -503,7 +560,48 @@ describe("Generator", function () {
         viewInstanceNamePrefix: 'VIP',
         viewInstanceNameSuffix: 'VIS',
       },
-      fieldMappings,
+      fieldMappings: [
+        {
+          tableName: "chapters",
+          columnName: "metadata",
+          generatedField: {
+            type: {
+              kind: "custom",
+              dbType: { name: "jsonb" },
+              tsType: {
+                name: "ChapterMetadata",
+                importPath: path.join(__dirname, "helpers/types"),
+              },
+              adapter: {
+                name: "ChapterMetadataAdapter",
+                importPath: path.join(__dirname, "helpers/adapters"),
+              },
+            },
+          },
+        },
+      ],
+    });
+    await generator.generate();
+    await snap(await readAllGenerated());
+  });
+
+  it("allows unqualified column enum names", async () => {
+    const generator = new Generator({
+      schemaPath,
+      connectionSourcePath,
+      outputDirPath,
+      tables: {
+        include: ["books"],
+      },
+      enums: {
+        include: [],
+      },
+      export: {
+        enums: true,
+      },
+      naming: {
+        enumUseQualifiedName: false,
+      },
     });
     await generator.generate();
     await snap(await readAllGenerated());
@@ -534,7 +632,8 @@ describe("Generator", function () {
               },
             },
           },
-        }
+        },
+        ...fieldMappings,
       ],
     });
     await generator.generate();
@@ -566,7 +665,8 @@ describe("Generator", function () {
               },
             },
           },
-        }
+        },
+        ...fieldMappings,
       ],
       includeDBTypeWhenIsOptional: true,
     });
@@ -679,7 +779,8 @@ it("supports custom int field", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
   });
   await generator.generate();
@@ -711,7 +812,8 @@ it("supports custom int field with db type name", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
     includeDBTypeWhenIsOptional: true,
   });
@@ -744,7 +846,8 @@ it("supports custom double field", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
   });
   await generator.generate();
@@ -776,7 +879,8 @@ it("supports custom double field with db type name", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
     includeDBTypeWhenIsOptional: true,
   });
@@ -809,7 +913,8 @@ it("supports custom UUID field", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
   });
   await generator.generate();
@@ -841,7 +946,8 @@ it("supports custom UUID field with db type name", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
     includeDBTypeWhenIsOptional: true,
   });
@@ -874,7 +980,8 @@ it("supports custom local date field", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
   });
   await generator.generate();
@@ -906,7 +1013,8 @@ it("supports custom local date field with db type name", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
     includeDBTypeWhenIsOptional: true,
   });
@@ -939,7 +1047,8 @@ it("supports custom local time field", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
   });
   await generator.generate();
@@ -971,7 +1080,8 @@ it("supports custom local time field with db type name", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
     includeDBTypeWhenIsOptional: true,
   });
@@ -1004,7 +1114,8 @@ it("supports custom local date time field", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
   });
   await generator.generate();
@@ -1036,7 +1147,8 @@ it("supports custom local date time field with db type name", async () => {
             },
           },
         },
-      }
+      },
+      ...fieldMappings,
     ],
     includeDBTypeWhenIsOptional: true,
   });

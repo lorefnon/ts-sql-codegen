@@ -83,6 +83,11 @@ tables:
     nullable: true
     default: null
     comment: ""
+  - name: format
+    type: enum('Audio-Book','Digital','Physical')
+    nullable: true
+    default: null
+    comment: ""
   - name: weight_grams
     type: double precision
     nullable: true
@@ -214,6 +219,11 @@ tables:
     nullable: true
     default: null
     comment: ""
+  - name: format
+    type: enum('Audio-Book','Digital','Physical')
+    nullable: true
+    default: null
+    comment: ""
   - name: weight_grams
     type: double precision
     nullable: true
@@ -235,6 +245,7 @@ tables:
         books.released_at,
         books.time_to_read,
         books.genre,
+        books.format,
         books.weight_grams,
         authors.name AS author_name
        FROM (authors
@@ -301,6 +312,12 @@ functions:
   returnType: uuid
   arguments: namespace uuid, name text
   type: FUNCTION
+enums:
+- name: public.genre
+  values:
+  - fantasy
+  - sci-fi
+  - horror
 driver:
   name: postgres
   databaseVersion: PostgreSQL 14.4 (Ubuntu 14.4-1.pgdg22.04+1) on x86_64-pc-linux-gnu, compiled by gcc (Ubuntu 11.2.0-19ubuntu1) 11.2.0, 64-bit

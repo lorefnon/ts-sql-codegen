@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import * as z from "zod";
 import { glob } from "glob";
-import path from "path/posix";
+import path from "path";
 import prompts from "prompts";
 import { GeneratorOptsSchema } from "./generator-options";
 import { Logger } from "./logger"

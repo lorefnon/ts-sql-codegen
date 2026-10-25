@@ -1,0 +1,14 @@
+// Genre.ts :
+/**
+ * DO NOT EDIT:
+ *
+ * This file has been auto-generated from database schema using ts-sql-codegen.
+ * Any changes will be overwritten.
+ */
+export const kGenre = {
+    fantasy: "fantasy",
+    "sci-fi": "sci-fi",
+    horror: "horror",
+} as const;
+
+export type Genre = keyof typeof kGenre;

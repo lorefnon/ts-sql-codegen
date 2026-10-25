@@ -30,8 +30,15 @@ export const TableSchema = z.object({
 
 export type Table = z.TypeOf<typeof TableSchema>;
 
+export const EnumSchema = z.object({
+    name: z.string(),
+    values: z.string().array(),
+});
+
+export type Enum = z.TypeOf<typeof EnumSchema>;
+
 export const TblsSchema = z.object({
     name: z.string(),
     tables: TableSchema.array(),
+    enums: EnumSchema.array().nullish(),
 });
-

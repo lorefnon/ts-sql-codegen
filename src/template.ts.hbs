@@ -5,6 +5,15 @@
  * This file has been auto-generated from database schema using ts-sql-codegen.
  * Any changes will be overwritten.
  */
+{{#if enum}}
+export const {{enum.constantName}} = {
+    {{#each enum.values}}
+    {{this.key}}: "{{this.value}}",
+    {{/each}}
+} as const;
+
+export type {{enum.typeName}} = keyof typeof {{enum.constantName}};
+{{else}}
 import { {{table.kind}} } from "ts-sql-query/{{table.kind}}{{output.import.extension}}";
 import type { DBConnection } from "{{dbConnectionSource}}{{output.import.extension}}";
 {{#if importExtraTypes}}
@@ -51,6 +60,16 @@ import {
     {{/if}}
 {{/each}}
 
+{{#each enums}}
+export const {{constantName}} = {
+    {{#each values}}
+    {{this.key}}: "{{this.value}}",
+    {{/each}}
+} as const;
+
+export type {{typeName}} = keyof typeof {{constantName}};
+
+{{/each}}
 {{#each table.comment}}
 {{this}}
 {{/each}}
@@ -109,6 +128,7 @@ export type {{name}} = {{{expr}}};
 {{/each}}
 {{#if colSetName}}
 export const {{colSetName}} = extractColumnsFrom({{instName}});
+{{/if}}
 {{/if}}
 {{/trim-trailing-whitespace}}
 {{#if repo}}

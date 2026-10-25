@@ -33,6 +33,7 @@ import { Table } from "ts-sql-query/Table";
 import type { DBConnection } from "../helpers/connection-source";
 import {
     Genre,
+    Format,
 } from "../helpers/types";
 
 export class BooksTable extends Table<DBConnection, 'PublicBooksTable'> {
@@ -42,6 +43,7 @@ export class BooksTable extends Table<DBConnection, 'PublicBooksTable'> {
     releasedAt = this.optionalColumn('released_at', 'localDate');
     readTime = this.optionalColumn('time_to_read', 'int');
     genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    format = this.optionalColumn<Format>('format', 'enum', 'format');
     /**
      * Sample weight as provided by distributor
      */

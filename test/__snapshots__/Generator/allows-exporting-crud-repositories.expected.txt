@@ -12,6 +12,7 @@ import {
 } from "ts-sql-query/extras/types";
 import {
     Genre,
+    Format,
 } from "../helpers/types";
 
 export class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
@@ -21,6 +22,7 @@ export class AuthorBooksTable extends View<DBConnection, 'AuthorBooksTable'> {
     releasedAt = this.optionalColumn('released_at', 'localDate');
     timeToRead = this.optionalColumn('time_to_read', 'int');
     genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    format = this.optionalColumn<Format>('format', 'enum', 'format');
     weightGrams = this.optionalColumn('weight_grams', 'double');
     authorName = this.optionalColumn('author_name', 'string');
 
@@ -196,6 +198,7 @@ import {
 } from "ts-sql-query/extras/utils";
 import {
     Genre,
+    Format,
 } from "../helpers/types";
 import {
     DynamicCondition,
@@ -208,6 +211,7 @@ export class BooksTable extends Table<DBConnection, 'BooksTable'> {
     releasedAt = this.optionalColumn('released_at', 'localDate');
     timeToRead = this.optionalColumn('time_to_read', 'int');
     genre = this.optionalColumn<Genre>('genre', 'enum', 'genre');
+    format = this.optionalColumn<Format>('format', 'enum', 'format');
     /**
      * Sample weight as provided by distributor
      */
@@ -225,6 +229,7 @@ export type BooksCols = {
     releasedAt: 'localDate'
     timeToRead: 'int'
     genre: ['enum', Genre]
+    format: ['enum', Format]
     weightGrams: 'double'
 }
 
